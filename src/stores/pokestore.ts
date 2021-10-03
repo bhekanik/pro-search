@@ -1,5 +1,11 @@
 import { writable } from 'svelte/store';
 
+export interface Pokeman {
+	name: string;
+	id: number;
+	image: string;
+}
+
 export const pokemon = writable([]);
 
 const fetchPokemon = async () => {
