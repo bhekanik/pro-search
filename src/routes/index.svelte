@@ -1,67 +1,93 @@
-<script context="module">
-	export async function load({ fetch }) {
-		const url = `https://pokeapi.co/api/v2/pokemon?limit=150`;
-		const res = await fetch(url);
-		const data = await res.json();
-		const loadedPokemon = data.results.map((data, index) => {
-			return {
-				name: data.name,
-				id: index + 1,
-				image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-					index + 1
-				}.png`
-			};
-		});
-
-		return {
-			props: {
-				pokemon: loadedPokemon
-			}
-		};
-	}
-	export const prerender = true;
-</script>
-
 <script lang="ts">
-	interface Pokeman {
-		name: string;
-		id: number;
-		image: string;
-	}
-	export let pokemon: Pokeman[];
-	import PokemanCard from '$lib/pokemanCard.svelte';
+	import Filter from '$lib/Filter.svelte';
+	import { onMount } from 'svelte';
 
+	let provider = 'https://google.com/search?q=';
+	let query = '';
 	let searchTerm = '';
-	let filterPokemon = [];
+	let site = {
+		enabled: false,
+		value: ''
+	};
+	let title = {
+		enabled: false
+	};
+	let fileType = {
+		enabled: false,
+		value: ''
+	};
+	let searchInput;
 
-	$: {
-		if (searchTerm) {
-			filterPokemon = pokemon.filter((pokeman) =>
-				pokeman.name.toLowerCase().includes(searchTerm.toLowerCase())
-			);
-		} else {
-			filterPokemon = [...pokemon];
+	const generateQueryAndGo = () => {
+		if (!searchTerm) return;
+		query = searchTerm;
+		if (title.enabled) {
+			query = `intitle:"${query}"`;
 		}
-	}
+		if (site.enabled && site.value) {
+			query = `site:${site.value} ${query}`;
+		}
+		if (fileType.enabled && fileType.value) {
+			query = `filetype:${fileType.value} ${query}`;
+		}
+		window.open(`${provider}${encodeURI(query)}`);
+		searchInput.focus();
+	};
+
+	const handleKeydown = (e) => {
+		if (e.keyCode === 13) {
+			generateQueryAndGo();
+		}
+	};
+
+	const handleClick = (e) => {
+		generateQueryAndGo();
+	};
+
+	onMount(() => {
+		searchInput.focus();
+	});
 </script>
 
 <svelte:head>
-	<title>PokeDex</title>
+	<title>Pro-Search</title>
 </svelte:head>
 
 <main>
-	<h1 class="text-4xl text-center my-8 uppercase">PokeDex</h1>
-	<input
-		class="w-full rounded-md text-lg p-4 border-2 border-gray-200 dark:border-gray-800"
-		placeholder="Search Pokemon"
-		bind:value={searchTerm}
-		type="text"
-		name=""
-		id=""
-	/>
-	<div class="py-4 grid gap-4 md:grid-cols-2 grid-cols-1">
-		{#each filterPokemon as pokeman}
-			<PokemanCard {pokeman} />
-		{/each}
+	<h1 class="text-4xl text-center my-8 uppercase">Pro-Search</h1>
+	<div class="flex gap-2">
+		<select
+			class="rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-800"
+			name="provider"
+			id="provider"
+			bind:value={provider}
+		>
+			<option selected value="https://google.com/search?q=">Google</option>
+			<option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
+			<option value="https://bing.com/search?q=">Bing</option>
+			<option value="https://search.yahoo.com/search?q=">Yahoo</option>
+		</select>
+		<input
+			class="w-full rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-800"
+			placeholder="Search"
+			bind:value={searchTerm}
+			on:keydown={handleKeydown}
+			type="text"
+			name=""
+			id=""
+			bind:this={searchInput}
+		/>
+		<button
+			class="px-8 rounded-md border-2 border-gray-400 dark:border-gray-800 bg-gray-800 text-gray-100 text-lg flex items-center justify-center"
+			on:click={handleClick}>Search</button
+		>
+	</div>
+
+	<div class="my-4">
+		<h3>Add Filters</h3>
+
+		<Filter name="Site" filter={site} go={handleKeydown} />
+		<Filter name="Title" filter={title} noInput />
+		<Filter name="File Type" filter={fileType} go={handleKeydown} />
 	</div>
 </main>
