@@ -32,6 +32,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@tailwindcss/typography": "^0.4.1"
+		"@netlify/functions": "^0.7.2",
+		"@tailwindcss/typography": "^0.4.1",
+		"@types/node": "^14.17.20"
 	}
 }
