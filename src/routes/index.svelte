@@ -55,7 +55,7 @@
 
 <main>
 	<h1 class="text-4xl text-center my-8 uppercase">Pro-Search</h1>
-	<div class="flex gap-2">
+	<div class="flex flex-col gap-2 md:flex-row">
 		<select
 			class="rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-800"
 			name="provider"
@@ -78,7 +78,7 @@
 			bind:this={searchInput}
 		/>
 		<button
-			class="px-8 rounded-md border-2 border-gray-400 dark:border-gray-800 bg-gray-800 text-gray-100 text-lg flex items-center justify-center"
+			class="px-8 py-4 rounded-md border-2 border-gray-400 dark:border-gray-800 bg-gray-800 text-gray-100 text-lg flex items-center justify-center"
 			on:click={handleClick}>Search</button
 		>
 	</div>
