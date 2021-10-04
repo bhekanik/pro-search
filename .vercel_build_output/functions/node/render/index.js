@@ -6125,7 +6125,7 @@ var user_hooks = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module"
 });
-var template = ({ head, body }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="/favicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n		' + head + '\n	</head>\n	<body>\n		<div id="svelte">' + body + "</div>\n	</body>\n</html>\n";
+var template = ({ head, body }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="/favicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n		<link rel="manifest" crossorigin="use-credentials" href="manifest.json" />\n		' + head + '\n	</head>\n	<body>\n		<div id="svelte">' + body + "</div>\n	</body>\n</html>\n";
 var options = null;
 var default_settings = { paths: { "base": "", "assets": "" } };
 function init(settings = default_settings) {
@@ -6136,9 +6136,9 @@ function init(settings = default_settings) {
     amp: false,
     dev: false,
     entry: {
-      file: assets + "/_app/start-0c677ed6.js",
+      file: assets + "/_app/start-16522e8a.js",
       css: [assets + "/_app/assets/start-d5b4de3e.css"],
-      js: [assets + "/_app/start-0c677ed6.js", assets + "/_app/chunks/vendor-12abbdca.js"]
+      js: [assets + "/_app/start-16522e8a.js", assets + "/_app/chunks/vendor-12abbdca.js"]
     },
     fetched: void 0,
     floc: false,
@@ -6157,7 +6157,7 @@ function init(settings = default_settings) {
     prerender: true,
     read: settings.read,
     root: Root,
-    service_worker: null,
+    service_worker: "/service-worker.js",
     router: true,
     ssr: true,
     target: "#svelte",
@@ -6167,7 +6167,7 @@ function init(settings = default_settings) {
 }
 var empty = () => ({});
 var manifest = {
-  assets: [{ "file": "favicon.png", "size": 1571, "type": "image/png" }],
+  assets: [{ "file": "favicon.png", "size": 1571, "type": "image/png" }, { "file": "logo_512.png", "size": 9541, "type": "image/png" }, { "file": "manifest.json", "size": 338, "type": "application/json" }, { "file": "robots.txt", "size": 66, "type": "text/plain" }],
   layout: "src/routes/__layout.svelte",
   error: ".svelte-kit/build/components/error.svelte",
   routes: [
@@ -6197,7 +6197,7 @@ var module_lookup = {
     return index;
   })
 };
-var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "pages/__layout.svelte-1d49a325.js", "css": ["assets/pages/__layout.svelte-5aacd43c.css"], "js": ["pages/__layout.svelte-1d49a325.js", "chunks/vendor-12abbdca.js"], "styles": [] }, ".svelte-kit/build/components/error.svelte": { "entry": "error.svelte-08606be3.js", "css": [], "js": ["error.svelte-08606be3.js", "chunks/vendor-12abbdca.js"], "styles": [] }, "src/routes/index.svelte": { "entry": "pages/index.svelte-d5a5b55e.js", "css": [], "js": ["pages/index.svelte-d5a5b55e.js", "chunks/vendor-12abbdca.js"], "styles": [] } };
+var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "pages/__layout.svelte-1d49a325.js", "css": ["assets/pages/__layout.svelte-6daeebe7.css"], "js": ["pages/__layout.svelte-1d49a325.js", "chunks/vendor-12abbdca.js"], "styles": [] }, ".svelte-kit/build/components/error.svelte": { "entry": "error.svelte-08606be3.js", "css": [], "js": ["error.svelte-08606be3.js", "chunks/vendor-12abbdca.js"], "styles": [] }, "src/routes/index.svelte": { "entry": "pages/index.svelte-85ca481f.js", "css": [], "js": ["pages/index.svelte-85ca481f.js", "chunks/vendor-12abbdca.js"], "styles": [] } };
 async function load_component(file) {
   const { entry, css: css2, js, styles } = metadata_lookup[file];
   return {
@@ -6278,9 +6278,9 @@ var Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${$$result.head += `${$$result.title = `<title>Pro-Search</title>`, ""}`, ""}
 
 <main><h1 class="${"text-4xl text-center my-8 uppercase"}">Pro-Search</h1>
-	<div class="${"flex gap-2"}"><select class="${"rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-800"}" name="${"provider"}" id="${"provider"}"><option selected value="${"https://google.com/search?q="}">Google</option><option value="${"https://duckduckgo.com/?q="}">DuckDuckGo</option><option value="${"https://bing.com/search?q="}">Bing</option><option value="${"https://search.yahoo.com/search?q="}">Yahoo</option></select>
+	<div class="${"flex flex-col gap-2 md:flex-row"}"><select class="${"rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-800"}" name="${"provider"}" id="${"provider"}"><option selected value="${"https://google.com/search?q="}">Google</option><option value="${"https://duckduckgo.com/?q="}">DuckDuckGo</option><option value="${"https://bing.com/search?q="}">Bing</option><option value="${"https://search.yahoo.com/search?q="}">Yahoo</option></select>
 		<input class="${"w-full rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-800"}" placeholder="${"Search"}" type="${"text"}" name="${""}" id="${""}"${add_attribute("value", searchTerm, 0)}${add_attribute("this", searchInput, 0)}>
-		<button class="${"px-8 rounded-md border-2 border-gray-400 dark:border-gray-800 bg-gray-800 text-gray-100 text-lg flex items-center justify-center"}">Search</button></div>
+		<button class="${"px-8 py-4 rounded-md border-2 border-gray-400 dark:border-gray-800 bg-gray-800 text-gray-100 text-lg flex items-center justify-center"}">Search</button></div>
 
 	<div class="${"my-4"}"><h3>Add Filters</h3>
 
