@@ -54,7 +54,7 @@
 </svelte:head>
 
 <main>
-	<h1 class="text-4xl text-center my-8 uppercase">Pro-Search</h1>
+	<h1 class="text-4xl text-center my-8">Pro-Search</h1>
 	<div class="flex flex-col gap-2 md:flex-row">
 		<select
 			class="rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-800"
