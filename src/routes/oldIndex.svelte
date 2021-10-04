@@ -1,17 +1,35 @@
 <script lang="ts">
-	import Filter from '$lib/Filter/Filter.svelte';
-	import { generateQuery } from '$lib/Filter/generateQuery';
+	import Filter from '$lib/OldFilter.svelte';
 	import { onMount } from 'svelte';
-	import { filters } from '../stores/filters';
 
 	let provider = 'https://google.com/search?q=';
+	let query = '';
 	let searchTerm = '';
+	let site = {
+		enabled: false,
+		value: ''
+	};
+	let title = {
+		enabled: false
+	};
+	let fileType = {
+		enabled: false,
+		value: ''
+	};
 	let searchInput;
 
 	const generateQueryAndGo = () => {
 		if (!searchTerm) return;
-		const query = generateQuery(searchTerm, $filters);
-
+		query = searchTerm;
+		if (title.enabled) {
+			query = `intitle:"${query}"`;
+		}
+		if (site.enabled && site.value) {
+			query = `site:${site.value} ${query}`;
+		}
+		if (fileType.enabled && fileType.value) {
+			query = `filetype:${fileType.value} ${query}`;
+		}
 		window.open(`${provider}${encodeURI(query)}`);
 		searchInput.focus();
 	};
@@ -68,9 +86,8 @@
 	<div class="my-4">
 		<h2>Add Filters</h2>
 
-		<Filter type="Site" go={handleKeydown} />
-		<Filter type="Title" go={handleKeydown} />
-		<Filter type="File Type" go={handleKeydown} />
-		<Filter type="URL" go={handleKeydown} />
+		<Filter name="Site" filter={site} go={handleKeydown} />
+		<Filter name="Title" filter={title} noInput />
+		<Filter name="File Type" filter={fileType} go={handleKeydown} />
 	</div>
 </main>
