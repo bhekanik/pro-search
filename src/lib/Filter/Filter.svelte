@@ -67,7 +67,7 @@
 	{#if enabled && type !== 'Title' && type !== 'URL'}
 		<input
 			disabled={!enabled}
-			class="w-full my-2 rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-800"
+			class="w-full my-2 rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-400 bg-transparent"
 			type="text"
 			name={`${type}-input`}
 			id=""
