@@ -84,7 +84,7 @@
 	</div>
 
 	<div class="my-4">
-		<h3>Add Filters</h3>
+		<h2>Add Filters</h2>
 
 		<Filter name="Site" filter={site} go={handleKeydown} />
 		<Filter name="Title" filter={title} noInput />

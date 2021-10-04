@@ -6125,7 +6125,45 @@ var user_hooks = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module"
 });
-var template = ({ head, body }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="/favicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n		<link rel="manifest" crossorigin="use-credentials" href="manifest.json" />\n		' + head + '\n	</head>\n	<body>\n		<div id="svelte">' + body + "</div>\n	</body>\n</html>\n";
+var template = ({ head, body }) => `<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#317EFB" />
+		<link rel="manifest" crossorigin="use-credentials" href="manifest.json" />
+		<link rel="apple-touch-icon" href="/logo_192.png" />
+		<meta name="description" content="Advanced search query builder" />
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-S20NGL4S0C"><\/script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
+
+			gtag('config', 'G-S20NGL4S0C');
+		<\/script>
+
+		<!-- Hotjar Tracking Code for https://pro-search-bhekanik.vercel.app/ -->
+		<script>
+			(function (h, o, t, j, a, r) {
+				h.hj =
+					h.hj ||
+					function () {
+						(h.hj.q = h.hj.q || []).push(arguments);
+					};
+				h._hjSettings = { hjid: 2632849, hjsv: 6 };
+				a = o.getElementsByTagName('head')[0];
+				r = o.createElement('script');
+				r.async = 1;
+				r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+				a.appendChild(r);
+			})(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+		<\/script>
+		` + head + '\n	</head>\n	<body>\n		<div id="svelte">' + body + "</div>\n	</body>\n</html>\n";
 var options = null;
 var default_settings = { paths: { "base": "", "assets": "" } };
 function init(settings = default_settings) {
@@ -6136,9 +6174,9 @@ function init(settings = default_settings) {
     amp: false,
     dev: false,
     entry: {
-      file: assets + "/_app/start-16522e8a.js",
+      file: assets + "/_app/start-14224df6.js",
       css: [assets + "/_app/assets/start-d5b4de3e.css"],
-      js: [assets + "/_app/start-16522e8a.js", assets + "/_app/chunks/vendor-12abbdca.js"]
+      js: [assets + "/_app/start-14224df6.js", assets + "/_app/chunks/vendor-12abbdca.js"]
     },
     fetched: void 0,
     floc: false,
@@ -6167,7 +6205,7 @@ function init(settings = default_settings) {
 }
 var empty = () => ({});
 var manifest = {
-  assets: [{ "file": "favicon.png", "size": 1571, "type": "image/png" }, { "file": "logo_512.png", "size": 9541, "type": "image/png" }, { "file": "manifest.json", "size": 338, "type": "application/json" }, { "file": "robots.txt", "size": 66, "type": "text/plain" }],
+  assets: [{ "file": "favicon.png", "size": 1571, "type": "image/png" }, { "file": "logo_192.png", "size": 4500, "type": "image/png" }, { "file": "logo_512.png", "size": 9541, "type": "image/png" }, { "file": "manifest.json", "size": 370, "type": "application/json" }, { "file": "robots.txt", "size": 66, "type": "text/plain" }],
   layout: "src/routes/__layout.svelte",
   error: ".svelte-kit/build/components/error.svelte",
   routes: [
@@ -6197,7 +6235,7 @@ var module_lookup = {
     return index;
   })
 };
-var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "pages/__layout.svelte-1d49a325.js", "css": ["assets/pages/__layout.svelte-6daeebe7.css"], "js": ["pages/__layout.svelte-1d49a325.js", "chunks/vendor-12abbdca.js"], "styles": [] }, ".svelte-kit/build/components/error.svelte": { "entry": "error.svelte-08606be3.js", "css": [], "js": ["error.svelte-08606be3.js", "chunks/vendor-12abbdca.js"], "styles": [] }, "src/routes/index.svelte": { "entry": "pages/index.svelte-85ca481f.js", "css": [], "js": ["pages/index.svelte-85ca481f.js", "chunks/vendor-12abbdca.js"], "styles": [] } };
+var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "pages/__layout.svelte-1d49a325.js", "css": ["assets/pages/__layout.svelte-e8858dce.css"], "js": ["pages/__layout.svelte-1d49a325.js", "chunks/vendor-12abbdca.js"], "styles": [] }, ".svelte-kit/build/components/error.svelte": { "entry": "error.svelte-08606be3.js", "css": [], "js": ["error.svelte-08606be3.js", "chunks/vendor-12abbdca.js"], "styles": [] }, "src/routes/index.svelte": { "entry": "pages/index.svelte-b0857921.js", "css": [], "js": ["pages/index.svelte-b0857921.js", "chunks/vendor-12abbdca.js"], "styles": [] } };
 async function load_component(file) {
   const { entry, css: css2, js, styles } = metadata_lookup[file];
   return {
@@ -6260,7 +6298,7 @@ var Filter = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.noInput(noInput);
   if ($$props.go === void 0 && $$bindings.go && go !== void 0)
     $$bindings.go(go);
-  return `<main><div class="${"flex"}"><label class="${"flex w-24 items-center gap-2"}"><input type="${"checkbox"}" name="${"siteCheckbox"}" id="${"siteCheckbox"}"${add_attribute("checked", filter.enabled, 1)}>
+  return `<main><div class="${"flex my-2"}"><label class="${"flex items-center gap-2"}"><input class="${"w-7 h-7"}" type="${"checkbox"}"${add_attribute("name", `${name}-checkbox`, 0)}${add_attribute("id", `${name}-checkbox`, 0)}${add_attribute("checked", filter.enabled, 1)}>
 			${escape(name)}</label></div>
 
 	${filter.enabled && !noInput ? `<input ${!filter.enabled ? "disabled" : ""} class="${"w-full my-2 rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-800"}" type="${"text"}" name="${"siteInput"}" id="${""}" placeholder="${"Site"}"${add_attribute("value", filter.value, 0)}>` : ``}</main>`;
@@ -6277,12 +6315,12 @@ var Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   };
   return `${$$result.head += `${$$result.title = `<title>Pro-Search</title>`, ""}`, ""}
 
-<main><h1 class="${"text-4xl text-center my-8 uppercase"}">Pro-Search</h1>
+<main><h1 class="${"text-4xl text-center my-8"}">Pro-Search</h1>
 	<div class="${"flex flex-col gap-2 md:flex-row"}"><select class="${"rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-800"}" name="${"provider"}" id="${"provider"}"><option selected value="${"https://google.com/search?q="}">Google</option><option value="${"https://duckduckgo.com/?q="}">DuckDuckGo</option><option value="${"https://bing.com/search?q="}">Bing</option><option value="${"https://search.yahoo.com/search?q="}">Yahoo</option></select>
 		<input class="${"w-full rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-800"}" placeholder="${"Search"}" type="${"text"}" name="${""}" id="${""}"${add_attribute("value", searchTerm, 0)}${add_attribute("this", searchInput, 0)}>
 		<button class="${"px-8 py-4 rounded-md border-2 border-gray-400 dark:border-gray-800 bg-gray-800 text-gray-100 text-lg flex items-center justify-center"}">Search</button></div>
 
-	<div class="${"my-4"}"><h3>Add Filters</h3>
+	<div class="${"my-4"}"><h2>Add Filters</h2>
 
 		${validate_component(Filter, "Filter").$$render($$result, {
     name: "Site",

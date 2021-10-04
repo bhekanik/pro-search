@@ -5,13 +5,14 @@
 	"icons": [
 		{
 			"src": "logo_512.png",
-			"type": "img/png",
-			"sizes": "512x512"
+			"type": "image/png",
+			"sizes": "512x512",
+			"purpose": "any maskable"
 		}
 	],
 	"background_color": "#ffffff",
 	"display": "standalone",
 	"scope": "/",
-	"theme_color": "#ffffff",
+	"theme_color": "#317EFB",
 	"description": "An app for easily building advanced search queries"
 }

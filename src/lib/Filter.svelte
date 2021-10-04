@@ -11,9 +11,15 @@
 </script>
 
 <main>
-	<div class="flex">
-		<label class="flex w-24 items-center gap-2">
-			<input type="checkbox" name="siteCheckbox" id="siteCheckbox" bind:checked={filter.enabled} />
+	<div class="flex my-2">
+		<label class="flex items-center gap-2">
+			<input
+				class="w-7 h-7"
+				type="checkbox"
+				name={`${name}-checkbox`}
+				id={`${name}-checkbox`}
+				bind:checked={filter.enabled}
+			/>
 			{name}
 		</label>
 	</div>

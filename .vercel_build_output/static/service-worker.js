@@ -1,15 +1,16 @@
-const timestamp = 1633312883936;
+const timestamp = 1633324060997;
 const build = [
-  "/_app/start-16522e8a.js",
+  "/_app/start-14224df6.js",
   "/_app/assets/start-d5b4de3e.css",
   "/_app/pages/__layout.svelte-1d49a325.js",
-  "/_app/assets/pages/__layout.svelte-6daeebe7.css",
+  "/_app/assets/pages/__layout.svelte-e8858dce.css",
   "/_app/error.svelte-08606be3.js",
-  "/_app/pages/index.svelte-85ca481f.js",
+  "/_app/pages/index.svelte-b0857921.js",
   "/_app/chunks/vendor-12abbdca.js"
 ];
 const files = [
   "/favicon.png",
+  "/logo_192.png",
   "/logo_512.png",
   "/manifest.json",
   "/robots.txt"
