@@ -1,6 +1,9 @@
 <script lang="ts">
-	import Filter from '$lib/Filter/Filter.svelte';
+	import FileTypeFilter from '$lib/Filter/FileType.svelte';
 	import { generateQuery } from '$lib/Filter/generateQuery';
+	import SiteFilter from '$lib/Filter/Site.svelte';
+	import TitleFilter from '$lib/Filter/Title.svelte';
+	import URLFilter from '$lib/Filter/URL.svelte';
 	import { onMount } from 'svelte';
 	import { filters } from '../stores/filters';
 
@@ -85,9 +88,9 @@
 	<div class="my-4">
 		<h2>Add Filters</h2>
 
-		<Filter type="Site" go={handleKeydown} />
-		<Filter type="Title" go={handleKeydown} />
-		<Filter type="File Type" go={handleKeydown} />
-		<Filter type="URL" go={handleKeydown} />
+		<SiteFilter go={handleKeydown} />
+		<TitleFilter go={handleKeydown} />
+		<FileTypeFilter go={handleKeydown} />
+		<URLFilter go={handleKeydown} />
 	</div>
 </main>

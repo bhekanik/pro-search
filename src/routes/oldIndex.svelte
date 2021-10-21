@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Filter from '$lib/OldFilter.svelte';
+	import Filter from '$lib/Filter/OldFilter.svelte';
 	import { onMount } from 'svelte';
 
 	let provider = 'https://google.com/search?q=';
