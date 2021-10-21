@@ -2,15 +2,30 @@
 
 Search engines are really amazing tools and we all use them everyday. Search engines also have really powerful tools to make queries much more specialised and specific. Unfortunately, few people use these advanced querying capabilities either because they don't know about them or they're just tedious to use. Those who do use them usually just have one or two go to filters. This is where Pro-search comes in. Pro-search is an advanced query builder for search engines. It allows you to build complex queries for search engines in an easy intuitive user interface. You choose which search engine(s) you want your query sent to and Pro-search will format the query for the target and open a new browser tab with the result. It's that simple.
 
+## Resources
+
+To learn more about what is possible in terms of filters, etc. Here are some helpful links:
+
+- [Google Advanced Queries Reference](http://www.googleguide.com/advanced_operators_reference.html)
+- [A New Google](https://dcgross.com/a-new-google)
+- [Use Google like a pro twitter thread](https://twitter.com/denicmarko/status/1385460520707313666?s=09)
+- [Advanced Google Search operators twitter thread](https://twitter.com/hnshah/status/1335622960401457152?s=19)
+- [Request for side project](https://twitter.com/swyx/status/1335627133956153344?s=19)
+- [Dorking: How to find anything on the internet](https://www.alec.fyi/dorking-how-to-find-anything-on-the-internet.html)
+- [Neat little Google hack twitter thread](https://twitter.com/stephsmithio/status/1388622741037666308?s=19)
+- [How to 'Google it' like a senior engineer](https://youtu.be/cEBkvm0-rg0)
+
 ## Contributing
+
+### Tech
 
 This is the tech used:
 
 - Frontend: SvelteKit
-- Styles: SCSS**
+- Styles: SCSS\*\*
 - Hosting: Vercel
 
-** There are some components currently written using Tailwind CSS because the initial plan was to do all styling using TailwindCSS. Plans have since changed so now, whenever you touch a component please convert the styles to SCSS.
+\*\* There are some components currently written using Tailwind CSS because the initial plan was to do all styling using TailwindCSS. Plans have since changed so now, whenever you touch a component please convert the styles to SCSS.
 
 ### Setting up your Dev Env
 
