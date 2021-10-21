@@ -8,6 +8,7 @@ This is the tech used:
 
 - Frontend: SvelteKit
 - Styles: SCSS**
+- Hosting: Vercel
 
 ** There are some components currently written using Tailwind CSS because the initial plan was to do all styling using TailwindCSS. Plans have since changed so now, whenever you touch a component please convert the styles to SCSS.
 
@@ -26,4 +27,5 @@ NB: The app will continue running even if you stop your terminal session. If you
 - Always rebase your work before opening a PR.
 - Open your pull request against `main`. Name your pull request meaningfull, include a description of what you did and reference the issue that the PR relates to so that github can do the automations.
 - PR's will not be accepted without appropriate tests where applicable.
+- A preview of the app will be deployed to vercel and the link attached to the PR as a comment.
 - Assign reviewers so that they're pinged to review your code.
