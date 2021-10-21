@@ -44,3 +44,16 @@ NB: The app will continue running even if you stop your terminal session. If you
 - PR's will not be accepted without appropriate tests where applicable.
 - A preview of the app will be deployed to vercel and the link attached to the PR as a comment.
 - Assign reviewers so that they're pinged to review your code.
+
+### Troubleshooting
+
+- If you encounter this error on your style tags:
+
+```bash
+Cannot find any of modules: sass,node-sass
+
+Error: Missing binding /home/bk/dev/personal/pro-search/node_modules/node-sass/vendor/linux-x64-83/binding.node
+Node Sass could not find a binding for your current environment: Linux 64-bit with Node.js 14.x
+```
+
+You may need to run `npm rebuild node-sass`. That should fix the issue
