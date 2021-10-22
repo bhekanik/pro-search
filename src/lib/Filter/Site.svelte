@@ -12,7 +12,6 @@
 			if (!isCheckbox) {
 				value ? (newFilters.site = `site:${value} `) : delete newFilters.site;
 			} else {
-				console.log('value:', value);
 				value === false && delete newFilters.site;
 			}
 			return newFilters;
