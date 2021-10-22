@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { Filter } from '../stores/query';
+	import type { Filter, Query } from '../stores/query';
+	import { query } from '../stores/query';
 	import { recentQueries } from '../stores/recentQueries';
 
 	export const generateFilters = (filters: Record<string, Filter>): string =>
@@ -13,7 +14,9 @@
 		});
 	};
 
-	const handleApply = () => {};
+	const handleApply = (selectedQuery: Query) => {
+		query.update(() => selectedQuery);
+	};
 </script>
 
 <h3 class="heading">Recent Queries</h3>
@@ -22,7 +25,7 @@
 		{#each $recentQueries as query, i}
 			<div class="query">
 				<div class="buttons">
-					<button class="apply-button" disabled={true} on:click={handleApply}>Apply</button>
+					<button class="apply-button" on:click={() => handleApply(query)}>Apply</button>
 					<button class="delete-button" on:click={() => handleDelete(i)}>Delete</button>
 				</div>
 				<div>
