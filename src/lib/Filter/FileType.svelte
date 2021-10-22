@@ -11,7 +11,10 @@
 			const newQuery = { ...currentQuery };
 			if (!isCheckbox) {
 				value
-					? (newQuery.filters.fileType = { value, formatted: `filetype:${value} ` })
+					? (newQuery.filters.fileType = {
+							value,
+							formatted: `filetype:${value} `
+					  })
 					: delete newQuery.filters.fileType;
 			} else {
 				value === false && delete newQuery.filters.fileType;
@@ -21,4 +24,4 @@
 	};
 </script>
 
-<FilterBase {handleInput} type="File Type" hasInput {go} />
+<FilterBase {handleInput} type="File Type" hasInput value={$query.filters.fileType?.value} {go} />

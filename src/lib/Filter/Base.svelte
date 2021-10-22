@@ -7,6 +7,7 @@
 	export let type: FilterType;
 	export let go: (e: any) => void = () => null;
 	export let hasInput: boolean = false;
+	export let value: string;
 </script>
 
 <div class="container">
@@ -30,6 +31,7 @@
 		name={`${type}-input`}
 		id=""
 		placeholder={type}
+		value={value || ''}
 		on:input={handleInput}
 		on:keydown={go}
 	/>

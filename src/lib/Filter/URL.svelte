@@ -11,7 +11,10 @@
 			const newQuery = { ...currentQuery };
 			if (!isCheckbox) {
 				value
-					? (newQuery.filters.url = { formatted: `inurl:${value}`, value })
+					? (newQuery.filters.url = {
+							value,
+							formatted: `inurl:${value}`
+					  })
 					: delete newQuery.filters.url;
 			} else {
 				value === false && delete newQuery.filters.url;
@@ -21,4 +24,4 @@
 	};
 </script>
 
-<FilterBase {handleInput} type="URL" hasInput {go} />
+<FilterBase {handleInput} type="URL" hasInput value={$query.filters.url?.value} {go} />
