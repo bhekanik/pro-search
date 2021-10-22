@@ -8,24 +8,10 @@
  * @returns The formated query ready to be sent to the search engine
  */
 export const generateQuery = (input: string, filters: Record<string, string>): string => {
-	/**
-	 * Cannot use title and url together because they wrap around the query term
-	 * so prefer to use title and only use url if title doesn't exist
-	 *
-	 * In future consider using the or (|) operator to be able to use both of
-	 * these together
-	 */
-	const titleFilter = filters.title || filters.url;
+	// put the filters together
+	const prefix = Object.values(filters).reduce((prev, curr) => `${prev}${curr}`);
 
-	const wrappedInput = titleFilter ? titleFilter.replace('replace_me', input) : input;
-
-	// put the filters together, ensuring to filter out the ones that wrap around
-	// the term.
-	const prefix = Object.values(filters)
-		.filter((filter: string) => !filter.includes('replace_me'))
-		.reduce((prev, curr) => `${prev}${curr}`);
-
-	const query = `${prefix} ${wrappedInput}`;
+	const query = `${prefix} ${input}`;
 
 	return query;
 };

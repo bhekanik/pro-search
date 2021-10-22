@@ -19,7 +19,7 @@
 		const query = generateQuery(searchTerm, $filters);
 
 		recentQueries.update((currentRecentQueries) => {
-			const newRecentQueries = [...currentRecentQueries, query];
+			const newRecentQueries = [...currentRecentQueries, { searchTerm, filters: $filters }];
 			globalThis.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
 
 			return newRecentQueries;

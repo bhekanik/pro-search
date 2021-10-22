@@ -9,10 +9,14 @@
 		const value = isCheckbox ? e.target.checked : e.target.value;
 		filters.update((currentFilters) => {
 			const newFilters = { ...currentFilters };
-			value === true ? (newFilters.url = `inurl:"replace_me"`) : delete newFilters.url;
+			if (!isCheckbox) {
+				value ? (newFilters.url = `inurl:${value}`) : delete newFilters.url;
+			} else {
+				value === false && delete newFilters.url;
+			}
 			return newFilters;
 		});
 	};
 </script>
 
-<FilterBase {handleInput} type="URL" {go} />
+<FilterBase {handleInput} type="URL" hasInput {go} />
