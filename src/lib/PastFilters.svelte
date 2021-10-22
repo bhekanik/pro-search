@@ -18,19 +18,34 @@
 
 <h3 class="heading">Recent Queries</h3>
 <div class="query-list">
-	{#each $recentQueries as query, i}
-		<div class="query">
-			<div class="buttons">
-				<button class="apply-button" disabled={true} on:click={handleApply}>Apply</button>
-				<button class="delete-button" on:click={() => handleDelete(i)}>Delete</button>
+	{#if $recentQueries.length}
+		{#each $recentQueries as query, i}
+			<div class="query">
+				<div class="buttons">
+					<button class="apply-button" disabled={true} on:click={handleApply}>Apply</button>
+					<button class="delete-button" on:click={() => handleDelete(i)}>Delete</button>
+				</div>
+				<div>
+					<span class="label">Search Term: </span>
+					<span class="query_search-term">{query.searchTerm}</span>
+				</div>
+				<div>
+					<span class="label">Search Provider: </span>
+					<span class="filters">
+						{query.provider.name}
+					</span>
+				</div>
+				<div>
+					<span class="label">Filters: </span>
+					<span class="filters">
+						{generateFilters(query.filters)}
+					</span>
+				</div>
 			</div>
-			<h3 class="query_search-term">{query.searchTerm}</h3>
-			<span class="label">Filters: </span>
-			<span class="filters">
-				{generateFilters(query.filters)}
-			</span>
-		</div>
-	{/each}
+		{/each}
+	{:else}
+		<span>No recent queries</span>
+	{/if}
 </div>
 
 <style lang="scss">
@@ -73,6 +88,7 @@
 	.query_search-term {
 		font-size: 1.5rem;
 		margin-bottom: 0.5rem;
+		font-weight: bold;
 	}
 
 	.filters {
