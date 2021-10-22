@@ -5,8 +5,10 @@
 	import SiteFilter from '$lib/Filter/Site.svelte';
 	import TitleFilter from '$lib/Filter/Title.svelte';
 	import URLFilter from '$lib/Filter/URL.svelte';
+	import PastFilters from '$lib/PastFilters.svelte';
 	import { onMount } from 'svelte';
 	import { filters } from '../stores/filters';
+	import { recentQueries } from '../stores/recentQueries';
 
 	let provider = 'https://google.com/search?q=';
 	let searchTerm = '';
@@ -15,6 +17,8 @@
 	const generateQueryAndGo = () => {
 		if (!searchTerm) return;
 		const query = generateQuery(searchTerm, $filters);
+
+		recentQueries.update((currentRecentQueries) => [...currentRecentQueries, query]);
 
 		window.open(`${provider}${encodeURI(query)}`);
 		searchInput.focus();
@@ -95,4 +99,5 @@
 		<FileTypeFilter go={handleKeydown} />
 		<URLFilter go={handleKeydown} />
 	</div>
+	<PastFilters />
 </main>
