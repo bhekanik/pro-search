@@ -1,17 +1,21 @@
+import type { Query } from '../../stores/query';
+
 /**
  * Formats the search input for the search engine according to the provided
  * filters
  *
- * @param input The value of the search input
- * @param filters Object containin the selected filters together with their
- * parameters
+ * @param query Object containin the selected filters together with their
+ * parameters and the search term
  * @returns The formated query ready to be sent to the search engine
  */
-export const generateQuery = (input: string, filters: Record<string, string>): string => {
+export const generateQuery = (query: Query): string => {
 	// put the filters together
-	const prefix = Object.values(filters).reduce((prev, curr) => `${prev}${curr}`);
+	const prefix = Object.values(query.filters).reduce(
+		(prev, curr) => `${prev}${curr.formatted}`,
+		''
+	);
 
-	const query = `${prefix} ${input}`;
+	const formattedQuery = `${prefix} ${query.searchTerm}`;
 
-	return query;
+	return formattedQuery;
 };

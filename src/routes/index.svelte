@@ -7,25 +7,25 @@
 	import URLFilter from '$lib/Filter/URL.svelte';
 	import PastFilters from '$lib/PastFilters.svelte';
 	import { onMount } from 'svelte';
-	import { filters } from '../stores/filters';
+	import { searchProviders } from '../app/config/searchProviders';
+	import { query } from '../stores/query';
 	import { recentQueries } from '../stores/recentQueries';
 
-	let provider = 'https://google.com/search?q=';
-	let searchTerm = '';
+	let provider = searchProviders[0].url;
 	let searchInput;
 
 	const generateQueryAndGo = () => {
-		if (!searchTerm) return;
-		const query = generateQuery(searchTerm, $filters);
+		if (!$query.searchTerm) return;
+		const formattedQuery = generateQuery($query);
 
 		recentQueries.update((currentRecentQueries) => {
-			const newRecentQueries = [...currentRecentQueries, { searchTerm, filters: $filters }];
+			const newRecentQueries = [...currentRecentQueries, { ...$query }];
 			globalThis.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
 
 			return newRecentQueries;
 		});
 
-		window.open(`${provider}${encodeURI(query)}`);
+		window.open(`${provider}${encodeURI(formattedQuery)}`);
 		searchInput.focus();
 	};
 
@@ -61,28 +61,18 @@
 			id="provider"
 			bind:value={provider}
 		>
-			<option
-				class="rounded-md text-lg p-4 border-2 dark:bg-gray-600 border-gray-400 dark:border-gray-400"
-				selected
-				value="https://google.com/search?q=">Google</option
-			>
-			<option
-				class="rounded-md text-lg p-4 border-2 dark:bg-gray-600 bg-transparent border-gray-400 dark:border-gray-400"
-				value="https://duckduckgo.com/?q=">DuckDuckGo</option
-			>
-			<option
-				class="rounded-md text-lg p-4 border-2 bg-transparent dark:bg-gray-600 border-gray-400 dark:border-gray-400"
-				value="https://bing.com/search?q=">Bing</option
-			>
-			<option
-				class="rounded-md text-lg p-4 border-2 bg-transparent dark:bg-gray-600 border-gray-400 dark:border-gray-400"
-				value="https://search.yahoo.com/search?q=">Yahoo</option
-			>
+			{#each searchProviders as provider}
+				<option
+					class="rounded-md text-lg p-4 border-2 dark:bg-gray-600 border-gray-400 dark:border-gray-400"
+					selected
+					value={provider.url}>{provider.name}</option
+				>
+			{/each}
 		</select>
 		<input
 			class="w-full rounded-md text-lg p-4 border-2 dark:bg-gray-600 border-gray-400 dark:border-gray-400 bg-transparent"
 			placeholder="Search"
-			bind:value={searchTerm}
+			bind:value={$query.searchTerm}
 			on:keydown={handleKeydown}
 			type="text"
 			name=""

@@ -1,8 +1,9 @@
 <script lang="ts">
+	import type { Filter } from '../stores/query';
 	import { recentQueries } from '../stores/recentQueries';
 
-	export const generateFilters = (filters: Record<string, string>): string =>
-		Object.values(filters).reduce((prev, curr) => `${prev}${curr}`);
+	export const generateFilters = (filters: Record<string, Filter>): string =>
+		Object.values(filters).reduce((prev, curr) => `${prev}${curr.formatted}`, '');
 
 	const handleDelete = (index: number) => {
 		recentQueries.update((currentRecentQueries) => {

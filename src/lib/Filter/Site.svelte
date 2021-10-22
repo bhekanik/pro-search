@@ -1,20 +1,22 @@
 <script lang="ts">
 	import FilterBase from '$lib/Filter/Base.svelte';
-	import { filters } from '../../stores/filters';
+	import { query } from '../../stores/query';
 
 	export let go: (e: any) => void = () => null;
 
 	const handleInput = (e: any) => {
 		const isCheckbox = e.target.type === 'checkbox';
 		const value = isCheckbox ? e.target.checked : e.target.value;
-		filters.update((currentFilters) => {
-			const newFilters = { ...currentFilters };
+		query.update((currentQuery) => {
+			const newQuery = { ...currentQuery };
 			if (!isCheckbox) {
-				value ? (newFilters.site = `site:${value} `) : delete newFilters.site;
+				value
+					? (newQuery.filters.site = { value, formatted: `site:${value} ` })
+					: delete newQuery.filters.site;
 			} else {
-				value === false && delete newFilters.site;
+				value === false && delete newQuery.filters.site;
 			}
-			return newFilters;
+			return newQuery;
 		});
 	};
 </script>

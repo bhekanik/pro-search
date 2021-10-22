@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { filters } from '../../stores/filters';
+	import { query } from '../../stores/query';
 	export let type: 'Site' | 'File Type' | 'Title' | 'URL';
 	export let go: (e: any) => void = () => null;
 
@@ -9,43 +9,49 @@
 		const isCheckbox = e.target.type === 'checkbox';
 		const value = isCheckbox ? e.target.checked : e.target.value;
 		if (type === 'Title') {
-			filters.update((currentFilters) => {
-				const newFilters = { ...currentFilters };
-				value === true ? (newFilters.title = `intitle:"replace_me"`) : delete newFilters.title;
-				return newFilters;
+			query.update((currentQuery) => {
+				const newQuery = { ...currentQuery };
+				value === true
+					? (newQuery.filters.title = { value, formatted: `intitle:"replace_me"` })
+					: delete newQuery.filters.title;
+				return newQuery;
 			});
 		}
 		if (type === 'Site') {
-			filters.update((currentFilters) => {
-				const newFilters = { ...currentFilters };
+			query.update((currentQuery) => {
+				const newQuery = { ...currentQuery };
 				if (!isCheckbox) {
-					value ? (newFilters.site = `site:${value} `) : delete newFilters.site;
+					value
+						? (newQuery.filters.site = { value, formatted: `site:${value} ` })
+						: delete newQuery.filters.site;
 				} else {
-					console.log('value:', value);
-					value === false && delete newFilters.site;
+					value === false && delete newQuery.filters.site;
 				}
-				return newFilters;
+				return newQuery;
 			});
 		}
 		if (type === 'File Type') {
-			filters.update((currentFilters) => {
-				const newFilters = { ...currentFilters };
+			query.update((currentQuery) => {
+				const newQuery = { ...currentQuery };
 				if (!isCheckbox) {
-					value ? (newFilters.fileType = `filetype:${value} `) : delete newFilters.fileType;
+					value
+						? (newQuery.filters.fileType = { value, formatted: `filetype:${value} ` })
+						: delete newQuery.filters.fileType;
 				} else {
-					value === false && delete newFilters.fileType;
+					value === false && delete newQuery.filters.fileType;
 				}
-				return newFilters;
+				return newQuery;
 			});
 		}
 		if (type === 'URL') {
-			filters.update((currentFilters) => {
-				const newFilters = { ...currentFilters };
-				value === true ? (newFilters.url = `inurl:"replace_me"`) : delete newFilters.url;
-				return newFilters;
+			query.update((currentQuery) => {
+				const newQuery = { ...currentQuery };
+				value === true
+					? (newQuery.filters.url = { value, formatted: `inurl:"replace_me"` })
+					: delete newQuery.filters.url;
+				return newQuery;
 			});
 		}
-		console.log('filters:', $filters);
 	};
 </script>
 
