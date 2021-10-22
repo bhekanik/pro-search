@@ -4,12 +4,18 @@
 	import type { FilterType } from './types';
 
 	export let type: FilterType;
+	export let enabled = false;
 
 	const handleCheckboxInput = (e: any) => {
 		const value = e.target.checked;
 		query.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
-			value === false && delete newQuery.filters[Case.camel(type)];
+			if (value === false) {
+				delete newQuery.filters[Case.camel(type)];
+				enabled = false;
+			} else {
+				enabled = true;
+			}
 			return newQuery;
 		});
 	};
@@ -30,25 +36,26 @@
 		/>
 		{type}
 	</label>
-</div>
 
-{#if Boolean($query.filters[Case.camel(type)]) && hasInput}
-	<input
-		disabled={!Boolean($query.filters[Case.camel(type)])}
-		class="w-full my-2 rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-400 bg-transparent"
-		type="text"
-		name={`${type}-input`}
-		id=""
-		placeholder={type}
-		value={$query.filters[Case.camel(type)]?.value || ''}
-		on:input={handleInput}
-		on:keydown={go}
-	/>
-{/if}
+	{#if (enabled || Boolean($query.filters[Case.camel(type)])) && hasInput}
+		<input
+			disabled={!Boolean($query.filters[Case.camel(type)])}
+			class="w-full my-2 rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-400 bg-transparent"
+			type="text"
+			name={`${type}-input`}
+			id=""
+			placeholder={type}
+			value={$query.filters[Case.camel(type)]?.value || ''}
+			on:input={handleInput}
+			on:keydown={go}
+		/>
+	{/if}
+</div>
 
 <style lang="scss">
 	.container {
-		display: flex;
+		display: grid;
+		gap: 2rem;
 		margin: 0.5rem 0;
 
 		.input-label {
