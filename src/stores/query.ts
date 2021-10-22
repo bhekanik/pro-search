@@ -5,7 +5,7 @@ import { searchProviders } from '../app/config/searchProviders';
 
 export interface Filter {
 	formatted: string;
-	value: string;
+	value?: string;
 }
 
 export interface Query {

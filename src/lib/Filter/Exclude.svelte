@@ -11,7 +11,10 @@
 			const newQuery = { ...currentQuery };
 			if (!isCheckbox) {
 				value
-					? (newQuery.filters.exclude = { value, formatted: `-${value} ` })
+					? (newQuery.filters.exclude = {
+							value,
+							formatted: `-${value} `
+					  })
 					: delete newQuery.filters.exclude;
 			} else {
 				value === false && delete newQuery.filters.exclude;
@@ -21,4 +24,4 @@
 	};
 </script>
 
-<FilterBase {handleInput} type="Exclude" hasInput {go} />
+<FilterBase {handleInput} type="Exclude" hasInput value={$query.filters.exclude?.value} {go} />

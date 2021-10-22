@@ -11,7 +11,10 @@
 			const newQuery = { ...currentQuery };
 			if (!isCheckbox) {
 				value
-					? (newQuery.filters.title = { formatted: `intitle:${value}`, value })
+					? (newQuery.filters.title = {
+							value,
+							formatted: `intitle:${value}`
+					  })
 					: delete newQuery.filters.title;
 			} else {
 				value === false && delete newQuery.filters.title;
@@ -21,4 +24,4 @@
 	};
 </script>
 
-<FilterBase {handleInput} type="Title" hasInput {go} />
+<FilterBase {handleInput} type="Title" hasInput value={$query.filters.title?.value} {go} />

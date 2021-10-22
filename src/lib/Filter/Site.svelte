@@ -11,7 +11,10 @@
 			const newQuery = { ...currentQuery };
 			if (!isCheckbox) {
 				value
-					? (newQuery.filters.site = { value, formatted: `site:${value} ` })
+					? (newQuery.filters.site = {
+							value,
+							formatted: `site:${value} `
+					  })
 					: delete newQuery.filters.site;
 			} else {
 				value === false && delete newQuery.filters.site;
@@ -21,4 +24,4 @@
 	};
 </script>
 
-<FilterBase {handleInput} type="Site" hasInput {go} />
+<FilterBase {handleInput} type="Site" hasInput value={$query.filters.site?.value} {go} />
