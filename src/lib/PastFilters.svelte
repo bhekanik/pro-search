@@ -1,18 +1,32 @@
 <script lang="ts">
 	import { recentQueries } from '../stores/recentQueries';
 
-	export const generateQuery = (filters: Record<string, string>): string =>
+	export const generateFilters = (filters: Record<string, string>): string =>
 		Object.values(filters).reduce((prev, curr) => `${prev}${curr}`);
+
+	const handleDelete = (index: number) => {
+		recentQueries.update((currentRecentQueries) => {
+			const newRecentQueries = currentRecentQueries.filter((_, i) => i !== index);
+			globalThis.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
+			return newRecentQueries;
+		});
+	};
+
+	const handleApply = () => {};
 </script>
 
 <h3 class="heading">Recent Queries</h3>
 <div class="query-list">
-	{#each $recentQueries as query}
+	{#each $recentQueries as query, i}
 		<div class="query">
+			<div class="buttons">
+				<button class="apply-button" disabled={true} on:click={handleApply}>Apply</button>
+				<button class="delete-button" on:click={() => handleDelete(i)}>Delete</button>
+			</div>
 			<h3 class="query_search-term">{query.searchTerm}</h3>
 			<span class="label">Filters: </span>
 			<span class="filters">
-				{generateQuery(query.filters)}
+				{generateFilters(query.filters)}
 			</span>
 		</div>
 	{/each}
@@ -39,6 +53,20 @@
 		border: 1px solid gray;
 		border-radius: 5px;
 		padding: 1rem 2rem;
+		position: relative;
+	}
+
+	.buttons {
+		position: absolute;
+		right: 2rem;
+		top: 1rem;
+		display: flex;
+		gap: 1rem;
+
+		button:disabled {
+			color: lightgray;
+			cursor: auto;
+		}
 	}
 
 	.query_search-term {
