@@ -18,7 +18,12 @@
 		if (!searchTerm) return;
 		const query = generateQuery(searchTerm, $filters);
 
-		recentQueries.update((currentRecentQueries) => [...currentRecentQueries, query]);
+		recentQueries.update((currentRecentQueries) => {
+			const newRecentQueries = [...currentRecentQueries, query];
+			globalThis.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
+
+			return newRecentQueries;
+		});
 
 		window.open(`${provider}${encodeURI(query)}`);
 		searchInput.focus();
