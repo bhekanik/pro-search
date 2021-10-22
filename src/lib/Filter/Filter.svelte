@@ -49,31 +49,29 @@
 	};
 </script>
 
-<main>
-	<div class="flex my-2">
-		<label class="flex items-center gap-2">
-			<input
-				class="w-7 h-7"
-				type="checkbox"
-				name={`${type}-checkbox`}
-				id={`${type}-checkbox`}
-				bind:checked={enabled}
-				on:input={handleInput}
-			/>
-			{type}
-		</label>
-	</div>
-
-	{#if enabled && type !== 'Title' && type !== 'URL'}
+<div class="flex my-2">
+	<label class="flex items-center gap-2">
 		<input
-			disabled={!enabled}
-			class="w-full my-2 rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-400 bg-transparent"
-			type="text"
-			name={`${type}-input`}
-			id=""
-			placeholder={type}
+			class="w-7 h-7"
+			type="checkbox"
+			name={`${type}-checkbox`}
+			id={`${type}-checkbox`}
+			bind:checked={enabled}
 			on:input={handleInput}
-			on:keydown={go}
 		/>
-	{/if}
-</main>
+		{type}
+	</label>
+</div>
+
+{#if enabled && type !== 'Title' && type !== 'URL'}
+	<input
+		disabled={!enabled}
+		class="w-full my-2 rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-400 bg-transparent"
+		type="text"
+		name={`${type}-input`}
+		id=""
+		placeholder={type}
+		on:input={handleInput}
+		on:keydown={go}
+	/>
+{/if}

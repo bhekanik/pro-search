@@ -15,6 +15,4 @@
 	};
 </script>
 
-<main>
-	<FilterBase {handleInput} type="URL" {go} />
-</main>
+<FilterBase {handleInput} type="URL" {go} />

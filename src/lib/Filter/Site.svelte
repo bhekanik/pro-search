@@ -20,6 +20,4 @@
 	};
 </script>
 
-<main>
-	<FilterBase {handleInput} type="Site" hasInput {go} />
-</main>
+<FilterBase {handleInput} type="Site" hasInput {go} />

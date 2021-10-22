@@ -15,6 +15,4 @@
 	};
 </script>
 
-<main>
-	<FilterBase {handleInput} type="Title" {go} />
-</main>
+<FilterBase {handleInput} type="Title" {go} />

@@ -7,33 +7,31 @@
 	export let hasInput: boolean = false;
 </script>
 
-<main>
-	<div class="container">
-		<label class="input-label">
-			<input
-				type="checkbox"
-				name={`${type}-checkbox`}
-				id={`${type}-checkbox`}
-				bind:checked={enabled}
-				on:input={handleInput}
-			/>
-			{type}
-		</label>
-	</div>
-
-	{#if enabled && hasInput}
+<div class="container">
+	<label class="input-label">
 		<input
-			disabled={!enabled}
-			class="w-full my-2 rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-400 bg-transparent"
-			type="text"
-			name={`${type}-input`}
-			id=""
-			placeholder={type}
+			type="checkbox"
+			name={`${type}-checkbox`}
+			id={`${type}-checkbox`}
+			bind:checked={enabled}
 			on:input={handleInput}
-			on:keydown={go}
 		/>
-	{/if}
-</main>
+		{type}
+	</label>
+</div>
+
+{#if enabled && hasInput}
+	<input
+		disabled={!enabled}
+		class="w-full my-2 rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-400 bg-transparent"
+		type="text"
+		name={`${type}-input`}
+		id=""
+		placeholder={type}
+		on:input={handleInput}
+		on:keydown={go}
+	/>
+{/if}
 
 <style lang="scss">
 	.container {

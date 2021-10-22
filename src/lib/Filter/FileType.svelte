@@ -19,6 +19,4 @@
 	};
 </script>
 
-<main>
-	<FilterBase {handleInput} type="File Type" hasInput {go} />
-</main>
+<FilterBase {handleInput} type="File Type" hasInput {go} />
