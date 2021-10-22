@@ -11,7 +11,6 @@
 	import { query } from '../stores/query';
 	import { recentQueries } from '../stores/recentQueries';
 
-	let provider = searchProviders[0].url;
 	let searchInput;
 
 	const generateQueryAndGo = () => {
@@ -25,7 +24,7 @@
 			return newRecentQueries;
 		});
 
-		window.open(`${provider}${encodeURI(formattedQuery)}`);
+		window.open(`${$query.provider.url}${encodeURI(formattedQuery)}`);
 		searchInput.focus();
 	};
 
@@ -59,7 +58,7 @@
 			class="rounded-md text-lg p-4 border-2 bg-transparent border-gray-400 dark:border-gray-400"
 			name="provider"
 			id="provider"
-			bind:value={provider}
+			bind:value={$query.provider.url}
 		>
 			{#each searchProviders as provider}
 				<option
