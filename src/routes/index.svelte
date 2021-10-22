@@ -17,14 +17,12 @@
 		if (!$query.searchTerm) return;
 		const formattedQuery = generateQuery($query);
 
-		console.log('query:', $query);
 		recentQueries.update((currentRecentQueries) => {
 			const newRecentQueries = [...currentRecentQueries, { ...$query }];
 			globalThis.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
 
 			return newRecentQueries;
 		});
-		console.log('recentQueries:', $recentQueries);
 
 		window.open(`${$query.provider.url}${encodeURI(formattedQuery)}`);
 		searchInput.focus();
@@ -43,6 +41,15 @@
 	onMount(() => {
 		searchInput.focus();
 	});
+
+	const handleProviderChange = (e: any) => {
+		query.update((currentQuery) => {
+			return {
+				...currentQuery,
+				provider: searchProviders.find((provider) => provider.id === e.target.value)
+			};
+		});
+	};
 </script>
 
 <svelte:head>
@@ -60,13 +67,14 @@
 			class="rounded-md text-lg p-4 border-2 bg-transparent border-gray-400 dark:border-gray-400"
 			name="provider"
 			id="provider"
-			bind:value={$query.provider.url}
+			on:change={handleProviderChange}
+			value={$query.provider.id}
 		>
 			{#each searchProviders as provider}
 				<option
 					class="rounded-md text-lg p-4 border-2 dark:bg-gray-600 border-gray-400 dark:border-gray-400"
 					selected
-					value={provider.url}>{provider.name}</option
+					value={provider.id}>{provider.name}</option
 				>
 			{/each}
 		</select>
