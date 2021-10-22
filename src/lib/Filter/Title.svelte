@@ -5,23 +5,18 @@
 	export let go: (e: any) => void = () => null;
 
 	const handleInput = (e: any) => {
-		const isCheckbox = e.target.type === 'checkbox';
-		const value = isCheckbox ? e.target.checked : e.target.value;
+		const value = e.target.value;
 		query.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
-			if (!isCheckbox) {
-				value
-					? (newQuery.filters.title = {
-							value,
-							formatted: `intitle:${value}`
-					  })
-					: delete newQuery.filters.title;
-			} else {
-				value === false && delete newQuery.filters.title;
-			}
+			value
+				? (newQuery.filters.title = {
+						value,
+						formatted: `intitle:${value}`
+				  })
+				: delete newQuery.filters.title;
 			return newQuery;
 		});
 	};
 </script>
 
-<FilterBase {handleInput} type="Title" hasInput value={$query.filters.title?.value} {go} />
+<FilterBase {handleInput} type="Title" hasInput {go} />
