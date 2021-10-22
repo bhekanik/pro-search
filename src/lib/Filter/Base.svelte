@@ -1,8 +1,10 @@
 <script lang="ts">
+	import type { FilterType } from './types';
+
 	let enabled = false;
 
 	export let handleInput: (e: any) => void;
-	export let type: 'Site' | 'File Type' | 'Title' | 'URL';
+	export let type: FilterType;
 	export let go: (e: any) => void = () => null;
 	export let hasInput: boolean = false;
 </script>

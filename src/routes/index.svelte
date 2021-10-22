@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ExcludeFilter from '$lib/Filter/Exclude.svelte';
 	import FileTypeFilter from '$lib/Filter/FileType.svelte';
 	import { generateQuery } from '$lib/Filter/generateQuery';
 	import SiteFilter from '$lib/Filter/Site.svelte';
@@ -89,6 +90,7 @@
 		<h2>Add Filters</h2>
 
 		<SiteFilter go={handleKeydown} />
+		<ExcludeFilter go={handleKeydown} />
 		<TitleFilter go={handleKeydown} />
 		<FileTypeFilter go={handleKeydown} />
 		<URLFilter go={handleKeydown} />
