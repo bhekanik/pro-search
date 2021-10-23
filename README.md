@@ -22,7 +22,7 @@ To learn more about what is possible in terms of filters, etc. Here are some hel
 This is the tech used:
 
 - Frontend: SvelteKit
-- Styles: SCSS\*\*
+- Styles: CSS\*\*
 - Hosting: Vercel
 
 \*\* There are some components currently written using Tailwind CSS because the initial plan was to do all styling using TailwindCSS. Plans have since changed so now, whenever you touch a component please convert the styles to SCSS.

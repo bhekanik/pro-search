@@ -29,6 +29,7 @@
 	<label class="input-label">
 		<input
 			type="checkbox"
+			class="checkbox"
 			name={`${type}-checkbox`}
 			id={`${type}-checkbox`}
 			checked={Boolean($query.filters[Case.camel(type)])}
@@ -40,7 +41,7 @@
 	{#if (enabled || Boolean($query.filters[Case.camel(type)])) && hasInput}
 		<input
 			disabled={!Boolean($query.filters[Case.camel(type)])}
-			class="w-full my-2 rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-400 bg-transparent"
+			class="w-full mb-2 rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-400 bg-transparent"
 			type="text"
 			name={`${type}-input`}
 			id=""
@@ -52,21 +53,21 @@
 	{/if}
 </div>
 
-<style lang="scss">
+<style>
 	.container {
 		display: grid;
-		gap: 2rem;
+		gap: 1rem;
 		margin: 0.5rem 0;
+	}
 
-		.input-label {
-			display: flex;
-			align-items: center;
-			gap: 0.5rem;
+	.input-label {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
 
-			input {
-				width: 1.75rem;
-				height: 1.75rem;
-			}
-		}
+	.checkbox {
+		width: 1.75rem;
+		height: 1.75rem;
 	}
 </style>

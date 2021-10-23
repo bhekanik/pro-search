@@ -51,7 +51,7 @@
 	{/if}
 </div>
 
-<style lang="scss">
+<style>
 	.heading {
 		font-size: 1.5rem;
 		padding: 1rem 0 0.5rem;
@@ -62,10 +62,10 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
+	}
 
-		.label {
-			color: gray;
-		}
+	.label {
+		color: gray;
 	}
 
 	.query {
@@ -81,11 +81,11 @@
 		top: 1rem;
 		display: flex;
 		gap: 1rem;
+	}
 
-		button:disabled {
-			color: lightgray;
-			cursor: auto;
-		}
+	button:disabled {
+		color: lightgray;
+		cursor: auto;
 	}
 
 	.query_search-term {

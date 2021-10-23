@@ -105,12 +105,13 @@
 	<PastFilters />
 </main>
 
-<style lang="scss">
+<style>
 	.filters-heading {
 		margin: 1rem 0;
 	}
 	.filters {
 		margin: 1rem 0;
-		// display: flex;
+		display: flex;
+		flex-direction: column;
 	}
 </style>
