@@ -19,4 +19,4 @@
 	};
 </script>
 
-<FilterBase {handleInput} type="Exclude" hasInput {go} />
+<FilterBase on:input={handleInput} type="Exclude" hasInput on:keydown={go} />

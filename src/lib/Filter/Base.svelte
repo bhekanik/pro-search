@@ -20,8 +20,6 @@
 		});
 	};
 
-	export let handleInput: (e: any) => void;
-	export let go: (e: any) => void = () => null;
 	export let hasInput: boolean = false;
 </script>
 
@@ -40,15 +38,14 @@
 
 	{#if (enabled || Boolean($query.filters[Case.camel(type)])) && hasInput}
 		<input
-			disabled={!Boolean($query.filters[Case.camel(type)])}
 			class="w-full mb-2 rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-400 bg-transparent"
 			type="text"
 			name={`${type}-input`}
 			id=""
 			placeholder={type}
 			value={$query.filters[Case.camel(type)]?.value || ''}
-			on:input={handleInput}
-			on:keydown={go}
+			on:input
+			on:keydown
 		/>
 	{/if}
 </div>

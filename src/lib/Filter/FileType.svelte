@@ -19,4 +19,4 @@
 	};
 </script>
 
-<FilterBase {handleInput} type="File Type" hasInput {go} />
+<FilterBase on:input={handleInput} type="File Type" hasInput on:keydown={go} />
