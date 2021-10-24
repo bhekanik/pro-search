@@ -2,8 +2,6 @@
 	import FilterBase from '$lib/Filter/Base.svelte';
 	import { query } from '../../stores/query';
 
-	export let go: (e: any) => void = () => null;
-
 	const handleInput = (e: any) => {
 		const value = e.target.value;
 		query.update((currentQuery) => {
@@ -19,4 +17,4 @@
 	};
 </script>
 
-<FilterBase on:input={handleInput} type="File Type" hasInput on:keydown={go} />
+<FilterBase on:input={handleInput} type="File Type" hasInput />

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Case from 'case';
 	import { query } from '../../stores/query';
+	import { recentQueries } from '../../stores/recentQueries';
+	import { generateQuery } from './generateQuery';
 	import type { FilterType } from './types';
 
 	export let type: FilterType;
@@ -18,6 +20,26 @@
 			}
 			return newQuery;
 		});
+	};
+
+	const generateQueryAndGo = () => {
+		if (!$query.searchTerm) return;
+		const formattedQuery = generateQuery($query);
+
+		recentQueries.update((currentRecentQueries) => {
+			const newRecentQueries = [...currentRecentQueries, { ...$query }];
+			globalThis.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
+
+			return newRecentQueries;
+		});
+
+		window.open(`${$query.provider.url}${encodeURI(formattedQuery)}`);
+	};
+
+	const handleKeydown = (e) => {
+		if (e.keyCode === 13) {
+			generateQueryAndGo();
+		}
 	};
 
 	export let hasInput: boolean = false;
@@ -45,7 +67,7 @@
 			placeholder={type}
 			value={$query.filters[Case.camel(type)]?.value || ''}
 			on:input
-			on:keydown
+			on:keydown={handleKeydown}
 		/>
 	{/if}
 </div>

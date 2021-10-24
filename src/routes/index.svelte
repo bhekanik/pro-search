@@ -96,11 +96,11 @@
 
 	<h2 class="filters-heading">Add Filters</h2>
 	<div class="filters">
-		<SiteFilter go={handleKeydown} />
-		<ExcludeFilter go={handleKeydown} />
-		<TitleFilter go={handleKeydown} />
-		<FileTypeFilter go={handleKeydown} />
-		<URLFilter go={handleKeydown} />
+		<SiteFilter />
+		<ExcludeFilter />
+		<TitleFilter />
+		<FileTypeFilter />
+		<URLFilter />
 	</div>
 	<PastFilters />
 </main>
