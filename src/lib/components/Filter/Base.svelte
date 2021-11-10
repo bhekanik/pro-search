@@ -1,7 +1,6 @@
 <script lang="ts">
+	import { query, recentQueries } from '$lib/stores';
 	import Case from 'case';
-	import { query } from '../../stores/query';
-	import { recentQueries } from '../../stores/recentQueries';
 	import { generateQuery } from './generateQuery';
 	import type { FilterType } from './types';
 
@@ -60,7 +59,7 @@
 
 	{#if (enabled || Boolean($query.filters[Case.camel(type)])) && hasInput}
 		<input
-			class="w-full mb-2 rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-400 bg-transparent"
+			class="search-input"
 			type="text"
 			name={`${type}-input`}
 			id=""
@@ -73,6 +72,7 @@
 </div>
 
 <style>
+	/* class="search-input w-full mb-2 rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-400 bg-transparent" */
 	.container {
 		display: grid;
 		gap: 1rem;
@@ -86,7 +86,7 @@
 	}
 
 	.checkbox {
-		width: 1.75rem;
-		height: 1.75rem;
+		width: 1.25rem;
+		height: 1.25rem;
 	}
 </style>

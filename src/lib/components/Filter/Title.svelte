@@ -1,6 +1,6 @@
 <script lang="ts">
-	import FilterBase from '$lib/Filter/Base.svelte';
-	import { query } from '../../stores/query';
+	import FilterBase from '$lib/components/Filter/Base.svelte';
+	import { query } from '$lib/stores';
 
 	const handleInput = (e: any) => {
 		const value = e.target.value;

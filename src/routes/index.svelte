@@ -1,15 +1,14 @@
 <script lang="ts">
-	import ExcludeFilter from '$lib/Filter/Exclude.svelte';
-	import FileTypeFilter from '$lib/Filter/FileType.svelte';
-	import { generateQuery } from '$lib/Filter/generateQuery';
-	import SiteFilter from '$lib/Filter/Site.svelte';
-	import TitleFilter from '$lib/Filter/Title.svelte';
-	import URLFilter from '$lib/Filter/URL.svelte';
-	import PastFilters from '$lib/PastFilters.svelte';
+	import { searchProviders } from '$lib/app/config/searchProviders';
+	import ExcludeFilter from '$lib/components/Filter/Exclude.svelte';
+	import FileTypeFilter from '$lib/components/Filter/FileType.svelte';
+	import { generateQuery } from '$lib/components/Filter/generateQuery';
+	import SiteFilter from '$lib/components/Filter/Site.svelte';
+	import TitleFilter from '$lib/components/Filter/Title.svelte';
+	import URLFilter from '$lib/components/Filter/URL.svelte';
+	import RecentQueriesList from '$lib/components/RecentQueries/RecentQueriesList.svelte';
+	import { query, recentQueries } from '$lib/stores';
 	import { onMount } from 'svelte';
-	import { searchProviders } from '../app/config/searchProviders';
-	import { query } from '../stores/query';
-	import { recentQueries } from '../stores/recentQueries';
 
 	let searchInput;
 
@@ -64,7 +63,7 @@
 	</h1>
 	<div class="flex flex-col gap-2 md:flex-row">
 		<select
-			class="rounded-md text-lg p-4 border-2 bg-transparent border-gray-400 dark:border-gray-400"
+			class="inputs rounded-md text-lg p-4 border-2 bg-transparent border-gray-400 dark:border-gray-400"
 			name="provider"
 			id="provider"
 			on:change={handleProviderChange}
@@ -79,7 +78,7 @@
 			{/each}
 		</select>
 		<input
-			class="w-full rounded-md text-lg p-4 border-2 dark:bg-gray-600 border-gray-400 dark:border-gray-400 bg-transparent"
+			class="search-input"
 			placeholder="Search"
 			bind:value={$query.searchTerm}
 			on:keydown={handleKeydown}
@@ -88,10 +87,7 @@
 			id=""
 			bind:this={searchInput}
 		/>
-		<button
-			class="px-8 py-4 rounded-md shadow-md border-0 bg-gray-700 text-gray-50 dark:hover:bg-gray-800 hover:bg-gray-600 text-lg flex items-center justify-center"
-			on:click={handleClick}>Search</button
-		>
+		<button class="inputs button" on:click={handleClick}>Search</button>
 	</div>
 
 	<h2 class="filters-heading">Add Filters</h2>
@@ -102,10 +98,21 @@
 		<FileTypeFilter />
 		<URLFilter />
 	</div>
-	<PastFilters />
+	<RecentQueriesList />
 </main>
 
 <style>
+	.search-input {
+		width: 100%;
+		border: 1px solid gray;
+		/* margin-bottom: 0.5rem; */
+		margin: auto;
+		border-radius: 10px;
+		font-size: 1rem;
+		padding: 0.5rem 1rem;
+		background-color: transparent;
+	}
+
 	.filters-heading {
 		margin: 1rem 0;
 	}

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { query } from '../../stores/query';
+	import { query } from '$lib/stores';
+
 	export let type: 'Site' | 'File Type' | 'Title' | 'URL';
 	export let go: (e: any) => void = () => null;
 

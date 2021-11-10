@@ -1,4 +1,4 @@
-import type { Query } from '../../stores/query';
+import type { Query } from '$lib/stores';
 
 /**
  * Formats the search input for the search engine according to the provided
