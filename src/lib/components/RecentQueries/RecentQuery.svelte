@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { recentQueries } from '$lib/stores';
-	import type { Filter, Query } from '$lib/stores/query';
+	import { query as currentQuery,recentQueries } from '$lib/stores';
+	import type { Filter,Query } from '$lib/stores/query';
 
 	const generateFilters = (filters: Record<string, Filter>): string =>
 		Object.values(filters).reduce((prev, curr) => `${prev}${curr.formatted}`, '');
@@ -14,7 +14,7 @@
 	};
 
 	const handleApply = (selectedQuery: Query) => {
-		query.update(() => selectedQuery);
+		currentQuery.update(() => selectedQuery);
 	};
 
 	export let query;
