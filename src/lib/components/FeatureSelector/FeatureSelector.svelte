@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { featureFlags } from '$lib/stores/featureFlags';
+	import { FeatureFlagNames, featureFlags } from '$lib/stores/featureFlags';
 	import { onDestroy } from 'svelte';
 
-	export let featureFlag: string;
+	export let featureFlag: FeatureFlagNames;
 	export let onFeature;
 	export let offFeature;
 

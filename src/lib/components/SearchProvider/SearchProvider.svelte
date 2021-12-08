@@ -18,7 +18,7 @@
 </script>
 
 <FeatureSelector
-	featureFlag="searchAll"
+	featureFlag="Search_All_Providers"
 	onFeature={searchProvidersWithAll}
 	offFeature={searchProvidersWithoutAll}
 	let:feature={searchProviders}
