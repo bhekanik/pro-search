@@ -17,4 +17,4 @@
 	};
 </script>
 
-<FilterBase on:input={handleInput} type="Site" hasInput />
+<FilterBase on:input={handleInput} type="Site" hasInput label="Search in specific website" />

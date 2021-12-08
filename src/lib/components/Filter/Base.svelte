@@ -6,6 +6,7 @@
 
 	export let type: FilterType;
 	export let enabled = false;
+	export let label = '';
 
 	const handleCheckboxInput = (e: any) => {
 		const value = e.target.checked;
@@ -54,7 +55,7 @@
 			checked={Boolean($query.filters[Case.camel(type)])}
 			on:input={handleCheckboxInput}
 		/>
-		{type}
+		{label || type}
 	</label>
 
 	{#if (enabled || Boolean($query.filters[Case.camel(type)])) && hasInput}

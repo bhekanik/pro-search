@@ -17,4 +17,4 @@
 	};
 </script>
 
-<FilterBase on:input={handleInput} type="Title" hasInput />
+<FilterBase on:input={handleInput} type="Title" hasInput label="Search in page title" />

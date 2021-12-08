@@ -1,48 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#317EFB" />
-    <link rel="manifest" crossorigin="use-credentials" href="manifest.json" />
-    <link rel="apple-touch-icon" href="/logo_192.png" />
-    <link rel="canonical" href="https://pro-search.vercel.app" />
-    <meta name="description" content="Advanced search query builder" />
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-S20NGL4S0C"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#317EFB" />
+		<link rel="manifest" crossorigin="use-credentials" href="manifest.json" />
+		<link rel="apple-touch-icon" href="/logo_192.png" />
+		<link rel="canonical" href="https://pro-search.vercel.app" />
+		<meta name="description" content="Advanced search query builder" />
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script
+			crossorigin="anonymous"
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-S20NGL4S0C"
+		></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
 
-      gtag("config", "G-S20NGL4S0C");
-    </script>
+			gtag('config', 'G-S20NGL4S0C');
+		</script>
 
-    <!-- Hotjar Tracking Code for https://pro-search-bhekanik.vercel.app/ -->
-    <script>
-      (function (h, o, t, j, a, r) {
-        h.hj =
-          h.hj ||
-          function () {
-            (h.hj.q = h.hj.q || []).push(arguments);
-          };
-        h._hjSettings = { hjid: 2632849, hjsv: 6 };
-        a = o.getElementsByTagName("head")[0];
-        r = o.createElement("script");
-        r.async = 1;
-        r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
-        a.appendChild(r);
-      })(window, document, "https://static.hotjar.com/c/hotjar-", ".js?sv=");
-    </script>
-    %svelte.head%
-  </head>
-  <body>
-    <div id="svelte">%svelte.body%</div>
-  </body>
+		<!-- Hotjar Tracking Code for https://pro-search-bhekanik.vercel.app/ -->
+		<script>
+			(function (h, o, t, j, a, r) {
+				h.hj =
+					h.hj ||
+					function () {
+						(h.hj.q = h.hj.q || []).push(arguments);
+					};
+				h._hjSettings = { hjid: 2632849, hjsv: 6 };
+				a = o.getElementsByTagName('head')[0];
+				r = o.createElement('script');
+				r.async = 1;
+				r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+				a.appendChild(r);
+			})(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+		</script>
+		<title>Pro Search</title>
+		%svelte.head%
+	</head>
+	<body>
+		<div id="svelte">%svelte.body%</div>
+	</body>
 </html>

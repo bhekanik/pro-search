@@ -1,7 +1,7 @@
 export interface SearchProvider {
 	id: string;
 	name: string;
-	url: string;
+	url: string | string[];
 }
 
 export const searchProviders = [
@@ -24,5 +24,16 @@ export const searchProviders = [
 		id: '4',
 		name: 'Yahoo',
 		url: 'https://search.yahoo.com/search?q='
+	},
+	{
+		id: '5',
+		name: 'All',
+		url: [
+			'https://search.yahoo.com/search?q=',
+			'https://search.yahoo.com/search?q=',
+			'https://google.com/search?q=',
+			'https://bing.com/search?q=',
+			'https://duckduckgo.com/?q='
+		]
 	}
 ];

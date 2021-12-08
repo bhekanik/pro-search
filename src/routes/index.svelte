@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { searchProviders } from '$lib/app/config/searchProviders';
 	import ExcludeFilter from '$lib/components/Filter/Exclude.svelte';
 	import FileTypeFilter from '$lib/components/Filter/FileType.svelte';
 	import { generateQuery } from '$lib/components/Filter/generateQuery';
@@ -7,6 +6,7 @@
 	import TitleFilter from '$lib/components/Filter/Title.svelte';
 	import URLFilter from '$lib/components/Filter/URL.svelte';
 	import RecentQueriesList from '$lib/components/RecentQueries/RecentQueriesList.svelte';
+	import SearchProvider from '$lib/components/SearchProvider/SearchProvider.svelte';
 	import { query, recentQueries } from '$lib/stores';
 	import { onMount } from 'svelte';
 
@@ -17,13 +17,22 @@
 		const formattedQuery = generateQuery($query);
 
 		recentQueries.update((currentRecentQueries) => {
-			const newRecentQueries = [...currentRecentQueries, { ...$query }];
+			const newRecentQueries = currentRecentQueries.find((item) => item.id === $query.id)
+				? [...currentRecentQueries]
+				: [...currentRecentQueries, { ...$query }];
 			globalThis.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
 
 			return newRecentQueries;
 		});
 
-		window.open(`${$query.provider.url}${encodeURI(formattedQuery)}`);
+		if (typeof $query.provider.url === 'string') {
+			window.open(`${$query.provider.url}${encodeURI(formattedQuery)}`);
+		} else {
+			$query.provider.url.forEach((url, i) => {
+				window.open(`${url}${encodeURI(formattedQuery)}`, i.toString());
+			});
+		}
+
 		searchInput.focus();
 	};
 
@@ -40,15 +49,6 @@
 	onMount(() => {
 		searchInput.focus();
 	});
-
-	const handleProviderChange = (e: any) => {
-		query.update((currentQuery) => {
-			return {
-				...currentQuery,
-				provider: searchProviders.find((provider) => provider.id === e.target.value)
-			};
-		});
-	};
 </script>
 
 <svelte:head>
@@ -61,22 +61,9 @@
 	>
 		Pro-Search
 	</h1>
+
 	<div class="flex flex-col gap-2 md:flex-row">
-		<select
-			class="inputs rounded-md text-lg p-4 border-2 bg-transparent border-gray-400 dark:border-gray-400"
-			name="provider"
-			id="provider"
-			on:change={handleProviderChange}
-			value={$query.provider.id}
-		>
-			{#each searchProviders as provider}
-				<option
-					class="rounded-md text-lg p-4 border-2 dark:bg-gray-600 border-gray-400 dark:border-gray-400"
-					selected
-					value={provider.id}>{provider.name}</option
-				>
-			{/each}
-		</select>
+		<SearchProvider />
 		<input
 			class="search-input"
 			placeholder="Search"
