@@ -1,5 +1,5 @@
 import type { SearchProvider } from '$lib/app/config/searchProviders';
-import { searchProviders } from '$lib/app/config/searchProviders';
+import { searchProvidersWithAll } from '$lib/app/config/searchProviders';
 import type { Writable } from 'svelte/store';
 import { writable } from 'svelte/store';
 import { v4 as uuidv4 } from 'uuid';
@@ -20,5 +20,5 @@ export const query: Writable<Query> = writable({
 	id: uuidv4(),
 	searchTerm: '',
 	filters: {},
-	provider: searchProviders[0]
+	provider: searchProvidersWithAll[0]
 });
