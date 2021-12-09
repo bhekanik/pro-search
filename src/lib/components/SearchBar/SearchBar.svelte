@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { generateQuery } from '$lib/components/Filters/generateQuery';
-	import { query, recentQueries } from '$lib/stores';
+	import { query, recentQueries, resetQuery } from '$lib/stores';
 	import { onMount } from 'svelte';
 
 	let searchInput;
@@ -10,6 +10,12 @@
 		if (!$query.searchTerm) return;
 		const formattedQuery = generateQuery($query);
 
+		executeQuery(`${$query.provider.url}${encodeURI(formattedQuery)}`);
+
+		searchInput.focus();
+	};
+
+	const saveSearch = () => {
 		recentQueries.update((currentRecentQueries) => {
 			const newRecentQueries = currentRecentQueries.find((item) => item.id === $query.id)
 				? [...currentRecentQueries]
@@ -19,9 +25,7 @@
 			return newRecentQueries;
 		});
 
-		executeQuery(`${$query.provider.url}${encodeURI(formattedQuery)}`);
-
-		searchInput.focus();
+		resetQuery();
 	};
 
 	const handleKeydown = (e) => {
@@ -40,7 +44,7 @@
 </script>
 
 <input
-	class="search-input"
+	class="input input-bordered input-primary w-full"
 	placeholder="Search"
 	bind:value={$query.searchTerm}
 	on:keydown={handleKeydown}
@@ -49,17 +53,7 @@
 	id=""
 	bind:this={searchInput}
 />
-<button class="inputs button" on:click={handleClick}>Search</button>
-
-<style>
-	.search-input {
-		width: 100%;
-		border: 1px solid gray;
-		/* margin-bottom: 0.5rem; */
-		margin: auto;
-		border-radius: 10px;
-		font-size: 1rem;
-		padding: 0.5rem 1rem;
-		background-color: transparent;
-	}
-</style>
+<button class="btn btn-primary" on:click={handleClick}>Search</button>
+{#if $query.searchTerm}
+	<button class="btn btn-outline btn-secondary" on:click={saveSearch}>Save</button>
+{/if}

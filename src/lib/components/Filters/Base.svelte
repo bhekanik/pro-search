@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { query, recentQueries } from '$lib/stores';
 	import Case from 'case';
+	import { slide } from 'svelte/transition';
 	import { generateQuery } from './generateQuery';
 	import type { FilterType } from './types';
 
@@ -49,7 +50,7 @@
 	<label class="input-label">
 		<input
 			type="checkbox"
-			class="checkbox"
+			class="toggle toggle-primary"
 			name={`${type}-checkbox`}
 			id={`${type}-checkbox`}
 			checked={Boolean($query.filters[Case.camel(type)])}
@@ -60,7 +61,9 @@
 
 	{#if (enabled || Boolean($query.filters[Case.camel(type)])) && hasInput}
 		<input
-			class="search-input"
+			in:slide
+			out:slide
+			class="input input-bordered"
 			type="text"
 			name={`${type}-input`}
 			id=""
@@ -73,7 +76,6 @@
 </div>
 
 <style>
-	/* class="search-input w-full mb-2 rounded-md text-lg p-4 border-2 border-gray-400 dark:border-gray-400 bg-transparent" */
 	.container {
 		display: grid;
 		gap: 1rem;
@@ -84,10 +86,5 @@
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
-	}
-
-	.checkbox {
-		width: 1.25rem;
-		height: 1.25rem;
 	}
 </style>

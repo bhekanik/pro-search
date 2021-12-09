@@ -1,7 +1,12 @@
 <script>
 	import { splitClient } from '$lib/app/splitClient';
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
+	import { themeChange } from 'theme-change';
 	import '../global.css';
+
+	onMount(() => {
+		themeChange(false);
+	});
 
 	onDestroy(splitClient.destroy);
 </script>

@@ -29,7 +29,7 @@
 
 <main class="dark:text-gray-50 h-full">
 	<h1
-		class="text-6xl text-center bg-transparent text-gray-700 dark:text-gray-400 my-8 font-extrabold"
+		class="text-6xl text-primary text-center bg-transparent dark:text-gray-400 my-8 font-extrabold"
 	>
 		Pro-Search
 	</h1>
@@ -50,6 +50,7 @@
 		<iframe title="Results" src={url} class="w-full h-full" frameborder="0" />
 	{:else}
 		<Filters />
+		<div class="divider" />
 		<RecentQueriesList />
 	{/if}
 </main>

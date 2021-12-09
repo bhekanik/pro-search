@@ -2,7 +2,7 @@ import { splitClient } from '$lib/app/splitClient';
 import type { Writable } from 'svelte/store';
 import { writable } from 'svelte/store';
 
-const featureFlagNames = ['Search_All_Providers', 'Results_In_IFrame'] as const;
+const featureFlagNames = ['Search_All_Providers', 'Results_In_IFrame', 'Save_Search'] as const;
 
 export type FeatureFlagNames = typeof featureFlagNames[number];
 

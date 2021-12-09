@@ -6,19 +6,21 @@
 	import URLFilter from '$lib/components/Filters/URL.svelte';
 </script>
 
-<h2 class="filters-heading">Add Filters</h2>
-<div class="filters">
-	<SiteFilter />
-	<ExcludeFilter />
-	<TitleFilter />
-	<FileTypeFilter />
-	<URLFilter />
+<div class="collapse my-2 w-full border rounded-box border-base-300 collapse-arrow">
+	<input type="checkbox" />
+	<div class="collapse-title text-xl font-medium">Add Filters</div>
+	<div class="collapse-content">
+		<div class="filters">
+			<SiteFilter />
+			<ExcludeFilter />
+			<TitleFilter />
+			<FileTypeFilter />
+			<URLFilter />
+		</div>
+	</div>
 </div>
 
 <style>
-	.filters-heading {
-		margin: 1rem 0;
-	}
 	.filters {
 		margin: 1rem 0;
 		display: flex;

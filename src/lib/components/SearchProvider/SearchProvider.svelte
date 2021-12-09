@@ -24,7 +24,7 @@
 	let:feature={searchProviders}
 >
 	<select
-		class="inputs rounded-md text-lg p-4 border-2 bg-transparent border-gray-400 dark:border-gray-400"
+		class="select select-bordered select-primary"
 		name="provider"
 		id="provider"
 		on:change={(e) => handleProviderChange(e, searchProviders)}

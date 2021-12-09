@@ -20,7 +20,6 @@
 	.heading {
 		font-size: 1.5rem;
 		padding: 1rem 0 0.5rem;
-		border-top: 1px solid gray;
 	}
 
 	.query-list {

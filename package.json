@@ -37,6 +37,8 @@
 		"@tailwindcss/typography": "^0.4.1",
 		"@types/node": "^14.17.20",
 		"case": "^1.6.3",
+		"daisyui": "^1.16.2",
+		"theme-change": "^2.0.2",
 		"uuid": "^8.3.2"
 	}
 }
