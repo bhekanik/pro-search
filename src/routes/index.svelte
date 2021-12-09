@@ -2,7 +2,8 @@
 	import FeatureSelector from '$lib/components/FeatureSelector/FeatureSelector.svelte';
 	import Filters from '$lib/components/Filters/Filters.svelte';
 	import RecentQueriesList from '$lib/components/RecentQueries/RecentQueriesList.svelte';
-	import SearchBar from '$lib/components/SearchBar/SearchBar.svelte';
+	import SearchBarNoSaveQuery from '$lib/components/SearchBar/SearchBarNoSaveQuery.svelte';
+	import SearchBarSaveQuery from '$lib/components/SearchBar/SearchBarSaveQuery.svelte';
 	import SearchProvider from '$lib/components/SearchProvider/SearchProvider.svelte';
 	import { query } from '$lib/stores';
 
@@ -42,7 +43,14 @@
 			offFeature={executeQueryWithNewTab}
 			let:feature={executeQuery}
 		>
-			<SearchBar {executeQuery} />
+			<FeatureSelector
+				featureFlag="Save_Search"
+				onFeature={SearchBarNoSaveQuery}
+				offFeature={SearchBarSaveQuery}
+				let:feature={SearchBar}
+			>
+				<SearchBar {executeQuery} />
+			</FeatureSelector>
 		</FeatureSelector>
 	</div>
 
