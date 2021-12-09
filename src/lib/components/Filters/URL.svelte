@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FilterBase from '$lib/components/Filter/Base.svelte';
+	import FilterBase from '$lib/components/Filters/Base.svelte';
 	import { query } from '$lib/stores';
 
 	const handleInput = (e: any) => {

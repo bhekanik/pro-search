@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FilterBase from '$lib/components/Filter/Base.svelte';
+	import FilterBase from '$lib/components/Filters/Base.svelte';
 	import { query } from '$lib/stores';
 
 	const handleInput = (e: any) => {
@@ -7,14 +7,14 @@
 		query.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			value
-				? (newQuery.filters.site = {
+				? (newQuery.filters.exclude = {
 						value,
-						formatted: `site:${value} `
+						formatted: `-${value} `
 				  })
-				: delete newQuery.filters.site;
+				: delete newQuery.filters.exclude;
 			return newQuery;
 		});
 	};
 </script>
 
-<FilterBase on:input={handleInput} type="Site" hasInput label="Search in specific website" />
+<FilterBase on:input={handleInput} type="Exclude" hasInput />

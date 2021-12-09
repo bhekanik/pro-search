@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FilterBase from '$lib/components/Filter/Base.svelte';
+	import FilterBase from '$lib/components/Filters/Base.svelte';
 	import { query } from '$lib/stores';
 
 	const handleInput = (e: any) => {
@@ -7,14 +7,14 @@
 		query.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			value
-				? (newQuery.filters.fileType = {
+				? (newQuery.filters.title = {
 						value,
-						formatted: `filetype:${value} `
+						formatted: `intitle:${value}`
 				  })
-				: delete newQuery.filters.fileType;
+				: delete newQuery.filters.title;
 			return newQuery;
 		});
 	};
 </script>
 
-<FilterBase on:input={handleInput} type="File Type" hasInput />
+<FilterBase on:input={handleInput} type="Title" hasInput label="Search in page title" />

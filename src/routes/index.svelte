@@ -1,10 +1,6 @@
 <script lang="ts">
-	import ExcludeFilter from '$lib/components/Filter/Exclude.svelte';
-	import FileTypeFilter from '$lib/components/Filter/FileType.svelte';
-	import { generateQuery } from '$lib/components/Filter/generateQuery';
-	import SiteFilter from '$lib/components/Filter/Site.svelte';
-	import TitleFilter from '$lib/components/Filter/Title.svelte';
-	import URLFilter from '$lib/components/Filter/URL.svelte';
+	import Filters from '$lib/components/Filters/Filters.svelte';
+	import { generateQuery } from '$lib/components/Filters/generateQuery';
 	import RecentQueriesList from '$lib/components/RecentQueries/RecentQueriesList.svelte';
 	import SearchProvider from '$lib/components/SearchProvider/SearchProvider.svelte';
 	import { query, recentQueries } from '$lib/stores';
@@ -77,14 +73,7 @@
 		<button class="inputs button" on:click={handleClick}>Search</button>
 	</div>
 
-	<h2 class="filters-heading">Add Filters</h2>
-	<div class="filters">
-		<SiteFilter />
-		<ExcludeFilter />
-		<TitleFilter />
-		<FileTypeFilter />
-		<URLFilter />
-	</div>
+	<Filters />
 	<RecentQueriesList />
 </main>
 
@@ -98,14 +87,5 @@
 		font-size: 1rem;
 		padding: 0.5rem 1rem;
 		background-color: transparent;
-	}
-
-	.filters-heading {
-		margin: 1rem 0;
-	}
-	.filters {
-		margin: 1rem 0;
-		display: flex;
-		flex-direction: column;
 	}
 </style>
