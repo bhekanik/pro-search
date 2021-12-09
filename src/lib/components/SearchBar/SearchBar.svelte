@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 
 	let searchInput;
+	export let executeQuery: (query: string) => void;
 
 	const generateQueryAndGo = () => {
 		if (!$query.searchTerm) return;
@@ -18,13 +19,7 @@
 			return newRecentQueries;
 		});
 
-		if (typeof $query.provider.url === 'string') {
-			window.open(`${$query.provider.url}${encodeURI(formattedQuery)}`);
-		} else {
-			$query.provider.url.forEach((url, i) => {
-				window.open(`${url}${encodeURI(formattedQuery)}`, i.toString());
-			});
-		}
+		executeQuery(`${$query.provider.url}${encodeURI(formattedQuery)}`);
 
 		searchInput.focus();
 	};

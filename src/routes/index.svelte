@@ -1,15 +1,33 @@
 <script lang="ts">
+	import FeatureSelector from '$lib/components/FeatureSelector/FeatureSelector.svelte';
 	import Filters from '$lib/components/Filters/Filters.svelte';
 	import RecentQueriesList from '$lib/components/RecentQueries/RecentQueriesList.svelte';
 	import SearchBar from '$lib/components/SearchBar/SearchBar.svelte';
 	import SearchProvider from '$lib/components/SearchProvider/SearchProvider.svelte';
+	import { query } from '$lib/stores';
+
+	let url = '';
+
+	const executeQueryWithIFrame = (queryUrl: string) => {
+		url = queryUrl + '&igu=1';
+	};
+
+	const executeQueryWithNewTab = (queryUrl: string) => {
+		if (typeof $query.provider.url === 'string') {
+			window.open(queryUrl);
+		} else {
+			$query.provider.url.forEach((providerUrl, i) => {
+				window.open(providerUrl, i.toString());
+			});
+		}
+	};
 </script>
 
 <svelte:head>
 	<title>Pro-Search</title>
 </svelte:head>
 
-<main class="dark:text-gray-50">
+<main class="dark:text-gray-50 h-full">
 	<h1
 		class="text-6xl text-center bg-transparent text-gray-700 dark:text-gray-400 my-8 font-extrabold"
 	>
@@ -18,9 +36,20 @@
 
 	<div class="flex flex-col gap-2 md:flex-row">
 		<SearchProvider />
-		<SearchBar />
+		<FeatureSelector
+			featureFlag="Results_In_IFrame"
+			onFeature={executeQueryWithIFrame}
+			offFeature={executeQueryWithNewTab}
+			let:feature={executeQuery}
+		>
+			<SearchBar {executeQuery} />
+		</FeatureSelector>
 	</div>
 
-	<Filters />
-	<RecentQueriesList />
+	{#if url}
+		<iframe title="Results" src={url} class="w-full h-full" frameborder="0" />
+	{:else}
+		<Filters />
+		<RecentQueriesList />
+	{/if}
 </main>
