@@ -2,6 +2,7 @@
 	import ExcludeFilter from '$lib/components/Filters/Exclude.svelte';
 	import FileTypeFilter from '$lib/components/Filters/FileType.svelte';
 	import SiteFilter from '$lib/components/Filters/Site.svelte';
+	import SynonymsFilter from '$lib/components/Filters/Synonyms.svelte';
 	import TitleFilter from '$lib/components/Filters/Title.svelte';
 	import URLFilter from '$lib/components/Filters/URL.svelte';
 </script>
@@ -13,6 +14,7 @@
 		<div class="filters">
 			<SiteFilter />
 			<ExcludeFilter />
+			<SynonymsFilter />
 			<TitleFilter />
 			<FileTypeFilter />
 			<URLFilter />

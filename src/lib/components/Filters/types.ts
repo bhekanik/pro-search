@@ -1,1 +1,1 @@
-export type FilterType = 'Site' | 'File Type' | 'Title' | 'URL' | 'Exclude';
+export type FilterType = 'Site' | 'File Type' | 'Title' | 'URL' | 'Exclude' | 'Synonyms';

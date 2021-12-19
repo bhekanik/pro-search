@@ -10,6 +10,8 @@
 	export let label = '';
 	export let textInputPlaceholder = '';
 
+	let filtersThatDontRequireSearchTerm: FilterType[] = ['Synonyms', 'Exclude', 'Title', 'URL'];
+
 	const handleCheckboxInput = (e: any) => {
 		const value = e.target.checked;
 		query.update((currentQuery) => {
@@ -25,7 +27,7 @@
 	};
 
 	const generateQueryAndGo = () => {
-		if (!$query.searchTerm) return;
+		if (!$query.searchTerm && !filtersThatDontRequireSearchTerm.includes(type)) return;
 		const formattedQuery = generateQuery($query);
 
 		recentQueries.update((currentRecentQueries) => {
