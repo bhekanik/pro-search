@@ -17,4 +17,10 @@
 	};
 </script>
 
-<FilterBase on:input={handleInput} type="Exclude" hasInput />
+<FilterBase
+	on:input={handleInput}
+	type="Exclude"
+	hasInput
+	label="Exclude results with this word"
+	textInputPlaceholder="Word to exclude"
+/>

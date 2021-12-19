@@ -8,6 +8,7 @@
 	export let type: FilterType;
 	export let enabled = false;
 	export let label = '';
+	export let textInputPlaceholder = '';
 
 	const handleCheckboxInput = (e: any) => {
 		const value = e.target.checked;
@@ -67,7 +68,7 @@
 			type="text"
 			name={`${type}-input`}
 			id=""
-			placeholder={type}
+			placeholder={textInputPlaceholder || type}
 			value={$query.filters[Case.camel(type)]?.value || ''}
 			on:input
 			on:keydown={handleKeydown}

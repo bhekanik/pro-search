@@ -17,4 +17,10 @@
 	};
 </script>
 
-<FilterBase on:input={handleInput} type="Title" hasInput label="Search in page title" />
+<FilterBase
+	on:input={handleInput}
+	type="Title"
+	hasInput
+	label="Only return results with this word in the title of the page"
+	textInputPlaceholder="Word"
+/>

@@ -17,4 +17,10 @@
 	};
 </script>
 
-<FilterBase on:input={handleInput} type="URL" hasInput />
+<FilterBase
+	on:input={handleInput}
+	type="URL"
+	hasInput
+	label="Only return results with this word in the URL"
+	textInputPlaceholder="Word"
+/>

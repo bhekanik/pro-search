@@ -17,4 +17,10 @@
 	};
 </script>
 
-<FilterBase on:input={handleInput} type="File Type" hasInput />
+<FilterBase
+	on:input={handleInput}
+	type="File Type"
+	hasInput
+	label="Only return results of this file type"
+	textInputPlaceholder="File type (example: pdf)"
+/>

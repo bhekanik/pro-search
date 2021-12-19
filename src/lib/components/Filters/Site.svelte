@@ -17,4 +17,10 @@
 	};
 </script>
 
-<FilterBase on:input={handleInput} type="Site" hasInput label="Search in specific website" />
+<FilterBase
+	on:input={handleInput}
+	type="Site"
+	hasInput
+	label="Only return results from this website"
+	textInputPlaceholder="Website (example: cnn.com)"
+/>
