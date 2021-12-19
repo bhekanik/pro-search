@@ -9,7 +9,7 @@
 			value
 				? (newQuery.filters.title = {
 						value,
-						formatted: `intitle:${value}`
+						formatted: value.split(' ').length > 1 ? `allintitle:${value} ` : `intitle:${value} `
 				  })
 				: delete newQuery.filters.title;
 			return newQuery;
@@ -21,6 +21,6 @@
 	on:input={handleInput}
 	type="Title"
 	hasInput
-	label="Only return results with this word in the title of the page"
-	textInputPlaceholder="Word"
+	label="Only return results with this word(s) in the title of the page"
+	textInputPlaceholder="Word(s)"
 />

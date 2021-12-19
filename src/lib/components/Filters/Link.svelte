@@ -7,11 +7,11 @@
 		query.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			value
-				? (newQuery.filters.exclude = {
+				? (newQuery.filters.link = {
 						value,
-						formatted: value.split(' ').reduce((acc, item) => `${acc}-${item.trim()} `, '')
+						formatted: `link:${value} `
 				  })
-				: delete newQuery.filters.exclude;
+				: delete newQuery.filters.link;
 			return newQuery;
 		});
 	};
@@ -19,8 +19,8 @@
 
 <FilterBase
 	on:input={handleInput}
-	type="Exclude"
+	type="Link"
 	hasInput
-	label="Exclude results with these words"
-	textInputPlaceholder="Words to exclude (example: detect plagiarism)"
+	label="Only return results that point to this URL"
+	textInputPlaceholder="URL (example: www.cnn.com)"
 />

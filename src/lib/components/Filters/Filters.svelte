@@ -1,6 +1,8 @@
 <script lang="ts">
 	import ExcludeFilter from '$lib/components/Filters/Exclude.svelte';
 	import FileTypeFilter from '$lib/components/Filters/FileType.svelte';
+	import LinkFilter from '$lib/components/Filters/Link.svelte';
+	import RelatedFilter from '$lib/components/Filters/Related.svelte';
 	import SiteFilter from '$lib/components/Filters/Site.svelte';
 	import SynonymsFilter from '$lib/components/Filters/Synonyms.svelte';
 	import TitleFilter from '$lib/components/Filters/Title.svelte';
@@ -18,6 +20,8 @@
 			<TitleFilter />
 			<FileTypeFilter />
 			<URLFilter />
+			<LinkFilter />
+			<RelatedFilter />
 		</div>
 	</div>
 </div>

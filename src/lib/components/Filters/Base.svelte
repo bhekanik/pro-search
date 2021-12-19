@@ -10,7 +10,14 @@
 	export let label = '';
 	export let textInputPlaceholder = '';
 
-	let filtersThatDontRequireSearchTerm: FilterType[] = ['Synonyms', 'Exclude', 'Title', 'URL'];
+	let filtersThatDontRequireSearchTerm: FilterType[] = [
+		'Synonyms',
+		'Exclude',
+		'Link',
+		'Related',
+		'Title',
+		'URL'
+	];
 
 	const handleCheckboxInput = (e: any) => {
 		const value = e.target.checked;

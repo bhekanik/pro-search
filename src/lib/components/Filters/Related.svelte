@@ -7,11 +7,11 @@
 		query.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			value
-				? (newQuery.filters.exclude = {
+				? (newQuery.filters.related = {
 						value,
-						formatted: value.split(' ').reduce((acc, item) => `${acc}-${item.trim()} `, '')
+						formatted: `related:${value} `
 				  })
-				: delete newQuery.filters.exclude;
+				: delete newQuery.filters.related;
 			return newQuery;
 		});
 	};
@@ -19,8 +19,8 @@
 
 <FilterBase
 	on:input={handleInput}
-	type="Exclude"
+	type="Related"
 	hasInput
-	label="Exclude results with these words"
-	textInputPlaceholder="Words to exclude (example: detect plagiarism)"
+	label="Only return results that are similar to the specified webpage"
+	textInputPlaceholder="URL (example: www.cnn.com)"
 />

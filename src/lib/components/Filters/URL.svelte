@@ -9,7 +9,7 @@
 			value
 				? (newQuery.filters.url = {
 						value,
-						formatted: `inurl:${value}`
+						formatted: value.split(' ').length > 1 ? `allinurl:${value} ` : `inurl:${value} `
 				  })
 				: delete newQuery.filters.url;
 			return newQuery;
@@ -21,6 +21,6 @@
 	on:input={handleInput}
 	type="URL"
 	hasInput
-	label="Only return results with this word in the URL"
-	textInputPlaceholder="Word"
+	label="Only return results with this word(s) in the URL"
+	textInputPlaceholder="Word(s)"
 />
