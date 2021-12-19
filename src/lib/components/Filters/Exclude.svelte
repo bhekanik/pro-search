@@ -9,7 +9,7 @@
 			value
 				? (newQuery.filters.exclude = {
 						value,
-						formatted: `-${value} `
+						formatted: value.split(',').reduce((acc, item) => `${acc}-${item.trim()} `, '')
 				  })
 				: delete newQuery.filters.exclude;
 			return newQuery;
@@ -21,6 +21,6 @@
 	on:input={handleInput}
 	type="Exclude"
 	hasInput
-	label="Exclude results with this word"
-	textInputPlaceholder="Word to exclude"
+	label="Exclude results with these words"
+	textInputPlaceholder="Words to exclude (comma seperated list)"
 />

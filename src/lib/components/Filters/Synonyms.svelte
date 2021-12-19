@@ -9,7 +9,7 @@
 			value
 				? (newQuery.filters.synonyms = {
 						value,
-						formatted: `~${value} `
+						formatted: value.split(',').reduce((acc, item) => `${acc}~${item.trim()} `, '')
 				  })
 				: delete newQuery.filters.synonyms;
 			return newQuery;
@@ -21,6 +21,6 @@
 	on:input={handleInput}
 	type="Synonyms"
 	hasInput
-	label="Include results with this word and its synonyms"
-	textInputPlaceholder="Word to include"
+	label="Include results with these words and their synonyms"
+	textInputPlaceholder="Words to include (comma seperated list)"
 />
