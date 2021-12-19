@@ -9,7 +9,8 @@
 			value
 				? (newQuery.filters.url = {
 						value,
-						formatted: value.split(' ').length > 1 ? `allinurl:${value} ` : `inurl:${value} `
+						formatted:
+							value.split(' ').length > 1 ? `allinurl:${value.trim()} ` : `inurl:${value.trim()} `
 				  })
 				: delete newQuery.filters.url;
 			return newQuery;

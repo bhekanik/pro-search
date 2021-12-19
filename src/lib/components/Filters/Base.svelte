@@ -1,23 +1,14 @@
 <script lang="ts">
-	import { query, recentQueries } from '$lib/stores';
+	import { query } from '$lib/stores';
+	import { generateQueryAndGo } from '$lib/utils/generateAndGo';
 	import Case from 'case';
 	import { slide } from 'svelte/transition';
-	import { generateQuery } from './generateQuery';
 	import type { FilterType } from './types';
 
 	export let type: FilterType;
 	export let enabled = false;
 	export let label = '';
 	export let textInputPlaceholder = '';
-
-	let filtersThatDontRequireSearchTerm: FilterType[] = [
-		'Synonyms',
-		'Exclude',
-		'Link',
-		'Related',
-		'Title',
-		'URL'
-	];
 
 	const handleCheckboxInput = (e: any) => {
 		const value = e.target.checked;
@@ -33,23 +24,9 @@
 		});
 	};
 
-	const generateQueryAndGo = () => {
-		if (!$query.searchTerm && !filtersThatDontRequireSearchTerm.includes(type)) return;
-		const formattedQuery = generateQuery($query);
-
-		recentQueries.update((currentRecentQueries) => {
-			const newRecentQueries = [...currentRecentQueries, { ...$query }];
-			globalThis.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
-
-			return newRecentQueries;
-		});
-
-		window.open(`${$query.provider.url}${encodeURI(formattedQuery)}`);
-	};
-
 	const handleKeydown = (e) => {
 		if (e.keyCode === 13) {
-			generateQueryAndGo();
+			window.open(generateQueryAndGo($query, type));
 		}
 	};
 

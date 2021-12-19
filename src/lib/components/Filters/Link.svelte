@@ -9,7 +9,7 @@
 			value
 				? (newQuery.filters.link = {
 						value,
-						formatted: `link:${value} `
+						formatted: `link:${value.trim()} `
 				  })
 				: delete newQuery.filters.link;
 			return newQuery;

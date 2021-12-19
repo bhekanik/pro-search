@@ -1,36 +1,27 @@
 <script lang="ts">
-	import { generateQuery } from '$lib/components/Filters/generateQuery';
-	import { query, recentQueries } from '$lib/stores';
+	import { query } from '$lib/stores';
+	import { generateQueryAndGo } from '$lib/utils/generateAndGo';
 	import { onMount } from 'svelte';
 
 	let searchInput;
 	export let executeQuery: (query: string) => void;
 
-	const generateQueryAndGo = () => {
-		if (!$query.searchTerm) return;
-		const formattedQuery = generateQuery($query);
-		recentQueries.update((currentRecentQueries) => {
-			const newRecentQueries = currentRecentQueries.find((item) => item.id === $query.id)
-				? [...currentRecentQueries]
-				: [...currentRecentQueries, { ...$query }];
-			globalThis.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
-
-			return newRecentQueries;
+	const handleInput = (e) => {
+		query.update((currentQuery) => {
+			return { ...currentQuery, searchTerm: e.target.value.trim() };
 		});
-
-		executeQuery(`${$query.provider.url}${encodeURI(formattedQuery)}`);
-
-		searchInput.focus();
 	};
 
 	const handleKeydown = (e) => {
 		if (e.keyCode === 13) {
-			generateQueryAndGo();
+			executeQuery(generateQueryAndGo($query));
+			searchInput.focus();
 		}
 	};
 
 	const handleClick = (e) => {
-		generateQueryAndGo();
+		executeQuery(generateQueryAndGo($query));
+		searchInput.focus();
 	};
 
 	onMount(() => {
@@ -41,8 +32,9 @@
 <input
 	class="input input-bordered input-primary w-full"
 	placeholder="Search"
-	bind:value={$query.searchTerm}
 	on:keydown={handleKeydown}
+	on:input={handleInput}
+	value={$query.searchTerm}
 	type="text"
 	name=""
 	id=""

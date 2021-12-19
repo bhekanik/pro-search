@@ -9,7 +9,7 @@
 			value
 				? (newQuery.filters.fileType = {
 						value,
-						formatted: `filetype:${value} `
+						formatted: `filetype:${value.trim()} `
 				  })
 				: delete newQuery.filters.fileType;
 			return newQuery;

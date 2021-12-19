@@ -9,7 +9,10 @@
 			value
 				? (newQuery.filters.title = {
 						value,
-						formatted: value.split(' ').length > 1 ? `allintitle:${value} ` : `intitle:${value} `
+						formatted:
+							value.split(' ').length > 1
+								? `allintitle:${value.trim()} `
+								: `intitle:${value.trim()} `
 				  })
 				: delete newQuery.filters.title;
 			return newQuery;

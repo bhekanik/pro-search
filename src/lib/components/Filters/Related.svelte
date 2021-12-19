@@ -9,7 +9,7 @@
 			value
 				? (newQuery.filters.related = {
 						value,
-						formatted: `related:${value} `
+						formatted: `related:${value.trim()} `
 				  })
 				: delete newQuery.filters.related;
 			return newQuery;
