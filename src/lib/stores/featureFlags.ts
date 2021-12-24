@@ -1,6 +1,6 @@
-import { splitClient } from '$lib/app/splitClient';
 import type { Writable } from 'svelte/store';
 import { writable } from 'svelte/store';
+import { splitClient } from '../app/splitClient';
 
 const featureFlagNames = ['Search_All_Providers', 'Results_In_IFrame', 'Save_Search'] as const;
 

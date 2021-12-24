@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { query } from '$lib/stores';
-	import { generateQueryAndGo } from '$lib/utils/generateAndGo';
 	import Case from 'case';
 	import { slide } from 'svelte/transition';
+	import { query } from '../../stores';
+	import { generateQueryAndGo } from '../../utils/generateAndGo';
 	import type { FilterType } from './types';
 
 	export let type: FilterType;

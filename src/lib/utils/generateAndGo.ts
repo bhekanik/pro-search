@@ -1,9 +1,9 @@
-import { filtersThatDontRequireSearchTerm } from '$lib/app/filters';
-import type { FilterType } from '$lib/components/Filters/types';
-import type { Query } from '$lib/stores';
-import { recentQueries } from '$lib/stores';
 import { v4 as uuidv4 } from 'uuid';
+import { filtersThatDontRequireSearchTerm } from '../app/filters';
 import { generateQuery } from '../components/Filters/generateQuery';
+import type { FilterType } from '../components/Filters/types';
+import type { Query } from '../stores';
+import { recentQueries } from '../stores';
 
 export const generateQueryAndGo = (query: Query, type?: FilterType): string => {
 	if (!query.searchTerm && !filtersThatDontRequireSearchTerm.includes(type)) return;
