@@ -5,7 +5,6 @@
 	import SearchBarNoSaveQuery from '$lib/components/SearchBar/SearchBarNoSaveQuery.svelte';
 	import SearchBarSaveQuery from '$lib/components/SearchBar/SearchBarSaveQuery.svelte';
 	import SearchProvider from '$lib/components/SearchProvider/SearchProvider.svelte';
-	import { query } from '$lib/stores';
 
 	let url = '';
 
@@ -13,13 +12,13 @@
 		url = queryUrl + '&igu=1';
 	};
 
-	const executeQueryWithNewTab = (queryUrl: string) => {
-		if (typeof $query.provider.url === 'string') {
+	const executeQueryWithNewTab = (queryUrl: string | string[]) => {
+		if (typeof queryUrl === 'string') {
 			window.open(queryUrl);
 		} else {
-			$query.provider.url.forEach((providerUrl, i) => {
-				window.open(providerUrl, i.toString());
-			});
+			for (let providerUrl of queryUrl) {
+				window.open(providerUrl);
+			}
 		}
 	};
 </script>

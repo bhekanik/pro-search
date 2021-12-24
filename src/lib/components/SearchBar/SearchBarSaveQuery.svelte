@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
 
 	let searchInput;
-	export let executeQuery: (query: string) => void;
+	export let executeQuery: (query: string | string[]) => void;
 
 	const handleInput = (e) => {
 		query.update((currentQuery) => {

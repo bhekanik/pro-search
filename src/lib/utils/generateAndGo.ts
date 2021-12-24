@@ -5,7 +5,7 @@ import type { FilterType } from '../components/Filters/types';
 import type { Query } from '../stores';
 import { recentQueries } from '../stores';
 
-export const generateQueryAndGo = (query: Query, type?: FilterType): string => {
+export const generateQueryAndGo = (query: Query, type?: FilterType): string | string[] => {
 	if (!query.searchTerm && !filtersThatDontRequireSearchTerm.includes(type)) return;
 
 	const saveNewQuery = (currentRecentQueries: Query[], newRecentQueries: Query[]) => {
@@ -32,5 +32,14 @@ export const generateQueryAndGo = (query: Query, type?: FilterType): string => {
 
 	const formattedQuery = generateQuery(query);
 
-	return `${query.provider.url}${encodeURI(formattedQuery)}`;
+	if (typeof query.provider.url === 'string') {
+		return `${query.provider.url}${encodeURI(formattedQuery)}`;
+	} else {
+		const url = [];
+		for (const providerUrl of query.provider.url) {
+			console.log('providerUrl:', providerUrl);
+			url.push(`${providerUrl}${encodeURI(formattedQuery)}`);
+		}
+		return url;
+	}
 };
