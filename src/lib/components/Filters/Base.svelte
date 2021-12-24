@@ -26,7 +26,7 @@
 
 	const handleKeydown = (e) => {
 		if (e.keyCode === 13) {
-			window.open(generateQueryAndGo($query, type));
+			window.open(generateQueryAndGo($query, type) as string);
 		}
 	};
 

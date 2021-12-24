@@ -25,4 +25,6 @@ export default (on, config) => {
 			viteConfig: { configFile: path.resolve(__dirname, '..', '..', 'vite.config.js') }
 		});
 	});
+
+	return config;
 };
