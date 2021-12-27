@@ -39,6 +39,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@auth0/auth0-spa-js": "^1.19.3",
 		"@netlify/functions": "^0.7.2",
 		"@splitsoftware/splitio": "^10.16.1",
 		"@tailwindcss/typography": "^0.4.1",
