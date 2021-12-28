@@ -22,8 +22,8 @@ const defaultQuery: Query = {
 	provider: searchProvidersWithAll[0]
 };
 
-export const query: Writable<Query> = writable(defaultQuery);
+export const queryStore: Writable<Query> = writable(defaultQuery);
 
 export const resetQuery = (): void => {
-	query.update(() => defaultQuery);
+	queryStore.update(() => defaultQuery);
 };

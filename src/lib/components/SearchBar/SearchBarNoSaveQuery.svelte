@@ -1,25 +1,24 @@
 <script lang="ts">
 	import { generateQuery } from '$lib/components/Filters/generateQuery';
-	import { query, recentQueries, resetQuery } from '$lib/stores';
-	import { onMount } from 'svelte';
+	import { queryStore, recentQueriesStore, resetQuery } from '$lib/stores';
 
 	let searchInput;
 	export let executeQuery: (query: string) => void;
 
 	const generateQueryAndGo = () => {
-		if (!$query.searchTerm) return;
-		const formattedQuery = generateQuery($query);
+		if (!$queryStore.searchTerm) return;
+		const formattedQuery = generateQuery();
 
-		executeQuery(`${$query.provider.url}${encodeURI(formattedQuery)}`);
+		executeQuery(`${$queryStore.provider.url}${encodeURI(formattedQuery)}`);
 
 		searchInput.focus();
 	};
 
 	const saveSearch = () => {
-		recentQueries.update((currentRecentQueries) => {
-			const newRecentQueries = currentRecentQueries.find((item) => item.id === $query.id)
+		recentQueriesStore.update((currentRecentQueries) => {
+			const newRecentQueries = currentRecentQueries.find((item) => item.id === $queryStore.id)
 				? [...currentRecentQueries]
-				: [...currentRecentQueries, { ...$query }];
+				: [...currentRecentQueries, { ...$queryStore }];
 			globalThis.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
 
 			return newRecentQueries;
@@ -38,22 +37,21 @@
 		generateQueryAndGo();
 	};
 
-	onMount(() => {
-		searchInput.focus();
-	});
+	function focusElement(element) {
+		element.focus();
+	}
 </script>
 
 <input
 	class="input input-bordered input-primary w-full"
 	placeholder="Search"
-	bind:value={$query.searchTerm}
+	bind:value={$queryStore.searchTerm}
 	on:keydown={handleKeydown}
 	type="text"
-	name=""
-	id=""
+	use:focusElement
 	bind:this={searchInput}
 />
 <button class="btn btn-primary" on:click={handleClick}>Search</button>
-{#if $query.searchTerm}
-	<button class="btn btn-outline btn-secondary" on:click={saveSearch}>Save</button>
+{#if $queryStore.searchTerm}
+	<button class="btn btn-outline btn-primary" on:click={saveSearch}>Save</button>
 {/if}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { recentQueries } from '$lib/stores';
+	import { recentQueriesStore } from '$lib/stores';
 	import { flip } from 'svelte/animate';
 	import { fade, scale } from 'svelte/transition';
 	import RecentQuery from './RecentQuery.svelte';
@@ -7,7 +7,7 @@
 
 <h3 class="heading">Recent Queries</h3>
 <ul class="query-list">
-	{#each $recentQueries as query (query.id)}
+	{#each $recentQueriesStore as query (query.id)}
 		<li class="query" in:fade out:scale|local animate:flip={{ duration: 500 }}>
 			<RecentQuery {query} />
 		</li>

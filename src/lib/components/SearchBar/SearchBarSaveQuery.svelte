@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { query } from '$lib/stores';
+	import { queryStore } from '$lib/stores';
 	import { generateQueryAndGo } from '$lib/utils/generateAndGo';
 	import { onMount } from 'svelte';
 
@@ -7,7 +7,7 @@
 	export let executeQuery: (query: string | string[]) => void;
 
 	const handleInput = (e) => {
-		query.update((currentQuery) => {
+		queryStore.update((currentQuery) => {
 			return { ...currentQuery, searchTerm: e.target.value.trim() };
 		});
 	};
@@ -34,7 +34,7 @@
 	placeholder="Search"
 	on:keydown={handleKeydown}
 	on:input={handleInput}
-	value={$query.searchTerm}
+	value={$queryStore.searchTerm}
 	type="text"
 	name=""
 	id=""

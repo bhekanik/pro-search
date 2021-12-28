@@ -37,8 +37,8 @@
 			}
 
 			// NEW - check for the code and state parameters
-			const query = window.location.search;
-			if (query.includes('code=') && query.includes('state=')) {
+			const windowLocationSearch = window.location.search;
+			if (windowLocationSearch.includes('code=') && windowLocationSearch.includes('state=')) {
 				// Process the login state
 				await auth0.handleRedirectCallback();
 

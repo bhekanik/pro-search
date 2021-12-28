@@ -1,14 +1,14 @@
-import type { Query } from '$lib/stores';
+import { queryStore } from '$lib/stores';
+import { get } from 'svelte/store';
 
 /**
  * Formats the search input for the search engine according to the provided
  * filters
  *
- * @param query Object containin the selected filters together with their
- * parameters and the search term
  * @returns The formated query ready to be sent to the search engine
  */
-export const generateQuery = (query: Query): string => {
+export const generateQuery = (): string => {
+	const query = get(queryStore);
 	// put the filters together
 	const prefix = Object.values(query.filters).reduce(
 		(prev, curr) => `${prev}${curr.formatted}`,

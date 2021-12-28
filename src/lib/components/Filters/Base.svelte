@@ -1,8 +1,8 @@
 <script lang="ts">
+	import { queryStore } from '$lib/stores';
+	import { generateQueryAndGo } from '$lib/utils/generateAndGo';
 	import Case from 'case';
 	import { slide } from 'svelte/transition';
-	import { query } from '../../stores';
-	import { generateQueryAndGo } from '../../utils/generateAndGo';
 	import type { FilterType } from './types';
 
 	export let type: FilterType;
@@ -12,7 +12,7 @@
 
 	const handleCheckboxInput = (e: any) => {
 		const value = e.target.checked;
-		query.update((currentQuery) => {
+		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			if (value === false) {
 				delete newQuery.filters[Case.camel(type)];
@@ -40,13 +40,13 @@
 			class="toggle toggle-primary"
 			name={`${type}-checkbox`}
 			id={`${type}-checkbox`}
-			checked={Boolean($query.filters[Case.camel(type)])}
+			checked={Boolean($queryStore.filters[Case.camel(type)])}
 			on:input={handleCheckboxInput}
 		/>
 		{label || type}
 	</label>
 
-	{#if (enabled || Boolean($query.filters[Case.camel(type)])) && hasInput}
+	{#if (enabled || Boolean($queryStore.filters[Case.camel(type)])) && hasInput}
 		<input
 			in:slide
 			out:slide
@@ -55,7 +55,7 @@
 			name={`${type}-input`}
 			id=""
 			placeholder={textInputPlaceholder || type}
-			value={$query.filters[Case.camel(type)]?.value || ''}
+			value={$queryStore.filters[Case.camel(type)]?.value || ''}
 			on:input
 			on:keydown={handleKeydown}
 		/>

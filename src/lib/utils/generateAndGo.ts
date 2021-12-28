@@ -1,10 +1,10 @@
+import { filtersThatDontRequireSearchTerm } from '$lib/app/filters';
+import { generateQuery } from '$lib/components/Filters/generateQuery';
+import type { FilterType } from '$lib/components/Filters/types';
+import type { Query } from '$lib/stores';
+import { queryStore, recentQueriesStore } from '$lib/stores';
 import { get } from 'svelte/store';
 import { v4 as uuidv4 } from 'uuid';
-import { filtersThatDontRequireSearchTerm } from '../app/filters';
-import { generateQuery } from '../components/Filters/generateQuery';
-import type { FilterType } from '../components/Filters/types';
-import type { Query } from '../stores';
-import { query as queryStore, recentQueries } from '../stores';
 
 export const generateQueryAndGo = (type?: FilterType): string | string[] => {
 	const query = get(queryStore);
@@ -17,7 +17,7 @@ export const generateQueryAndGo = (type?: FilterType): string | string[] => {
 		return newRecentQueries;
 	};
 
-	recentQueries.update((currentRecentQueries) => {
+	recentQueriesStore.update((currentRecentQueries) => {
 		let newRecentQueries = [...currentRecentQueries];
 		currentRecentQueries.length > 0
 			? currentRecentQueries.forEach((currentRecentQuery) => {
@@ -32,7 +32,7 @@ export const generateQueryAndGo = (type?: FilterType): string | string[] => {
 		return newRecentQueries;
 	});
 
-	const formattedQuery = generateQuery(query);
+	const formattedQuery = generateQuery();
 
 	if (typeof query.provider.url === 'string') {
 		return `${query.provider.url}${encodeURI(formattedQuery)}`;

@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { query as currentQuery, recentQueries } from '$lib/stores';
+	import { queryStore as currentQueryStore, recentQueriesStore } from '$lib/stores';
 	import type { Filter, Query } from '$lib/stores/query';
 
 	const generateFilters = (filters: Record<string, Filter>): string =>
 		Object.values(filters).reduce((prev, curr) => `${prev}${curr.formatted}`, '');
 
 	const handleDelete = (queryId: string) => {
-		recentQueries.update((currentRecentQueries) => {
+		recentQueriesStore.update((currentRecentQueries) => {
 			const newRecentQueries = currentRecentQueries.filter((query) => query.id !== queryId);
 			globalThis.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
 			return newRecentQueries;
@@ -14,7 +14,7 @@
 	};
 
 	const handleApply = (selectedQuery: Query) => {
-		currentQuery.update(() => selectedQuery);
+		currentQueryStore.update(() => selectedQuery);
 	};
 
 	export let query;

@@ -4,11 +4,11 @@
 		searchProvidersWithAll,
 		searchProvidersWithoutAll
 	} from '$lib/app/config/searchProviders';
-	import { query } from '$lib/stores';
+	import { queryStore } from '$lib/stores';
 	import FeatureSelector from '../FeatureSelector/FeatureSelector.svelte';
 
 	const handleProviderChange = (e: any, searchProviders: SearchProvider[]) => {
-		query.update((currentQuery) => {
+		queryStore.update((currentQuery) => {
 			return {
 				...currentQuery,
 				provider: searchProviders.find((provider) => provider.id === e.target.value)
@@ -28,7 +28,7 @@
 		name="provider"
 		id="provider"
 		on:change={(e) => handleProviderChange(e, searchProviders)}
-		value={$query.provider.id}
+		value={$queryStore.provider.id}
 	>
 		{#each searchProviders as provider}
 			<option
