@@ -14,13 +14,13 @@
 
 	const handleKeydown = (e) => {
 		if (e.keyCode === 13) {
-			executeQuery(generateQueryAndGo($query));
+			executeQuery(generateQueryAndGo());
 			searchInput.focus();
 		}
 	};
 
 	const handleClick = (e) => {
-		executeQuery(generateQueryAndGo($query));
+		executeQuery(generateQueryAndGo());
 		searchInput.focus();
 	};
 

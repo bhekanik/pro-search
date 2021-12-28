@@ -16,8 +16,15 @@
 		if (typeof queryUrl === 'string') {
 			window.open(queryUrl);
 		} else {
-			for (let providerUrl of queryUrl) {
-				window.open(providerUrl);
+			for (let [key, url] of queryUrl.entries()) {
+				if (key === 0) {
+					window.open(url, `_blank_first_${key.toString()}`);
+				} else {
+					setTimeout(function () {
+						console.log('resolved', key, url);
+						window.open(url, `_blank_${key.toString()}`);
+					}, 1500 * key);
+				}
 			}
 		}
 	};

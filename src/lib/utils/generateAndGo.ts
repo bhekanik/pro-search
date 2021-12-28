@@ -1,11 +1,13 @@
+import { get } from 'svelte/store';
 import { v4 as uuidv4 } from 'uuid';
 import { filtersThatDontRequireSearchTerm } from '../app/filters';
 import { generateQuery } from '../components/Filters/generateQuery';
 import type { FilterType } from '../components/Filters/types';
 import type { Query } from '../stores';
-import { recentQueries } from '../stores';
+import { query as queryStore, recentQueries } from '../stores';
 
-export const generateQueryAndGo = (query: Query, type?: FilterType): string | string[] => {
+export const generateQueryAndGo = (type?: FilterType): string | string[] => {
+	const query = get(queryStore);
 	if (!query.searchTerm && !filtersThatDontRequireSearchTerm.includes(type)) return;
 
 	const saveNewQuery = (currentRecentQueries: Query[], newRecentQueries: Query[]) => {
@@ -37,7 +39,6 @@ export const generateQueryAndGo = (query: Query, type?: FilterType): string | st
 	} else {
 		const url = [];
 		for (const providerUrl of query.provider.url) {
-			console.log('providerUrl:', providerUrl);
 			url.push(`${providerUrl}${encodeURI(formattedQuery)}`);
 		}
 		return url;
