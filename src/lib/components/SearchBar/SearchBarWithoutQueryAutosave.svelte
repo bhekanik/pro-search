@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { generateQuery } from '$lib/components/Filters/generateQuery';
+	import { generateQuery } from '$lib/components/Filters/utils/generateQuery';
 	import { queryStore, resetQuery } from '$lib/stores';
 	import { updateRecentQueries } from '$lib/utils/generateAndGo';
 

@@ -1,6 +1,6 @@
 import { filtersThatDontRequireSearchTerm } from '$lib/app/filters';
-import { generateQuery } from '$lib/components/Filters/generateQuery';
 import type { FilterType } from '$lib/components/Filters/types';
+import { generateQuery } from '$lib/components/Filters/utils/generateQuery';
 import type { Query } from '$lib/stores';
 import { queryStore, recentQueriesStore } from '$lib/stores';
 import { get } from 'svelte/store';

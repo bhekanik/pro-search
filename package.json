@@ -1,8 +1,10 @@
 {
 	"name": "pro-search",
 	"version": "0.0.1",
+	"license": "MIT",
 	"scripts": {
 		"start": "svelte-kit dev --host --open",
+		"start:https": "svelte-kit dev --host --open --https",
 		"dev": "docker-compose up",
 		"stop": "docker-compose down",
 		"build": "svelte-kit build",
@@ -33,7 +35,7 @@
 		"svelte": "^3.42.6",
 		"svelte-check": "^2.2.6",
 		"svelte-preprocess": "^4.9.8",
-		"tailwindcss": "^2.2.16",
+		"tailwindcss": "^2.2.19",
 		"tslib": "^2.3.1",
 		"typescript": "^4.4.3"
 	},

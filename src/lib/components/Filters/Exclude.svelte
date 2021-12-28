@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FilterBase from '$lib/components/Filters/Base.svelte';
+	import FilterBase from '$lib/components/Filters/Base/Base.svelte';
 	import { queryStore } from '$lib/stores';
 	import { listApplyOperator, Operator } from './utils/listApplyOperator';
 
