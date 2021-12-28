@@ -15,7 +15,7 @@ export interface Query {
 	provider: SearchProvider;
 }
 
-const defaultQuery: Query = {
+export const defaultQuery: Query = {
 	id: '',
 	searchTerm: '',
 	filters: {},
@@ -25,5 +25,7 @@ const defaultQuery: Query = {
 export const queryStore: Writable<Query> = writable(defaultQuery);
 
 export const resetQuery = (): void => {
-	queryStore.update(() => defaultQuery);
+	console.log('resetting...');
+
+	queryStore.set(defaultQuery);
 };

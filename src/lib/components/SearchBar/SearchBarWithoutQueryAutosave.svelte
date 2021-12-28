@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { generateQuery } from '$lib/components/Filters/generateQuery';
-	import { queryStore, recentQueriesStore, resetQuery } from '$lib/stores';
+	import { queryStore, resetQuery } from '$lib/stores';
+	import { updateRecentQueries } from '$lib/utils/generateAndGo';
 
 	let searchInput;
 	export let executeQuery: (query: string) => void;
@@ -15,14 +16,7 @@
 	};
 
 	const saveSearch = () => {
-		recentQueriesStore.update((currentRecentQueries) => {
-			const newRecentQueries = currentRecentQueries.find((item) => item.id === $queryStore.id)
-				? [...currentRecentQueries]
-				: [...currentRecentQueries, { ...$queryStore }];
-			globalThis.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
-
-			return newRecentQueries;
-		});
+		updateRecentQueries();
 
 		resetQuery();
 	};

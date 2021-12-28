@@ -1,6 +1,7 @@
 <script lang="ts">
 	import FilterBase from '$lib/components/Filters/Base.svelte';
 	import { queryStore } from '$lib/stores';
+	import { listApplyOperator, Operator } from './utils/listApplyOperator';
 
 	const handleInput = (e: any) => {
 		const value = e.target.value;
@@ -9,7 +10,7 @@
 			value
 				? (newQuery.filters.exclude = {
 						value,
-						formatted: value.split(' ').reduce((acc, item) => `${acc}-${item.trim()} `, '')
+						formatted: listApplyOperator(value, Operator.Exclude)
 				  })
 				: delete newQuery.filters.exclude;
 			return newQuery;

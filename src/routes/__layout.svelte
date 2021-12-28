@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { splitClient } from '$lib/app/splitClient';
+	import { queryStore } from '$lib/stores';
 	import createAuth0Client from '@auth0/auth0-spa-js';
 	import { onDestroy, onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
@@ -71,6 +72,7 @@
 		class="btn btn-outline btn-primary modal-button absolute right-6 top-4"
 		>{isAuthenticated ? `Logout: ${user?.email}` : 'Login/Sign Up'}</button
 	>
+	<pre>{JSON.stringify($queryStore, null, 2)}</pre>
 	<div class="p-8 max-w-6xl mx-auto h-full">
 		<slot />
 	</div>

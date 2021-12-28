@@ -2,8 +2,8 @@
 	import FeatureSelector from '$lib/components/FeatureSelector/FeatureSelector.svelte';
 	import Filters from '$lib/components/Filters/Filters.svelte';
 	import RecentQueriesList from '$lib/components/RecentQueries/RecentQueriesList.svelte';
-	import SearchBarNoSaveQuery from '$lib/components/SearchBar/SearchBarNoSaveQuery.svelte';
-	import SearchBarSaveQuery from '$lib/components/SearchBar/SearchBarSaveQuery.svelte';
+	import SearchBarWithoutQueryAutosave from '$lib/components/SearchBar/SearchBarWithoutQueryAutosave.svelte';
+	import SearchBarWithQueryAutosave from '$lib/components/SearchBar/SearchBarWithQueryAutosave.svelte';
 	import SearchProvider from '$lib/components/SearchProvider/SearchProvider.svelte';
 
 	let url = '';
@@ -51,8 +51,8 @@
 		>
 			<FeatureSelector
 				featureFlag="Save_Search"
-				onFeature={SearchBarNoSaveQuery}
-				offFeature={SearchBarSaveQuery}
+				onFeature={SearchBarWithoutQueryAutosave}
+				offFeature={SearchBarWithQueryAutosave}
 				let:feature={SearchBar}
 			>
 				<SearchBar {executeQuery} />

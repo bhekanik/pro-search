@@ -14,7 +14,7 @@
 	};
 
 	const handleApply = (selectedQuery: Query) => {
-		currentQueryStore.update(() => selectedQuery);
+		currentQueryStore.set(selectedQuery);
 	};
 
 	export let query;

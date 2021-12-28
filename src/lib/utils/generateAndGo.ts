@@ -6,17 +6,16 @@ import { queryStore, recentQueriesStore } from '$lib/stores';
 import { get } from 'svelte/store';
 import { v4 as uuidv4 } from 'uuid';
 
-export const generateQueryAndGo = (type?: FilterType): string | string[] => {
+const saveNewQuery = (currentRecentQueries: Query[], newRecentQueries: Query[]) => {
 	const query = get(queryStore);
-	if (!query.searchTerm && !filtersThatDontRequireSearchTerm.includes(type)) return;
+	const newQuery = { ...query, id: uuidv4() };
+	newRecentQueries = [...currentRecentQueries, newQuery];
+	globalThis.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
+	return newRecentQueries;
+};
 
-	const saveNewQuery = (currentRecentQueries: Query[], newRecentQueries: Query[]) => {
-		const newQuery = { ...query, id: uuidv4() };
-		newRecentQueries = [...currentRecentQueries, newQuery];
-		globalThis.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
-		return newRecentQueries;
-	};
-
+export function updateRecentQueries(): void {
+	const query = get(queryStore);
 	recentQueriesStore.update((currentRecentQueries) => {
 		let newRecentQueries = [...currentRecentQueries];
 		currentRecentQueries.length > 0
@@ -31,6 +30,13 @@ export const generateQueryAndGo = (type?: FilterType): string | string[] => {
 
 		return newRecentQueries;
 	});
+}
+
+export const generateQueryAndGo = (type?: FilterType): string | string[] => {
+	const query = get(queryStore);
+	if (!query.searchTerm && !filtersThatDontRequireSearchTerm.includes(type)) return;
+
+	updateRecentQueries();
 
 	const formattedQuery = generateQuery();
 
