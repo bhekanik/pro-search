@@ -27,25 +27,36 @@
 		}
 	};
 
-	const handleClick = () => {
+	const handleSearch = (e) => {
 		generateQueryAndGo();
 	};
+	
+	const handleSearchClear = (e) => {
+		// resetQuery()
+	};
+
 
 	function focusElement(element) {
 		element.focus();
 	}
 </script>
 
-<input
-	class="input input-bordered input-primary w-full"
-	placeholder="Search"
-	bind:value={$queryStore.searchTerm}
-	on:keydown={handleKeydown}
-	type="text"
-	use:focusElement
-	bind:this={searchInput}
-/>
-<button class="btn btn-primary" on:click={handleClick}>Search</button>
+<div class="relative w-full" >
+	<input
+		class="input input-bordered input-primary w-full"
+		placeholder="Search"
+		bind:value={$queryStore.searchTerm}
+		on:keydown={handleKeydown}
+		type="text"
+		use:focusElement
+		bind:this={searchInput}
+	/>
+	{#if $queryStore.searchTerm}
+	<button on:click={handleSearchClear} class="absolute top-0 right-0 rounded-l-none btn btn-error">X</button>
+	{/if}
+</div>
+
+<button class="btn btn-primary" on:click={handleSearch}>Search</button>
 {#if $queryStore.searchTerm}
 	<button class="btn btn-outline" on:click={saveSearch}>Save</button>
 {/if}
