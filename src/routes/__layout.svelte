@@ -1,7 +1,7 @@
 <script lang="ts">
 	import auth from '$lib/app/auth/authService';
 	import { splitClient } from '$lib/app/splitClient';
-	import { authReadiness, featureFlagsStore, isAuthenticated, readiness, user } from '$lib/stores';
+	import { authReadiness, isAuthenticated, readiness, user } from '$lib/stores';
 	import { onDestroy, onMount } from 'svelte';
 	import '../global.css';
 
@@ -83,11 +83,7 @@
 				{$isAuthenticated ? `Logout: ${$user?.email}` : 'Login/Sign Up'}</button
 			>
 		</div>
-		<pre class="absolute top-0 pointer-events-none">{JSON.stringify(
-				$featureFlagsStore,
-				null,
-				2
-			)}</pre>
+		<!-- <StoreMonitor /> -->
 		<div class="p-8 max-w-6xl mx-auto h-full">
 			<slot />
 		</div>
