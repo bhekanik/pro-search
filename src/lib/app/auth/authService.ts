@@ -25,7 +25,16 @@ async function loginWithRedirect(
 		await client.loginWithRedirect(options);
 
 		user.set(await client.getUser());
-		isAuthenticated.set(true);
+	} catch (e) {
+		// eslint-disable-next-line
+		console.error(e);
+	}
+}
+
+async function handleRedirectCallback(client: Auth0Client, url?: string): Promise<void> {
+	popupOpen.set(true);
+	try {
+		await client.handleRedirectCallback(url);
 	} catch (e) {
 		// eslint-disable-next-line
 		console.error(e);
@@ -37,8 +46,12 @@ async function loginWithPopup(client: Auth0Client, options?: PopupLoginOptions):
 	try {
 		await client.loginWithPopup(options);
 
-		user.set(await client.getUser());
-		isAuthenticated.set(true);
+		if (client) {
+			const authState = await client.isAuthenticated();
+			isAuthenticated.set(authState);
+			const userState = await client.getUser();
+			user.set(userState);
+		}
 	} catch (e) {
 		// eslint-disable-next-line
 		console.error(e);
@@ -59,6 +72,7 @@ async function checkAuth(client: Auth0Client): Promise<void> {
 const auth = {
 	createClient,
 	checkAuth,
+	handleRedirectCallback,
 	loginWithRedirect,
 	loginWithPopup,
 	logout

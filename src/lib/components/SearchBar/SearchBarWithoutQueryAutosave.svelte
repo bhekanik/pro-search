@@ -47,5 +47,5 @@
 />
 <button class="btn btn-primary" on:click={handleClick}>Search</button>
 {#if $queryStore.searchTerm}
-	<button class="btn btn-outline btn-primary" on:click={saveSearch}>Save</button>
+	<button class="btn btn-outline" on:click={saveSearch}>Save</button>
 {/if}

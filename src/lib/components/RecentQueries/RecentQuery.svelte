@@ -21,42 +21,33 @@
 </script>
 
 <div class="buttons">
-	<button class="apply-button" on:click={() => handleApply(query)}>Apply</button>
-	<button class="delete-button" on:click={() => handleDelete(query.id)}>Delete</button>
+	<button class="btn btn-ghost" on:click={() => handleApply(query)}>Apply</button>
+	<button class="btn btn-ghost" on:click={() => handleDelete(query.id)}>Delete</button>
 </div>
 <div>
-	<span class="label">Search Term: </span>
+	<span class="">Search Term: </span>
 	<span class="query_search-term">{query.searchTerm}</span>
 </div>
 <div>
-	<span class="label">Search Provider: </span>
+	<span class="">Search Provider: </span>
 	<span class="filters">
 		{query.provider.name}
 	</span>
 </div>
 <div>
-	<span class="label">Filters: </span>
+	<span class="">Filters: </span>
 	<span class="filters">
 		{generateFilters(query.filters)}
 	</span>
 </div>
 
 <style>
-	.label {
-		color: gray;
-	}
-
 	.buttons {
 		position: absolute;
 		right: 2rem;
 		top: 1rem;
 		display: flex;
 		gap: 1rem;
-	}
-
-	button:disabled {
-		color: lightgray;
-		cursor: auto;
 	}
 
 	.query_search-term {

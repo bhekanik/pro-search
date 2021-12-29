@@ -5,6 +5,7 @@
 	import SearchBarWithoutQueryAutosave from '$lib/components/SearchBar/SearchBarWithoutQueryAutosave.svelte';
 	import SearchBarWithQueryAutosave from '$lib/components/SearchBar/SearchBarWithQueryAutosave.svelte';
 	import SearchProvider from '$lib/components/SearchProvider/SearchProvider.svelte';
+	import { isAuthenticated } from '$lib/stores';
 
 	let url = '';
 
@@ -64,7 +65,9 @@
 		<iframe title="Results" src={url} class="w-full h-full" frameborder="0" />
 	{:else}
 		<Filters />
-		<div class="divider" />
-		<RecentQueriesList />
+		{#if $isAuthenticated}
+			<div class="divider" />
+			<RecentQueriesList />
+		{/if}
 	{/if}
 </main>

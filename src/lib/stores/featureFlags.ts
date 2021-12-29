@@ -1,4 +1,3 @@
-import type { Writable } from 'svelte/store';
 import { writable } from 'svelte/store';
 import { splitClient } from '../app/splitClient';
 
@@ -12,7 +11,9 @@ export interface FeatureFlags {
 	Save_Search: SplitIO.Treatment;
 }
 
-export const featureFlagsStore: Writable<FeatureFlags> = writable(
+export const featureFlagsReadiness = writable<boolean>(false);
+
+export const featureFlagsStore = writable<FeatureFlags>(
 	splitClient.getTreatments(featureFlagNames.concat()) as unknown as FeatureFlags
 );
 
@@ -20,6 +21,7 @@ splitClient.on(splitClient.Event.SDK_READY, function () {
 	featureFlagsStore.update(
 		(value) => splitClient.getTreatments(Object.keys(value)) as unknown as FeatureFlags
 	);
+	featureFlagsReadiness.set(true);
 });
 
 splitClient.on(splitClient.Event.SDK_UPDATE, function () {

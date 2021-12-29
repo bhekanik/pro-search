@@ -2,7 +2,11 @@ import { filtersThatDontRequireSearchTerm } from '$lib/app/filters';
 import type { FilterType } from '$lib/components/Filters/types';
 import { generateQuery } from '$lib/components/Filters/utils/generateQuery';
 import type { Query } from '$lib/stores';
-import { queryStore, recentQueriesStore } from '$lib/stores';
+import {
+	isAuthenticated as isAuthenticatedStore,
+	queryStore,
+	recentQueriesStore
+} from '$lib/stores';
 import { get } from 'svelte/store';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -16,6 +20,11 @@ const saveNewQuery = (currentRecentQueries: Query[], newRecentQueries: Query[]) 
 
 export function updateRecentQueries(): void {
 	const query = get(queryStore);
+	const isAuthenticated = get(isAuthenticatedStore);
+	console.log('canSaveQuery?:', isAuthenticated);
+	if (!isAuthenticated) {
+		return;
+	}
 	recentQueriesStore.update((currentRecentQueries) => {
 		let newRecentQueries = [...currentRecentQueries];
 		currentRecentQueries.length > 0

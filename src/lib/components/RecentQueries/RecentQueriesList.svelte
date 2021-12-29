@@ -8,7 +8,12 @@
 <h3 class="heading">Recent Queries</h3>
 <ul class="query-list">
 	{#each $recentQueriesStore as query (query.id)}
-		<li class="query" in:fade out:scale|local animate:flip={{ duration: 500 }}>
+		<li
+			class="card card-bordered shadow-md py-4 px-8 relative"
+			in:fade
+			out:scale|local
+			animate:flip={{ duration: 500 }}
+		>
 			<RecentQuery {query} />
 		</li>
 	{:else}
@@ -30,8 +35,6 @@
 	}
 
 	.query {
-		border: 1px solid gray;
-		border-radius: 5px;
 		padding: 1rem 2rem;
 		position: relative;
 	}
