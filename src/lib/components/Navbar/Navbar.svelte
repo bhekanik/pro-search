@@ -8,7 +8,7 @@
 	<div class="flex-1 hidden px-2 mx-2 lg:flex" />
 	<div class="flex-none hidden px-2 mx-2 lg:flex">
 		<div class="flex items-stretch">
-			<a class="btn btn-ghost btn-sm rounded-btn">
+			<button class="btn btn-ghost btn-sm rounded-btn">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
@@ -23,7 +23,7 @@
 					/>
 				</svg>
 				Config
-			</a>
+			</button>
 		</div>
 	</div>
 	<div class="flex-none">

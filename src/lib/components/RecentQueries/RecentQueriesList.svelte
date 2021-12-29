@@ -33,9 +33,4 @@
 		gap: 0.5rem;
 		list-style: none;
 	}
-
-	.query {
-		padding: 1rem 2rem;
-		position: relative;
-	}
 </style>

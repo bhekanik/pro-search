@@ -10,8 +10,8 @@
 	export let label = '';
 	export let textInputPlaceholder = '';
 
-	const handleCheckboxInput = (e: any) => {
-		const value = e.target.checked;
+	const handleCheckboxInput = (e: Event) => {
+		const value = (e.target as HTMLInputElement).checked;
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			if (value === false) {
@@ -30,7 +30,7 @@
 		}
 	};
 
-	export let hasInput: boolean = false;
+	export let hasInput = false;
 </script>
 
 <div class="container">

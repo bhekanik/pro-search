@@ -7,11 +7,13 @@
 	import { queryStore } from '$lib/stores';
 	import FeatureSelector from '../FeatureSelector/FeatureSelector.svelte';
 
-	const handleProviderChange = (e: any, searchProviders: SearchProvider[]) => {
+	const handleProviderChange = (e: Event, searchProviders: SearchProvider[]) => {
 		queryStore.update((currentQuery) => {
 			return {
 				...currentQuery,
-				provider: searchProviders.find((provider) => provider.id === e.target.value)
+				provider: searchProviders.find(
+					(provider) => provider.id === (e.target as HTMLSelectElement).value
+				)
 			};
 		});
 	};

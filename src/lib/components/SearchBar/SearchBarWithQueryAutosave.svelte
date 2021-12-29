@@ -19,7 +19,7 @@
 		}
 	};
 
-	const handleClick = (e) => {
+	const handleClick = () => {
 		executeQuery(generateQueryAndGo());
 		searchInput.focus();
 	};

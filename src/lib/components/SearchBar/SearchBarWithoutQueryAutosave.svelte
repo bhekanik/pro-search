@@ -27,7 +27,7 @@
 		}
 	};
 
-	const handleClick = (e) => {
+	const handleClick = () => {
 		generateQueryAndGo();
 	};
 

@@ -14,11 +14,10 @@ import path from 'path';
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-/**
- * @type {Cypress.PluginConfig}
- */
-// eslint-disable-next-line no-unused-vars
-export default (on, config) => {
+export default (
+	on: Cypress.PluginEvents,
+	config: Cypress.PluginConfigOptions
+): void | Cypress.ConfigOptions | Promise<Cypress.ConfigOptions> => {
 	on('dev-server:start', async (options) => {
 		return startDevServer({
 			options,

@@ -14,7 +14,8 @@
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
 		"cy:open-ct": "cypress open-ct",
-		"cy:run-ct": "cypress run-ct"
+		"cy:run-ct": "cypress run-ct",
+		"prepare": "husky install"
 	},
 	"devDependencies": {
 		"@cypress/vite-dev-server": "^2.2.2",
@@ -39,7 +40,8 @@
 		"svelte-preprocess": "^4.9.8",
 		"tailwindcss": "^3.0.8",
 		"tslib": "^2.3.1",
-		"typescript": "^4.4.3"
+		"typescript": "^4.5.4",
+		"husky": "^7.0.0"
 	},
 	"type": "module",
 	"dependencies": {

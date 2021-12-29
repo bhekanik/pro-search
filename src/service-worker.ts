@@ -1,4 +1,5 @@
 import { build, files, timestamp } from '$service-worker';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const worker = self as unknown as any;
 const FILES = `cache${timestamp}`;
 const to_cache = build.concat(files);

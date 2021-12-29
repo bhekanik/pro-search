@@ -8,7 +8,7 @@
 	const handleDelete = (queryId: string) => {
 		recentQueriesStore.update((currentRecentQueries) => {
 			const newRecentQueries = currentRecentQueries.filter((query) => query.id !== queryId);
-			globalThis.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
+			window.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
 			return newRecentQueries;
 		});
 	};
