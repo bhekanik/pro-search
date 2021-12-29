@@ -1,5 +1,4 @@
-import { filtersThatDontRequireSearchTerm } from '$lib/app/filters';
-import type { FilterType } from '$lib/components/Filters/types';
+import { filtersThatDontRequireSearchTerm, FilterType } from '$lib/app/types/filters';
 import { generateQuery } from '$lib/components/Filters/utils/generateQuery';
 import type { Query } from '$lib/stores';
 import {

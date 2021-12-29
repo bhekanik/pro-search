@@ -1,9 +1,9 @@
 <script lang="ts">
+	import type { FilterType } from '$lib/app/types/filters';
 	import { queryStore } from '$lib/stores';
 	import { generateQueryAndGo } from '$lib/utils/generateAndGo';
 	import Case from 'case';
 	import { slide } from 'svelte/transition';
-	import type { FilterType } from '../types';
 
 	export let type: FilterType;
 	export let enabled = false;

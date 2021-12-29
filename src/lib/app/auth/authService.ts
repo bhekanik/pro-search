@@ -26,7 +26,6 @@ async function loginWithRedirect(
 
 		user.set(await client.getUser());
 	} catch (e) {
-		// eslint-disable-next-line
 		console.error(e);
 	}
 }
@@ -36,7 +35,6 @@ async function handleRedirectCallback(client: Auth0Client, url?: string): Promis
 	try {
 		await client.handleRedirectCallback(url);
 	} catch (e) {
-		// eslint-disable-next-line
 		console.error(e);
 	}
 }
@@ -53,7 +51,6 @@ async function loginWithPopup(client: Auth0Client, options?: PopupLoginOptions):
 			user.set(userState);
 		}
 	} catch (e) {
-		// eslint-disable-next-line
 		console.error(e);
 	} finally {
 		popupOpen.set(false);
@@ -70,11 +67,11 @@ async function checkAuth(client: Auth0Client): Promise<void> {
 }
 
 const auth = {
-	createClient,
 	checkAuth,
+	createClient,
 	handleRedirectCallback,
-	loginWithRedirect,
 	loginWithPopup,
+	loginWithRedirect,
 	logout
 };
 

@@ -1,4 +1,12 @@
-import type { FilterType } from '$lib/components/Filters/types';
+export type FilterType =
+	| 'Site'
+	| 'Link'
+	| 'Related'
+	| 'File Type'
+	| 'Title'
+	| 'URL'
+	| 'Exclude'
+	| 'Synonyms';
 
 export const filtersThatDontRequireSearchTerm: FilterType[] = [
 	'Synonyms',

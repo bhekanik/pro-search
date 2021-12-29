@@ -4,9 +4,6 @@ node_modules
 /.svelte-kit
 /package
 
-# Local Netlify folder
-.netlify
-/functions
 .vercel
 
 .env
