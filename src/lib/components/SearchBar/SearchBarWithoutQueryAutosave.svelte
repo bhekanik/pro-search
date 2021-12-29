@@ -31,6 +31,11 @@
 	const handleSearch = (e) => {
 		generateQueryAndGo();
 	};
+	
+	const handleSearchClear = (e) => {
+		// resetQuery()
+	};
+
 
 	const handleSearchClear = (e) => {
 		$queryStore.searchTerm = '';
