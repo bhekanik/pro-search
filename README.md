@@ -30,11 +30,13 @@ This is the tech used:
 ### Setting up your Dev Env
 
 #### With Docker
+
 This dev app runs in a docker container so all you should need to do is install [Docker Desktop](https://www.docker.com/products/docker-desktop 'Download Docker Desktop'). Once you have that installed you can run `npm run dev` to start up the app. This should run it on port 3000.
 
 NB: The app will continue running even if you stop your terminal session. If you need to stop it you will need to run `npm run stop`.
 
 #### Without Docker
+
 Should you have any issues with docker, you can also run the app without it. Run `npm run start`, and the app should run on port 3000.
 
 ### Working on an issue
