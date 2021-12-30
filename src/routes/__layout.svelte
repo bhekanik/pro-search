@@ -1,6 +1,8 @@
 <script lang="ts">
 	import auth from '$lib/app/auth/authService';
 	import { splitClient } from '$lib/app/splitClient';
+	import ConfigModal from '$lib/components/ConfigModal/ConfigModal.svelte';
+	import StoreMonitor from '$lib/components/StoreMonitor/StoreMonitor.svelte';
 	import { authReadiness, isAuthenticated, readiness, user } from '$lib/stores';
 	import { onDestroy, onMount } from 'svelte';
 	import '../global.css';
@@ -62,28 +64,12 @@
 	{#if $readiness}
 		<!-- <Navbar handleLogin={login} /> -->
 		<div class="absolute right-6 top-4 flex gap-2">
-			{#if $isAuthenticated}
-				<label for="my-modal-2" class="btn btn-primary modal-button">Config</label>
-				<input type="checkbox" id="my-modal-2" class="modal-toggle" />
-				<div class="modal">
-					<div class="modal-box">
-						<p>
-							Enim dolorem dolorum omnis atque necessitatibus. Consequatur aut adipisci qui iusto
-							illo eaque. Consequatur repudiandae et. Nulla ea quasi eligendi. Saepe velit autem
-							minima.
-						</p>
-						<div class="modal-action">
-							<label for="my-modal-2" class="btn btn-primary">Accept</label>
-							<label for="my-modal-2" class="btn">Close</label>
-						</div>
-					</div>
-				</div>
-			{/if}
-			<button on:click={$isAuthenticated ? logout : login} class="btn btn-primary">
+			<ConfigModal />
+			<button on:click={$isAuthenticated ? logout : login} class="btn btn-ghost">
 				{$isAuthenticated ? `Logout: ${$user?.email}` : 'Login/Sign Up'}</button
 			>
 		</div>
-		<!-- <StoreMonitor /> -->
+		<StoreMonitor />
 		<div class="p-8 max-w-6xl mx-auto h-full">
 			<slot />
 		</div>

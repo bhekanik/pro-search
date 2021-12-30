@@ -5,7 +5,7 @@
 	import SearchBarWithoutQueryAutosave from '$lib/components/SearchBar/SearchBarWithoutQueryAutosave.svelte';
 	import SearchBarWithQueryAutosave from '$lib/components/SearchBar/SearchBarWithQueryAutosave.svelte';
 	import SearchProvider from '$lib/components/SearchProvider/SearchProvider.svelte';
-	import { isAuthenticated } from '$lib/stores';
+	import { configStore, isAuthenticated } from '$lib/stores';
 
 	let url = '';
 
@@ -35,7 +35,7 @@
 	<title>Pro-Search</title>
 </svelte:head>
 
-<main class="dark:text-gray-50 h-full">
+<main class="dark:text-gray-50 mt-24 h-full">
 	<h1
 		class="text-6xl text-primary text-center bg-transparent dark:text-gray-400 my-8 font-extrabold"
 	>
@@ -52,6 +52,7 @@
 		>
 			<FeatureSelector
 				featureFlag="Save_Search"
+				otherCondition={!$configStore.autosaveQueries}
 				onFeature={SearchBarWithoutQueryAutosave}
 				offFeature={SearchBarWithQueryAutosave}
 				let:feature={SearchBar}

@@ -1,5 +1,12 @@
 <script>
-	import { featureFlagsStore, queryStore, readiness, recentQueriesStore, user } from '$lib/stores';
+	import {
+		configStore,
+		featureFlagsStore,
+		queryStore,
+		readiness,
+		recentQueriesStore,
+		user
+	} from '$lib/stores';
 
 	let selected = 'featureFlags';
 
@@ -8,7 +15,8 @@
 		auth: $user,
 		query: $queryStore,
 		recentQueries: $recentQueriesStore,
-		readiness: $readiness
+		readiness: $readiness,
+		config: $configStore
 	};
 
 	function handleClick(e) {
@@ -57,6 +65,15 @@
 				data-title="recentQueries"
 				class="btn"
 				checked={selected === 'recentQueries'}
+			/>
+			<input
+				on:click={handleClick}
+				type="radio"
+				name="options"
+				id="config"
+				data-title="config"
+				class="btn"
+				checked={selected === 'config'}
 			/>
 			<input
 				on:click={handleClick}

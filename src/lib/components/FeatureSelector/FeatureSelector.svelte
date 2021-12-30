@@ -1,10 +1,13 @@
 <script lang="ts">
-	import type { FeatureFlagNames } from '$lib/stores';
-	import { featureFlagsStore } from '$lib/stores';
+	import { FeatureFlagNames, featureFlagsStore } from '$lib/stores';
 
 	export let featureFlag: FeatureFlagNames;
 	export let onFeature;
 	export let offFeature;
+	export let otherCondition = true;
+
+	let featureState = $featureFlagsStore[featureFlag] === 'on' && otherCondition;
+	console.log('featureState:', featureState);
 </script>
 
-<slot feature={$featureFlagsStore[featureFlag] === 'on' ? onFeature : offFeature} />
+<slot feature={featureState ? onFeature : offFeature} />

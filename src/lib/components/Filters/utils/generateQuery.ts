@@ -7,7 +7,7 @@ import { get } from 'svelte/store';
  *
  * @returns The formated query ready to be sent to the search engine
  */
-export const generateQuery = (): string => {
+export const formatQuery = (): string => {
 	const query = get(queryStore);
 	// put the filters together
 	const prefix = Object.values(query.filters).reduce(

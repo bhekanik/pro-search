@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { FilterType } from '$lib/app/types/filters';
 	import { queryStore } from '$lib/stores';
-	import { generateQueryAndGo } from '$lib/utils/generateAndGo';
+	import { generateQueryUrl } from '$lib/utils/generateAndGo';
 	import Case from 'case';
 	import { slide } from 'svelte/transition';
 
@@ -26,7 +26,7 @@
 
 	const handleKeydown = (e) => {
 		if (e.keyCode === 13) {
-			window.open(generateQueryAndGo(type) as string);
+			window.open(generateQueryUrl(type) as string);
 		}
 	};
 

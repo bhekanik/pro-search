@@ -1,6 +1,6 @@
-import { filtersThatDontRequireSearchTerm } from '$lib/app/types/filters';
 import type { FilterType } from '$lib/app/types/filters';
-import { generateQuery } from '$lib/components/Filters/utils/generateQuery';
+import { filtersThatDontRequireSearchTerm } from '$lib/app/types/filters';
+import { formatQuery } from '$lib/components/Filters/utils/generateQuery';
 import type { Query } from '$lib/stores';
 import {
 	isAuthenticated as isAuthenticatedStore,
@@ -41,13 +41,20 @@ export function updateRecentQueries(): void {
 	});
 }
 
-export const generateQueryAndGo = (type?: FilterType): string | string[] => {
+interface GenerateQueryUrlOptions {
+	saveQuery: boolean;
+}
+
+export const generateQueryUrl = (
+	type?: FilterType,
+	{ saveQuery }: GenerateQueryUrlOptions = { saveQuery: false }
+): string | string[] => {
 	const query = get(queryStore);
 	if (!query.searchTerm && !filtersThatDontRequireSearchTerm.includes(type)) return;
 
-	updateRecentQueries();
+	if (saveQuery) updateRecentQueries();
 
-	const formattedQuery = generateQuery();
+	const formattedQuery = formatQuery();
 
 	if (typeof query.provider.url === 'string') {
 		return `${query.provider.url}${encodeURI(formattedQuery)}`;
