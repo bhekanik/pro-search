@@ -3,10 +3,8 @@
 	"version": "0.0.1",
 	"license": "MIT",
 	"scripts": {
-		"start": "svelte-kit dev --host --open",
-		"start:https": "svelte-kit dev --host --open --https",
-		"dev": "docker-compose up",
-		"stop": "docker-compose down",
+		"dev": "svelte-kit dev --host --open",
+		"dev:https": "svelte-kit dev --host --open --https",
 		"build": "svelte-kit build",
 		"preview": "svelte-kit preview",
 		"check": "svelte-check --tsconfig ./tsconfig.json",

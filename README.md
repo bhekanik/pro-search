@@ -31,13 +31,11 @@ This is the tech used:
 
 #### With Docker
 
-This dev app runs in a docker container so all you should need to do is install [Docker Desktop](https://www.docker.com/products/docker-desktop 'Download Docker Desktop'). Once you have that installed you can run `npm run dev` to start up the app. This should run it on port 3000.
+This dev app runs in a docker container so all you should need to do is install [Docker Desktop](https://www.docker.com/products/docker-desktop 'Download Docker Desktop').
 
-NB: The app will continue running even if you stop your terminal session. If you need to stop it you will need to run `npm run stop`.
+There is a devcontainer already setup in the project so we advise that you use that. If you're using vscode as your editor (recommended) install the [Remote - Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) then to run the dev container simply type CMD + SHIFT + P on mac or CTRL + SHIFT + P on windows and search for "Open in container" and press enter. This will run a container that has the dev environment already set up. This might take a while the first time but subsequent times should be faster.
 
-#### Without Docker
-
-Should you have any issues with docker, you can also run the app without it. Run `npm run start`, and the app should run on port 3000.
+Once you have that installed you can run `npm run dev` to start up the app. This should run it on port 3000.
 
 ### Working on an issue
 
