@@ -4,4 +4,4 @@
 	export let executeQuery: (query: string | string[]) => void;
 </script>
 
-<SearchBarBase {executeQuery} />
+<SearchBarBase {executeQuery} saveQuery={true} />

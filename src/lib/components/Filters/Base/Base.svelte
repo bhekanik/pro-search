@@ -28,7 +28,7 @@
 
 	const handleKeydown = (e) => {
 		if (e.keyCode === 13) {
-			window.open(generateQueryUrl(type) as string);
+			window.open(generateQueryUrl({ type }) as string);
 		}
 	};
 
@@ -48,7 +48,7 @@
 		{label || type}
 	</label>
 
-	{#if enabled && options}
+	{#if (enabled || Boolean($queryStore.filters[Case.camel(type)])) && options}
 		<select
 			in:slide
 			out:slide
@@ -69,7 +69,7 @@
 		</select>
 	{/if}
 
-	{#if enabled && hasInput}
+	{#if (enabled || Boolean($queryStore.filters[Case.camel(type)])) && hasInput}
 		<input
 			in:slide
 			out:slide

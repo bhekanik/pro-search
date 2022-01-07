@@ -48,17 +48,17 @@ export function updateRecentQueries(): void {
 }
 
 interface GenerateQueryUrlOptions {
-	saveQuery: boolean;
+	saveQuery?: boolean;
+	type?: FilterType;
 }
 
 export const generateQueryUrl = (
-	type?: FilterType,
-	{ saveQuery }: GenerateQueryUrlOptions = { saveQuery: false }
+	options: GenerateQueryUrlOptions = { saveQuery: false }
 ): string | string[] => {
 	const query = get(queryStore);
-	if (!query.searchTerm && !filtersThatDontRequireSearchTerm.includes(type)) return;
+	if (!query.searchTerm && !filtersThatDontRequireSearchTerm.includes(options.type)) return;
 
-	if (saveQuery) updateRecentQueries();
+	if (options.saveQuery) updateRecentQueries();
 
 	const formattedQuery = formatQuery();
 

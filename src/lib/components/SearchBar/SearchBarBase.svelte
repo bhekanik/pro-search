@@ -6,10 +6,14 @@
 	let searchInput;
 
 	export let executeQuery: (query: string | string[]) => void;
+	export let saveQuery = false;
 
 	const handleSearch = (refocusSearchBar: () => void) => {
 		if (!$queryStore.searchTerm) return;
-		executeQuery(generateQueryUrl());
+		const queryUrl = generateQueryUrl({
+			saveQuery
+		});
+		executeQuery(queryUrl);
 		refocusSearchBar();
 	};
 
@@ -26,7 +30,6 @@
 	};
 
 	const handleSearchClear = () => {
-		// $queryStore.searchTerm = '';
 		queryStore.reset();
 	};
 

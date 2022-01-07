@@ -73,7 +73,7 @@
 			"stash-push:command",
 			"switch:command",
 			"push:command"
-		],
+		]
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
