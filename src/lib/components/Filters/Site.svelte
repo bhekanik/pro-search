@@ -6,12 +6,10 @@
 		const value = (e.target as HTMLInputElement).value;
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
-			value
-				? (newQuery.filters.site = {
-						value,
-						formatted: `site:${value.trim()} `
-				  })
-				: delete newQuery.filters.site;
+			newQuery.filters.site = {
+				value,
+				formatted: `site:${value.trim()} `
+			};
 			return newQuery;
 		});
 	};

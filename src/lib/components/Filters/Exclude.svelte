@@ -7,12 +7,10 @@
 		const value = (e.target as HTMLInputElement).value;
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
-			value
-				? (newQuery.filters.exclude = {
-						value,
-						formatted: listApplyOperator(value, Operator.Exclude)
-				  })
-				: delete newQuery.filters.exclude;
+			newQuery.filters.exclude = {
+				value,
+				formatted: listApplyOperator(value, Operator.Exclude)
+			};
 			return newQuery;
 		});
 	};

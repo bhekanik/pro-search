@@ -7,12 +7,10 @@
 		const value = (e.target as HTMLInputElement).value;
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
-			value
-				? (newQuery.filters.synonyms = {
-						value,
-						formatted: listApplyOperator(value, Operator.Synonym)
-				  })
-				: delete newQuery.filters.synonyms;
+			newQuery.filters.synonyms = {
+				value,
+				formatted: listApplyOperator(value, Operator.Synonym)
+			};
 			return newQuery;
 		});
 	};

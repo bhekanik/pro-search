@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { queryStore } from '$lib/stores';
+	import { queryStore, resetQuery } from '$lib/stores';
 	import { generateQueryUrl } from '$lib/utils/generateAndGo';
 	import { fade, scale } from 'svelte/transition';
 
@@ -15,7 +15,9 @@
 
 	const handleInput = (e) => {
 		queryStore.update((currentQuery) => {
-			return { ...currentQuery, searchTerm: e.target.value.trim() };
+			const newQuery = { ...currentQuery };
+			newQuery.searchTerm = e.target.value.trim();
+			return newQuery;
 		});
 	};
 
@@ -24,7 +26,8 @@
 	};
 
 	const handleSearchClear = () => {
-		$queryStore.searchTerm = '';
+		// $queryStore.searchTerm = '';
+		resetQuery();
 	};
 
 	const onKeydown = (e) => {

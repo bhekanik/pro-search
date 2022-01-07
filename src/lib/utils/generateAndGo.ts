@@ -10,32 +10,38 @@ import {
 import { get } from 'svelte/store';
 import { v4 as uuidv4 } from 'uuid';
 
-const saveNewQuery = (currentRecentQueries: Query[], newRecentQueries: Query[]) => {
+const saveNewQuery = (currentRecentQueries: Query[]) => {
 	const query = get(queryStore);
 	const newQuery = { ...query, id: uuidv4() };
-	newRecentQueries = [...currentRecentQueries, newQuery];
-	globalThis.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
+	const newRecentQueries = [...currentRecentQueries, newQuery];
+
+	window.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
+
 	return newRecentQueries;
 };
 
 export function updateRecentQueries(): void {
 	const query = get(queryStore);
 	const isAuthenticated = get(isAuthenticatedStore);
-	console.log('canSaveQuery?:', isAuthenticated);
+
 	if (!isAuthenticated) {
 		return;
 	}
+
 	recentQueriesStore.update((currentRecentQueries) => {
 		let newRecentQueries = [...currentRecentQueries];
-		currentRecentQueries.length > 0
+		const newQuery = { ...query };
+		delete newQuery.id;
+		let exists = false;
+		currentRecentQueries.length
 			? currentRecentQueries.forEach((currentRecentQuery) => {
-					if (JSON.stringify(query) === JSON.stringify({ ...currentRecentQuery, id: '' })) {
-						globalThis.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
-					} else {
-						newRecentQueries = saveNewQuery(currentRecentQueries, newRecentQueries);
+					if (JSON.stringify(newQuery) === JSON.stringify({ ...currentRecentQuery })) {
+						exists = true;
 					}
 			  })
-			: (newRecentQueries = saveNewQuery(currentRecentQueries, newRecentQueries));
+			: (newRecentQueries = saveNewQuery(newRecentQueries));
+
+		if (!exists) newRecentQueries = saveNewQuery(newRecentQueries);
 
 		return newRecentQueries;
 	});

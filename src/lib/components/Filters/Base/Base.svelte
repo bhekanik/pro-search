@@ -46,7 +46,7 @@
 		{label || type}
 	</label>
 
-	{#if (enabled || Boolean($queryStore.filters[Case.camel(type)])) && hasInput}
+	{#if enabled && hasInput}
 		<input
 			in:slide
 			out:slide

@@ -6,12 +6,10 @@
 		const value = (e.target as HTMLInputElement).value;
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
-			value
-				? (newQuery.filters.fileType = {
-						value,
-						formatted: `filetype:${value.trim()} `
-				  })
-				: delete newQuery.filters.fileType;
+			newQuery.filters.fileType = {
+				value,
+				formatted: `filetype:${value.trim()} `
+			};
 			return newQuery;
 		});
 	};

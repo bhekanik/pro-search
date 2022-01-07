@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { queryStore as currentQueryStore, recentQueriesStore } from '$lib/stores';
+	import { queryStore, recentQueriesStore } from '$lib/stores';
 	import type { Filter, Query } from '$lib/stores/query';
 
 	const generateFilters = (filters: Record<string, Filter>): string =>
@@ -14,7 +14,7 @@
 	};
 
 	const handleApply = (selectedQuery: Query) => {
-		currentQueryStore.set(selectedQuery);
+		queryStore.set({ ...selectedQuery });
 	};
 
 	export let query;
