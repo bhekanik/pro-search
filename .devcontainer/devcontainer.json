@@ -67,7 +67,13 @@
 			"yaml": false,
 			"plaintext": false,
 			"markdown": true
-		}
+		},
+		"gitlens.gitCommands.skipConfirmations": [
+			"fetch:command",
+			"stash-push:command",
+			"switch:command",
+			"push:command"
+		],
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
@@ -91,7 +97,8 @@
 		"visualstudioexptteam.vscodeintellicode",
 		"github.copilot",
 		"midnightsyntax.vscode-wrap-console-log",
-		"tyriar.sort-lines"
+		"tyriar.sort-lines",
+		"eamodio.gitlens"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
