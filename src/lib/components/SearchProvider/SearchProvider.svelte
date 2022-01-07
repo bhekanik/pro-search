@@ -3,7 +3,7 @@
 		SearchProvider,
 		searchProvidersWithAll,
 		searchProvidersWithoutAll
-	} from '$lib/app/config/searchProviders';
+	} from '$lib/app/config';
 	import { queryStore } from '$lib/stores';
 	import FeatureSelector from '../FeatureSelector/FeatureSelector.svelte';
 

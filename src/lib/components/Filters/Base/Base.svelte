@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { FileType } from '$lib/app/config';
 	import type { FilterType } from '$lib/app/types/filters';
 	import { queryStore } from '$lib/stores';
 	import { generateQueryUrl } from '$lib/utils/generateAndGo';
@@ -9,6 +10,7 @@
 	export let enabled = false;
 	export let label = '';
 	export let textInputPlaceholder = '';
+	export let options: FileType[] | null = null;
 
 	const handleCheckboxInput = (e: Event) => {
 		const value = (e.target as HTMLInputElement).checked;
@@ -45,6 +47,27 @@
 		/>
 		{label || type}
 	</label>
+
+	{#if enabled && options}
+		<select
+			in:slide
+			out:slide
+			class="select select-bordered"
+			type="text"
+			name={`${type}-input`}
+			id={`${type}-input`}
+			value={$queryStore.filters[Case.camel(type)]?.value || options[0].value}
+			on:change
+		>
+			{#each options as option}
+				<option
+					class="rounded-md text-lg p-4 border-2 dark:bg-gray-600 border-gray-400 dark:border-gray-400"
+					selected
+					value={option.value}>{option.label}</option
+				>
+			{/each}
+		</select>
+	{/if}
 
 	{#if enabled && hasInput}
 		<input
