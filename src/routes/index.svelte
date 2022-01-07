@@ -2,10 +2,9 @@
 	import FeatureSelector from '$lib/components/FeatureSelector/FeatureSelector.svelte';
 	import Filters from '$lib/components/Filters/Filters.svelte';
 	import RecentQueriesList from '$lib/components/RecentQueries/RecentQueriesList.svelte';
-	import SearchBarWithoutQueryAutosave from '$lib/components/SearchBar/SearchBarWithoutQueryAutosave.svelte';
-	import SearchBarWithQueryAutosave from '$lib/components/SearchBar/SearchBarWithQueryAutosave.svelte';
+	import SearchBar from '$lib/components/SearchBar/SearchBar.svelte';
 	import SearchProvider from '$lib/components/SearchProvider/SearchProvider.svelte';
-	import { configStore, isAuthenticated } from '$lib/stores';
+	import { isAuthenticated } from '$lib/stores';
 
 	let url = '';
 
@@ -50,15 +49,7 @@
 			offFeature={executeQueryWithNewTab}
 			let:feature={executeQuery}
 		>
-			<FeatureSelector
-				featureFlag="Save_Search"
-				otherCondition={!$configStore.autosaveQueries}
-				onFeature={SearchBarWithoutQueryAutosave}
-				offFeature={SearchBarWithQueryAutosave}
-				let:feature={SearchBar}
-			>
-				<SearchBar {executeQuery} />
-			</FeatureSelector>
+			<SearchBar {executeQuery} />
 		</FeatureSelector>
 	</div>
 

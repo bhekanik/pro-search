@@ -1,7 +1,7 @@
 <script lang="ts">
-	import SearchBar from './SearchBar.svelte';
+	import SearchBarBase from './SearchBarBase.svelte';
 
 	export let executeQuery: (query: string | string[]) => void;
 </script>
 
-<SearchBar {executeQuery} />
+<SearchBarBase {executeQuery} />
