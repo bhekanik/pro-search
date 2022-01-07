@@ -61,7 +61,13 @@
 		"editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
 		"vscode-edge-devtools.mirrorEdits": true,
 		"svelte.enable-ts-plugin": true,
-		"editor.inlineSuggest.enabled": true
+		"editor.inlineSuggest.enabled": true,
+		"github.copilot.enable": {
+			"*": true,
+			"yaml": false,
+			"plaintext": false,
+			"markdown": true
+		}
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
@@ -82,7 +88,10 @@
 		"svelte.svelte-vscode",
 		"ardenivanov.svelte-intellisense",
 		"bradlc.vscode-tailwindcss",
-		"visualstudioexptteam.vscodeintellicode"
+		"visualstudioexptteam.vscodeintellicode",
+		"github.copilot",
+		"midnightsyntax.vscode-wrap-console-log",
+		"tyriar.sort-lines"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
