@@ -1,13 +1,14 @@
 <script lang="ts">
-	import { recentQueriesStore } from '$lib/stores';
 	import { flip } from 'svelte/animate';
 	import { fade, scale } from 'svelte/transition';
 	import RecentQuery from './RecentQuery.svelte';
+
+	let recentQueries = JSON.parse(window.localStorage?.getItem('recentQueries') || '[]');
 </script>
 
 <h3 class="heading">Recent Queries</h3>
 <ul class="query-list">
-	{#each $recentQueriesStore as query (query.id)}
+	{#each recentQueries as query (query.id)}
 		<li
 			class="card card-bordered shadow-md py-4 px-8 relative"
 			in:fade
