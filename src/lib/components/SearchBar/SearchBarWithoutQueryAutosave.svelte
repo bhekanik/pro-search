@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { isAuthenticated, queryStore, resetQuery } from '$lib/stores';
+	import { isAuthenticated, queryStore } from '$lib/stores';
 	import { updateRecentQueries } from '$lib/utils/generateAndGo';
 	import { fade } from 'svelte/transition';
 	import SearchBar from './SearchBar.svelte';
@@ -8,7 +8,7 @@
 
 	const saveSearch = () => {
 		updateRecentQueries();
-		resetQuery();
+		queryStore.reset();
 	};
 </script>
 

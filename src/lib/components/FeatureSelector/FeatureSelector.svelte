@@ -7,7 +7,6 @@
 	export let otherCondition = true;
 
 	let featureState = $featureFlagsStore[featureFlag] === 'on' && otherCondition;
-	console.log('featureState:', featureState);
 </script>
 
 <slot feature={featureState ? onFeature : offFeature} />

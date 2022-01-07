@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { queryStore, resetQuery } from '$lib/stores';
+	import { queryStore } from '$lib/stores';
 	import { generateQueryUrl } from '$lib/utils/generateAndGo';
 	import { fade, scale } from 'svelte/transition';
 
@@ -27,7 +27,7 @@
 
 	const handleSearchClear = () => {
 		// $queryStore.searchTerm = '';
-		resetQuery();
+		queryStore.reset();
 	};
 
 	const onKeydown = (e) => {

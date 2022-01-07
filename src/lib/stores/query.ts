@@ -22,10 +22,11 @@ export const defaultQuery: Query = {
 	provider: searchProvidersWithAll[0]
 };
 
-export const queryStore: Writable<Query> = writable(defaultQuery);
+const { subscribe, set, update }: Writable<Query> = writable(defaultQuery);
 
-export const resetQuery = (): void => {
-	console.log('resetting...');
-
-	queryStore.set(defaultQuery);
+export const queryStore = {
+	subscribe,
+	update,
+	set,
+	reset: (): void => set(defaultQuery)
 };
