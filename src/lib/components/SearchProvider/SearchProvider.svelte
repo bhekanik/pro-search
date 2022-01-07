@@ -5,7 +5,7 @@
 		searchProvidersWithoutAll
 	} from '$lib/app/config';
 	import { queryStore } from '$lib/stores';
-	import FeatureSelector from '../FeatureSelector/FeatureSelector.svelte';
+	import ValueSelector from '../FeatureSelector/ValueSelector.svelte';
 
 	const handleProviderChange = (e: Event, searchProviders: SearchProvider[]) => {
 		queryStore.update((currentQuery) => {
@@ -19,10 +19,10 @@
 	};
 </script>
 
-<FeatureSelector
+<ValueSelector
 	featureFlag="Search_All_Providers"
-	onFeature={searchProvidersWithAll}
-	offFeature={searchProvidersWithoutAll}
+	onValue={searchProvidersWithAll}
+	offValue={searchProvidersWithoutAll}
 	let:feature={searchProviders}
 >
 	<select
@@ -40,4 +40,4 @@
 			>
 		{/each}
 	</select>
-</FeatureSelector>
+</ValueSelector>

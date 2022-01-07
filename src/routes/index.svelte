@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FeatureSelector from '$lib/components/FeatureSelector/FeatureSelector.svelte';
+	import ValueSelector from '$lib/components/FeatureSelector/ValueSelector.svelte';
 	import Filters from '$lib/components/Filters/Filters.svelte';
 	import RecentQueriesList from '$lib/components/RecentQueries/RecentQueriesList.svelte';
 	import SearchBar from '$lib/components/SearchBar/SearchBar.svelte';
@@ -43,14 +43,14 @@
 
 	<div class="flex flex-col gap-2 md:flex-row">
 		<SearchProvider />
-		<FeatureSelector
+		<ValueSelector
 			featureFlag="Results_In_IFrame"
-			onFeature={executeQueryWithIFrame}
-			offFeature={executeQueryWithNewTab}
+			onValue={executeQueryWithIFrame}
+			offValue={executeQueryWithNewTab}
 			let:feature={executeQuery}
 		>
 			<SearchBar {executeQuery} />
-		</FeatureSelector>
+		</ValueSelector>
 	</div>
 
 	{#if url}
