@@ -20,6 +20,6 @@
 	on:input={handleInput}
 	type="Title"
 	hasInput
-	label="Only return results with this word(s) in the title of the page"
+	label="... with these words in the page title"
 	textInputPlaceholder="Word(s)"
 />

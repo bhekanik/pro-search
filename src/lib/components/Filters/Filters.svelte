@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Exact from '$lib/components/Filters/Exact.svelte';
 	import ExcludeFilter from '$lib/components/Filters/Exclude.svelte';
 	import FileTypeFilter from '$lib/components/Filters/FileType.svelte';
 	import LinkFilter from '$lib/components/Filters/Link.svelte';
@@ -7,6 +8,8 @@
 	import SynonymsFilter from '$lib/components/Filters/Synonyms.svelte';
 	import TitleFilter from '$lib/components/Filters/Title.svelte';
 	import URLFilter from '$lib/components/Filters/URL.svelte';
+	import DateAfter from './DateAfter.svelte';
+	import DateBefore from './DateBefore.svelte';
 </script>
 
 <div class="collapse my-2 w-full border rounded-box border-base-300 collapse-arrow">
@@ -14,12 +17,16 @@
 	<div class="collapse-title text-xl font-medium">Add Filters</div>
 	<div class="collapse-content">
 		<div class="filters">
-			<SiteFilter />
-			<ExcludeFilter />
+			<h2>Only return pages...</h2>
 			<SynonymsFilter />
+			<Exact />
+			<ExcludeFilter />
 			<TitleFilter />
-			<FileTypeFilter />
 			<URLFilter />
+			<SiteFilter />
+			<DateBefore />
+			<DateAfter />
+			<FileTypeFilter />
 			<LinkFilter />
 			<RelatedFilter />
 		</div>

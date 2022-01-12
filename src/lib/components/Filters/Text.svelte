@@ -1,15 +1,15 @@
 <script lang="ts">
 	import FilterBase from '$lib/components/Filters/Base/Base.svelte';
 	import { queryStore } from '$lib/stores';
-	import { listApplyOperator, Operator } from './utils/listApplyOperator';
 
 	const handleInput = (e: Event) => {
 		const value = (e.target as HTMLInputElement).value;
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
-			newQuery.filters.synonyms = {
+			newQuery.filters.text = {
 				value,
-				formatted: listApplyOperator(value, Operator.Synonym)
+				formatted:
+					value.split(' ').length > 1 ? `allintext:${value.trim()} ` : `intext:${value.trim()} `
 			};
 			return newQuery;
 		});
@@ -18,8 +18,8 @@
 
 <FilterBase
 	on:input={handleInput}
-	type="Synonyms"
+	type="Text"
 	hasInput
-	label="... with these words and their synonyms"
-	textInputPlaceholder="Words to include (example: amazed sailor)"
+	label="... with these words in the page text"
+	textInputPlaceholder="Word(s)"
 />

@@ -19,6 +19,6 @@
 	on:input={handleInput}
 	type="Related"
 	hasInput
-	label="Only return results that are similar to the specified webpage"
+	label="... that are similar to this webpage"
 	textInputPlaceholder="URL (example: www.cnn.com)"
 />

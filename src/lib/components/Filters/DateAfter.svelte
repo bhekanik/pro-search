@@ -1,15 +1,14 @@
 <script lang="ts">
 	import FilterBase from '$lib/components/Filters/Base/Base.svelte';
 	import { queryStore } from '$lib/stores';
-	import { listApplyOperator, Operator } from './utils/listApplyOperator';
 
 	const handleInput = (e: Event) => {
 		const value = (e.target as HTMLInputElement).value;
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
-			newQuery.filters.synonyms = {
+			newQuery.filters.dateAfter = {
 				value,
-				formatted: listApplyOperator(value, Operator.Synonym)
+				formatted: `after:${value.trim()} `
 			};
 			return newQuery;
 		});
@@ -18,8 +17,8 @@
 
 <FilterBase
 	on:input={handleInput}
-	type="Synonyms"
+	type="DateAfter"
 	hasInput
-	label="... with these words and their synonyms"
-	textInputPlaceholder="Words to include (example: amazed sailor)"
+	label="... published after this date"
+	textInputPlaceholder="YYYY-MM-DD or YYYY"
 />

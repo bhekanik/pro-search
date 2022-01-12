@@ -1,5 +1,9 @@
 export type FilterType =
 	| 'Site'
+	| 'Exact'
+	| 'DateBefore'
+	| 'DateAfter'
+	| 'Text'
 	| 'Link'
 	| 'Related'
 	| 'File Type'
@@ -12,6 +16,8 @@ export const filtersThatDontRequireSearchTerm: FilterType[] = [
 	'Synonyms',
 	'Exclude',
 	'Link',
+	'Exact',
+	'Text',
 	'Related',
 	'Title',
 	'URL'

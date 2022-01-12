@@ -19,6 +19,6 @@
 	on:input={handleInput}
 	type="Site"
 	hasInput
-	label="Only return results from this website"
-	textInputPlaceholder="Website (example: cnn.com)"
+	label="... from this website or domain"
+	textInputPlaceholder="Website (examples: cnn.com, .com, .org)"
 />

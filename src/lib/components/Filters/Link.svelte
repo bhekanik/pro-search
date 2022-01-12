@@ -19,6 +19,6 @@
 	on:input={handleInput}
 	type="Link"
 	hasInput
-	label="Only return results that point to this URL"
+	label="... that point to this URL"
 	textInputPlaceholder="URL (example: www.cnn.com)"
 />

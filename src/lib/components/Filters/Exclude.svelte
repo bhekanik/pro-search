@@ -20,6 +20,6 @@
 	on:input={handleInput}
 	type="Exclude"
 	hasInput
-	label="Exclude results with these words"
+	label="... without any of these words"
 	textInputPlaceholder="Words to exclude (example: detect plagiarism)"
 />

@@ -19,7 +19,7 @@
 <FilterBase
 	on:change={handleChange}
 	type="File Type"
-	label="Only return results of this file type"
+	label="... of this file type"
 	textInputPlaceholder="File type (example: pdf)"
 	options={fileTypes}
 />

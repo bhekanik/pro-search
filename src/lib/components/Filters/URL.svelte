@@ -20,6 +20,6 @@
 	on:input={handleInput}
 	type="URL"
 	hasInput
-	label="Only return results with this word(s) in the URL"
+	label="... with these words in the URL"
 	textInputPlaceholder="Word(s)"
 />
