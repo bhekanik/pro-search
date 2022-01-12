@@ -14,6 +14,7 @@ To learn more about what is possible in terms of filters, etc. Here are some hel
 - [Dorking: How to find anything on the internet](https://www.alec.fyi/dorking-how-to-find-anything-on-the-internet.html)
 - [Neat little Google hack twitter thread](https://twitter.com/stephsmithio/status/1388622741037666308?s=19)
 - [How to 'Google it' like a senior engineer](https://youtu.be/cEBkvm0-rg0)
+- [The Ultimate Guide to the Google Search](https://moz.com/blog/the-ultimate-guide-to-the-google-search-parameters)
 
 ## Contributing
 

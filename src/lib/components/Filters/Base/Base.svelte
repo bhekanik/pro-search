@@ -18,6 +18,7 @@
 	export let textInputPlaceholder = '';
 	export let options: OptionType[] | null = null;
 	export let handleSelectChange: (e: Event) => void = null;
+	export let handleCheckboxChange: (e: Event) => void = null;
 
 	const handleCheckboxInput = (e: Event) => {
 		const value = (e.target as HTMLInputElement).checked;
@@ -28,8 +29,15 @@
 				enabled = false;
 			} else {
 				enabled = true;
+				if (type === 'Safe') handleCheckboxChange({ target: { value: 'active' } } as any);
 				if (type === 'Past') handleSelectChange({ target: { value: 'd' } } as any);
 				if (type === 'File Type') handleSelectChange({ target: { value: 'pdf' } } as any);
+				if (type === 'Rights')
+					handleSelectChange({
+						target: {
+							value: '(cc_publicdomain|cc_attribute|cc_sharealike|cc_noncommercial|cc_nonderived)'
+						}
+					} as any);
 			}
 			return newQuery;
 		});

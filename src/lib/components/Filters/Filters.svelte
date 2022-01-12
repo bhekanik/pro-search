@@ -11,6 +11,8 @@
 	import DateAfter from './DateAfter.svelte';
 	import DateBefore from './DateBefore.svelte';
 	import Past from './Past.svelte';
+	import Rights from './Rights.svelte';
+	import Safe from './Safe.svelte';
 </script>
 
 <div class="collapse my-2 w-full border rounded-box border-base-300 collapse-arrow">
@@ -18,13 +20,15 @@
 	<div class="collapse-title text-xl font-medium">Add Filters</div>
 	<div class="collapse-content">
 		<div class="filters">
-			<h2>Only return pages...</h2>
+			<Safe />
+			<h2 class="mt-4">Only return pages...</h2>
 			<SynonymsFilter />
 			<Exact />
 			<ExcludeFilter />
 			<TitleFilter />
 			<URLFilter />
 			<Past />
+			<Rights />
 			<SiteFilter />
 			<DateBefore />
 			<DateAfter />

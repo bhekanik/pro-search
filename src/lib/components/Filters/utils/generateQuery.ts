@@ -1,7 +1,7 @@
 import { queryStore } from '$lib/stores';
 import { get } from 'svelte/store';
 
-const queryParamFilters = ['past'];
+const queryParamFilters = ['past', 'rights', 'safe'];
 
 /**
  * Formats the search input for the search engine according to the provided

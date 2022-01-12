@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { pastOptions } from '$lib/app/config/pastOptions';
+	import { rightsOptions } from '$lib/app/config/rightsOptions';
 	import FilterBase from '$lib/components/Filters/Base/Base.svelte';
 	import { queryStore } from '$lib/stores';
 
@@ -7,9 +7,9 @@
 		const value = (e.target as HTMLSelectElement).value;
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
-			newQuery.filters.past = {
+			newQuery.filters.rights = {
 				value,
-				formatted: `as_qdr=${value.trim()} `
+				formatted: `as_rights=${value.trim()} `
 			};
 			return newQuery;
 		});
@@ -18,7 +18,7 @@
 
 <FilterBase
 	handleSelectChange={handleChange}
-	type="Past"
-	label="... that were published in ..."
-	options={pastOptions}
+	type="Rights"
+	label="... that the following rights"
+	options={rightsOptions}
 />

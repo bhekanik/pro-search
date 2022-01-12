@@ -1,6 +1,8 @@
 export type FilterType =
 	| 'Site'
 	| 'Past'
+	| 'Safe'
+	| 'Rights'
 	| 'Exact'
 	| 'DateBefore'
 	| 'DateAfter'
