@@ -1,9 +1,16 @@
 <script lang="ts">
+	import type { Query } from '$lib/stores';
+	import { recentQueriesStore } from '$lib/stores';
 	import { flip } from 'svelte/animate';
 	import { fade, scale } from 'svelte/transition';
 	import RecentQuery from './RecentQuery.svelte';
 
-	let recentQueries = JSON.parse(window.localStorage?.getItem('recentQueries') || '[]');
+	let recentQueries: Query[] = [];
+
+	// $: {
+	// 	recentQueriesStore.subscribe((queries) => (recentQueries = queries));
+	// }
+	$: recentQueries = $recentQueriesStore;
 </script>
 
 <h3 class="heading">Recent Queries</h3>

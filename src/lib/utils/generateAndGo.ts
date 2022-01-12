@@ -2,7 +2,11 @@ import type { FilterType } from '$lib/app/types/filters';
 import { filtersThatDontRequireSearchTerm } from '$lib/app/types/filters';
 import { formatQuery } from '$lib/components/Filters/utils/generateQuery';
 import type { Query } from '$lib/stores';
-import { isAuthenticated as isAuthenticatedStore, queryStore } from '$lib/stores';
+import {
+	isAuthenticated as isAuthenticatedStore,
+	queryStore,
+	recentQueriesStore
+} from '$lib/stores';
 import { get } from 'svelte/store';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -13,6 +17,7 @@ const saveNewQuery = (currentRecentQueries: Query[]) => {
 
 	window.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
 
+	recentQueriesStore.set(newRecentQueries);
 	return newRecentQueries;
 };
 

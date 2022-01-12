@@ -2,7 +2,6 @@
 	import auth from '$lib/app/auth/authService';
 	import { splitClient } from '$lib/app/splitClient';
 	import ConfigModal from '$lib/components/ConfigModal/ConfigModal.svelte';
-	import StoreMonitor from '$lib/components/StoreMonitor/StoreMonitor.svelte';
 	import { authReadiness, isAuthenticated, readiness, user } from '$lib/stores';
 	import { onDestroy, onMount } from 'svelte';
 	import '../global.css';
@@ -69,7 +68,7 @@
 				{$isAuthenticated ? `Logout: ${$user?.email}` : 'Login/Sign Up'}</button
 			>
 		</div>
-		<StoreMonitor />
+		<!-- <StoreMonitor /> -->
 		<div class="p-8 max-w-6xl mx-auto h-full">
 			<slot />
 		</div>
