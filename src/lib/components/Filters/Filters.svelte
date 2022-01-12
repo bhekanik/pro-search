@@ -8,6 +8,7 @@
 	import SynonymsFilter from '$lib/components/Filters/Synonyms.svelte';
 	import TitleFilter from '$lib/components/Filters/Title.svelte';
 	import URLFilter from '$lib/components/Filters/URL.svelte';
+	import { queryStore } from '$lib/stores';
 	import DateAfter from './DateAfter.svelte';
 	import DateBefore from './DateBefore.svelte';
 	import Past from './Past.svelte';
@@ -20,15 +21,19 @@
 	<div class="collapse-title text-xl font-medium">Add Filters</div>
 	<div class="collapse-content">
 		<div class="filters">
-			<Safe />
+			{#if $queryStore.provider.name === 'Google'}
+				<Safe />
+			{/if}
 			<h2 class="mt-4">Only return pages...</h2>
 			<SynonymsFilter />
 			<Exact />
 			<ExcludeFilter />
 			<TitleFilter />
 			<URLFilter />
-			<Past />
-			<Rights />
+			{#if $queryStore.provider.name === 'Google'}
+				<Past />
+				<Rights />
+			{/if}
 			<SiteFilter />
 			<DateBefore />
 			<DateAfter />
