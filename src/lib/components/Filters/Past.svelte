@@ -1,15 +1,16 @@
 <script lang="ts">
-	import { fileTypes } from '$lib/app/config';
+	import { pastOptions } from '$lib/app/config/pastOptions';
 	import FilterBase from '$lib/components/Filters/Base/Base.svelte';
 	import { queryStore } from '$lib/stores';
 
 	const handleChange = (e: Event) => {
 		const value = (e.target as HTMLSelectElement).value;
+		console.log('value:', value);
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
-			newQuery.filters.fileType = {
+			newQuery.filters.past = {
 				value,
-				formatted: `filetype:${value.trim()} `
+				formatted: `as_qdr=${value.trim()} `
 			};
 			return newQuery;
 		});
@@ -18,8 +19,7 @@
 
 <FilterBase
 	handleSelectChange={handleChange}
-	type="File Type"
-	label="... of this file type"
-	textInputPlaceholder="File type (example: pdf)"
-	options={fileTypes}
+	type="Past"
+	label="... that were published in ..."
+	options={pastOptions}
 />

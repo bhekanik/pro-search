@@ -1,5 +1,6 @@
 export type FilterType =
 	| 'Site'
+	| 'Past'
 	| 'Exact'
 	| 'DateBefore'
 	| 'DateAfter'

@@ -10,6 +10,7 @@
 	import URLFilter from '$lib/components/Filters/URL.svelte';
 	import DateAfter from './DateAfter.svelte';
 	import DateBefore from './DateBefore.svelte';
+	import Past from './Past.svelte';
 </script>
 
 <div class="collapse my-2 w-full border rounded-box border-base-300 collapse-arrow">
@@ -23,6 +24,7 @@
 			<ExcludeFilter />
 			<TitleFilter />
 			<URLFilter />
+			<Past />
 			<SiteFilter />
 			<DateBefore />
 			<DateAfter />

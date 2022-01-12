@@ -1,5 +1,11 @@
+<script lang="ts" context="module">
+	export interface OptionType {
+		label: string;
+		value: string;
+	}
+</script>
+
 <script lang="ts">
-	import type { FileType } from '$lib/app/config';
 	import type { FilterType } from '$lib/app/types/filters';
 	import { queryStore } from '$lib/stores';
 	import { generateQueryUrl } from '$lib/utils/generateAndGo';
@@ -10,7 +16,8 @@
 	export let enabled = false;
 	export let label = '';
 	export let textInputPlaceholder = '';
-	export let options: FileType[] | null = null;
+	export let options: OptionType[] | null = null;
+	export let handleSelectChange: (e: Event) => void = null;
 
 	const handleCheckboxInput = (e: Event) => {
 		const value = (e.target as HTMLInputElement).checked;
@@ -21,9 +28,15 @@
 				enabled = false;
 			} else {
 				enabled = true;
+				if (type === 'Past') handleSelectChange({ target: { value: 'd' } } as any);
+				if (type === 'File Type') handleSelectChange({ target: { value: 'pdf' } } as any);
 			}
 			return newQuery;
 		});
+	};
+
+	const onSelectChange = (e) => {
+		handleSelectChange(e);
 	};
 
 	const handleKeydown = (e) => {
@@ -57,12 +70,11 @@
 			name={`${type}-input`}
 			id={`${type}-input`}
 			value={$queryStore.filters[Case.camel(type)]?.value || options[0].value}
-			on:change
+			on:change={onSelectChange}
 		>
 			{#each options as option}
 				<option
 					class="rounded-md text-lg p-4 border-2 dark:bg-gray-600 border-gray-400 dark:border-gray-400"
-					selected
 					value={option.value}>{option.label}</option
 				>
 			{/each}
