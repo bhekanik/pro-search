@@ -12,13 +12,12 @@ import { v4 as uuidv4 } from 'uuid';
 
 const saveNewQuery = (currentRecentQueries: Query[]) => {
 	const query = get(queryStore);
-	const newQuery = { ...query, id: uuidv4() };
+	const newQuery = { ...query, id: uuidv4(), createdAt: new Date().toISOString() };
 	const newRecentQueries = [...currentRecentQueries, newQuery];
 
 	window.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
 
 	recentQueriesStore.set(newRecentQueries);
-	return newRecentQueries;
 };
 
 export function updateRecentQueries(): void {
@@ -29,20 +28,23 @@ export function updateRecentQueries(): void {
 		return;
 	}
 
+	// Skip saving if the query is equal to the first recent query
 	const currentRecentQueries = JSON.parse(window.localStorage?.getItem('recentQueries') || '[]');
-	let newRecentQueries = [...currentRecentQueries];
+	const newRecentQueries = [...currentRecentQueries];
 	const newQuery = { ...query };
 	delete newQuery.id;
+	delete newQuery.createdAt;
 	let exists = false;
-	currentRecentQueries.length
-		? currentRecentQueries.forEach((currentRecentQuery) => {
-				if (JSON.stringify(newQuery) === JSON.stringify({ ...currentRecentQuery })) {
-					exists = true;
-				}
-		  })
-		: (newRecentQueries = saveNewQuery(newRecentQueries));
+	if (currentRecentQueries.length) {
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { id, createdAt, ...queryWithoutId } =
+			currentRecentQueries[currentRecentQueries.length - 1];
+		if (JSON.stringify(newQuery) === JSON.stringify({ ...queryWithoutId })) {
+			exists = true;
+		}
+	}
 
-	if (!exists) newRecentQueries = saveNewQuery(newRecentQueries);
+	if (!exists) saveNewQuery(newRecentQueries);
 }
 
 interface GenerateQueryUrlOptions {

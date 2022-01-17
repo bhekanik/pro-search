@@ -13,13 +13,15 @@ export interface Query {
 	searchTerm: string;
 	filters: Record<string, Filter>;
 	provider: SearchProvider;
+	createdAt: string;
 }
 
 export const defaultQuery: Query = {
 	id: '',
 	searchTerm: '',
 	filters: {},
-	provider: searchProvidersWithAll[0]
+	provider: searchProvidersWithAll[0],
+	createdAt: new Date().toISOString()
 };
 
 const { subscribe, set, update }: Writable<Query> = writable(defaultQuery);

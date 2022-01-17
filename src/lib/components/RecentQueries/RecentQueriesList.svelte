@@ -7,14 +7,13 @@
 
 	let recentQueries: Query[] = [];
 
-	// $: {
-	// 	recentQueriesStore.subscribe((queries) => (recentQueries = queries));
-	// }
-	$: recentQueries = $recentQueriesStore;
+	$: recentQueries = $recentQueriesStore.sort(
+		(a, b) => Number(new Date(b.createdAt)) - Number(new Date(a.createdAt))
+	);
 </script>
 
 <h3 class="heading">Recent Queries</h3>
-<ul class="query-list pb-4 mb-4">
+<ul class="query-list pb-4 mb-4 overflow-y-auto">
 	{#each recentQueries as query (query.id)}
 		<li
 			class="card card-bordered shadow-md py-4 px-8 relative"
