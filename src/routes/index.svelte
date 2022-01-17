@@ -34,7 +34,7 @@
 	<title>Pro-Search</title>
 </svelte:head>
 
-<main class="dark:text-gray-50 mt-24 h-full">
+<main class="dark:text-gray-50 mt-24">
 	<h1
 		class="text-6xl text-primary text-center bg-transparent dark:text-gray-400 my-8 font-extrabold"
 	>

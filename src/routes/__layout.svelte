@@ -84,7 +84,7 @@
 	onDestroy(splitClient.destroy);
 </script>
 
-<div class="relative h-full dark:bg-gray-600">
+<div class="relative h-full w-full overflow-y-auto dark:bg-gray-600">
 	{#if $readiness}
 		<!-- <Navbar handleLogin={login} /> -->
 		<div class="absolute right-6 top-4 flex gap-2">

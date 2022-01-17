@@ -20,5 +20,5 @@
 	type="DateAfter"
 	hasInput
 	label="... published after this date"
-	textInputPlaceholder="YYYY-MM-DD or YYYY"
+	textInputPlaceholder="YYYY.MM.DD or YYYY"
 />

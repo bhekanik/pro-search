@@ -2,30 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-	--color-main: rgb(55, 65, 81);
-}
-
 html,
 body,
 #svelte {
 	height: 100vh;
 	width: 100vw;
+	scroll-behavior: smooth;
 }
 
-.inputs {
-	border: 1px solid var(--color-main);
-	margin: auto;
-	border-radius: 10px;
-	font-size: 1rem;
-	padding: 0.5rem 1rem;
-}
-
-.button {
+#svelte {
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	border: none;
-	background-color: var(--color-main);
-	color: white;
+	flex-direction: column;
+	height: 100vh;
 }

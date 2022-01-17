@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"license": "MIT",
 	"scripts": {
-		"dev": "svelte-kit dev --host --open",
+		"dev": "svelte-kit dev --host --open --port 4000",
 		"dev:https": "svelte-kit dev --host --open --https",
 		"build": "svelte-kit build",
 		"preview": "svelte-kit preview",

@@ -14,7 +14,7 @@
 </script>
 
 <h3 class="heading">Recent Queries</h3>
-<ul class="query-list">
+<ul class="query-list pb-4 mb-4">
 	{#each recentQueries as query (query.id)}
 		<li
 			class="card card-bordered shadow-md py-4 px-8 relative"

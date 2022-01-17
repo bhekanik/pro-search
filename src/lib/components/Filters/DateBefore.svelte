@@ -20,5 +20,5 @@
 	type="DateBefore"
 	hasInput
 	label="... published before this date"
-	textInputPlaceholder="YYYY-MM-DD or YYYY"
+	textInputPlaceholder="YYYY.MM.DD or YYYY"
 />
