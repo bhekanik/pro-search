@@ -24,7 +24,7 @@
 	};
 </script>
 
-<div class="flex justify-between items-center">
+<div class="flex justify-between items-center mb-2">
 	<h1 class="font-medium text-xl">{query.name}</h1>
 	<div class="flex gap-1 align-middle items-center">
 		<ShareModal {query} />

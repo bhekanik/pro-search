@@ -10,13 +10,12 @@ import {
 import { get } from 'svelte/store';
 import { v4 as uuidv4 } from 'uuid';
 
-const saveNewQuery = (currentRecentQueries: Query[]) => {
-	const query = get(queryStore);
+const saveNewQuery = (currentRecentQueries: Query[], query: Query) => {
 	const newQuery = {
 		...query,
 		id: uuidv4(),
 		createdAt: new Date().toISOString(),
-		name: `Untitled Query - ${new Date().toUTCString()}`
+		name: query.name || `Untitled Query - ${new Date().toUTCString()}`
 	};
 	const newRecentQueries = [...currentRecentQueries, newQuery];
 
@@ -25,8 +24,8 @@ const saveNewQuery = (currentRecentQueries: Query[]) => {
 	recentQueriesStore.set(newRecentQueries);
 };
 
-export function updateRecentQueries(): void {
-	const query = get(queryStore);
+export function updateRecentQueries(options?: { query?: Query }): void {
+	const query = options.query || get(queryStore);
 	const isAuthenticated = get(isAuthenticatedStore);
 
 	if (!isAuthenticated) {
@@ -36,20 +35,21 @@ export function updateRecentQueries(): void {
 	// Skip saving if the query is equal to the first recent query
 	const currentRecentQueries = JSON.parse(window.localStorage?.getItem('recentQueries') || '[]');
 	const newRecentQueries = [...currentRecentQueries];
-	const newQuery = { ...query };
-	delete newQuery.id;
-	delete newQuery.createdAt;
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const { id, createdAt, ...queryWithoutIdAndDate } = query;
 	let exists = false;
 	if (currentRecentQueries.length) {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { id, createdAt, ...queryWithoutId } =
+		const { id, createdAt, ...currentQueryWithoutIdAndDate } =
 			currentRecentQueries[currentRecentQueries.length - 1];
-		if (JSON.stringify(newQuery) === JSON.stringify({ ...queryWithoutId })) {
+		if (
+			JSON.stringify(queryWithoutIdAndDate) === JSON.stringify({ ...currentQueryWithoutIdAndDate })
+		) {
 			exists = true;
 		}
 	}
 
-	if (!exists) saveNewQuery(newRecentQueries);
+	if (!exists) saveNewQuery(newRecentQueries, query);
 }
 
 interface GenerateQueryUrlOptions {
