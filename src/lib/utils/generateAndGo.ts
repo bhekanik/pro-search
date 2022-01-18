@@ -12,7 +12,12 @@ import { v4 as uuidv4 } from 'uuid';
 
 const saveNewQuery = (currentRecentQueries: Query[]) => {
 	const query = get(queryStore);
-	const newQuery = { ...query, id: uuidv4(), createdAt: new Date().toISOString() };
+	const newQuery = {
+		...query,
+		id: uuidv4(),
+		createdAt: new Date().toISOString(),
+		name: `Untitled Query - ${new Date().toUTCString()}`
+	};
 	const newRecentQueries = [...currentRecentQueries, newQuery];
 
 	window.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));

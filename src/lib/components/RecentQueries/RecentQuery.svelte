@@ -21,10 +21,13 @@
 	};
 </script>
 
-<div class="buttons">
-	<ShareModal {query} />
-	<button class="btn btn-ghost" on:click={() => handleApply()}>Apply</button>
-	<button class="btn btn-ghost" on:click={() => handleDelete()}>Delete</button>
+<div class="flex justify-between align-center">
+	<h1 class="query_search-term">{query.name}</h1>
+	<div class="flex gap-4">
+		<ShareModal {query} />
+		<button class="btn btn-ghost" on:click={() => handleApply()}>Apply</button>
+		<button class="btn btn-ghost" on:click={() => handleDelete()}>Delete</button>
+	</div>
 </div>
 <div>
 	<span class="">Search Term: </span>
