@@ -1,28 +1,30 @@
 <script lang="ts">
 	import { queryStore, recentQueriesStore } from '$lib/stores';
-	import type { Filter, Query } from '$lib/stores/query';
+	import type { Filter } from '$lib/stores/query';
+	import ShareModal from './ShareModal.svelte';
+
+	export let query;
 
 	const generateFilters = (filters: Record<string, Filter>): string =>
 		Object.values(filters).reduce((prev, curr) => `${prev}${curr.formatted}`, '');
 
-	const handleDelete = (queryId: string) => {
+	const handleDelete = () => {
 		const recentQueries = JSON.parse(window.localStorage?.getItem('recentQueries') || '[]');
-		const newRecentQueries = recentQueries.filter((query) => query.id !== queryId);
+		const newRecentQueries = recentQueries.filter((recentQuery) => recentQuery.id !== query.id);
 		window.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
 		recentQueriesStore.set(newRecentQueries);
 		return newRecentQueries;
 	};
 
-	const handleApply = (selectedQuery: Query) => {
-		queryStore.set({ ...selectedQuery });
+	const handleApply = () => {
+		queryStore.set({ ...query });
 	};
-
-	export let query;
 </script>
 
 <div class="buttons">
-	<button class="btn btn-ghost" on:click={() => handleApply(query)}>Apply</button>
-	<button class="btn btn-ghost" on:click={() => handleDelete(query.id)}>Delete</button>
+	<ShareModal {query} />
+	<button class="btn btn-ghost" on:click={() => handleApply()}>Apply</button>
+	<button class="btn btn-ghost" on:click={() => handleDelete()}>Delete</button>
 </div>
 <div>
 	<span class="">Search Term: </span>

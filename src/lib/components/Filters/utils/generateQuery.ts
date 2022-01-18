@@ -1,3 +1,4 @@
+import type { Query } from '$lib/stores';
 import { queryStore } from '$lib/stores';
 import { get } from 'svelte/store';
 
@@ -9,8 +10,9 @@ const queryParamFilters = ['past', 'rights', 'safe'];
  *
  * @returns The formated query ready to be sent to the search engine
  */
-export const formatQuery = (): string => {
-	const query = get(queryStore);
+export const formatQuery = (options?: { query?: Query }): string => {
+	const query = options.query || get(queryStore);
+
 	// put the filters together
 	const prefix = Object.entries(query.filters)
 		.filter((filter) => !queryParamFilters.includes(filter[0]))
@@ -18,10 +20,12 @@ export const formatQuery = (): string => {
 
 	const queryParams = Object.entries(query.filters)
 		.filter((filter) => queryParamFilters.includes(filter[0]))
-		.map((filter) => filter[1].formatted)
+		.map((filter) => filter[1].formatted.trim())
 		.join('&');
 
-	const formattedQuery = `${prefix} ${query.searchTerm}&${queryParams.trim()}`;
+	const formattedQuery = `${prefix}${query.searchTerm}${
+		queryParams.trim() ? `&${queryParams}` : ''
+	}`;
 
 	return formattedQuery;
 };

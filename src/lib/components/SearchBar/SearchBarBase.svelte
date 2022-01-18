@@ -11,7 +11,8 @@
 	const handleSearch = (refocusSearchBar: () => void) => {
 		if (!$queryStore.searchTerm) return;
 		const queryUrl = generateQueryUrl({
-			saveQuery
+			saveQuery,
+			skipSearchTermCheck: true
 		});
 		executeQuery(queryUrl);
 		refocusSearchBar();

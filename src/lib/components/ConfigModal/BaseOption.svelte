@@ -13,7 +13,6 @@
 
 <div class="container">
 	<label class="input-label">
-		<!-- svelte-ignore missing-declaration -->
 		<input
 			type="checkbox"
 			class="toggle toggle-primary"

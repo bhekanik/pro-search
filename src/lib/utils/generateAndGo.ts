@@ -50,17 +50,25 @@ export function updateRecentQueries(): void {
 interface GenerateQueryUrlOptions {
 	saveQuery?: boolean;
 	type?: FilterType;
+	skipSearchTermCheck?: boolean;
+	query?: Query;
 }
 
 export const generateQueryUrl = (
-	options: GenerateQueryUrlOptions = { saveQuery: false }
+	options: GenerateQueryUrlOptions = { saveQuery: false, skipSearchTermCheck: false }
 ): string | string[] => {
-	const query = get(queryStore);
-	if (!query.searchTerm && !filtersThatDontRequireSearchTerm.includes(options.type)) return;
+	const query = options.query || get(queryStore);
+
+	if (
+		!options.skipSearchTermCheck &&
+		query.searchTerm &&
+		!filtersThatDontRequireSearchTerm.includes(options.type)
+	)
+		return;
 
 	if (options.saveQuery) updateRecentQueries();
 
-	const formattedQuery = formatQuery();
+	const formattedQuery = formatQuery({ query });
 
 	if (typeof query.provider.url === 'string') {
 		return `${query.provider.url}${encodeURI(formattedQuery)}`;
