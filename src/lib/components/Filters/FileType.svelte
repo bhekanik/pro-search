@@ -8,6 +8,7 @@
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			newQuery.filters.fileType = {
+				type: 'File Type',
 				value,
 				formatted: `filetype:${value.trim()} `
 			};

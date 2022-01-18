@@ -7,6 +7,7 @@
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			newQuery.filters.related = {
+				type: 'Related',
 				value,
 				formatted: `related:${value.trim()} `
 			};

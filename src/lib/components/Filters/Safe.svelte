@@ -7,6 +7,7 @@
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			newQuery.filters.safe = {
+				type: 'Safe',
 				value,
 				formatted: `safe=${value.trim()} `
 			};

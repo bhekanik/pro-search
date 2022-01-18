@@ -8,6 +8,7 @@
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			newQuery.filters.rights = {
+				type: 'Rights',
 				value,
 				formatted: `as_rights=${value.trim()} `
 			};

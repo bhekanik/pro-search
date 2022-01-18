@@ -7,6 +7,7 @@
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			newQuery.filters.title = {
+				type: 'Title',
 				value,
 				formatted:
 					value.split(' ').length > 1 ? `allintitle:${value.trim()} ` : `intitle:${value.trim()} `

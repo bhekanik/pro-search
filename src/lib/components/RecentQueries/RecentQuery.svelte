@@ -6,7 +6,10 @@
 	export let query;
 
 	const generateFilters = (filters: Record<string, Filter>): string =>
-		Object.values(filters).reduce((prev, curr) => `${prev}${curr.formatted}`, '');
+		Object.values(filters).reduce(
+			(prev, curr) => `${prev ? prev : ''}${prev && curr ? ', ' : ''}${curr.type}: ${curr.value}`,
+			''
+		);
 
 	const handleDelete = () => {
 		const recentQueries = JSON.parse(window.localStorage?.getItem('recentQueries') || '[]');
@@ -21,47 +24,27 @@
 	};
 </script>
 
-<div class="flex justify-between align-center">
-	<h1 class="query_search-term">{query.name}</h1>
-	<div class="flex gap-4">
+<div class="flex justify-between items-center">
+	<h1 class="font-medium text-xl">{query.name}</h1>
+	<div class="flex gap-1 align-middle items-center">
 		<ShareModal {query} />
-		<button class="btn btn-ghost" on:click={() => handleApply()}>Apply</button>
-		<button class="btn btn-ghost" on:click={() => handleDelete()}>Delete</button>
+		<button class="btn btn-sm btn-ghost" on:click={() => handleApply()}>Apply</button>
+		<button class="btn btn-sm btn-ghost" on:click={() => handleDelete()}>Delete</button>
 	</div>
 </div>
 <div>
 	<span class="">Search Term: </span>
-	<span class="query_search-term">{query.searchTerm}</span>
+	<span class="font-medium">{query.searchTerm}</span>
 </div>
 <div>
 	<span class="">Search Provider: </span>
-	<span class="filters">
+	<span class="font-medium">
 		{query.provider.name}
 	</span>
 </div>
 <div>
 	<span class="">Filters: </span>
-	<span class="filters">
+	<span class="font-medium">
 		{generateFilters(query.filters)}
 	</span>
 </div>
-
-<style>
-	.buttons {
-		position: absolute;
-		right: 2rem;
-		top: 1rem;
-		display: flex;
-		gap: 1rem;
-	}
-
-	.query_search-term {
-		font-size: 1.5rem;
-		margin-bottom: 0.5rem;
-		font-weight: bold;
-	}
-
-	.filters {
-		font-weight: bold;
-	}
-</style>

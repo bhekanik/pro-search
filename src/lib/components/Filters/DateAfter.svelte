@@ -7,6 +7,7 @@
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			newQuery.filters.dateAfter = {
+				type: 'DateAfter',
 				value,
 				formatted: `after:${value.trim()} `
 			};

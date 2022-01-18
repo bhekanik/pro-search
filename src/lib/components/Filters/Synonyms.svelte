@@ -8,6 +8,7 @@
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			newQuery.filters.synonyms = {
+				type: 'Synonyms',
 				value,
 				formatted: listApplyOperator(value, Operator.Synonym)
 			};

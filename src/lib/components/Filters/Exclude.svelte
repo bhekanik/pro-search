@@ -8,6 +8,7 @@
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			newQuery.filters.exclude = {
+				type: 'Exclude',
 				value,
 				formatted: listApplyOperator(value, Operator.Exclude)
 			};

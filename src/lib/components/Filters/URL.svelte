@@ -7,6 +7,7 @@
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			newQuery.filters.url = {
+				type: 'URL',
 				value,
 				formatted:
 					value.split(' ').length > 1 ? `allinurl:${value.trim()} ` : `inurl:${value.trim()} `

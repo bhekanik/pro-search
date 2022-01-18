@@ -7,6 +7,7 @@
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			newQuery.filters.link = {
+				type: 'Link',
 				value,
 				formatted: `link:${value.trim()} `
 			};

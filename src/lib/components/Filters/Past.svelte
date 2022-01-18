@@ -8,6 +8,7 @@
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			newQuery.filters.past = {
+				type: 'Past',
 				value,
 				formatted: `as_qdr=${value.trim()} `
 			};

@@ -7,6 +7,7 @@
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			newQuery.filters.dateBefore = {
+				type: 'DateBefore',
 				value,
 				formatted: `before:${value.trim()} `
 			};

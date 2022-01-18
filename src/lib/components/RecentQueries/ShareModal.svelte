@@ -31,7 +31,7 @@
 	};
 </script>
 
-<label for={`share-modal-btn-${query.id}`} class="btn btn-ghost modal-button">Share</label>
+<label for={`share-modal-btn-${query.id}`} class="btn btn-sm btn-ghost modal-button">Share</label>
 <input on:click={onOpen} type="checkbox" id={`share-modal-btn-${query.id}`} class="modal-toggle" />
 <div class="modal">
 	<div class="modal-box">

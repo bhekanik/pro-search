@@ -7,6 +7,7 @@
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			newQuery.filters.exact = {
+				type: 'Exact',
 				value,
 				formatted: `"${value.trim()}" `
 			};

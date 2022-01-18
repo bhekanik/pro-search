@@ -7,6 +7,7 @@
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			newQuery.filters.text = {
+				type: 'Text',
 				value,
 				formatted:
 					value.split(' ').length > 1 ? `allintext:${value.trim()} ` : `intext:${value.trim()} `

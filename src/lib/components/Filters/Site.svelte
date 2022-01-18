@@ -7,6 +7,7 @@
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			newQuery.filters.site = {
+				type: 'Site',
 				value,
 				formatted: `site:${value.trim()} `
 			};
