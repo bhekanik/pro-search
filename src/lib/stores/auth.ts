@@ -2,6 +2,7 @@ import { writable } from 'svelte/store';
 
 interface User {
 	email?: string;
+	picture?: string;
 }
 
 export const isAuthenticated = writable(false);

@@ -81,17 +81,77 @@
 		});
 	}
 
-	onDestroy(splitClient.destroy);
+	onDestroy(splitClient?.destroy);
 </script>
+
+<svelte:head>
+	{#if process.env.NODE_ENV === 'production'}
+		<script>
+			(function (h, o, t, j, a, r) {
+				h.hj =
+					h.hj ||
+					function () {
+						(h.hj.q = h.hj.q || []).push(arguments);
+					};
+				h._hjSettings = { hjid: 2801982, hjsv: 6 };
+				a = o.getElementsByTagName('head')[0];
+				r = o.createElement('script');
+				r.async = 1;
+				r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+				a.appendChild(r);
+			})(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+		</script>
+	{:else}
+		<!-- Hotjar Tracking Code for https://pro-search-bhekanik.vercel.app/ -->
+		<script>
+			(function (h, o, t, j, a, r) {
+				h.hj =
+					h.hj ||
+					function () {
+						(h.hj.q = h.hj.q || []).push(arguments);
+					};
+				h._hjSettings = { hjid: 2632849, hjsv: 6 };
+				a = o.getElementsByTagName('head')[0];
+				r = o.createElement('script');
+				r.async = 1;
+				r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+				a.appendChild(r);
+			})(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+		</script>
+	{/if}
+</svelte:head>
 
 <div class="relative h-full w-full overflow-y-auto dark:bg-gray-600">
 	{#if $readiness}
 		<!-- <Navbar handleLogin={login} /> -->
 		<div class="absolute right-6 top-4 flex gap-2">
 			<ConfigModal />
-			<button on:click={$isAuthenticated ? logout : login} class="btn btn-ghost">
-				{$isAuthenticated ? `Logout: ${$user?.email}` : 'Login/Sign Up'}</button
-			>
+			{#if $isAuthenticated}
+				<div class="dropdown dropdown-end">
+					<div tabindex="0" class={`avatar`}>
+						<div
+							class="mb-8 rounded-full w-10 h-10 ring ring-primary ring-offset-base-100 ring-offset-2"
+						>
+							<img alt="profile" src={$user?.picture} />
+						</div>
+					</div>
+
+					<ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
+						{#if $user?.email}
+							<li>
+								<span>{$user?.email}</span>
+							</li>
+						{/if}
+						<li>
+							<button on:click={logout}>Logout</button>
+						</li>
+					</ul>
+				</div>
+			{:else}
+				<button on:click={login} class="btn btn-ghost">
+					{'Login/Sign Up'}
+				</button>
+			{/if}
 		</div>
 		<!-- <StoreMonitor /> -->
 		<div class="p-8 max-w-6xl mx-auto h-full">
