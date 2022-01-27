@@ -21,10 +21,7 @@
 	<div class="collapse-title text-xl font-medium">Add Filters</div>
 	<div class="collapse-content">
 		<div class="filters">
-			{#if $queryStore.provider.name === 'Google'}
-				<Safe />
-			{/if}
-			<h2 class="mt-4">Only return pages...</h2>
+			<h2>Only return pages...</h2>
 			<SynonymsFilter />
 			<Exact />
 			<ExcludeFilter />
@@ -40,6 +37,10 @@
 			<FileTypeFilter />
 			<LinkFilter />
 			<RelatedFilter />
+			<h2 class="mt-4">Additional Settings</h2>
+			{#if $queryStore.provider.name === 'Google'}
+				<Safe />
+			{/if}
 		</div>
 	</div>
 </div>

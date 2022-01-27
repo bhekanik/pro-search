@@ -9,7 +9,9 @@
 	import { onDestroy, onMount } from 'svelte';
 	import '../global.css';
 
-	if (process.env.NODE_ENV === 'production') {
+	let isProd = process.env.NODE_ENV === 'production';
+
+	if (isProd) {
 		Sentry.init({
 			dsn: 'https://02775679838d495d91eacec805880d2a@o1115887.ingest.sentry.io/6148918',
 			integrations: [new Integrations.BrowserTracing()],
@@ -17,39 +19,16 @@
 			// Set tracesSampleRate to 1.0 to capture 100%
 			// of transactions for performance monitoring.
 			// We recommend adjusting this value in production
-			tracesSampleRate: 1.0
+			tracesSampleRate: 0.5
 		});
 		LogRocket.init('uetpov/pro-search');
 	}
 
 	let auth0Client;
 
-	onMount(async () => {
-		auth0Client = await auth.createClient();
-
-		if (auth0Client) {
-			const authState = await auth0Client.isAuthenticated();
-			isAuthenticated.set(authState);
-			const userState = await auth0Client.getUser();
-			user.set(userState);
-			if (userState)
-				LogRocket.identify(userState.email, {
-					name: userState.name,
-					email: userState.email
-				});
-		}
-
-		if ($isAuthenticated) {
-			authReadiness.set(true);
-			// show the gated content
-			return;
-		}
-
-		// NEW - check for the code and state parameters
-		const windowLocationSearch = window.location.search;
-		if (windowLocationSearch.includes('code=') && windowLocationSearch.includes('state=')) {
-			// Process the login state
-			await auth.handleRedirectCallback(auth0Client);
+	onMount(() => {
+		(async () => {
+			auth0Client = await auth.createClient();
 
 			if (auth0Client) {
 				const authState = await auth0Client.isAuthenticated();
@@ -63,10 +42,35 @@
 					});
 			}
 
-			// Use replaceState to redirect the user away and remove the querystring parameters
-			window.history.replaceState({}, document.title, '/');
-		}
-		authReadiness.set(true);
+			if ($isAuthenticated) {
+				authReadiness.set(true);
+				// show the gated content
+				return;
+			}
+
+			// NEW - check for the code and state parameters
+			const windowLocationSearch = window.location.search;
+			if (windowLocationSearch.includes('code=') && windowLocationSearch.includes('state=')) {
+				// Process the login state
+				await auth.handleRedirectCallback(auth0Client);
+
+				if (auth0Client) {
+					const authState = await auth0Client.isAuthenticated();
+					isAuthenticated.set(authState);
+					const userState = await auth0Client.getUser();
+					user.set(userState);
+					if (userState)
+						LogRocket.identify(userState.email, {
+							name: userState.name,
+							email: userState.email
+						});
+				}
+
+				// Use replaceState to redirect the user away and remove the querystring parameters
+				window.history.replaceState({}, document.title, '/');
+			}
+			authReadiness.set(true);
+		})();
 	});
 
 	function login() {
@@ -86,7 +90,7 @@
 </script>
 
 <svelte:head>
-	{#if process.env.NODE_ENV === 'production'}
+	{#if isProd}
 		<script>
 			(function (h, o, t, j, a, r) {
 				h.hj =
