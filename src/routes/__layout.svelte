@@ -9,17 +9,18 @@
 	import { onDestroy, onMount } from 'svelte';
 	import '../global.css';
 
-	Sentry.init({
-		dsn: 'https://02775679838d495d91eacec805880d2a@o1115887.ingest.sentry.io/6148918',
-		integrations: [new Integrations.BrowserTracing()],
+	if (process.env.NODE_ENV === 'production') {
+		Sentry.init({
+			dsn: 'https://02775679838d495d91eacec805880d2a@o1115887.ingest.sentry.io/6148918',
+			integrations: [new Integrations.BrowserTracing()],
 
-		// Set tracesSampleRate to 1.0 to capture 100%
-		// of transactions for performance monitoring.
-		// We recommend adjusting this value in production
-		tracesSampleRate: 1.0
-	});
-
-	LogRocket.init('uetpov/pro-search');
+			// Set tracesSampleRate to 1.0 to capture 100%
+			// of transactions for performance monitoring.
+			// We recommend adjusting this value in production
+			tracesSampleRate: 1.0
+		});
+		LogRocket.init('uetpov/pro-search');
+	}
 
 	let auth0Client;
 
