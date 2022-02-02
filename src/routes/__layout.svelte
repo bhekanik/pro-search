@@ -2,11 +2,13 @@
 	import auth from '$lib/app/auth/authService';
 	import { splitClient } from '$lib/app/splitClient';
 	import ConfigModal from '$lib/components/ConfigModal/ConfigModal.svelte';
+	import RecentQueriesList from '$lib/components/RecentQueries/RecentQueriesList.svelte';
 	import { authReadiness, isAuthenticated, readiness, user } from '$lib/stores';
 	import * as Sentry from '@sentry/browser';
 	import { Integrations } from '@sentry/tracing';
 	import LogRocket from 'logrocket';
 	import { onDestroy, onMount } from 'svelte';
+	import { themeChange } from 'theme-change';
 	import '../global.css';
 
 	let isProd = process.env.NODE_ENV === 'production';
@@ -27,6 +29,7 @@
 	let auth0Client;
 
 	onMount(() => {
+		themeChange(false);
 		(async () => {
 			auth0Client = await auth.createClient();
 
@@ -126,44 +129,55 @@
 	{/if}
 </svelte:head>
 
-<div class="relative h-full w-full overflow-y-auto dark:bg-gray-600">
+<header>
+	<h1 class="text-6xl text-left bg-transparent m-8 font-bold">Pro-Search</h1>
+
+	<div class="absolute right-6 top-4 flex gap-2">
+		<ConfigModal />
+		<!-- <button data-toggle-theme="dark,light" data-act-class="ACTIVECLASS">Theme</button> -->
+		{#if $isAuthenticated}
+			<div class="dropdown dropdown-end">
+				<div tabindex="0" class={`avatar`}>
+					<div
+						class="mb-8 rounded-full w-10 h-10 ring ring-primary ring-offset-base-100 ring-offset-2"
+					>
+						<img alt="profile" src={$user?.picture} />
+					</div>
+				</div>
+
+				<ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
+					{#if $user?.email}
+						<li>
+							<span>{$user?.email}</span>
+						</li>
+					{/if}
+					<li>
+						<button on:click={logout}>Logout</button>
+					</li>
+				</ul>
+			</div>
+		{:else}
+			<button on:click={login} class="btn btn-ghost">
+				{'Login/Sign Up'}
+			</button>
+		{/if}
+	</div>
+</header>
+<div
+	class="p-8 pt-2 relative h-full max-w-7xl overflow-y-auto grid grid-cols-[1fr] md:grid-cols-[1fr_minmax(200px,400px)] gap-8"
+>
 	{#if $readiness}
 		<!-- <Navbar handleLogin={login} /> -->
-		<div class="absolute right-6 top-4 flex gap-2">
-			<ConfigModal />
-			{#if $isAuthenticated}
-				<div class="dropdown dropdown-end">
-					<div tabindex="0" class={`avatar`}>
-						<div
-							class="mb-8 rounded-full w-10 h-10 ring ring-primary ring-offset-base-100 ring-offset-2"
-						>
-							<img alt="profile" src={$user?.picture} />
-						</div>
-					</div>
-
-					<ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
-						{#if $user?.email}
-							<li>
-								<span>{$user?.email}</span>
-							</li>
-						{/if}
-						<li>
-							<button on:click={logout}>Logout</button>
-						</li>
-					</ul>
-				</div>
-			{:else}
-				<button on:click={login} class="btn btn-ghost">
-					{'Login/Sign Up'}
-				</button>
-			{/if}
-		</div>
 		<!-- <StoreMonitor /> -->
-		<div class="p-8 max-w-6xl mx-auto h-full">
+		<div class="max-w-6xl h-full">
 			<slot />
 		</div>
+
+		{#if $isAuthenticated}
+			<RecentQueriesList />
+		{/if}
 	{:else}
-		<div class="h-full w-full grid place-items-center">
+		<div class="h-full w-full grid place-items-center col-span-2">
 			<div class="btn btn-circle btn-ghost btn-xl loading" />
 		</div>
 	{/if}

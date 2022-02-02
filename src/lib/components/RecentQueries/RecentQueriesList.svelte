@@ -12,32 +12,38 @@
 	);
 </script>
 
-<h3 class="heading">Recent Queries</h3>
-<ul class="query-list pb-4 mb-4 overflow-y-auto">
-	{#each recentQueries as query (query.id)}
-		<li
-			class="card card-bordered shadow-md py-4 px-8 relative"
-			in:fade
-			out:scale|local
-			animate:flip={{ duration: 500 }}
-		>
-			<RecentQuery {query} />
-		</li>
-	{:else}
-		<span>No recent queries</span>
-	{/each}
-</ul>
+<div class="queries px-4 pt-2 overflow-auto relative bg-gray-700 hidden md:block">
+	<h3 class="text-2xl mb-4 text-gray-300">Recent Queries</h3>
+	<ul class="flex flex-col gap-4 list-none pb-4 mb-4">
+		{#each recentQueries as query (query.id)}
+			<li
+				class="card glass hover:bg-violet-800 bg-violet-900 shadow-md py-2 px-4 relative"
+				in:fade
+				out:scale|local
+				animate:flip={{ duration: 500 }}
+			>
+				<RecentQuery {query} />
+			</li>
+		{:else}
+			<span>No recent queries</span>
+		{/each}
+	</ul>
+</div>
 
 <style>
-	.heading {
-		font-size: 1.5rem;
-		padding: 1rem 0 0.5rem;
+	.queries::-webkit-scrollbar {
+		width: 15px;
 	}
 
-	.query-list {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-		list-style: none;
+	.queries::-webkit-scrollbar-track {
+		background-color: #555555;
+		border-radius: 100px;
+	}
+
+	.queries::-webkit-scrollbar-thumb {
+		border-radius: 80px;
+		border: 5px solid transparent;
+		background-clip: content-box;
+		background-color: #8070d4;
 	}
 </style>

@@ -25,26 +25,23 @@
 </script>
 
 <div class="flex justify-between items-center mb-2">
-	<h1 class="font-medium text-xl">{query.name}</h1>
-	<div class="flex gap-1 align-middle items-center">
-		<ShareModal {query} />
-		<button class="btn btn-sm btn-ghost" on:click={() => handleApply()}>Apply</button>
-		<button class="btn btn-sm btn-ghost" on:click={() => handleDelete()}>Delete</button>
-	</div>
+	<h1 class="font-medium text-lg text-gray-300">{query.name}</h1>
 </div>
 <div>
-	<span class="">Search Term: </span>
-	<span class="font-medium">{query.searchTerm}</span>
-</div>
-<div>
-	<span class="">Search Provider: </span>
-	<span class="font-medium">
+	<span class="text-gray-300">Search Provider: </span>
+	<span class="font-medium text-gray-300">
 		{query.provider.name}
 	</span>
 </div>
 <div>
-	<span class="">Filters: </span>
-	<span class="font-medium">
+	<span class="text-gray-300">Filters: </span>
+	<span class="font-medium text-gray-300">
 		{generateFilters(query.filters)}
 	</span>
+
+	<div class="flex gap-1 align-middle items-center justify-end mt-2">
+		<ShareModal {query} />
+		<button class="btn btn-sm glass text-gray-300" on:click={() => handleApply()}>Apply</button>
+		<button class="btn btn-sm glass text-gray-300" on:click={() => handleDelete()}>Delete</button>
+	</div>
 </div>

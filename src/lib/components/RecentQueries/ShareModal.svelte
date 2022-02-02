@@ -31,21 +31,26 @@
 	};
 </script>
 
-<label for={`share-modal-btn-${query.id}`} class="btn btn-sm btn-ghost modal-button">Share</label>
+<label
+	for={`share-modal-btn-${query.id}`}
+	class="btn btn-sm btn-ghost glass modal-button text-gray-300">Share</label
+>
 <input on:click={onOpen} type="checkbox" id={`share-modal-btn-${query.id}`} class="modal-toggle" />
 <div class="modal">
 	<div class="modal-box">
 		<div class="w-full flex gap-2">
-			<input type="text" class="input input-bordered w-full" readonly value={link} />
-			<button on:click={handleCopy} class="btn btn-outline">Copy</button>
+			<input type="text" class="input input-sm input-bordered w-full" readonly value={link} />
+			<button on:click={handleCopy} class="btn btn-outline btn-sm">Copy</button>
 		</div>
-		<p>{copiedText}</p>
+		<p class="text-sm w-full px-2">{copiedText}</p>
 
 		<div class="modal-action">
-			<button on:click={handleShare} for={`share-modal-btn-${query.id}`} class="btn btn-primary"
-				>Share</button
+			<button
+				on:click={handleShare}
+				for={`share-modal-btn-${query.id}`}
+				class="btn btn-sm btn-primary">Share</button
 			>
-			<label for={`share-modal-btn-${query.id}`} class="btn">Close</label>
+			<label for={`share-modal-btn-${query.id}`} class="btn btn-sm">Close</label>
 		</div>
 	</div>
 </div>

@@ -57,7 +57,7 @@
 </script>
 
 <div class="container">
-	<label class="input-label">
+	<label class="input-label text-gray-300">
 		<input
 			type="checkbox"
 			class="toggle toggle-primary"

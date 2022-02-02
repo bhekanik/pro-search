@@ -47,7 +47,7 @@
 
 <div class="relative w-full">
 	<input
-		class="input input-bordered input-primary w-full"
+		class="input input-bordered input-primary w-full bg-gray-600"
 		placeholder="Search"
 		on:keydown={onKeydown}
 		on:input={handleInput}

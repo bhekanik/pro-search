@@ -18,10 +18,10 @@
 
 <div class="collapse my-2 w-full border rounded-box border-base-300 collapse-arrow">
 	<input type="checkbox" />
-	<div class="collapse-title text-xl font-medium">Add Filters</div>
+	<div class="collapse-title text-gray-300">Add Filters</div>
 	<div class="collapse-content">
 		<div class="filters">
-			<h2>Only return pages...</h2>
+			<h2 class="text-gray-300">Only return pages...</h2>
 			<SynonymsFilter />
 			<Exact />
 			<ExcludeFilter />
@@ -37,18 +37,10 @@
 			<FileTypeFilter />
 			<LinkFilter />
 			<RelatedFilter />
-			<h2 class="mt-4">Additional Settings</h2>
+			<h2 class="text-gray-300 mt-4">Additional Settings</h2>
 			{#if $queryStore.provider.name === 'Google'}
 				<Safe />
 			{/if}
 		</div>
 	</div>
 </div>
-
-<style>
-	.filters {
-		margin: 1rem 0;
-		display: flex;
-		flex-direction: column;
-	}
-</style>
