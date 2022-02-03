@@ -3,6 +3,7 @@
 	import { splitClient } from '$lib/app/splitClient';
 	import Header from '$lib/components/Header/Header.svelte';
 	import ShareModal from '$lib/components/SavedQueries/ShareModal.svelte';
+	import Seo from '$lib/components/SEO/SEO.svelte';
 	import { isAuthenticated, readiness } from '$lib/stores';
 	import { queryToShareStore } from '$lib/stores/queryToShare';
 	import * as Sentry from '@sentry/browser';
@@ -67,6 +68,7 @@
 		</script>
 	{/if}
 </svelte:head>
+<Seo />
 
 <Header />
 <div class="tabs border-b px-8 border-b-gray-400">
