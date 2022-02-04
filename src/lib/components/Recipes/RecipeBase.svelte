@@ -9,11 +9,13 @@
 		handleSearch?: () => void;
 		handleInput: (e: any) => void;
 		value: string;
+		helperText?: string;
 	}
 
 	export let bgColor = 'bg-blue-900';
 	export let hoverBgColor = 'bg-blue-800';
 	export let name: string;
+	export let textColor = 'text-gray-300';
 	export let inputs: InputType[];
 	export let handleSearch: () => void;
 </script>
@@ -23,7 +25,7 @@
 	in:fade
 >
 	<div class="mb-2">
-		<h1 class="font-medium text-lg text-gray-300 whitespace-nowrap overflow-hidden text-ellipsis">
+		<h1 class={`font-medium text-lg ${textColor} whitespace-nowrap overflow-hidden text-ellipsis`}>
 			{name}
 		</h1>
 		<div class="p-2">
@@ -55,6 +57,9 @@
 								class="absolute top-1 right-2 btn-xs btn-ghost btn btn-circle">✕</button
 							>
 						{/if}
+						{#if input.helperText}
+							<span class="text-xs text-gray-900">{input.helperText}</span>
+						{/if}
 					</div>
 				{/each}
 			</div>
@@ -62,7 +67,8 @@
 	</div>
 	<div>
 		<div class="flex gap-1 align-middle items-center justify-end mt-2">
-			<button class="btn btn-sm glass text-gray-300" on:click={() => handleSearch()}>Search</button>
+			<button class={`btn btn-sm glass ${textColor}`} on:click={() => handleSearch()}>Search</button
+			>
 		</div>
 	</div>
 </div>
