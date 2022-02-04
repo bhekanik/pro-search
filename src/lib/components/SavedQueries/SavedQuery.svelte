@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import ShareModal from '$lib/components/SavedQueries/ShareModal.svelte';
 	import { queryStore, savedQueriesStore, SAVED_QUERIES_KEY } from '$lib/stores';
 	import type { Filter } from '$lib/stores/query';
@@ -21,6 +22,7 @@
 
 	const handleApply = () => {
 		queryStore.set({ ...query });
+		goto('/');
 	};
 </script>
 
@@ -28,6 +30,12 @@
 	<h1 class="font-medium text-lg text-gray-300 whitespace-nowrap overflow-hidden text-ellipsis">
 		{query.name}
 	</h1>
+</div>
+<div>
+	<span class="text-gray-300">Query Term: </span>
+	<span class="font-medium text-gray-300 whitespace-nowrap overflow-hidden text-ellipsis">
+		{query.searchTerm}
+	</span>
 </div>
 <div>
 	<span class="text-gray-300">Search Provider: </span>
