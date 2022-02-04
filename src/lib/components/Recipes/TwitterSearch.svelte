@@ -2,12 +2,15 @@
 	import { fade, scale } from 'svelte/transition';
 
 	let searchTerm = '';
+	let url = '';
+	$: {
+		url = `https://www.google.com/search?q=${encodeURI(
+			`site:twitter.com ${searchTerm.replace('#', '')}`
+		)}`;
+	}
 
 	const handleSearch = () => {
-		window.open(
-			'https://www.google.com/search?q=' + encodeURI(`site:twitter.com `) + encodeURI(searchTerm),
-			'_blank'
-		);
+		window.open(url, '_blank');
 	};
 
 	const handleKeydown = (e) => {
@@ -26,8 +29,8 @@
 		<h1 class="font-medium text-lg text-gray-900 whitespace-nowrap overflow-hidden text-ellipsis">
 			Search on Twitter
 		</h1>
-		<div class="p-2 relative">
-			<div class="w-full flex gap-2">
+		<div class="p-2">
+			<div class="relative w-full">
 				<input
 					placeholder="Search Term"
 					type="text"
@@ -41,9 +44,11 @@
 						on:click={() => (searchTerm = '')}
 						in:fade
 						out:scale
-						class="absolute top-3 right-3 btn-xs btn-ghost btn btn-circle">✕</button
+						class="absolute top-1 right-3 btn-xs btn-ghost btn btn-circle">✕</button
 					>
 				{/if}
+
+				<span class="text-xs text-gray-900">Example: @jack startsmall join</span>
 			</div>
 		</div>
 	</div>

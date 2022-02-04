@@ -29,7 +29,7 @@
 			Search public Google Sheets
 		</h1>
 		<div class="p-2">
-			<div class="relative w-full flex gap-2 flex-col">
+			<div class="relative w-full">
 				<input
 					placeholder="Query"
 					type="text"
@@ -46,7 +46,7 @@
 					>
 				{/if}
 				<span class="text-xs text-gray-900"
-					>Some ideas: Try searching for Startup tools or Angel or Salaries</span
+					>Example: Try searching for Startup tools or Angel or Salaries</span
 				>
 			</div>
 		</div>
