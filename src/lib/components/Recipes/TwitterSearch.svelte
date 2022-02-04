@@ -25,7 +25,6 @@
 <div
 	class="flex flex-col justify-between card glass hover:bg-[#49b1f1] bg-[#1DA1F2] shadow-md py-2 px-4 relative"
 	in:fade
-	out:scale|local
 >
 	<div class="mb-2">
 		<h1 class="font-medium text-lg text-gray-900 whitespace-nowrap overflow-hidden text-ellipsis">

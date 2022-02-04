@@ -4,7 +4,7 @@
 	import SavedQueriesList from '$lib/components/SavedQueries/SavedQueriesList.svelte';
 	import SearchBar from '$lib/components/SearchBar/SearchBar.svelte';
 	import SearchProvider from '$lib/components/SearchProvider/SearchProvider.svelte';
-	import { isAuthenticated, readiness } from '$lib/stores';
+	import { isAuthenticated } from '$lib/stores';
 
 	let url = '';
 
@@ -37,36 +37,30 @@
 <div
 	class="p-8 pt-6 relative h-full overflow-y-auto grid grid-cols-[1fr] md:grid-cols-[minmax(600px,1fr)_minmax(290px,400px)] gap-8"
 >
-	{#if $readiness}
-		<!-- <StoreMonitor /> -->
-		<div class="max-w-6xl h-full">
-			<main class="dark:text-gray-50">
-				<div class="flex flex-col gap-2 md:flex-row">
-					<SearchProvider />
-					<ValueSelector
-						featureFlag="Results_In_IFrame"
-						onValue={executeQueryWithIFrame}
-						offValue={executeQueryWithNewTab}
-						let:feature={executeQuery}
-					>
-						<SearchBar {executeQuery} />
-					</ValueSelector>
-				</div>
+	<!-- <StoreMonitor /> -->
+	<div class="max-w-6xl h-full">
+		<main class="dark:text-gray-50">
+			<div class="flex flex-col gap-2 md:flex-row">
+				<SearchProvider />
+				<ValueSelector
+					featureFlag="Results_In_IFrame"
+					onValue={executeQueryWithIFrame}
+					offValue={executeQueryWithNewTab}
+					let:feature={executeQuery}
+				>
+					<SearchBar {executeQuery} />
+				</ValueSelector>
+			</div>
 
-				{#if url}
-					<iframe title="Results" src={url} class="w-full h-full" frameborder="0" />
-				{:else}
-					<Filters />
-				{/if}
-			</main>
-		</div>
+			{#if url}
+				<iframe title="Results" src={url} class="w-full h-full" frameborder="0" />
+			{:else}
+				<Filters />
+			{/if}
+		</main>
+	</div>
 
-		{#if $isAuthenticated}
-			<SavedQueriesList />
-		{/if}
-	{:else}
-		<div class="h-full w-full grid place-items-center col-span-2">
-			<div class="btn btn-circle btn-ghost btn-xl loading" />
-		</div>
+	{#if $isAuthenticated}
+		<SavedQueriesList />
 	{/if}
 </div>
