@@ -35,7 +35,7 @@
 		selected = id;
 	}
 
-	onDestroy(unsubscribe);
+	onDestroy(() => unsubscribe?.());
 </script>
 
 <div class="collapse z-50 my-2 border rounded-box border-base-300 collapse-arrow absolute top-0">

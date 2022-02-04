@@ -17,7 +17,7 @@
 		});
 	}
 
-	onDestroy(unsubscribe);
+	onDestroy(() => unsubscribe?.());
 </script>
 
 <svelte:component this={Feature} {...props} />

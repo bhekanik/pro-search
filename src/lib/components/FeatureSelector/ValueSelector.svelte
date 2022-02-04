@@ -16,7 +16,7 @@
 		});
 	}
 
-	onDestroy(() => unsubscribe());
+	onDestroy(() => unsubscribe?.());
 </script>
 
 <slot feature={value} />

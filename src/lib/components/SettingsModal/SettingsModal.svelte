@@ -8,7 +8,6 @@
 </script>
 
 {#if $isAuthenticated}
-	<label for="my-modal-2" class="btn btn-ghost modal-button">Config</label>
 	<input type="checkbox" id="my-modal-2" class="modal-toggle" />
 	<div class="modal">
 		<div class="modal-box">
