@@ -2,24 +2,43 @@
 	import SavedQuery from '$lib/components/SavedQueries/SavedQuery.svelte';
 	import type { Query } from '$lib/stores';
 	import { savedQueriesStore } from '$lib/stores';
+	import { search } from 'fast-fuzzy';
 	import { flip } from 'svelte/animate';
-	import { fade, scale } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 
 	let savedQueries: Query[] = [];
+	let filteredQueries: Query[] = [];
+
+	let searchTerm = '';
+
+	$: {
+		if (searchTerm) {
+			const filtered = search(searchTerm, savedQueries, { keySelector: (obj) => obj.name });
+			filteredQueries = [...filtered];
+		} else {
+			filteredQueries = [...savedQueries];
+		}
+	}
 
 	$: savedQueries = $savedQueriesStore.sort(
 		(a, b) => Number(new Date(b.createdAt)) - Number(new Date(a.createdAt))
 	);
 </script>
 
-<div class="queries px-4 pt-2 overflow-auto relative bg-gray-700 hidden md:block">
-	<h3 class="text-2xl mb-4 text-gray-300">Saved Queries</h3>
-	<ul class="flex flex-col gap-4 list-none pb-4 mb-4">
-		{#each savedQueries as query (query.id)}
+<div class="queries px-4 overflow-auto relative bg-gray-700 hidden md:block">
+	<div class="flex flex-col pt-2 pb-4 bg-gray-700 sticky top-0 z-20">
+		<h3 class="text-xl mb-4 text-gray-300 whitespace-nowrap">Saved Queries</h3>
+		<input
+			bind:value={searchTerm}
+			class="input input-sm input-bordered w-full bg-gray-600"
+			placeholder="Search"
+		/>
+	</div>
+	<ul class="flex flex-col gap-4 list-none pb-4 mb-4 z-10">
+		{#each filteredQueries as query (query.id)}
 			<li
 				class="card glass hover:bg-violet-800 bg-violet-900 shadow-md py-2 px-4 relative"
 				in:fade
-				out:scale|local
 				animate:flip={{ duration: 500 }}
 			>
 				<SavedQuery {query} />
