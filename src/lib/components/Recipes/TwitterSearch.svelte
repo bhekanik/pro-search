@@ -1,16 +1,14 @@
 <script lang="ts">
-	import ShareModal from '$lib/components/RecentQueries/ShareModal.svelte';
-	import { queryStore } from '$lib/stores';
 	import { fade, scale } from 'svelte/transition';
 
-	export let recipe;
+	let searchTerm = '';
 
 	const handleSearch = () => {
-		queryStore.set({ ...recipe });
+		window.open(
+			'https://www.google.com/search?q=' + encodeURI(`site:twitter.com `) + encodeURI(searchTerm),
+			'_blank'
+		);
 	};
-
-	let queryName = '';
-	let input = null;
 
 	const handleKeydown = (e) => {
 		if (e.keyCode === 13) {
@@ -20,22 +18,21 @@
 </script>
 
 <div
-	class="flex flex-col justify-between card glass hover:bg-blue-800 bg-blue-900 shadow-md py-2 px-4 relative"
+	class="flex flex-col justify-between card glass hover:bg-[#49b1f1] bg-[#1DA1F2] shadow-md py-2 px-4 relative"
 	in:fade
 	out:scale|local
 >
-	<div class="flex flex-col justify-between mb-2">
-		<h1 class="font-medium text-lg text-gray-300 whitespace-nowrap overflow-hidden text-ellipsis">
-			{recipe.name}
+	<div class="mb-2">
+		<h1 class="font-medium text-lg text-gray-900 whitespace-nowrap overflow-hidden text-ellipsis">
+			Search on Twitter
 		</h1>
-		<div>
+		<div class="p-2">
 			<div class="w-full flex gap-2">
 				<input
-					bind:this={input}
 					placeholder="Search Term"
 					type="text"
 					class="input input-sm input-bordered w-full"
-					bind:value={queryName}
+					bind:value={searchTerm}
 					on:keydown={handleKeydown}
 				/>
 			</div>
@@ -43,7 +40,6 @@
 	</div>
 	<div>
 		<div class="flex gap-1 align-middle items-center justify-end mt-2">
-			<ShareModal query={recipe} />
 			<button class="btn btn-sm glass text-gray-300" on:click={() => handleSearch()}>Search</button>
 		</div>
 	</div>

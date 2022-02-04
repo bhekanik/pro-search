@@ -1,7 +1,7 @@
 <script lang="ts">
+	import ShareModal from '$lib/components/RecentQueries/ShareModal.svelte';
 	import { queryStore, recentQueriesStore } from '$lib/stores';
 	import type { Filter } from '$lib/stores/query';
-	import ShareModal from './ShareModal.svelte';
 
 	export let query;
 
@@ -24,7 +24,7 @@
 	};
 </script>
 
-<div class="flex justify-between items-center mb-2">
+<div class="mb-2">
 	<h1 class="font-medium text-lg text-gray-300 whitespace-nowrap overflow-hidden text-ellipsis">
 		{query.name}
 	</h1>
@@ -40,10 +40,9 @@
 	<span class="font-medium text-gray-300 whitespace-nowrap overflow-hidden text-ellipsis">
 		{generateFilters(query.filters)}
 	</span>
-
-	<div class="flex gap-1 align-middle items-center justify-end mt-2">
-		<ShareModal {query} />
-		<button class="btn btn-sm glass text-gray-300" on:click={() => handleApply()}>Apply</button>
-		<button class="btn btn-sm glass text-gray-300" on:click={() => handleDelete()}>Delete</button>
-	</div>
+</div>
+<div class="flex gap-1 align-middle items-center justify-end mt-2">
+	<ShareModal {query} />
+	<button class="btn btn-sm glass text-gray-300" on:click={() => handleApply()}>Apply</button>
+	<button class="btn btn-sm glass text-gray-300" on:click={() => handleDelete()}>Delete</button>
 </div>

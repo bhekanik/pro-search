@@ -91,7 +91,7 @@
 </script>
 
 <header class="flex justify-between align-center px-8 py-4">
-	<h1 class="text-4xl text-left bg-transparent font-bold">Pro-Search</h1>
+	<h1 class="text-2xl md:text-4xl text-left bg-transparent font-medium">Pro-Search</h1>
 
 	<div class="flex gap-2 items-center">
 		<SettingsModal />
