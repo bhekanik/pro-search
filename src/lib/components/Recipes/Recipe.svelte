@@ -32,7 +32,7 @@
 			<div class="w-full flex gap-2">
 				<input
 					bind:this={input}
-					placeholder="Search Term"
+					placeholder="Query"
 					type="text"
 					class="input input-sm input-bordered w-full"
 					bind:value={queryName}

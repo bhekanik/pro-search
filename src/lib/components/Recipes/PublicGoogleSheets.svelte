@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { fade, scale } from 'svelte/transition';
 
-	let searchTerm = '';
-	let searchTermInput = null;
+	let queryTerm = '';
+	let queryTermInput = null;
 
 	const handleSearch = () => {
 		window.open(
 			'https://www.google.com/search?q=' +
 				encodeURI(`site:docs.google.com/spreadsheets `) +
-				encodeURI(`intitle:"${searchTerm}"`),
+				encodeURI(`intitle:"${queryTerm}"`),
 			'_blank'
 		);
 	};
@@ -35,15 +35,15 @@
 					placeholder="Query"
 					type="text"
 					class="input input-sm input-bordered w-full pr-8"
-					bind:value={searchTerm}
-					bind:this={searchTermInput}
+					bind:value={queryTerm}
+					bind:this={queryTermInput}
 					on:keydown={handleKeydown}
 				/>
-				{#if searchTerm}
+				{#if queryTerm}
 					<button
 						on:click={() => {
-							searchTerm = '';
-							searchTermInput.focus();
+							queryTerm = '';
+							queryTermInput.focus();
 						}}
 						in:fade
 						out:scale

@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { fade, scale } from 'svelte/transition';
 
-	let searchTerm = '';
-	let searchTermInput = null;
+	let queryTerm = '';
+	let queryTermInput = null;
 
 	let url = '';
 	$: {
 		url = `https://www.google.com/search?q=${encodeURI(
-			`site:twitter.com ${searchTerm.replace('#', '')}`
+			`site:twitter.com ${queryTerm.replace('#', '')}`
 		)}`;
 	}
 
@@ -34,19 +34,19 @@
 		<div class="p-2">
 			<div class="relative w-full">
 				<input
-					placeholder="Search Term"
+					placeholder="Query"
 					type="text"
 					class="input input-sm input-bordered w-full pr-8"
-					bind:value={searchTerm}
-					bind:this={searchTermInput}
+					bind:value={queryTerm}
+					bind:this={queryTermInput}
 					on:keydown={handleKeydown}
 				/>
 
-				{#if searchTerm}
+				{#if queryTerm}
 					<button
 						on:click={() => {
-							searchTerm = '';
-							searchTermInput.focus();
+							queryTerm = '';
+							queryTermInput.focus();
 						}}
 						in:fade
 						out:scale

@@ -4,12 +4,12 @@
 	let siteUrl = '';
 	let siteUrlInput = null;
 
-	let searchTerm = '';
-	let searchTermInput = null;
+	let queryTerm = '';
+	let queryTermInput = null;
 
 	const handleSearch = () => {
 		window.open(
-			'https://www.google.com/search?q=' + encodeURI(`site:${siteUrl} `) + encodeURI(searchTerm),
+			'https://www.google.com/search?q=' + encodeURI(`site:${siteUrl} `) + encodeURI(queryTerm),
 			'_blank'
 		);
 	};
@@ -28,13 +28,13 @@
 >
 	<div class="mb-2">
 		<h1 class="font-medium text-lg text-gray-300 whitespace-nowrap overflow-hidden text-ellipsis">
-			Search your own site
+			Search your own website
 		</h1>
 		<div class="p-2">
 			<div class="relative w-full flex gap-2 flex-col">
 				<div class="relative">
 					<input
-						placeholder="Your site. For example, www.example.com"
+						placeholder="Your website. For example, www.example.com"
 						type="url"
 						class="input input-sm input-bordered w-full pr-8"
 						bind:value={siteUrl}
@@ -56,19 +56,19 @@
 
 				<div class="relative">
 					<input
-						placeholder="Search Term"
+						placeholder="Query"
 						type="text"
 						class="input input-sm input-bordered w-full pr-8"
-						bind:value={searchTerm}
-						bind:this={searchTermInput}
+						bind:value={queryTerm}
+						bind:this={queryTermInput}
 						on:keydown={handleKeydown}
 					/>
 
-					{#if searchTerm}
+					{#if queryTerm}
 						<button
 							on:click={() => {
-								searchTerm = '';
-								searchTermInput.focus();
+								queryTerm = '';
+								queryTermInput.focus();
 							}}
 							in:fade
 							out:scale
