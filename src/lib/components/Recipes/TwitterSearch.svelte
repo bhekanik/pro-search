@@ -2,6 +2,8 @@
 	import { fade, scale } from 'svelte/transition';
 
 	let searchTerm = '';
+	let searchTermInput = null;
+
 	let url = '';
 	$: {
 		url = `https://www.google.com/search?q=${encodeURI(
@@ -36,12 +38,16 @@
 					type="text"
 					class="input input-sm input-bordered w-full pr-8"
 					bind:value={searchTerm}
+					bind:this={searchTermInput}
 					on:keydown={handleKeydown}
 				/>
 
 				{#if searchTerm}
 					<button
-						on:click={() => (searchTerm = '')}
+						on:click={() => {
+							searchTerm = '';
+							searchTermInput.focus();
+						}}
 						in:fade
 						out:scale
 						class="absolute top-1 right-3 btn-xs btn-ghost btn btn-circle">✕</button

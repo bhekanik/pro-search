@@ -2,6 +2,7 @@
 	import { fade, scale } from 'svelte/transition';
 
 	let searchTerm = '';
+	let searchTermInput = null;
 
 	const handleSearch = () => {
 		window.open(
@@ -35,19 +36,21 @@
 					type="text"
 					class="input input-sm input-bordered w-full pr-8"
 					bind:value={searchTerm}
+					bind:this={searchTermInput}
 					on:keydown={handleKeydown}
 				/>
 				{#if searchTerm}
 					<button
-						on:click={() => (searchTerm = '')}
+						on:click={() => {
+							searchTerm = '';
+							searchTermInput.focus();
+						}}
 						in:fade
 						out:scale
 						class="absolute top-1 right-3 btn-xs btn-ghost btn btn-circle">✕</button
 					>
 				{/if}
-				<span class="text-xs text-gray-900"
-					>Example: Try searching for Startup tools or Angel or Salaries</span
-				>
+				<span class="text-xs text-gray-900">Example: Startup tools or Angel or Salaries</span>
 			</div>
 		</div>
 	</div>

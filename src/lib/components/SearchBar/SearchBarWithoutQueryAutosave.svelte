@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { isAuthenticated, queryStore } from '$lib/stores';
-	import { updateRecentQueries } from '$lib/utils/generateAndGo';
+	import { updateSavedQueries } from '$lib/utils/generateAndGo';
 	import { fade } from 'svelte/transition';
 	import SearchBarBase from './SearchBarBase.svelte';
 
@@ -10,7 +10,7 @@
 	let input = null;
 
 	const saveSearch = () => {
-		updateRecentQueries({
+		updateSavedQueries({
 			query: {
 				...$queryStore,
 				name: queryName

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import ShareModal from '$lib/components/RecentQueries/ShareModal.svelte';
-	import { queryStore, recentQueriesStore } from '$lib/stores';
+	import ShareModal from '$lib/components/SavedQueries/ShareModal.svelte';
+	import { queryStore, savedQueriesStore, SAVED_QUERIES_KEY } from '$lib/stores';
 	import type { Filter } from '$lib/stores/query';
 
 	export let query;
@@ -12,11 +12,11 @@
 		);
 
 	const handleDelete = () => {
-		const recentQueries = JSON.parse(window.localStorage?.getItem('recentQueries') || '[]');
-		const newRecentQueries = recentQueries.filter((recentQuery) => recentQuery.id !== query.id);
-		window.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
-		recentQueriesStore.set(newRecentQueries);
-		return newRecentQueries;
+		const savedQueries = JSON.parse(window.localStorage?.getItem(SAVED_QUERIES_KEY) || '[]');
+		const newSavedQueries = savedQueries.filter((savedQuery) => savedQuery.id !== query.id);
+		window.localStorage?.setItem(SAVED_QUERIES_KEY, JSON.stringify(newSavedQueries));
+		savedQueriesStore.set(newSavedQueries);
+		return newSavedQueries;
 	};
 
 	const handleApply = () => {

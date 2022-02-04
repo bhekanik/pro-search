@@ -4,7 +4,7 @@
 		featureFlagsStore,
 		queryStore,
 		readiness,
-		recentQueriesStore,
+		savedQueriesStore,
 		user
 	} from '$lib/stores';
 	import { onDestroy } from 'svelte';
@@ -15,7 +15,7 @@
 		featureFlags: { value: $featureFlagsStore, name: featureFlagsStore },
 		auth: { value: $user, name: user },
 		query: { value: $queryStore, name: queryStore },
-		recentQueries: { value: $recentQueriesStore, name: recentQueriesStore },
+		savedQueries: { value: $savedQueriesStore, name: savedQueriesStore },
 		readiness: { value: $readiness, name: readiness },
 		config: { value: $configStore, name: configStore }
 	};

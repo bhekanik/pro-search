@@ -2,7 +2,10 @@
 	import { fade, scale } from 'svelte/transition';
 
 	let siteUrl = '';
+	let siteUrlInput = null;
+
 	let searchTerm = '';
+	let searchTermInput = null;
 
 	const handleSearch = () => {
 		window.open(
@@ -35,11 +38,15 @@
 						type="url"
 						class="input input-sm input-bordered w-full pr-8"
 						bind:value={siteUrl}
+						bind:this={siteUrlInput}
 						on:keydown={handleKeydown}
 					/>
 					{#if siteUrl}
 						<button
-							on:click={() => (siteUrl = '')}
+							on:click={() => {
+								siteUrl = '';
+								siteUrlInput.focus();
+							}}
 							in:fade
 							out:scale
 							class="absolute top-1 right-2 btn-xs btn-ghost btn btn-circle">✕</button
@@ -53,12 +60,16 @@
 						type="text"
 						class="input input-sm input-bordered w-full pr-8"
 						bind:value={searchTerm}
+						bind:this={searchTermInput}
 						on:keydown={handleKeydown}
 					/>
 
 					{#if searchTerm}
 						<button
-							on:click={() => (searchTerm = '')}
+							on:click={() => {
+								searchTerm = '';
+								searchTermInput.focus();
+							}}
 							in:fade
 							out:scale
 							class="absolute top-1 right-2 btn-xs btn-ghost btn btn-circle">✕</button

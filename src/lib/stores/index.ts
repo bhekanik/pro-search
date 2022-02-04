@@ -3,4 +3,4 @@ export * from './config';
 export * from './featureFlags';
 export * from './query';
 export * from './readiness';
-export * from './recentQueries';
+export * from './savedQueries';

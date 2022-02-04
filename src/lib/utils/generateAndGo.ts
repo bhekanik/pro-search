@@ -5,26 +5,27 @@ import type { Query } from '$lib/stores';
 import {
 	isAuthenticated as isAuthenticatedStore,
 	queryStore,
-	recentQueriesStore
+	savedQueriesStore,
+	SAVED_QUERIES_KEY
 } from '$lib/stores';
 import { get } from 'svelte/store';
 import { v4 as uuidv4 } from 'uuid';
 
-const saveNewQuery = (currentRecentQueries: Query[], query: Query) => {
+const saveNewQuery = (currentSavedQueries: Query[], query: Query) => {
 	const newQuery = {
 		...query,
 		id: uuidv4(),
 		createdAt: new Date().toISOString(),
 		name: query.name || `Untitled Query - ${new Date().toUTCString()}`
 	};
-	const newRecentQueries = [...currentRecentQueries, newQuery];
+	const newSavedQueries = [...currentSavedQueries, newQuery];
 
-	window.localStorage?.setItem('recentQueries', JSON.stringify(newRecentQueries));
+	window.localStorage?.setItem(SAVED_QUERIES_KEY, JSON.stringify(newSavedQueries));
 
-	recentQueriesStore.set(newRecentQueries);
+	savedQueriesStore.set(newSavedQueries);
 };
 
-export function updateRecentQueries(options?: { query?: Query }): void {
+export function updateSavedQueries(options?: { query?: Query }): void {
 	const query = options.query || get(queryStore);
 	const isAuthenticated = get(isAuthenticatedStore);
 
@@ -32,16 +33,16 @@ export function updateRecentQueries(options?: { query?: Query }): void {
 		return;
 	}
 
-	// Skip saving if the query is equal to the first recent query
-	const currentRecentQueries = JSON.parse(window.localStorage?.getItem('recentQueries') || '[]');
-	const newRecentQueries = [...currentRecentQueries];
+	// Skip saving if the query is equal to the first saved query
+	const currentSavedQueries = JSON.parse(window.localStorage?.getItem(SAVED_QUERIES_KEY) || '[]');
+	const newSavedQueries = [...currentSavedQueries];
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const { id, createdAt, ...queryWithoutIdAndDate } = query;
 	let exists = false;
-	if (currentRecentQueries.length) {
+	if (currentSavedQueries.length) {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const { id, createdAt, ...currentQueryWithoutIdAndDate } =
-			currentRecentQueries[currentRecentQueries.length - 1];
+			currentSavedQueries[currentSavedQueries.length - 1];
 		if (
 			JSON.stringify(queryWithoutIdAndDate) === JSON.stringify({ ...currentQueryWithoutIdAndDate })
 		) {
@@ -49,7 +50,7 @@ export function updateRecentQueries(options?: { query?: Query }): void {
 		}
 	}
 
-	if (!exists) saveNewQuery(newRecentQueries, query);
+	if (!exists) saveNewQuery(newSavedQueries, query);
 }
 
 interface GenerateQueryUrlOptions {
@@ -71,7 +72,7 @@ export const generateQueryUrl = (
 	)
 		return;
 
-	if (options.saveQuery) updateRecentQueries();
+	if (options.saveQuery) updateSavedQueries();
 
 	const formattedQuery = formatQuery({ query });
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ShareModal from '$lib/components/RecentQueries/ShareModal.svelte';
+	import ShareModal from '$lib/components/SavedQueries/ShareModal.svelte';
 	import { queryStore } from '$lib/stores';
 	import { fade, scale } from 'svelte/transition';
 

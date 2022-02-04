@@ -1,8 +1,8 @@
 <script lang="ts">
-	import RecentQueriesList from '$lib/components/RecentQueries/RecentQueriesList.svelte';
 	import OwnSite from '$lib/components/Recipes/OwnSite.svelte';
 	import PublicGoogleSheets from '$lib/components/Recipes/PublicGoogleSheets.svelte';
 	import TwitterSearch from '$lib/components/Recipes/TwitterSearch.svelte';
+	import SavedQueriesList from '$lib/components/SavedQueries/SavedQueriesList.svelte';
 	import { isAuthenticated, readiness } from '$lib/stores';
 </script>
 
@@ -23,7 +23,7 @@
 		</div>
 
 		{#if $isAuthenticated}
-			<RecentQueriesList />
+			<SavedQueriesList />
 		{/if}
 	{:else}
 		<div class="h-full w-full grid place-items-center col-span-2">
