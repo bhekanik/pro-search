@@ -24,8 +24,6 @@
 		LogRocket.init('uetpov/pro-search');
 	}
 
-	console.log('page:', $page);
-
 	onMount(() => {
 		themeChange(false);
 	});

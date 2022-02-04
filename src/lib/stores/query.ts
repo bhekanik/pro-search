@@ -28,11 +28,11 @@ export const defaultQuery: Query = {
 	createdAt: new Date().toISOString()
 };
 
-const { subscribe, set, update }: Writable<Query> = writable(defaultQuery);
+const { subscribe, set, update }: Writable<Query> = writable({ ...defaultQuery });
 
 export const queryStore = {
 	subscribe,
 	update,
 	set,
-	reset: (): void => set(defaultQuery)
+	reset: (): void => set({ ...defaultQuery, filters: {} })
 };

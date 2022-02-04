@@ -8,14 +8,18 @@
 	export let executeQuery: (query: string | string[]) => void;
 	export let saveQuery = false;
 
-	const handleSearch = (refocusSearchBar: () => void) => {
+	function focusElement(element) {
+		element.focus();
+	}
+
+	const handleSearch = () => {
 		if (!$queryStore.searchTerm) return;
 		const queryUrl = generateQueryUrl({
 			saveQuery,
 			skipSearchTermCheck: true
 		});
 		executeQuery(queryUrl);
-		refocusSearchBar();
+		focusElement(searchInput);
 	};
 
 	const handleInput = (e) => {
@@ -27,7 +31,7 @@
 	};
 
 	const onSearch = () => {
-		handleSearch(searchInput.focus);
+		handleSearch();
 	};
 
 	const handleSearchClear = () => {
@@ -36,13 +40,9 @@
 
 	const onKeydown = (e) => {
 		if (e.keyCode === 13) {
-			handleSearch(searchInput.focus);
+			handleSearch();
 		}
 	};
-
-	function focusElement(element) {
-		element.focus();
-	}
 </script>
 
 <div class="relative w-full">
