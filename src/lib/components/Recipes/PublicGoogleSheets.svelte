@@ -5,7 +5,9 @@
 
 	const handleSearch = () => {
 		window.open(
-			'https://www.google.com/search?q=' + encodeURI(`site:twitter.com `) + encodeURI(searchTerm),
+			'https://www.google.com/search?q=' +
+				encodeURI(`site:docs.google.com/spreadsheets `) +
+				encodeURI(`intitle:"${searchTerm}"`),
 			'_blank'
 		);
 	};
@@ -18,23 +20,26 @@
 </script>
 
 <div
-	class="flex flex-col justify-between card glass hover:bg-[#49b1f1] bg-[#1DA1F2] shadow-md py-2 px-4 relative"
+	class="flex flex-col justify-between card glass hover:bg-[#40ed99] bg-[#0F9D58] shadow-md py-2 px-4 relative"
 	in:fade
 	out:scale|local
 >
 	<div class="mb-2">
 		<h1 class="font-medium text-lg text-gray-900 whitespace-nowrap overflow-hidden text-ellipsis">
-			Search on Twitter
+			Search public Google Sheets
 		</h1>
 		<div class="p-2">
-			<div class="w-full flex gap-2">
+			<div class="w-full flex gap-2 flex-col">
 				<input
-					placeholder="Search Term"
+					placeholder="Query"
 					type="text"
 					class="input input-sm input-bordered w-full"
 					bind:value={searchTerm}
 					on:keydown={handleKeydown}
 				/>
+				<span class="text-xs text-gray-900"
+					>Some ideas: Try searching for Startup tools or Angel or Salaries</span
+				>
 			</div>
 		</div>
 	</div>

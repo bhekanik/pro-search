@@ -122,7 +122,7 @@
 				</ul>
 			</div>
 		{:else}
-			<button on:click={login} class="btn btn-ghost">
+			<button on:click={login} class="btn btn-sm btn-ghost">
 				{'Login/Sign Up'}
 			</button>
 		{/if}

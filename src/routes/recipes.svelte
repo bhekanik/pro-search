@@ -1,6 +1,7 @@
 <script lang="ts">
 	import RecentQueriesList from '$lib/components/RecentQueries/RecentQueriesList.svelte';
 	import OwnSite from '$lib/components/Recipes/OwnSite.svelte';
+	import PublicGoogleSheets from '$lib/components/Recipes/PublicGoogleSheets.svelte';
 	import TwitterSearch from '$lib/components/Recipes/TwitterSearch.svelte';
 	import { isAuthenticated, readiness } from '$lib/stores';
 </script>
@@ -18,6 +19,7 @@
 		>
 			<OwnSite />
 			<TwitterSearch />
+			<PublicGoogleSheets />
 		</div>
 
 		{#if $isAuthenticated}
