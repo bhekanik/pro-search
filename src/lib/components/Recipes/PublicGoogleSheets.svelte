@@ -20,7 +20,7 @@
 </script>
 
 <div
-	class="flex flex-col justify-between card glass hover:bg-[#40ed99] bg-[#0F9D58] shadow-md py-2 px-4 relative"
+	class="flex flex-col justify-between card glass hover:bg-[#11b666] bg-[#0F9D58] shadow-md py-2 px-4 relative"
 	in:fade
 	out:scale|local
 >
@@ -29,14 +29,22 @@
 			Search public Google Sheets
 		</h1>
 		<div class="p-2">
-			<div class="w-full flex gap-2 flex-col">
+			<div class="relative w-full flex gap-2 flex-col">
 				<input
 					placeholder="Query"
 					type="text"
-					class="input input-sm input-bordered w-full"
+					class="input input-sm input-bordered w-full pr-8"
 					bind:value={searchTerm}
 					on:keydown={handleKeydown}
 				/>
+				{#if searchTerm}
+					<button
+						on:click={() => (searchTerm = '')}
+						in:fade
+						out:scale
+						class="absolute top-1 right-3 btn-xs btn-ghost btn btn-circle">✕</button
+					>
+				{/if}
 				<span class="text-xs text-gray-900"
 					>Some ideas: Try searching for Startup tools or Angel or Salaries</span
 				>

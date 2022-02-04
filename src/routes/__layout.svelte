@@ -68,7 +68,7 @@
 </svelte:head>
 
 <Header />
-<div class="tabs border-b px-8 mb-4 border-b-gray-400">
+<div class="tabs border-b px-8 border-b-gray-400">
 	<a href="/" class={`tab tab-bordered ${$page.url.pathname === '/' && 'tab-active'}`}>Search</a>
 	<a href="/recipes" class={`tab tab-bordered ${$page.url.pathname === '/recipes' && 'tab-active'}`}
 		>Recipies</a

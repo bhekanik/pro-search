@@ -35,7 +35,7 @@
 </svelte:head>
 
 <div
-	class="p-8 pt-2 relative h-full overflow-y-auto grid grid-cols-[1fr] md:grid-cols-[minmax(600px,1fr)_minmax(290px,400px)] gap-8"
+	class="p-8 pt-6 relative h-full overflow-y-auto grid grid-cols-[1fr] md:grid-cols-[minmax(600px,1fr)_minmax(290px,400px)] gap-8"
 >
 	{#if $readiness}
 		<!-- <StoreMonitor /> -->
