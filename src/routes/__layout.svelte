@@ -2,7 +2,9 @@
 	import { page } from '$app/stores';
 	import { splitClient } from '$lib/app/splitClient';
 	import Header from '$lib/components/Header/Header.svelte';
+	import ShareModal from '$lib/components/SavedQueries/ShareModal.svelte';
 	import { isAuthenticated, readiness } from '$lib/stores';
+	import { queryToShareStore } from '$lib/stores/queryToShare';
 	import * as Sentry from '@sentry/browser';
 	import { Integrations } from '@sentry/tracing';
 	import LogRocket from 'logrocket';
@@ -89,4 +91,8 @@
 	<div class="h-full w-full grid place-items-center col-span-2">
 		<div class="btn btn-circle btn-ghost btn-xl loading" />
 	</div>
+{/if}
+
+{#if $queryToShareStore}
+	<ShareModal query={$queryToShareStore} />
 {/if}

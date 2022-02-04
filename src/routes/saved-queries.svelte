@@ -3,6 +3,7 @@
 	import SavedQuery from '$lib/components/SavedQueries/SavedQuery.svelte';
 	import type { Query } from '$lib/stores';
 	import { savedQueriesStore } from '$lib/stores';
+	import { queryToShareStore } from '$lib/stores/queryToShare';
 	import { search } from 'fast-fuzzy';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
@@ -11,6 +12,12 @@
 	let filteredQueries: Query[] = [];
 
 	let searchTerm = '';
+
+	const handleShare = (id: string) => {
+		const queryToShare = savedQueries.find((query) => query.id === id);
+
+		queryToShareStore.set(queryToShare);
+	};
 
 	$: {
 		if (searchTerm) {
@@ -54,7 +61,7 @@
 					in:fade
 					animate:flip={{ duration: 500 }}
 				>
-					<SavedQuery {query} />
+					<SavedQuery {query} {handleShare} />
 				</div>
 			{:else}
 				<span>No saved queries</span>

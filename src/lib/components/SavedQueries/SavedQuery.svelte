@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import ShareModal from '$lib/components/SavedQueries/ShareModal.svelte';
 	import { queryStore, savedQueriesStore, SAVED_QUERIES_KEY } from '$lib/stores';
 	import type { Filter } from '$lib/stores/query';
 
 	export let query;
+	export let handleShare: (id: string) => void;
+	console.log('handleShare:', handleShare);
 
 	const generateFilters = (filters: Record<string, Filter>): string =>
 		Object.values(filters).reduce(
@@ -50,7 +51,11 @@
 	</span>
 </div>
 <div class="flex gap-1 align-middle items-center justify-end mt-2">
-	<ShareModal {query} />
+	<label
+		on:click={() => handleShare(query.id)}
+		for={`share-modal-btn-${query.id}`}
+		class="btn btn-sm btn-ghost glass modal-button text-gray-300">Share</label
+	>
 	<button class="btn btn-sm glass text-gray-300" on:click={() => handleApply()}>Apply</button>
 	<button class="btn btn-sm glass text-gray-300" on:click={() => handleDelete()}>Delete</button>
 </div>
