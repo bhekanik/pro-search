@@ -9,7 +9,7 @@
 			newQuery.filters.site = {
 				type: 'Site',
 				value,
-				formatted: `site:${value.trim()} `
+				formatted: `as_sitesearch=${encodeURIComponent(value.trim())} `
 			};
 			return newQuery;
 		});

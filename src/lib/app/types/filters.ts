@@ -1,5 +1,6 @@
 export type FilterType =
 	| 'Site'
+	| 'Area'
 	| 'Past'
 	| 'Safe'
 	| 'Rights'
@@ -17,7 +18,6 @@ export type FilterType =
 
 export const filtersThatDontRequireSearchTerm: FilterType[] = [
 	'Synonyms',
-	'Exclude',
 	'Link',
 	'Exact',
 	'Text',

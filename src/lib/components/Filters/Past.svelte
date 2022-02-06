@@ -10,7 +10,7 @@
 			newQuery.filters.past = {
 				type: 'Past',
 				value,
-				formatted: `as_qdr=${value.trim()} `
+				formatted: `as_qdr=${encodeURIComponent(value.trim())}`
 			};
 			return newQuery;
 		});

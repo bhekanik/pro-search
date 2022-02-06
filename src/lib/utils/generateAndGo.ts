@@ -1,6 +1,6 @@
 import type { FilterType } from '$lib/app/types/filters';
 import { filtersThatDontRequireSearchTerm } from '$lib/app/types/filters';
-import { formatQuery } from '$lib/components/Filters/utils/generateQuery';
+import { formatQuery } from '$lib/components/Filters/utils/formatQuery';
 import type { Query } from '$lib/stores';
 import {
 	isAuthenticated as isAuthenticatedStore,
@@ -77,11 +77,11 @@ export const generateQueryUrl = (
 	const formattedQuery = formatQuery({ query });
 
 	if (typeof query.provider.url === 'string') {
-		return `${query.provider.url}${encodeURIComponent(formattedQuery)}`;
+		return `${query.provider.url}${formattedQuery}`;
 	} else {
 		const url = [];
 		for (const providerUrl of query.provider.url) {
-			url.push(`${providerUrl}${encodeURIComponent(formattedQuery)}`);
+			url.push(`${providerUrl}${formattedQuery}`);
 		}
 		return url;
 	}

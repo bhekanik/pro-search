@@ -9,7 +9,7 @@
 			newQuery.filters.safe = {
 				type: 'Safe',
 				value,
-				formatted: `safe=${value.trim()} `
+				formatted: `safe=${encodeURIComponent(value.trim())}`
 			};
 			return newQuery;
 		});

@@ -29,15 +29,12 @@
 				enabled = false;
 			} else {
 				enabled = true;
-				if (type === 'Safe') handleCheckboxChange({ target: { value: 'active' } } as any);
-				if (type === 'Past') handleSelectChange({ target: { value: 'd' } } as any);
-				if (type === 'File Type') handleSelectChange({ target: { value: 'pdf' } } as any);
-				if (type === 'Rights')
-					handleSelectChange({
-						target: {
-							value: '(cc_publicdomain|cc_attribute|cc_sharealike|cc_noncommercial|cc_nonderived)'
-						}
-					} as any);
+				if (type === 'Safe' && handleCheckboxChange) {
+					handleCheckboxChange({ target: { value: 'active' } } as any);
+				}
+				if (options && handleSelectChange) {
+					handleSelectChange({ target: { value: options[0].value } } as any);
+				}
 			}
 			return newQuery;
 		});
@@ -48,7 +45,7 @@
 	};
 
 	const handleKeydown = (e) => {
-		if (e.keyCode === 13) {
+		if (e.key === 'Enter' || e.code === 'Enter') {
 			window.open(generateQueryUrl({ type }) as string);
 		}
 	};

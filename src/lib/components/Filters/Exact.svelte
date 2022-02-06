@@ -9,7 +9,7 @@
 			newQuery.filters.exact = {
 				type: 'Exact',
 				value,
-				formatted: `"${value.trim()}" `
+				formatted: `as_epq=${encodeURIComponent(value.trim())}`
 			};
 			return newQuery;
 		});

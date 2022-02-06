@@ -6,9 +6,8 @@
 	import RelatedFilter from '$lib/components/Filters/Related.svelte';
 	import SiteFilter from '$lib/components/Filters/Site.svelte';
 	import SynonymsFilter from '$lib/components/Filters/Synonyms.svelte';
-	import TitleFilter from '$lib/components/Filters/Title.svelte';
-	import URLFilter from '$lib/components/Filters/URL.svelte';
 	import { queryStore } from '$lib/stores';
+	import Area from './Area.svelte';
 	import DateAfter from './DateAfter.svelte';
 	import DateBefore from './DateBefore.svelte';
 	import Past from './Past.svelte';
@@ -25,8 +24,6 @@
 			<SynonymsFilter />
 			<Exact />
 			<ExcludeFilter />
-			<TitleFilter />
-			<URLFilter />
 			{#if $queryStore.provider.name === 'Google'}
 				<Past />
 				<Rights />
@@ -34,11 +31,12 @@
 			<SiteFilter />
 			<DateBefore />
 			<DateAfter />
+			<Area />
 			<FileTypeFilter />
 			<LinkFilter />
 			<RelatedFilter />
-			<h2 class="text-gray-300 mt-4">Additional Settings</h2>
-			{#if $queryStore.provider.name === 'Google'}
+			{#if $queryStore.provider.name === 'Bing' || $queryStore.provider.name === 'Google'}
+				<h2 class="text-gray-300 mt-4">Additional Settings</h2>
 				<Safe />
 			{/if}
 		</div>

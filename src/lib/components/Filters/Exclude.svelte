@@ -1,7 +1,6 @@
 <script lang="ts">
 	import FilterBase from '$lib/components/Filters/Base/Base.svelte';
 	import { queryStore } from '$lib/stores';
-	import { listApplyOperator, Operator } from './utils/listApplyOperator';
 
 	const handleInput = (e: Event) => {
 		const value = (e.target as HTMLInputElement).value;
@@ -10,7 +9,7 @@
 			newQuery.filters.exclude = {
 				type: 'Exclude',
 				value,
-				formatted: listApplyOperator(value, Operator.Exclude)
+				formatted: `as_eq=${encodeURIComponent(value.trim())}`
 			};
 			return newQuery;
 		});

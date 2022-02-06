@@ -9,7 +9,7 @@
 			newQuery.filters.related = {
 				type: 'Related',
 				value,
-				formatted: `related:${value.trim()} `
+				formatted: `as_rq=${encodeURIComponent(value.trim())} `
 			};
 			return newQuery;
 		});

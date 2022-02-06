@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fileTypes } from '$lib/app/config';
+	import { searchAreas } from '$lib/app/config/areas';
 	import FilterBase from '$lib/components/Filters/Base/Base.svelte';
 	import { queryStore } from '$lib/stores';
 
@@ -7,10 +7,10 @@
 		const value = (e.target as HTMLSelectElement).value;
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
-			newQuery.filters.fileType = {
-				type: 'File Type',
+			newQuery.filters.area = {
+				type: 'Area',
 				value,
-				formatted: `filetype:${value.trim()} `
+				formatted: `as_occt=${encodeURIComponent(value.trim())}`
 			};
 			return newQuery;
 		});
@@ -19,8 +19,8 @@
 
 <FilterBase
 	handleSelectChange={handleChange}
-	type="File Type"
-	label="... of this file type"
-	textInputPlaceholder="File type (example: pdf)"
-	options={fileTypes}
+	type="Area"
+	label="... with the search term in the ..."
+	textInputPlaceholder="Search Area"
+	options={searchAreas}
 />
