@@ -4,6 +4,8 @@ export interface SearchProvider {
 	url: string | string[];
 }
 
+export type SearchProviderName = 'Google' | 'Bing' | 'DuckDuckGo' | 'Yahoo';
+
 export const searchProvidersWithoutAll = [
 	{
 		id: '1',

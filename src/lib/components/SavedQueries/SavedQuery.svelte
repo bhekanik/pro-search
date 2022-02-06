@@ -5,7 +5,6 @@
 
 	export let query;
 	export let handleShare: (id: string) => void;
-	console.log('handleShare:', handleShare);
 
 	const generateFilters = (filters: Record<string, Filter>): string =>
 		Object.values(filters).reduce(

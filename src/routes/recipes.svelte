@@ -1,9 +1,10 @@
 <script lang="ts">
-	import OwnSite from '$lib/components/Recipes/OwnSite.svelte';
-	import PublicGoogleSheets from '$lib/components/Recipes/PublicGoogleSheets.svelte';
-	import TwitterSearch from '$lib/components/Recipes/TwitterSearch.svelte';
+	import type { RecipeType } from '$lib/app/config/recipes';
+	import Recipe from '$lib/components/Recipes/Recipe.svelte';
 	import SavedQueriesList from '$lib/components/SavedQueries/SavedQueriesList.svelte';
 	import { isAuthenticated } from '$lib/stores';
+
+	export let recipes: RecipeType[];
 </script>
 
 <svelte:head>
@@ -16,9 +17,17 @@
 	<div
 		class="px-4 h-full grid gap-2 auto-rows-max grid-cols-[repeat(auto-fill,minmax(190px,1fr))] overflow-auto recipes-list"
 	>
-		<OwnSite />
-		<TwitterSearch />
-		<PublicGoogleSheets />
+		{#each recipes as recipe (recipe.id)}
+			<Recipe
+				searchProvider={recipe.searchProvider}
+				hoverBgColor={recipe.hoverBgColor}
+				bgColor={recipe.bgColor}
+				textColor={recipe.textColor}
+				inputs={recipe.inputs}
+				queryTemplate={recipe.queryTemplate}
+				name={recipe.name}
+			/>
+		{/each}
 	</div>
 
 	{#if $isAuthenticated}
