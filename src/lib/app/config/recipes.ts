@@ -35,7 +35,7 @@ export const recipes: RecipeType[] = [
 	{
 		id: '1',
 		searchProvider: 'Google',
-		hoverBgColor: 'bg-blue-800',
+		hoverBgColor: 'hover:bg-blue-800',
 		inputs: [
 			{
 				name: 'siteUrl',
@@ -56,7 +56,7 @@ export const recipes: RecipeType[] = [
 	{
 		id: '2',
 		name: 'Search on Twitter',
-		hoverBgColor: 'bg-[#49b1f1]',
+		hoverBgColor: 'hover:bg-[#49b1f1]',
 		bgColor: 'bg-[#1DA1F2]',
 		textColor: 'text-gray-900',
 		searchProvider: 'Google',
@@ -73,7 +73,7 @@ export const recipes: RecipeType[] = [
 	},
 	{
 		id: '3',
-		hoverBgColor: 'bg-[#11b666]',
+		hoverBgColor: 'hover:bg-[#11b666]',
 		bgColor: 'bg-[#0F9D58]',
 		textColor: 'text-gray-900',
 		queryTemplate: `site:docs.google.com/spreadsheets intitle:"{{queryTerm}}"`,

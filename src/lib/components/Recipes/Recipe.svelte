@@ -18,6 +18,7 @@
 	let baseUrl = 'https://www.google.com/search?q=';
 	let handleInputFuncs: ((e: Event) => void)[] = [];
 	let values: string[] = [];
+	let readyHoverColor = '';
 
 	onMount(() => {
 		baseUrl = searchProvidersWithoutAll.find((item) => item.name === searchProvider).url;
@@ -51,7 +52,7 @@
 </script>
 
 <div
-	class={`flex flex-col justify-between card glass hover:${hoverBgColor} ${bgColor} shadow-md py-2 px-4 relative`}
+	class={`flex flex-col justify-between card glass ${hoverBgColor} ${bgColor} shadow-md py-2 px-4 relative`}
 	in:fade
 >
 	<div class="mb-2">
