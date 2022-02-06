@@ -11,3 +11,5 @@ node_modules
 cypress/screenshots/
 cypress/videos/
 .vercel_build_output
+# Local Netlify folder
+.netlify
