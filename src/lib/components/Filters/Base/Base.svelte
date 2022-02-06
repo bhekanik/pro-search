@@ -32,6 +32,9 @@
 				if (type === 'Safe' && handleCheckboxChange) {
 					handleCheckboxChange({ target: { value: 'active' } } as any);
 				}
+				if (type === 'Personal' && handleCheckboxChange) {
+					handleCheckboxChange({ target: { value: false } } as any);
+				}
 				if (options && handleSelectChange) {
 					handleSelectChange({ target: { value: options[0].value } } as any);
 				}

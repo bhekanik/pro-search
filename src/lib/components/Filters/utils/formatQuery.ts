@@ -16,6 +16,7 @@ const queryParamFilters = [
 	'country',
 	'dateBefore',
 	'dateAfter',
+	'personal',
 	'contentType',
 	'fileType'
 ];

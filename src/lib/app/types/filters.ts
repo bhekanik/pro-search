@@ -1,6 +1,7 @@
 export type FilterType =
 	| 'Site'
 	| 'Area'
+	| 'Personal'
 	| 'Content Type'
 	| 'Country'
 	| 'Locale'

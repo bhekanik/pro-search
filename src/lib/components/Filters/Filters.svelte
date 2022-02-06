@@ -14,6 +14,7 @@
 	import DateBefore from './DateBefore.svelte';
 	import Locale from './Locale.svelte';
 	import Past from './Past.svelte';
+	import Personal from './Personal.svelte';
 	import PublishLanguage from './PublishLanguage.svelte';
 	import Rights from './Rights.svelte';
 	import Safe from './Safe.svelte';
@@ -44,6 +45,7 @@
 			<h2 class="text-gray-300 mt-4">Additional Settings</h2>
 			{#if $queryStore.provider.name === 'Bing' || $queryStore.provider.name === 'Google'}
 				<Safe />
+				<Personal />
 			{/if}
 			{#if $queryStore.provider.name === 'Google'}
 				<Locale />
