@@ -10,8 +10,6 @@
 	import Area from './Area.svelte';
 	import Content from './Content.svelte';
 	import Country from './Country.svelte';
-	import DateAfter from './DateAfter.svelte';
-	import DateBefore from './DateBefore.svelte';
 	import Locale from './Locale.svelte';
 	import Past from './Past.svelte';
 	import Personal from './Personal.svelte';
@@ -36,8 +34,8 @@
 				<Content />
 			{/if}
 			<SiteFilter />
-			<DateBefore />
-			<DateAfter />
+			<!-- <DateBefore /> -->
+			<!-- <DateAfter /> -->
 			<Area />
 			<FileTypeFilter />
 			<LinkFilter />
@@ -48,6 +46,7 @@
 			{/if}
 			{#if $queryStore.provider.name === 'Google'}
 				<Personal />
+				<!-- <SortBy /> -->
 				<!-- <AdWords /> -->
 				<Locale />
 				<Country />

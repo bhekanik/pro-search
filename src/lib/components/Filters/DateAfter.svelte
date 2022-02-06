@@ -9,7 +9,7 @@
 			newQuery.filters.dateAfter = {
 				type: 'DateAfter',
 				value,
-				formatted: `tbs=cdr:1,cd_min=${value.trim()} `
+				formatted: `tbs=cdr:1,cd_min=${value.trim()},cd_max=${new Date().toLocaleDateString()}`
 			};
 			return newQuery;
 		});

@@ -3,24 +3,25 @@ import { queryStore } from '$lib/stores';
 import { get } from 'svelte/store';
 
 const queryParamFilters = [
-	'past',
-	'rights',
-	'safe',
+	'adWords',
+	'area',
+	'contentType',
+	'country',
+	'dateAfter',
+	'dateBefore',
 	'exact',
 	'exclude',
-	'site',
-	'related',
-	'area',
-	'adWords',
-	'publishLanguage',
-	'locale',
-	'country',
+	'fileType',
 	'link',
-	'dateBefore',
-	'dateAfter',
+	'locale',
+	'past',
 	'personal',
-	'contentType',
-	'fileType'
+	'publishLanguage',
+	'related',
+	'rights',
+	'safe',
+	'site',
+	'sortBy'
 ];
 
 /**

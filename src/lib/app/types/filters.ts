@@ -1,33 +1,34 @@
 export type FilterType =
-	| 'Site'
-	| 'Area'
 	| 'AdWords'
-	| 'Personal'
+	| 'Area'
 	| 'Content Type'
 	| 'Country'
-	| 'Locale'
-	| 'Publish Language'
-	| 'Past'
-	| 'Safe'
-	| 'Rights'
-	| 'Exact'
-	| 'DateBefore'
 	| 'DateAfter'
-	| 'Text'
-	| 'Link'
-	| 'Related'
-	| 'File Type'
-	| 'Title'
-	| 'URL'
+	| 'DateBefore'
+	| 'Exact'
 	| 'Exclude'
-	| 'Synonyms';
+	| 'File Type'
+	| 'Link'
+	| 'Locale'
+	| 'Past'
+	| 'Personal'
+	| 'Publish Language'
+	| 'Related'
+	| 'Rights'
+	| 'Safe'
+	| 'Site'
+	| 'Sort By'
+	| 'Synonyms'
+	| 'Text'
+	| 'Title'
+	| 'URL';
 
 export const filtersThatDontRequireSearchTerm: FilterType[] = [
-	'Synonyms',
-	'Link',
 	'Exact',
-	'Text',
+	'Link',
 	'Related',
+	'Synonyms',
+	'Text',
 	'Title',
 	'URL'
 ];
