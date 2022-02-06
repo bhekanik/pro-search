@@ -10,7 +10,7 @@
 			newQuery.filters.area = {
 				type: 'Area',
 				value,
-				formatted: `as_occt=${encodeURIComponent(value.trim())}`
+				formatted: `as_occt=${encodeURIComponent(value)}`
 			};
 			return newQuery;
 		});

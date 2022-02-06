@@ -10,7 +10,9 @@
 	import Area from './Area.svelte';
 	import DateAfter from './DateAfter.svelte';
 	import DateBefore from './DateBefore.svelte';
+	import Locale from './Locale.svelte';
 	import Past from './Past.svelte';
+	import PublishLanguage from './PublishLanguage.svelte';
 	import Rights from './Rights.svelte';
 	import Safe from './Safe.svelte';
 </script>
@@ -27,6 +29,7 @@
 			{#if $queryStore.provider.name === 'Google'}
 				<Past />
 				<Rights />
+				<PublishLanguage />
 			{/if}
 			<SiteFilter />
 			<DateBefore />
@@ -35,9 +38,12 @@
 			<FileTypeFilter />
 			<LinkFilter />
 			<RelatedFilter />
+			<h2 class="text-gray-300 mt-4">Additional Settings</h2>
 			{#if $queryStore.provider.name === 'Bing' || $queryStore.provider.name === 'Google'}
-				<h2 class="text-gray-300 mt-4">Additional Settings</h2>
 				<Safe />
+			{/if}
+			{#if $queryStore.provider.name === 'Google'}
+				<Locale />
 			{/if}
 		</div>
 	</div>

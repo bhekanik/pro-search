@@ -10,7 +10,7 @@
 			newQuery.filters.rights = {
 				type: 'Rights',
 				value,
-				formatted: `as_rights=${encodeURIComponent(value.trim())}`
+				formatted: `as_rights=${encodeURIComponent(value)}`
 			};
 			return newQuery;
 		});

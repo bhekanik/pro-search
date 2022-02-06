@@ -1,6 +1,8 @@
 export type FilterType =
 	| 'Site'
 	| 'Area'
+	| 'Locale'
+	| 'Publish Language'
 	| 'Past'
 	| 'Safe'
 	| 'Rights'

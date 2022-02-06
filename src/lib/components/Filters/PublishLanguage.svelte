@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { pastOptions } from '$lib/app/config/pastOptions';
+	import { publishLanguages } from '$lib/app/config/languages';
 	import FilterBase from '$lib/components/Filters/Base/Base.svelte';
 	import { queryStore } from '$lib/stores';
 
@@ -7,10 +7,10 @@
 		const value = (e.target as HTMLSelectElement).value;
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
-			newQuery.filters.past = {
-				type: 'Past',
+			newQuery.filters.publishLanguage = {
+				type: 'Publish Language',
 				value,
-				formatted: `as_qdr=${encodeURIComponent(value)}`
+				formatted: `lr=${encodeURIComponent(value)} `
 			};
 			return newQuery;
 		});
@@ -19,7 +19,8 @@
 
 <FilterBase
 	handleSelectChange={handleChange}
-	type="Past"
-	label="... that were published in ..."
-	options={pastOptions}
+	type="Publish Language"
+	label="... published in this language"
+	textInputPlaceholder="Publish Language"
+	options={publishLanguages}
 />

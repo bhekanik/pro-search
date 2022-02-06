@@ -2,7 +2,19 @@ import type { Query } from '$lib/stores';
 import { queryStore } from '$lib/stores';
 import { get } from 'svelte/store';
 
-const queryParamFilters = ['past', 'rights', 'safe', 'exact', 'exclude', 'site', 'related', 'area'];
+const queryParamFilters = [
+	'past',
+	'rights',
+	'safe',
+	'exact',
+	'exclude',
+	'site',
+	'related',
+	'area',
+	'publishLanguage',
+	'locale',
+	'fileType'
+];
 
 /**
  * Formats the search input for the search engine according to the provided

@@ -77,7 +77,7 @@
 			value={$queryStore.filters[Case.camel(type)]?.value || options[0].value}
 			on:change={onSelectChange}
 		>
-			{#each options as option}
+			{#each options as option (option.value)}
 				<option
 					class="rounded-md text-lg p-4 border-2 dark:bg-gray-600 border-gray-400 dark:border-gray-400"
 					value={option.value}>{option.label}</option

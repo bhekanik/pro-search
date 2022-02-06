@@ -10,7 +10,7 @@
 			newQuery.filters.fileType = {
 				type: 'File Type',
 				value,
-				formatted: `filetype:${value.trim()} `
+				formatted: `as_filetype=${encodeURIComponent(value)} `
 			};
 			return newQuery;
 		});
