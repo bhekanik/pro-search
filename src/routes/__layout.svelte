@@ -7,7 +7,6 @@
 	import { queryToShareStore } from '$lib/stores/queryToShare';
 	import * as Sentry from '@sentry/browser';
 	import { Integrations } from '@sentry/tracing';
-	import LogRocket from 'logrocket';
 	import { onDestroy, onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
 	import '../global.css';
@@ -24,7 +23,6 @@
 			// We recommend adjusting this value in production
 			tracesSampleRate: 0.5
 		});
-		LogRocket.init('uetpov/pro-search');
 	}
 
 	onMount(() => {
