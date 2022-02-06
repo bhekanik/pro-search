@@ -60,7 +60,7 @@ export const recipes: RecipeType[] = [
 		bgColor: 'bg-[#1DA1F2]',
 		textColor: 'text-gray-900',
 		searchProvider: 'Google',
-		queryTemplate: `@twitter {{queryTerm}}`,
+		queryTemplate: `site:twitter.com {{queryTerm}}`,
 		inputs: [
 			{
 				name: 'queryTerm',
