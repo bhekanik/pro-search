@@ -39,7 +39,7 @@
 						parsedQuery = (parsedQuery || queryTemplate).replace(`{{${state[i].name}}}`, item);
 					});
 
-					const url = `${baseUrl}${encodeURI(parsedQuery)}`;
+					const url = `${baseUrl}${encodeURIComponent(parsedQuery)}`;
 
 					parsedQuery = queryTemplate;
 

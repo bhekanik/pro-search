@@ -67,7 +67,7 @@ export const recipes: RecipeType[] = [
 				type: 'text',
 				placeholder: 'Query',
 				shouldHandleSearch: true,
-				helperText: 'Example: @jack startsmall join'
+				helperText: 'Example: @jack #startsmall join'
 			}
 		]
 	},
