@@ -8,7 +8,7 @@ const queryParamFilters = ['past', 'rights', 'safe'];
  * Formats the search input for the search engine according to the provided
  * filters
  *
- * @returns The formated query ready to be sent to the search engine
+ * @returns The formatted query ready to be sent to the search engine
  */
 export const formatQuery = (options?: { query?: Query }): string => {
 	const query = options.query || get(queryStore);

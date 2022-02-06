@@ -21,5 +21,5 @@
 	type="Exact"
 	hasInput
 	label="... that have this exact word or phrase"
-	textInputPlaceholder="URL (example: www.cnn.com)"
+	textInputPlaceholder="Word/Phrase (example: we live in a society)"
 />

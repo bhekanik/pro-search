@@ -21,6 +21,6 @@
 	handleSelectChange={handleChange}
 	type="File Type"
 	label="... of this file type"
-	textInputPlaceholder="File type (example: pdf)"
+	textInputPlaceholder="File type"
 	options={fileTypes}
 />

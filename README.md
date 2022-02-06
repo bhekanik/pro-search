@@ -1,6 +1,6 @@
 # Pro-search
 
-Search engines are really amazing tools and we all use them everyday. Search engines also have really powerful tools to make queries much more specialised and specific. Unfortunately, few people use these advanced querying capabilities either because they don't know about them or they're just tedious to use. Those who do use them usually just have one or two go to filters. This is where Pro-search comes in. Pro-search is an advanced query builder for search engines. It allows you to build complex queries for search engines in an easy intuitive user interface. You choose which search engine(s) you want your query sent to and Pro-search will format the query for the target and open a new browser tab with the result. It's that simple.
+Search engines are really amazing tools and we all use them everyday. Search engines also have really powerful tools to make queries much more specialized and specific. Unfortunately, few people use these advanced querying capabilities either because they don't know about them or they're just tedious to use. Those who do use them usually just have one or two go to filters. This is where Pro-search comes in. Pro-search is an advanced query builder for search engines. It allows you to build complex queries for search engines in an easy intuitive user interface. You choose which search engine(s) you want your query sent to and Pro-search will format the query for the target and open a new browser tab with the result. It's that simple.
 
 ## Resources
 
@@ -16,6 +16,10 @@ To learn more about what is possible in terms of filters, etc. Here are some hel
 - [How to 'Google it' like a senior engineer](https://youtu.be/cEBkvm0-rg0)
 - [The Ultimate Guide to the Google Search](https://moz.com/blog/the-ultimate-guide-to-the-google-search-parameters)
 - [URL parameters of the Google search engine results page](https://seoheronews.com/url-google)
+- [50+ Google Search Operators](https://seosly.com/google-search-operators/)
+- [An SEO Guide to Google Advanced Search Operators](https://www.searchenginejournal.com/google-search-operators-commands/215331/)
+- [Google Search Operators: The Complete List (42 Advanced Operators)](https://ahrefs.com/blog/google-advanced-search-operators/)
+- [Google Search Operators: Making Advanced Search Easier](https://serpstat.com/blog/google-search-operators-making-advanced-search-easier/)
 
 ## Contributing
 
@@ -42,11 +46,11 @@ Once you have that installed you can run `npm run dev` to start up the app. This
 ### Working on an issue
 
 - When you select an issue, make sure to assign it to yourself to avoid someone else picking it up and duplicating work. Also go to the project board and move it to 'In Progress'
-- Create a feature branch from `main`. Name your branch starting with the issue number then a little description of what the branch is about seperated by a '/', for example '23/take-over-the-world'
+- Create a feature branch from `main`. Name your branch starting with the issue number then a little description of what the branch is about separated by a '/', for example '23/take-over-the-world'
 - Your commits should be structured and meaningful inline with [this convention](https://dev.to/bhekanik/supercharge-your-git-history-with-better-commit-messages-32fk).
 - Refactor your commits to clean them up (if needed).
 - Always rebase your work before opening a PR.
-- Open your pull request against `main`. Name your pull request meaningfull, include a description of what you did and reference the issue that the PR relates to so that github can do the automations.
+- Open your pull request against `main`. Name your pull request meaningful, include a description of what you did and reference the issue that the PR relates to so that github can do the automation.
 - PR's will not be accepted without appropriate tests where applicable.
 - A preview of the app will be deployed to vercel and the link attached to the PR as a comment.
 - Assign reviewers so that they're pinged to review your code.

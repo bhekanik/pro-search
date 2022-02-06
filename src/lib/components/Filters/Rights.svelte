@@ -20,6 +20,6 @@
 <FilterBase
 	handleSelectChange={handleChange}
 	type="Rights"
-	label="... that the following rights"
+	label="... that have the following rights"
 	options={rightsOptions}
 />
