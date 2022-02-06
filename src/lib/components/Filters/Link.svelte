@@ -9,7 +9,7 @@
 			newQuery.filters.link = {
 				type: 'Link',
 				value,
-				formatted: `link:${value.trim()} `
+				formatted: `as_lq=${value.trim()} `
 			};
 			return newQuery;
 		});

@@ -45,9 +45,10 @@
 			<h2 class="text-gray-300 mt-4">Additional Settings</h2>
 			{#if $queryStore.provider.name === 'Bing' || $queryStore.provider.name === 'Google'}
 				<Safe />
-				<Personal />
 			{/if}
 			{#if $queryStore.provider.name === 'Google'}
+				<Personal />
+				<!-- <AdWords /> -->
 				<Locale />
 				<Country />
 			{/if}

@@ -1,6 +1,7 @@
 export type FilterType =
 	| 'Site'
 	| 'Area'
+	| 'AdWords'
 	| 'Personal'
 	| 'Content Type'
 	| 'Country'

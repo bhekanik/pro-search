@@ -35,6 +35,9 @@
 				if (type === 'Personal' && handleCheckboxChange) {
 					handleCheckboxChange({ target: { value: false } } as any);
 				}
+				if (type === 'AdWords' && handleCheckboxChange) {
+					handleCheckboxChange({ target: { value: 'off' } } as any);
+				}
 				if (options && handleSelectChange) {
 					handleSelectChange({ target: { value: options[0].value } } as any);
 				}
