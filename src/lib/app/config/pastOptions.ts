@@ -8,6 +8,10 @@ export const pastOptions: OptionType[] = [
 		value: 'd'
 	},
 	{
+		label: '... the last hour',
+		value: 'h'
+	},
+	{
 		label: '... the past 7 days',
 		value: 'w'
 	},
@@ -22,5 +26,9 @@ export const pastOptions: OptionType[] = [
 	{
 		label: '... the past year',
 		value: 'y'
+	},
+	{
+		label: '... anytime for all time',
+		value: 'all'
 	}
 ];

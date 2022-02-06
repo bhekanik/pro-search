@@ -8,6 +8,8 @@
 	import SynonymsFilter from '$lib/components/Filters/Synonyms.svelte';
 	import { queryStore } from '$lib/stores';
 	import Area from './Area.svelte';
+	import Content from './Content.svelte';
+	import Country from './Country.svelte';
 	import DateAfter from './DateAfter.svelte';
 	import DateBefore from './DateBefore.svelte';
 	import Locale from './Locale.svelte';
@@ -30,6 +32,7 @@
 				<Past />
 				<Rights />
 				<PublishLanguage />
+				<Content />
 			{/if}
 			<SiteFilter />
 			<DateBefore />
@@ -44,6 +47,7 @@
 			{/if}
 			{#if $queryStore.provider.name === 'Google'}
 				<Locale />
+				<Country />
 			{/if}
 		</div>
 	</div>

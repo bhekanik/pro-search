@@ -9,7 +9,7 @@
 			newQuery.filters.dateBefore = {
 				type: 'DateBefore',
 				value,
-				formatted: `before:${value.trim()} `
+				formatted: `tbs=cdr:1&cd_max=${value.trim()} `
 			};
 			return newQuery;
 		});

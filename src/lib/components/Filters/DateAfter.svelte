@@ -9,7 +9,7 @@
 			newQuery.filters.dateAfter = {
 				type: 'DateAfter',
 				value,
-				formatted: `after:${value.trim()} `
+				formatted: `tbs=cdr:1,cd_min=${value.trim()} `
 			};
 			return newQuery;
 		});

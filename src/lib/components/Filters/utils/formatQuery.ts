@@ -13,6 +13,10 @@ const queryParamFilters = [
 	'area',
 	'publishLanguage',
 	'locale',
+	'country',
+	'dateBefore',
+	'dateAfter',
+	'contentType',
 	'fileType'
 ];
 
