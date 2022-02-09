@@ -2,14 +2,15 @@
 	import type { RecipeType } from '$lib/app/config/recipes';
 	import Recipe from '$lib/components/Recipes/Recipe.svelte';
 	import SavedQueriesList from '$lib/components/SavedQueries/SavedQueriesList.svelte';
-	import { isAuthenticated } from '$lib/stores';
+	import { isAuthenticated, seo } from '$lib/stores';
 
 	export let recipes: RecipeType[];
-</script>
 
-<svelte:head>
-	<title>Pro-Search | Recipes</title>
-</svelte:head>
+	seo.set({
+		title: 'Pro-Search | Recipes',
+		description: 'Advanced search query builder'
+	});
+</script>
 
 <div
 	class="p-8 pt-6 relative h-full overflow-y-auto grid grid-cols-[1fr] md:grid-cols-[minmax(600px,1fr)_minmax(290px,400px)] gap-4"

@@ -4,7 +4,7 @@
 	import SavedQueriesList from '$lib/components/SavedQueries/SavedQueriesList.svelte';
 	import SearchBar from '$lib/components/SearchBar/SearchBar.svelte';
 	import SearchProvider from '$lib/components/SearchProvider/SearchProvider.svelte';
-	import { isAuthenticated } from '$lib/stores';
+	import { isAuthenticated, seo } from '$lib/stores';
 
 	let url = '';
 
@@ -28,6 +28,11 @@
 			}
 		}
 	};
+
+	seo.set({
+		title: 'Pro-Search',
+		description: 'Advanced search query builder'
+	});
 </script>
 
 <div

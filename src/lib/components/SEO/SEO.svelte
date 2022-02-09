@@ -1,11 +1,12 @@
 <script lang="ts">
+	import { seo } from '$lib/stores';
 	let isProd = process.env.NODE_ENV === 'production';
 </script>
 
 <svelte:head>
-	<title>Pro-Search</title>
+	<title>{$seo.title}</title>
 	<link rel="canonical" href="https://pro-search.io" />
-	<meta name="description" content="Advanced search query builder" />
+	<meta name="description" content={$seo.description} />
 
 	{#if isProd}
 		<script>
