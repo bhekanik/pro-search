@@ -8,6 +8,8 @@
 
 	let url = '';
 
+	let showInfo = false;
+
 	const executeQueryWithIFrame = (queryUrl: string) => {
 		url = queryUrl + '&igu=1';
 	};
@@ -40,6 +42,14 @@
 	<!-- <StoreMonitor /> -->
 	<div class="max-w-6xl h-full">
 		<main class="dark:text-gray-50">
+			<div
+				class={`${
+					showInfo === false && 'hidden'
+				} relative border-2 border-gray-600 flex justify-between w-full p-2 px-4 bg-pink-50 opacity-80 text-gray-800 my-2`}
+			>
+				<span>Some stuff here </span>
+				<button on:click={() => (showInfo = false)} class="btn btn-xs btn-ghost">Dismiss</button>
+			</div>
 			<div class="flex flex-col gap-2 md:flex-row">
 				<SearchProvider />
 				<ValueSelector
@@ -56,6 +66,7 @@
 				<iframe title="Results" src={url} class="w-full h-full" frameborder="0" />
 			{:else}
 				<Filters />
+				<!-- <Recipes /> -->
 			{/if}
 		</main>
 	</div>
