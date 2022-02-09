@@ -1,8 +1,10 @@
 <script lang="ts">
-	import auth from '$lib/app/auth/authService';
+	import { auth } from '$lib/app/firebase';
+	import { authStore, handleUser, signInWithGitHub, signout } from '$lib/app/firebase/auth';
 	import { splitClient } from '$lib/app/splitClient';
 	import SettingsModal from '$lib/components/SettingsModal/SettingsModal.svelte';
-	import { authReadiness, isAuthenticated, user } from '$lib/stores';
+	import { isAuthenticated } from '$lib/stores';
+	import { onIdTokenChanged } from 'firebase/auth';
 	import LogRocket from 'logrocket';
 	import { onDestroy, onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
@@ -13,70 +15,34 @@
 		LogRocket.init('uetpov/pro-search');
 	}
 
-	let auth0Client;
+	let unsubscribe;
 
 	onMount(() => {
+		unsubscribe = onIdTokenChanged(auth, handleUser);
+
 		themeChange(false);
-		(async () => {
-			auth0Client = await auth.createClient();
 
-			if (auth0Client) {
-				const authState = await auth0Client.isAuthenticated();
-				isAuthenticated.set(authState);
-				const userState = await auth0Client.getUser();
-				user.set(userState);
-				if (userState)
-					LogRocket.identify(userState.email, {
-						name: userState.name,
-						email: userState.email
-					});
-			}
-
-			if ($isAuthenticated) {
-				authReadiness.set(true);
-				// show the gated content
-				return;
-			}
-
-			// NEW - check for the code and state parameters
-			const windowLocationSearch = window.location.search;
-			if (windowLocationSearch.includes('code=') && windowLocationSearch.includes('state=')) {
-				// Process the login state
-				await auth.handleRedirectCallback(auth0Client);
-
-				if (auth0Client) {
-					const authState = await auth0Client.isAuthenticated();
-					isAuthenticated.set(authState);
-					const userState = await auth0Client.getUser();
-					user.set(userState);
-					if (userState)
-						LogRocket.identify(userState.email, {
-							name: userState.name,
-							email: userState.email
-						});
-				}
-
-				// Use replaceState to redirect the user away and remove the querystring parameters
-				window.history.replaceState({}, document.title, '/');
-			}
-			authReadiness.set(true);
-		})();
+		if ($authStore.user) {
+			LogRocket.identify($authStore.user.email, {
+				name: $authStore.user.name,
+				email: $authStore.user.email,
+				uid: $authStore.user.uid
+			});
+		}
 	});
 
 	function login() {
-		// auth.loginWithRedirect(auth0Client, {
-		// 	redirect_uri: window.location.origin
-		// });
-		auth.loginWithPopup(auth0Client);
+		signInWithGitHub('/');
 	}
 
 	function logout() {
-		auth.logout(auth0Client, {
-			returnTo: window.location.origin
-		});
+		signout();
 	}
 
-	onDestroy(() => splitClient?.destroy());
+	onDestroy(() => {
+		splitClient?.destroy();
+		unsubscribe?.();
+	});
 </script>
 
 <header class="flex justify-between align-center px-8 py-4">
@@ -89,7 +55,7 @@
 			<div class="dropdown dropdown-end">
 				<div tabindex="0" class="avatar">
 					<div class="rounded-full w-8 h-8 ring ring-primary">
-						<img alt="profile" src={$user?.picture} />
+						<img alt="profile" src={$authStore.user?.photoUrl} />
 					</div>
 				</div>
 
@@ -97,9 +63,9 @@
 					tabindex="0"
 					class="menu dropdown-content rounded-box w-52 bordered shadow-lg bg-slate-600"
 				>
-					{#if $user?.email}
+					{#if $authStore.user?.email}
 						<li>
-							<span>{$user?.email}</span>
+							<span>{$authStore.user?.email}</span>
 						</li>
 					{/if}
 					<li>
