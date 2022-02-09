@@ -4,7 +4,7 @@
 	import SavedQueriesList from '$lib/components/SavedQueries/SavedQueriesList.svelte';
 	import SearchBar from '$lib/components/SearchBar/SearchBar.svelte';
 	import SearchProvider from '$lib/components/SearchProvider/SearchProvider.svelte';
-	import { isAuthenticated } from '$lib/stores';
+	import { isAuthenticated, seo } from '$lib/stores';
 
 	let url = '';
 
@@ -30,11 +30,12 @@
 			}
 		}
 	};
-</script>
 
-<svelte:head>
-	<title>Pro-Search</title>
-</svelte:head>
+	seo.set({
+		title: 'Pro-Search',
+		description: 'Advanced search query builder'
+	});
+</script>
 
 <div
 	class="p-8 pt-6 relative h-full overflow-y-auto grid grid-cols-[1fr] md:grid-cols-[minmax(600px,1fr)_minmax(290px,400px)] gap-8"

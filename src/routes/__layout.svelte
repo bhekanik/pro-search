@@ -3,8 +3,8 @@
 	import { splitClient } from '$lib/app/splitClient';
 	import Header from '$lib/components/Header/Header.svelte';
 	import ShareModal from '$lib/components/SavedQueries/ShareModal.svelte';
-	import { isAuthenticated, readiness } from '$lib/stores';
-	import { queryToShareStore } from '$lib/stores/queryToShare';
+	import Seo from '$lib/components/SEO/SEO.svelte';
+	import { isAuthenticated, queryToShareStore, readiness } from '$lib/stores';
 	import * as Sentry from '@sentry/browser';
 	import { Integrations } from '@sentry/tracing';
 	import { onDestroy, onMount } from 'svelte';
@@ -32,41 +32,7 @@
 	onDestroy(() => splitClient?.destroy());
 </script>
 
-<svelte:head>
-	{#if isProd}
-		<script>
-			(function (h, o, t, j, a, r) {
-				h.hj =
-					h.hj ||
-					function () {
-						(h.hj.q = h.hj.q || []).push(arguments);
-					};
-				h._hjSettings = { hjid: 2801982, hjsv: 6 };
-				a = o.getElementsByTagName('head')[0];
-				r = o.createElement('script');
-				r.async = 1;
-				r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
-				a.appendChild(r);
-			})(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
-		</script>
-	{:else}
-		<script>
-			(function (h, o, t, j, a, r) {
-				h.hj =
-					h.hj ||
-					function () {
-						(h.hj.q = h.hj.q || []).push(arguments);
-					};
-				h._hjSettings = { hjid: 2632849, hjsv: 6 };
-				a = o.getElementsByTagName('head')[0];
-				r = o.createElement('script');
-				r.async = 1;
-				r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
-				a.appendChild(r);
-			})(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
-		</script>
-	{/if}
-</svelte:head>
+<Seo />
 
 <Header />
 <div class="tabs border-b px-8 border-b-gray-400">
