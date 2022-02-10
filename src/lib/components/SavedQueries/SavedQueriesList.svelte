@@ -1,8 +1,7 @@
 <script lang="ts">
 	import SavedQuery from '$lib/components/SavedQueries/SavedQuery.svelte';
 	import type { Query } from '$lib/stores';
-	import { savedQueriesStore } from '$lib/stores';
-	import { queryToShareStore } from '$lib/stores/queryToShare';
+	import { queryToShareStore, savedQueriesStore } from '$lib/stores';
 	import { search } from 'fast-fuzzy';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';

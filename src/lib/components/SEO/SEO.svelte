@@ -1,16 +1,29 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { seo } from '$lib/stores';
-	import { get } from 'svelte/store';
+	import { onDestroy } from 'svelte';
 	let isProd = process.env.NODE_ENV === 'production';
 
 	const {
 		url: { pathname, host, protocol }
 	} = $page;
-	const description = get(seo).description;
-	const title = get(seo).title;
+	let description = $seo.description;
+	let title = $seo.title;
+	let unsubscribe;
+
+	$: {
+		unsubscribe = seo.subscribe((value) => {
+			description = value.description;
+			title = value.title;
+		});
+	}
+
 	let url = `${protocol}//${host}${pathname}`;
 	let image = `${protocol}//${host}/OG.png`;
+
+	onDestroy(() => {
+		unsubscribe?.();
+	});
 </script>
 
 <svelte:head>

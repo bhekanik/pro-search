@@ -80,7 +80,10 @@
 </script>
 
 <header class="flex justify-between align-center px-8 py-4">
-	<h1 class="text-2xl md:text-4xl text-left bg-transparent font-medium">Pro-Search</h1>
+	<div class="flex gap-2 items-center justify-center">
+		<img class="w-10 h-10" src="/logo_512.png" alt="logo" />
+		<h1 class="text2xl md:text-4xl text-left bg-transparent font-medium">Pro-Search</h1>
+	</div>
 
 	<div class="flex gap-2 items-center">
 		<SettingsModal />

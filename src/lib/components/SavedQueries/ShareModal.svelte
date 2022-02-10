@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { generateQueryUrl } from '$lib/utils/generateAndGo';
+	import QRCode from 'qrcode';
+	import QrGenerator from '../QRGenerator.svelte';
 
 	export let query;
 
@@ -25,6 +27,7 @@
 				text: 'Query Title',
 				url: link
 			});
+			console.log(await QRCode.toDataURL(link));
 		} catch (error) {
 			console.log('error:', error);
 		}
@@ -34,11 +37,16 @@
 <input on:click={onOpen} type="checkbox" id={`share-modal-btn-${query.id}`} class="modal-toggle" />
 <div class="modal">
 	<div class="modal-box">
-		<div class="w-full flex gap-2">
-			<input type="text" class="input input-sm input-bordered w-full" readonly value={link} />
-			<button on:click={handleCopy} class="btn btn-outline btn-sm">Copy</button>
+		<div class="flex gap-2">
+			<QrGenerator {link} />
+			<div class="flex-1">
+				<div class="w-full flex gap-2">
+					<input type="text" class="input input-sm input-bordered w-full" readonly value={link} />
+					<button on:click={handleCopy} class="btn btn-outline btn-sm">Copy</button>
+				</div>
+				<p class="text-sm w-full px-2">{copiedText}</p>
+			</div>
 		</div>
-		<p class="text-sm w-full px-2">{copiedText}</p>
 
 		<div class="modal-action">
 			<button

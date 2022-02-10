@@ -2,10 +2,13 @@
 	import Recipes from '$lib/components/Recipes/Recipes.svelte';
 	import SavedQueriesList from '$lib/components/SavedQueries/SavedQueriesList.svelte';
 	import { isAuthenticated, seo } from '$lib/stores';
+	import { onMount } from 'svelte';
 
-	seo.set({
-		title: 'Pro-Search | Recipes',
-		description: 'Advanced search query builder'
+	onMount(() => {
+		seo.set({
+			title: 'Pro-Search | Recipes',
+			description: 'Advanced search query builder'
+		});
 	});
 </script>
 

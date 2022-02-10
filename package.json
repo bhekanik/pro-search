@@ -55,6 +55,7 @@
 		"fast-fuzzy": "^1.11.1",
 		"firebase": "^9.6.6",
 		"logrocket": "^2.1.3",
+		"qrcode": "^1.5.0",
 		"theme-change": "^2.0.2",
 		"uuid": "^8.3.2"
 	},

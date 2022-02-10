@@ -5,6 +5,7 @@
 	import SearchBar from '$lib/components/SearchBar/SearchBar.svelte';
 	import SearchProvider from '$lib/components/SearchProvider/SearchProvider.svelte';
 	import { isAuthenticated, seo } from '$lib/stores';
+	import { onMount } from 'svelte';
 
 	let url = '';
 
@@ -31,9 +32,11 @@
 		}
 	};
 
-	seo.set({
-		title: 'Pro-Search',
-		description: 'Advanced search query builder'
+	onMount(() => {
+		seo.set({
+			title: 'Pro-Search',
+			description: 'Advanced search query builder'
+		});
 	});
 </script>
 

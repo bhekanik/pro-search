@@ -4,17 +4,13 @@
 	import type { Query } from '$lib/stores';
 	import { queryToShareStore, savedQueriesStore, seo } from '$lib/stores';
 	import { search } from 'fast-fuzzy';
+	import { onMount } from 'svelte';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
 	let savedQueries: Query[] = [];
 	let filteredQueries: Query[] = [];
 
 	let searchTerm = '';
-
-	seo.set({
-		title: 'Pro-Search | Saved Queries',
-		description: 'Advanced search query builder'
-	});
 
 	const handleShare = (id: string) => {
 		const queryToShare = savedQueries.find((query) => query.id === id);
@@ -39,9 +35,11 @@
 		element.focus();
 	}
 
-	seo.set({
-		title: 'Pro-Search | Recipes',
-		description: 'Advanced search query builder'
+	onMount(() => {
+		seo.set({
+			title: 'Pro-Search | Saved Queries',
+			description: 'Advanced search query builder'
+		});
 	});
 </script>
 
