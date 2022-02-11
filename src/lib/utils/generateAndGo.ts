@@ -1,17 +1,20 @@
+import { initFirebase } from '$lib/app/auth/initFirebase';
 import type { FilterType } from '$lib/app/types/filters';
 import { filtersThatDontRequireSearchTerm } from '$lib/app/types/filters';
 import { formatQuery } from '$lib/components/Filters/utils/formatQuery';
-import type { Query } from '$lib/stores';
 import {
+	firebaseAuth,
 	isAuthenticated as isAuthenticatedStore,
+	Query,
 	queryStore,
 	savedQueriesStore,
 	SAVED_QUERIES_KEY
 } from '$lib/stores';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { get } from 'svelte/store';
 import { v4 as uuidv4 } from 'uuid';
 
-const saveNewQuery = (currentSavedQueries: Query[], query: Query) => {
+const saveNewQuery = async (currentSavedQueries: Query[], query: Query) => {
 	const newQuery = {
 		...query,
 		id: uuidv4(),
@@ -19,13 +22,18 @@ const saveNewQuery = (currentSavedQueries: Query[], query: Query) => {
 		name: query.name || `Untitled Query - ${new Date().toUTCString()}`
 	};
 	const newSavedQueries = [...currentSavedQueries, newQuery];
+	const { db } = await initFirebase();
 
-	window.localStorage?.setItem(SAVED_QUERIES_KEY, JSON.stringify(newSavedQueries));
+	await setDoc(
+		doc(db, SAVED_QUERIES_KEY, get(firebaseAuth).user.uid),
+		{ data: newSavedQueries },
+		{ merge: true }
+	);
 
 	savedQueriesStore.set(newSavedQueries);
 };
 
-export function updateSavedQueries(options?: { query?: Query }): void {
+export async function updateSavedQueries(options?: { query?: Query }): Promise<void> {
 	const query = options.query || get(queryStore);
 	const isAuthenticated = get(isAuthenticatedStore);
 
@@ -33,8 +41,12 @@ export function updateSavedQueries(options?: { query?: Query }): void {
 		return;
 	}
 
+	const { db } = await initFirebase();
+
 	// Skip saving if the query is equal to the first saved query
-	const currentSavedQueries = JSON.parse(window.localStorage?.getItem(SAVED_QUERIES_KEY) || '[]');
+	const currentSavedQueries =
+		(await getDoc(doc(db, SAVED_QUERIES_KEY, get(firebaseAuth).user.uid))).data()?.data ?? [];
+
 	const newSavedQueries = [...currentSavedQueries];
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const { id, createdAt, ...queryWithoutIdAndDate } = query;

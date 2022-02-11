@@ -2,9 +2,17 @@
 	import { initFirebase } from '$lib/app/auth/initFirebase';
 	import { splitClient } from '$lib/app/splitClient';
 	import SettingsModal from '$lib/components/SettingsModal/SettingsModal.svelte';
-	import { authReadiness, firebaseAuth as firebaseAuthStore, isAuthenticated } from '$lib/stores';
+	import {
+		authReadiness,
+		configStore,
+		firebaseAuth as firebaseAuthStore,
+		isAuthenticated,
+		savedQueriesStore,
+		SAVED_QUERIES_KEY
+	} from '$lib/stores';
 	import 'firebase/auth';
 	import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
+	import { doc, getDoc } from 'firebase/firestore';
 	import LogRocket from 'logrocket';
 	import { onDestroy, onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
@@ -22,14 +30,20 @@
 			const firebase = await initFirebase();
 			auth = firebase.auth;
 
-			if ($firebaseAuthStore.user) {
-				LogRocket.identify($firebaseAuthStore.user.email || $firebaseAuthStore.user.displayName, {
-					name: $firebaseAuthStore.user.displayName,
-					email: $firebaseAuthStore.user.email
-				});
-			}
+			onAuthStateChanged(auth, async (user) => {
+				if (user) {
+					LogRocket.identify(user.email || user.displayName, {
+						name: user.displayName,
+						email: user.email
+					});
 
-			onAuthStateChanged(auth, (user) => {
+					const usersSnapshot = await getDoc(doc(firebase.db, 'users', user.uid));
+					const savedQueriesSnapshot = await getDoc(doc(firebase.db, SAVED_QUERIES_KEY, user.uid));
+
+					savedQueriesStore.set(savedQueriesSnapshot.data()?.data || []);
+					configStore.set(usersSnapshot.data().config || { autosaveQueries: false });
+				}
+
 				firebaseAuthStore.set({
 					isLoggedIn: !!user,
 					user,

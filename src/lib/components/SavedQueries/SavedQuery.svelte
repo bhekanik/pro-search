@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { queryStore, savedQueriesStore, SAVED_QUERIES_KEY } from '$lib/stores';
+	import { initFirebase } from '$lib/app/auth/initFirebase';
+	import { firebaseAuth, queryStore, savedQueriesStore, SAVED_QUERIES_KEY } from '$lib/stores';
 	import type { Filter } from '$lib/stores/query';
+	import { doc, getDoc, setDoc } from 'firebase/firestore';
+	import { get } from 'svelte/store';
 
 	export let query;
 	export let handleShare: (id: string) => void;
@@ -12,10 +15,20 @@
 			''
 		);
 
-	const handleDelete = () => {
-		const savedQueries = JSON.parse(window.localStorage?.getItem(SAVED_QUERIES_KEY) || '[]');
+	const handleDelete = async () => {
+		const { db } = await initFirebase();
+
+		const savedQueries =
+			(await getDoc(doc(db, SAVED_QUERIES_KEY, get(firebaseAuth).user.uid))).data()?.data ?? [];
+
 		const newSavedQueries = savedQueries.filter((savedQuery) => savedQuery.id !== query.id);
-		window.localStorage?.setItem(SAVED_QUERIES_KEY, JSON.stringify(newSavedQueries));
+
+		await setDoc(
+			doc(db, SAVED_QUERIES_KEY, $firebaseAuth.user.uid),
+			{ data: newSavedQueries },
+			{ merge: true }
+		);
+
 		savedQueriesStore.set(newSavedQueries);
 		return newSavedQueries;
 	};

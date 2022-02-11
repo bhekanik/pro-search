@@ -1,9 +1,17 @@
 <script>
-	import { configStore, isAuthenticated } from '$lib/stores';
+	import { initFirebase } from '$lib/app/auth/initFirebase';
+	import { configStore, firebaseAuth, isAuthenticated } from '$lib/stores';
+	import { doc, setDoc } from 'firebase/firestore';
 	import BaseOption from './BaseOption.svelte';
 
-	function handleAccept() {
-		window.localStorage?.setItem('config', JSON.stringify($configStore));
+	async function handleAccept() {
+		const { db } = await initFirebase();
+
+		await setDoc(
+			doc(db, 'users', $firebaseAuth.user.uid),
+			{ config: $configStore },
+			{ merge: true }
+		);
 	}
 </script>
 

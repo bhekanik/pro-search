@@ -6,6 +6,4 @@ interface Config {
 
 export type ConfigOption = keyof Config;
 
-export const configStore = writable<Config>(
-	JSON.parse(globalThis.localStorage?.getItem('config') || '{"autosaveQueries":false}')
-);
+export const configStore = writable<Config>({ autosaveQueries: false });
