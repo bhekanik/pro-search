@@ -1,16 +1,10 @@
 <script lang="ts">
+	import { initFirebase } from '$lib/app/auth/initFirebase';
 	import { splitClient } from '$lib/app/splitClient';
 	import SettingsModal from '$lib/components/SettingsModal/SettingsModal.svelte';
 	import { authReadiness, firebaseAuth as firebaseAuthStore, isAuthenticated } from '$lib/stores';
-	import { getApps, initializeApp } from 'firebase/app';
 	import 'firebase/auth';
-	import {
-		getAuth,
-		GoogleAuthProvider,
-		onAuthStateChanged,
-		signInWithPopup,
-		signOut
-	} from 'firebase/auth';
+	import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
 	import LogRocket from 'logrocket';
 	import { onDestroy, onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
@@ -21,55 +15,43 @@
 		LogRocket.init('uetpov/pro-search');
 	}
 
-	let firebaseApp;
-	let firebaseAuth;
+	let auth;
 
 	onMount(() => {
-		const firebaseConfig = {
-			apiKey: import.meta.env.VITE_API_KEY as string,
-			authDomain: import.meta.env.VITE_AUTH_DOMAIN as string,
-			projectId: import.meta.env.VITE_PROJECT_ID as string,
-			storageBucket: import.meta.env.VITE_STORAGE_BUCKET as string,
-			messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID as string,
-			appId: import.meta.env.VITE_APP_ID as string,
-			measurementId: import.meta.env.VITE_MEASUREMENT_ID as string
-		};
+		(async () => {
+			const firebase = await initFirebase();
+			auth = firebase.auth;
 
-		// Initialize Firebase
-		firebaseApp = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-
-		firebaseAuth = getAuth(firebaseApp);
-
-		onAuthStateChanged(firebaseAuth, (user) => {
-			console.log('user:', user);
-			firebaseAuthStore.set({
-				isLoggedIn: !!user,
-				user,
-				firebaseControlled: true
-			});
-
-			isAuthenticated.set(!!user);
-
-			if (user) {
-				LogRocket.identify(user.email || user.displayName, {
-					name: user.displayName,
-					email: user.email
+			if ($firebaseAuthStore.user) {
+				LogRocket.identify($firebaseAuthStore.user.email || $firebaseAuthStore.user.displayName, {
+					name: $firebaseAuthStore.user.displayName,
+					email: $firebaseAuthStore.user.email
 				});
 			}
 
-			authReadiness.set(true);
-		});
+			onAuthStateChanged(auth, (user) => {
+				firebaseAuthStore.set({
+					isLoggedIn: !!user,
+					user,
+					firebaseControlled: true
+				});
+
+				isAuthenticated.set(!!user);
+
+				authReadiness.set(true);
+			});
+		})();
 
 		themeChange(false);
 	});
 
 	function login() {
 		const provider = new GoogleAuthProvider();
-		signInWithPopup(firebaseAuth, provider);
+		signInWithPopup(auth, provider);
 	}
 
 	function logout() {
-		signOut(firebaseAuth);
+		signOut(auth);
 	}
 
 	onDestroy(() => splitClient?.destroy());
