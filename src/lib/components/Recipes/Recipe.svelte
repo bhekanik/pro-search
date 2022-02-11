@@ -18,7 +18,6 @@
 	let baseUrl = 'https://www.google.com/search?q=';
 	let handleInputFuncs: ((e: Event) => void)[] = [];
 	let values: string[] = [];
-	let readyHoverColor = '';
 
 	onMount(() => {
 		baseUrl = searchProvidersWithoutAll.find((item) => item.name === searchProvider).url;

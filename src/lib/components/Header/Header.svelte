@@ -1,8 +1,16 @@
 <script lang="ts">
-	import auth from '$lib/app/auth/authService';
 	import { splitClient } from '$lib/app/splitClient';
 	import SettingsModal from '$lib/components/SettingsModal/SettingsModal.svelte';
-	import { authReadiness, isAuthenticated, user } from '$lib/stores';
+	import { authReadiness, firebaseAuth as firebaseAuthStore, isAuthenticated } from '$lib/stores';
+	import { getApps, initializeApp } from 'firebase/app';
+	import 'firebase/auth';
+	import {
+		getAuth,
+		GoogleAuthProvider,
+		onAuthStateChanged,
+		signInWithPopup,
+		signOut
+	} from 'firebase/auth';
 	import LogRocket from 'logrocket';
 	import { onDestroy, onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
@@ -13,67 +21,55 @@
 		LogRocket.init('uetpov/pro-search');
 	}
 
-	let auth0Client;
+	let firebaseApp;
+	let firebaseAuth;
 
 	onMount(() => {
-		themeChange(false);
-		(async () => {
-			auth0Client = await auth.createClient();
+		const firebaseConfig = {
+			apiKey: import.meta.env.VITE_API_KEY as string,
+			authDomain: import.meta.env.VITE_AUTH_DOMAIN as string,
+			projectId: import.meta.env.VITE_PROJECT_ID as string,
+			storageBucket: import.meta.env.VITE_STORAGE_BUCKET as string,
+			messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID as string,
+			appId: import.meta.env.VITE_APP_ID as string,
+			measurementId: import.meta.env.VITE_MEASUREMENT_ID as string
+		};
 
-			if (auth0Client) {
-				const authState = await auth0Client.isAuthenticated();
-				isAuthenticated.set(authState);
-				const userState = await auth0Client.getUser();
-				user.set(userState);
-				if (userState)
-					LogRocket.identify(userState.email, {
-						name: userState.name,
-						email: userState.email
-					});
+		// Initialize Firebase
+		firebaseApp = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+
+		firebaseAuth = getAuth(firebaseApp);
+
+		onAuthStateChanged(firebaseAuth, (user) => {
+			console.log('user:', user);
+			firebaseAuthStore.set({
+				isLoggedIn: !!user,
+				user,
+				firebaseControlled: true
+			});
+
+			isAuthenticated.set(!!user);
+
+			if (user) {
+				LogRocket.identify(user.email || user.displayName, {
+					name: user.displayName,
+					email: user.email
+				});
 			}
 
-			if ($isAuthenticated) {
-				authReadiness.set(true);
-				// show the gated content
-				return;
-			}
-
-			// NEW - check for the code and state parameters
-			const windowLocationSearch = window.location.search;
-			if (windowLocationSearch.includes('code=') && windowLocationSearch.includes('state=')) {
-				// Process the login state
-				await auth.handleRedirectCallback(auth0Client);
-
-				if (auth0Client) {
-					const authState = await auth0Client.isAuthenticated();
-					isAuthenticated.set(authState);
-					const userState = await auth0Client.getUser();
-					user.set(userState);
-					if (userState)
-						LogRocket.identify(userState.email, {
-							name: userState.name,
-							email: userState.email
-						});
-				}
-
-				// Use replaceState to redirect the user away and remove the querystring parameters
-				window.history.replaceState({}, document.title, '/');
-			}
 			authReadiness.set(true);
-		})();
+		});
+
+		themeChange(false);
 	});
 
 	function login() {
-		// auth.loginWithRedirect(auth0Client, {
-		// 	redirect_uri: window.location.origin
-		// });
-		auth.loginWithPopup(auth0Client);
+		const provider = new GoogleAuthProvider();
+		signInWithPopup(firebaseAuth, provider);
 	}
 
 	function logout() {
-		auth.logout(auth0Client, {
-			returnTo: window.location.origin
-		});
+		signOut(firebaseAuth);
 	}
 
 	onDestroy(() => splitClient?.destroy());
@@ -88,11 +84,11 @@
 	<div class="flex gap-2 items-center">
 		<SettingsModal />
 		<!-- <button data-toggle-theme="dark,light" data-act-class="ACTIVECLASS">Theme</button> -->
-		{#if $isAuthenticated}
+		{#if $firebaseAuthStore.isLoggedIn}
 			<div class="dropdown dropdown-end">
 				<div tabindex="0" class="avatar">
 					<div class="rounded-full w-8 h-8 ring ring-primary">
-						<img alt="profile" src={$user?.picture} />
+						<img alt="profile" src={$firebaseAuthStore.user?.photoURL} />
 					</div>
 				</div>
 
@@ -100,9 +96,9 @@
 					tabindex="0"
 					class="menu dropdown-content rounded-box w-52 bordered shadow-lg bg-slate-600"
 				>
-					{#if $user?.email}
+					{#if $firebaseAuthStore.user.email}
 						<li>
-							<span>{$user?.email}</span>
+							<span>{$firebaseAuthStore.user?.email}</span>
 						</li>
 					{/if}
 					<li>
