@@ -1,31 +1,36 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { initFirebase } from '$lib/app/auth/initFirebase';
-	import type { AuthProvider } from 'firebase/auth';
 	import {
+		AuthProvider,
 		createUserWithEmailAndPassword,
 		GoogleAuthProvider,
 		signInWithEmailAndPassword,
-		signInWithRedirect,
+		signInWithPopup,
 		TwitterAuthProvider
 	} from 'firebase/auth';
 
-	let loginError;
-	let registerError;
+	let loginError = '';
+	let registerError = '';
 	let closeModalButton = null;
+
+	function closeAndGoHome() {
+		loginError = '';
+		registerError = '';
+		closeModalButton.click();
+		goto('/');
+	}
 
 	async function handleSubmit(e) {
 		const { auth } = await initFirebase();
 
 		const formData = new FormData(e.target);
 		const formValues = Object.fromEntries(formData.entries());
+		console.log('formValues:', formValues);
 
 		signInWithEmailAndPassword(auth, formValues.email as string, formValues.password as string)
 			.then((user) => {
-				console.log('user:', user);
-				console.log('success');
-				closeModalButton.click();
-				goto('/');
+				closeAndGoHome();
 			})
 			.catch((error) => {
 				console.log('errorMessage:', error.message);
@@ -36,10 +41,7 @@
 						formValues.password as string
 					)
 						.then((user) => {
-							console.log('user:', user);
-							console.log('success');
-							closeModalButton.click();
-							goto('/');
+							closeAndGoHome();
 						})
 						.catch((error) => {
 							console.log('error:', error.message);
@@ -54,7 +56,8 @@
 	async function handleSocialAuth(provider: AuthProvider) {
 		const firebase = await initFirebase();
 		const auth = firebase.auth;
-		signInWithRedirect(auth, provider);
+		closeAndGoHome();
+		signInWithPopup(auth, provider);
 	}
 </script>
 
@@ -93,10 +96,12 @@
 			<p class="w-full">Or use:</p>
 			<div class="flex w-full gap-2">
 				<button
+					type="button"
 					on:click={() => handleSocialAuth(new GoogleAuthProvider())}
 					class="btn btn-primary flex-1">Google</button
 				>
 				<button
+					type="button"
 					on:click={() => handleSocialAuth(new TwitterAuthProvider())}
 					class="btn btn-primary flex-1">Twitter</button
 				>
