@@ -89,9 +89,19 @@
 		<!-- <button data-toggle-theme="dark,light" data-act-class="ACTIVECLASS">Theme</button> -->
 		{#if $firebaseAuthStore.isLoggedIn}
 			<div class="dropdown dropdown-end">
-				<div tabindex="0" class="avatar">
+				<div
+					tabindex="0"
+					class={`avatar ${!$firebaseAuthStore.user?.photoURL ? 'placeholder' : ''}`}
+				>
 					<div class="rounded-full w-8 h-8 ring ring-primary">
-						<img alt="profile" src={$firebaseAuthStore.user?.photoURL} />
+						{#if $firebaseAuthStore.user?.photoURL}
+							<img alt="profile" src={$firebaseAuthStore.user.photoURL} />
+						{:else}
+							<span class="text-s"
+								>{$firebaseAuthStore.user.displayName?.charAt(0) ||
+									$firebaseAuthStore.user.email?.charAt(0)}</span
+							>
+						{/if}
 					</div>
 				</div>
 
