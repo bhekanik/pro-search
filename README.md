@@ -21,6 +21,7 @@ To learn more about what is possible in terms of filters, etc. Here are some hel
 - [Google Search Operators: The Complete List (42 Advanced Operators)](https://ahrefs.com/blog/google-advanced-search-operators/)
 - [Google Search Operators: Making Advanced Search Easier](https://serpstat.com/blog/google-search-operators-making-advanced-search-easier/)
 - [Google search parameters resources](http://devcoma.blogspot.com/2017/04/google-search-parameters-resources.html)
+- [Twitter advanced search operators](https://github.com/igorbrigadir/twitter-advanced-search)
 
 ## Contributing
 

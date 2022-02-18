@@ -16,6 +16,7 @@
 	import LogRocket from 'logrocket';
 	import { onDestroy, onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
+	import AuthModal from '../AuthModal/AuthModal.svelte';
 
 	let isProd = process.env.NODE_ENV === 'production';
 
@@ -31,6 +32,16 @@
 			auth = firebase.auth;
 
 			onAuthStateChanged(auth, async (user) => {
+				firebaseAuthStore.set({
+					isLoggedIn: !!user,
+					user,
+					firebaseControlled: true
+				});
+
+				isAuthenticated.set(!!user);
+
+				authReadiness.set(true);
+
 				if (user) {
 					LogRocket.identify(user.email || user.displayName, {
 						name: user.displayName,
@@ -41,18 +52,8 @@
 					const savedQueriesSnapshot = await getDoc(doc(firebase.db, SAVED_QUERIES_KEY, user.uid));
 
 					savedQueriesStore.set(savedQueriesSnapshot.data()?.data || []);
-					configStore.set(usersSnapshot.data().config || { autosaveQueries: false });
+					configStore.set(usersSnapshot.data()?.config || { autosaveQueries: false });
 				}
-
-				firebaseAuthStore.set({
-					isLoggedIn: !!user,
-					user,
-					firebaseControlled: true
-				});
-
-				isAuthenticated.set(!!user);
-
-				authReadiness.set(true);
 			});
 		})();
 
@@ -79,6 +80,7 @@
 
 	<div class="flex gap-2 items-center">
 		<SettingsModal />
+		<AuthModal />
 		<!-- <button data-toggle-theme="dark,light" data-act-class="ACTIVECLASS">Theme</button> -->
 		{#if $firebaseAuthStore.isLoggedIn}
 			<div class="dropdown dropdown-end">
@@ -106,9 +108,10 @@
 				</ul>
 			</div>
 		{:else}
-			<button on:click={login} class="btn btn-sm btn-ghost">
+			<label for="auth-modal" class="btn btn-sm btn-ghost">Login</label>
+			<!-- <button on:click={login} class="btn btn-sm btn-ghost">
 				{'Login/Sign Up'}
-			</button>
+			</button> -->
 		{/if}
 	</div>
 </header>
