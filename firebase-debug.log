@@ -1,0 +1,18 @@
+[debug] [2022-02-18T17:01:52.010Z] ----------------------------------------------------------------------
+[debug] [2022-02-18T17:01:52.012Z] Command:       /home/bk/.nvm/versions/node/v16.10.0/bin/node /home/bk/.nvm/versions/node/v16.10.0/bin/firebase deploy --only functions
+[debug] [2022-02-18T17:01:52.012Z] CLI Version:   10.2.1
+[debug] [2022-02-18T17:01:52.012Z] Platform:      linux
+[debug] [2022-02-18T17:01:52.012Z] Node Version:  v16.10.0
+[debug] [2022-02-18T17:01:52.013Z] Time:          Fri Feb 18 2022 17:01:52 GMT+0000 (Greenwich Mean Time)
+[debug] [2022-02-18T17:01:52.013Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-02-18T17:01:52.015Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2022-02-18T17:01:52.091Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-02-18T17:01:52.091Z] > authorizing via signed-in user (bhekanik@gmail.com)
+[debug] [2022-02-18T17:01:52.091Z] [iam] checking project pro-search-app for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2022-02-18T17:01:52.091Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/pro-search-app:testIamPermissions [none]
+[debug] [2022-02-18T17:01:52.091Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/pro-search-app:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-02-18T17:01:52.671Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/pro-search-app:testIamPermissions 200
+[debug] [2022-02-18T17:01:52.671Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/pro-search-app:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-02-18T17:01:52.672Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/pro-search-app/serviceAccounts/pro-search-app@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2022-02-18T17:01:52.672Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/pro-search-app/serviceAccounts/pro-search-app@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}

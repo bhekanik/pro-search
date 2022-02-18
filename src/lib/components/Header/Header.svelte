@@ -11,7 +11,12 @@
 		SAVED_QUERIES_KEY
 	} from '$lib/stores';
 	import 'firebase/auth';
-	import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
+	import {
+		GoogleAuthProvider,
+		onAuthStateChanged,
+		signInWithRedirect,
+		signOut
+	} from 'firebase/auth';
 	import { doc, getDoc } from 'firebase/firestore';
 	import LogRocket from 'logrocket';
 	import { onDestroy, onMount } from 'svelte';
@@ -62,7 +67,7 @@
 
 	function login() {
 		const provider = new GoogleAuthProvider();
-		signInWithPopup(auth, provider);
+		signInWithRedirect(auth, provider);
 	}
 
 	function logout() {
@@ -108,10 +113,10 @@
 				</ul>
 			</div>
 		{:else}
-			<label for="auth-modal" class="btn btn-sm btn-ghost">Login</label>
-			<!-- <button on:click={login} class="btn btn-sm btn-ghost">
+			<label for="auth-modal" class="btn btn-sm btn-ghost">Login/Register</label>
+			<button on:click={login} class="btn btn-sm btn-ghost">
 				{'Login/Sign Up'}
-			</button> -->
+			</button>
 		{/if}
 	</div>
 </header>
