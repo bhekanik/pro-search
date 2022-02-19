@@ -12,10 +12,12 @@
 	} from '$lib/stores';
 	import 'firebase/auth';
 	import {
+		EmailAuthProvider,
 		GoogleAuthProvider,
 		onAuthStateChanged,
 		signInWithRedirect,
-		signOut
+		signOut,
+		TwitterAuthProvider
 	} from 'firebase/auth';
 	import { doc, getDoc } from 'firebase/firestore';
 	import LogRocket from 'logrocket';
@@ -30,6 +32,9 @@
 	}
 
 	let auth;
+	let ui;
+	let uiConfig;
+	let closeModalButton = null;
 
 	onMount(() => {
 		(async () => {
@@ -60,6 +65,30 @@
 					configStore.set(usersSnapshot.data()?.config || { autosaveQueries: false });
 				}
 			});
+
+			const firebaseui = await import('firebaseui');
+			ui = new firebaseui.auth.AuthUI(auth);
+			uiConfig = {
+				callbacks: {
+					signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+						if (authResult?.additionalUserInfo?.providerId === 'password') closeModalButton.click();
+						// User successfully signed in.
+						// Return type determines whether we continue the redirect automatically
+						// or whether we leave that to developer to handle.
+						return false;
+					}
+				},
+				signInOptions: [
+					// List of OAuth providers supported.
+					EmailAuthProvider.PROVIDER_ID,
+					GoogleAuthProvider.PROVIDER_ID,
+					TwitterAuthProvider.PROVIDER_ID
+				],
+				credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO
+			};
+			// if (ui.isPendingRedirect()) {
+			ui.start('#firebaseui-auth-container', uiConfig);
+			// }
 		})();
 
 		themeChange(false);
@@ -72,6 +101,7 @@
 
 	function logout() {
 		signOut(auth);
+		ui.start('#firebaseui-auth-container', uiConfig);
 	}
 
 	onDestroy(() => splitClient?.destroy());
@@ -85,7 +115,7 @@
 
 	<div class="flex gap-2 items-center">
 		<SettingsModal />
-		<AuthModal />
+		<AuthModal bind:closeModalButton />
 		<!-- <button data-toggle-theme="dark,light" data-act-class="ACTIVECLASS">Theme</button> -->
 		{#if $firebaseAuthStore.isLoggedIn}
 			<div class="dropdown dropdown-end">
@@ -99,7 +129,7 @@
 						{:else}
 							<span class="text-s"
 								>{$firebaseAuthStore.user.displayName?.charAt(0) ||
-									$firebaseAuthStore.user.email?.charAt(0)}</span
+									$firebaseAuthStore.user.email?.charAt(0).toUpperCase()}</span
 							>
 						{/if}
 					</div>

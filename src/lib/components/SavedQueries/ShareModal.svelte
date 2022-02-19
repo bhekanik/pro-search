@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { generateQueryUrl } from '$lib/utils/generateAndGo';
-	import QRCode from 'qrcode';
 	import QrGenerator from '../QRGenerator.svelte';
 
 	export let query;
@@ -27,7 +26,6 @@
 				text: 'Query Title',
 				url: link
 			});
-			console.log(await QRCode.toDataURL(link));
 		} catch (error) {
 			console.log('error:', error);
 		}
