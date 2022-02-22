@@ -32,20 +32,51 @@ const queryParamFilters = [
  */
 export const formatQuery = (options?: { query?: Query }): string => {
 	const query = options.query || get(queryStore);
+	const {
+		provider: { name: searchProviderName }
+	} = query;
 
-	// put the filters together
-	const prefix = Object.entries(query.filters)
-		.filter((filter) => !queryParamFilters.includes(filter[0]))
-		.reduce((prev, curr) => `${prev}${curr[1].formatted}`, '');
+	if (searchProviderName === 'Google') {
+		// put the filters together
+		const prefix = Object.entries(query.filters)
+			.filter((filter) => !queryParamFilters.includes(filter[0]))
+			.reduce((prev, curr) => `${prev}${curr[1].formatted}`, '');
 
-	const queryParams = Object.entries(query.filters)
-		.filter((filter) => queryParamFilters.includes(filter[0]))
-		.map((filter) => filter[1].formatted.trim())
-		.join('&');
+		const queryParams = Object.entries(query.filters)
+			.filter((filter) => queryParamFilters.includes(filter[0]))
+			.map((filter) => filter[1].formatted.trim())
+			.join('&');
 
-	const formattedQuery = `${prefix}${query.searchTerm}${
-		queryParams.trim() ? `&${queryParams}` : ''
-	}`;
+		const formattedQuery = `${prefix}${query.searchTerm}${
+			queryParams.trim() ? `&${queryParams}` : ''
+		}`;
 
-	return formattedQuery;
+		return formattedQuery;
+	} else if (searchProviderName === 'Bing') {
+		// put the filters together
+		const prefix = Object.entries(query.filters)
+			.filter((filter) => !['save'].includes(filter[0]))
+			.reduce((prev, curr) => `${prev}${curr[1].formatted}`, '');
+
+		const queryParams = Object.entries(query.filters)
+			.filter((filter) => ['save'].includes(filter[0]))
+			.map((filter) => filter[1].formatted.trim())
+			.join('&');
+
+		const formattedQuery = `${prefix}${query.searchTerm}${
+			queryParams.trim() ? `&${queryParams}` : ''
+		}`;
+
+		return formattedQuery;
+	} else {
+		// put the filters together
+		const prefix = Object.entries(query.filters).reduce(
+			(prev, curr) => `${prev}${curr[1].formatted}`,
+			''
+		);
+
+		const formattedQuery = `${prefix}${query.searchTerm}`;
+
+		return formattedQuery;
+	}
 };

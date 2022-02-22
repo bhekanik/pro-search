@@ -79,10 +79,11 @@ export const generateQueryUrl = (
 
 	if (
 		!options.skipSearchTermCheck &&
-		query.searchTerm &&
+		!query.searchTerm &&
 		!filtersThatDontRequireSearchTerm.includes(options.type)
-	)
+	) {
 		return;
+	}
 
 	if (options.saveQuery) updateSavedQueries();
 
