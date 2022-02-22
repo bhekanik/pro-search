@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ValueSelector from '$lib/components/FeatureSelector/ValueSelector.svelte';
-	import Filters from '$lib/components/Filters/Filters.svelte';
+	import Filters from '$lib/components/Filters/Google.svelte';
 	import SavedQueriesList from '$lib/components/SavedQueries/SavedQueriesList.svelte';
 	import SearchBar from '$lib/components/SearchBar/SearchBar.svelte';
 	import SearchProvider from '$lib/components/SearchProvider/SearchProvider.svelte';

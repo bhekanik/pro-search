@@ -6,7 +6,7 @@ export interface SearchProvider {
 
 export type SearchProviderName = 'Google' | 'Bing' | 'DuckDuckGo' | 'Yahoo';
 
-export const searchProvidersWithoutAll = [
+export const searchProvidersWithoutAll: SearchProvider[] = [
 	{
 		id: '1',
 		name: 'Google',
@@ -29,7 +29,7 @@ export const searchProvidersWithoutAll = [
 	}
 ];
 
-export const searchProvidersWithAll = [
+export const searchProvidersWithAll: SearchProvider[] = [
 	...searchProvidersWithoutAll,
 	{
 		id: '5',

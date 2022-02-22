@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { initFirebase } from '$lib/app/auth/initFirebase';
+	import { searchProvidersWithAll } from '$lib/app/config';
 	import { splitClient } from '$lib/app/splitClient';
 	import SettingsModal from '$lib/components/SettingsModal/SettingsModal.svelte';
 	import {
@@ -7,6 +8,7 @@
 		configStore,
 		firebaseAuth as firebaseAuthStore,
 		isAuthenticated,
+		queryStore,
 		savedQueriesStore,
 		SAVED_QUERIES_KEY
 	} from '$lib/stores';
@@ -19,7 +21,7 @@
 		signOut,
 		TwitterAuthProvider
 	} from 'firebase/auth';
-	import { doc, getDoc } from 'firebase/firestore';
+	import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 	import LogRocket from 'logrocket';
 	import { onDestroy, onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
@@ -35,6 +37,8 @@
 	let ui;
 	let uiConfig;
 	let closeModalButton = null;
+	let configUnsub;
+	let savedQueriesUnsub;
 
 	onMount(() => {
 		(async () => {
@@ -58,11 +62,19 @@
 						email: user.email
 					});
 
-					const usersSnapshot = await getDoc(doc(firebase.db, 'users', user.uid));
 					const savedQueriesSnapshot = await getDoc(doc(firebase.db, SAVED_QUERIES_KEY, user.uid));
 
-					savedQueriesStore.set(savedQueriesSnapshot.data()?.data || []);
-					configStore.set(usersSnapshot.data()?.config || { autosaveQueries: false });
+					savedQueriesUnsub = onSnapshot(doc(firebase.db, SAVED_QUERIES_KEY, user.uid), (doc) => {
+						savedQueriesStore.set(savedQueriesSnapshot.data().data || []);
+					});
+
+					configUnsub = onSnapshot(doc(firebase.db, 'users', user.uid), (doc) => {
+						configStore.set(doc.data().config);
+						queryStore.set({
+							...$queryStore,
+							provider: doc.data().config.defaultSearchProvider || searchProvidersWithAll[0]
+						});
+					});
 				}
 			});
 
@@ -104,7 +116,11 @@
 		ui.start('#firebaseui-auth-container', uiConfig);
 	}
 
-	onDestroy(() => splitClient?.destroy());
+	onDestroy(() => {
+		splitClient?.destroy();
+		configUnsub?.();
+		savedQueriesUnsub?.();
+	});
 </script>
 
 <header class="flex justify-between align-center px-8 py-4">
@@ -145,7 +161,8 @@
 						</li>
 					{/if}
 					<li>
-						<label for="my-modal-2" class="btn btn-sm btn-ghost border modal-button">Config</label>
+						<label for="my-modal-2" class="btn btn-sm btn-ghost border modal-button">Settings</label
+						>
 					</li>
 					<li>
 						<button class="btn btn-sm btn-ghost" on:click={logout}>Logout</button>

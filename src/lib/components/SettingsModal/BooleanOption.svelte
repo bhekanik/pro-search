@@ -1,12 +1,10 @@
 <script lang="ts">
-	import type { ConfigOption } from '$lib/stores';
-	import { configStore } from '$lib/stores';
 	import { slide } from 'svelte/transition';
 
 	export let enabled = false;
 	export let label = '';
 	export let textInputPlaceholder = '';
-	export let option: ConfigOption;
+	export let value: boolean;
 
 	export let hasInput = false;
 </script>
@@ -18,7 +16,7 @@
 			class="toggle toggle-primary"
 			name={`${label}-checkbox`}
 			id={`${label}-checkbox`}
-			bind:checked={$configStore[option]}
+			bind:checked={value}
 		/>
 		{label}
 	</label>
