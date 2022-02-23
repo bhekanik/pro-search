@@ -69,7 +69,7 @@
 					});
 
 					configUnsub = onSnapshot(doc(firebase.db, 'users', user.uid), (doc) => {
-						configStore.set(doc.data().config);
+						configStore.set({ ...$configStore, ...doc.data().config });
 						queryStore.set({
 							...$queryStore,
 							provider: doc.data().config.defaultSearchProvider || searchProvidersWithAll[0]
@@ -113,6 +113,19 @@
 
 	function logout() {
 		signOut(auth);
+
+		firebaseAuthStore.set({
+			isLoggedIn: false,
+			user: null,
+			firebaseControlled: false
+		});
+
+		isAuthenticated.set(false);
+
+		savedQueriesStore.set([]);
+
+		configStore.reset();
+
 		ui.start('#firebaseui-auth-container', uiConfig);
 	}
 
@@ -134,6 +147,7 @@
 		<AuthModal bind:closeModalButton />
 		<!-- <button data-toggle-theme="dark,light" data-act-class="ACTIVECLASS">Theme</button> -->
 		{#if $firebaseAuthStore.isLoggedIn}
+			<label for="my-modal-2" class="btn btn-sm btn-ghost border modal-button">Settings</label>
 			<div class="dropdown dropdown-end">
 				<div
 					tabindex="0"
@@ -160,17 +174,17 @@
 							<span>{$firebaseAuthStore.user?.email}</span>
 						</li>
 					{/if}
-					<li>
+					<!-- <li>
 						<label for="my-modal-2" class="btn btn-sm btn-ghost border modal-button">Settings</label
 						>
-					</li>
+					</li> -->
 					<li>
-						<button class="btn btn-sm btn-ghost" on:click={logout}>Logout</button>
+						<span on:click={logout}>Logout</span>
 					</li>
 				</ul>
 			</div>
 		{:else}
-			<label for="auth-modal" class="btn btn-sm btn-ghost">Login/Register</label>
+			<label for="auth-modal" class="btn btn-sm btn-ghost">Login / Sign Up</label>
 			<!-- <button on:click={login} class="btn btn-sm btn-ghost">
 				{'Login/Sign Up'}
 			</button> -->

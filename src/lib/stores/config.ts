@@ -9,10 +9,19 @@ interface Config {
 
 export type ConfigOption = keyof Config;
 
-export const configStore = writable<Config>({
+const defaultConfig = {
 	autosaveQueries: false,
 	defaultSearchProvider: searchProvidersWithAll[0],
 	queryPreview: false
-});
+};
+
+export const { subscribe, update, set } = writable<Config>({ ...defaultConfig });
+
+export const configStore = {
+	subscribe,
+	update,
+	set,
+	reset: (): void => set({ ...defaultConfig })
+};
 
 // add a listener to the firestore

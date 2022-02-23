@@ -64,6 +64,7 @@
 			>
 				<span class="input-label mr-4">Default Search Provider: </span>
 				<SearchProviderSelect
+					value={$configStore.defaultSearchProvider.id}
 					{searchProviders}
 					on:change={(e) => handleChange(e, searchProviders)}
 				/>

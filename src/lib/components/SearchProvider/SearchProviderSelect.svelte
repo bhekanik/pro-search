@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { SearchProvider } from '$lib/app/config/searchProviders';
-	import { queryStore } from '$lib/stores';
 
 	export let searchProviders: SearchProvider[] = [];
+	export let value: string;
 </script>
 
 <select
@@ -10,7 +10,7 @@
 	name="provider"
 	id="provider"
 	on:change
-	value={$queryStore.provider.id}
+	{value}
 >
 	{#each searchProviders as provider}
 		<option

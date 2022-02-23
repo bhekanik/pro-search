@@ -20,7 +20,7 @@
 	let values: string[] = [];
 
 	onMount(() => {
-		baseUrl = searchProvidersWithoutAll.find((item) => item.name === searchProvider).url;
+		baseUrl = searchProvidersWithoutAll.find((item) => item.name === searchProvider).url as string;
 
 		for (const [i, input] of inputs.entries()) {
 			state[i] = {
@@ -55,7 +55,7 @@
 	in:fade
 >
 	<div class="mb-2">
-		<h1 class={`font-medium text-lg ${textColor} whitespace-nowrap overflow-hidden text-ellipsis`}>
+		<h1 class={`font-medium text-lg ${textColor}`}>
 			{name}
 		</h1>
 		<div class="p-2">

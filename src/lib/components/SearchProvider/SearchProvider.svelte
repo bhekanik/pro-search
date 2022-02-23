@@ -27,6 +27,7 @@
 	let:feature={searchProviders}
 >
 	<SearchProviderSelect
+		value={$queryStore.provider?.id}
 		{searchProviders}
 		on:change={(e) => handleProviderChange(e, searchProviders)}
 	/>
