@@ -7,8 +7,6 @@
 	import SearchProviderSelect from '../SearchProvider/SearchProviderSelect.svelte';
 	import BooleanOption from './BooleanOption.svelte';
 
-	let defaultSearchProvier;
-
 	async function handleAccept() {
 		const { db } = await initFirebase();
 
@@ -20,13 +18,22 @@
 	}
 
 	function handleChange(e: Event, searchProviders) {
-		defaultSearchProvier = searchProviders.find((searchProvider) => {
+		searchProviders.find((searchProvider) => {
 			if (searchProvider.id === (e.target as HTMLSelectElement).value) {
 				configStore.set({
 					...$configStore,
 					defaultSearchProvider: searchProvider
 				});
 			}
+		});
+	}
+
+	function handleCheckboxChange(e: Event) {
+		const { checked, name } = e.target as HTMLInputElement;
+
+		configStore.set({
+			...$configStore,
+			[name]: checked
 		});
 	}
 </script>
@@ -37,7 +44,18 @@
 	<div class="modal">
 		<div class="modal-box">
 			<h3 class="font-bold text-xl mb-8">Settings</h3>
-			<BooleanOption value={$configStore.autosaveQueries} label="Autosave Queries" />
+			<BooleanOption
+				name="autosaveQueries"
+				{handleCheckboxChange}
+				value={$configStore.autosaveQueries}
+				label="Autosave Queries"
+			/>
+			<BooleanOption
+				name="queryPreview"
+				{handleCheckboxChange}
+				value={$configStore.queryPreview}
+				label="Query URL Preview"
+			/>
 			<ValueSelector
 				featureFlag="Search_All_Providers"
 				onValue={searchProvidersWithAll}

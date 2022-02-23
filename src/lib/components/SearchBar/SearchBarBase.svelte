@@ -14,11 +14,11 @@
 
 	const handleSearch = () => {
 		if (!$queryStore.searchTerm) return;
-		const queryUrl = generateQueryUrl({
+		const generatedQueryUrl = generateQueryUrl({
 			saveQuery,
 			skipSearchTermCheck: true
 		});
-		executeQuery(queryUrl);
+		executeQuery(generatedQueryUrl);
 		focusElement(searchInput);
 	};
 

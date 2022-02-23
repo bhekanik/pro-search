@@ -3,8 +3,10 @@
 
 	export let enabled = false;
 	export let label = '';
+	export let name: string;
 	export let textInputPlaceholder = '';
 	export let value: boolean;
+	export let handleCheckboxChange;
 
 	export let hasInput = false;
 </script>
@@ -14,9 +16,10 @@
 		<input
 			type="checkbox"
 			class="toggle toggle-primary"
-			name={`${label}-checkbox`}
+			{name}
 			id={`${label}-checkbox`}
-			bind:checked={value}
+			{value}
+			on:input={handleCheckboxChange}
 		/>
 		{label}
 	</label>

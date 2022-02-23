@@ -90,11 +90,11 @@ export const generateQueryUrl = (
 	const formattedQuery = formatQuery({ query });
 
 	if (typeof query.provider.url === 'string') {
-		return `${query.provider.url}${formattedQuery}`;
+		return `${query.provider.url}${encodeURIComponent(formattedQuery)}`;
 	} else {
 		const url = [];
 		for (const providerUrl of query.provider.url) {
-			url.push(`${providerUrl}${formattedQuery}`);
+			url.push(`${providerUrl}${encodeURIComponent(formattedQuery)}`);
 		}
 		return url;
 	}

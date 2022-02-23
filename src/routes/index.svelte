@@ -1,10 +1,11 @@
 <script lang="ts">
 	import ValueSelector from '$lib/components/FeatureSelector/ValueSelector.svelte';
 	import Filters from '$lib/components/Filters/Filters.svelte';
+	import QueryUrlPreview from '$lib/components/QueryURLPreview/QueryURLPreview.svelte';
 	import SavedQueriesList from '$lib/components/SavedQueries/SavedQueriesList.svelte';
 	import SearchBar from '$lib/components/SearchBar/SearchBar.svelte';
 	import SearchProvider from '$lib/components/SearchProvider/SearchProvider.svelte';
-	import { isAuthenticated, seo } from '$lib/stores';
+	import { configStore, isAuthenticated, seo } from '$lib/stores';
 	import { onMount } from 'svelte';
 
 	let url = '';
@@ -53,6 +54,11 @@
 				<span>Some stuff here </span>
 				<button on:click={() => (showInfo = false)} class="btn btn-xs btn-ghost">Dismiss</button>
 			</div>
+
+			{#if $configStore.queryPreview}
+				<QueryUrlPreview />
+			{/if}
+
 			<div class="flex flex-col gap-2 md:flex-row">
 				<SearchProvider />
 				<ValueSelector
