@@ -30,7 +30,8 @@ export const saveUser = functions
 					id: '1',
 					name: 'Google',
 					url: 'https://google.com/search?q='
-				}
+				},
+				queryPreview: false
 			}
 		};
 
