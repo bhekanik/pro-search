@@ -1,20 +1,22 @@
 import { writable } from 'svelte/store';
 import { splitClient } from '../app/splitClient';
 
-const featureFlagNames = ['Search_All_Providers', 'Results_In_IFrame', 'Save_Search'] as const;
+const featureFlagNames = ['Search_All_Providers', 'Results_In_IFrame'] as const;
 
 export type FeatureFlagNames = typeof featureFlagNames[number];
 
 export interface FeatureFlags {
 	Search_All_Providers: SplitIO.Treatment;
 	Results_In_IFrame: SplitIO.Treatment;
-	Save_Search: SplitIO.Treatment;
 }
 
-export const featureFlagsReadiness = writable<boolean>(false);
+export const featureFlagsReadiness = writable<boolean>(true);
 
 export const featureFlagsStore = writable<FeatureFlags>(
-	splitClient.getTreatments(featureFlagNames.concat()) as unknown as FeatureFlags
+	(splitClient.getTreatments(featureFlagNames.concat()) as unknown as FeatureFlags) || {
+		Search_All_Providers: 'off',
+		Results_In_IFrame: 'off'
+	}
 );
 
 splitClient.on(splitClient.Event.SDK_READY, function () {

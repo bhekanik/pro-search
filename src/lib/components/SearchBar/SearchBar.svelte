@@ -8,8 +8,7 @@
 </script>
 
 <ComponentSelector
-	featureFlag="Save_Search"
-	otherCondition={!$configStore.autosaveQueries}
+	condition={!$configStore.autosaveQueries}
 	onFeature={SearchBarWithoutQueryAutosave}
 	offFeature={SearchBarWithQueryAutosave}
 	let:feature={SearchBar}

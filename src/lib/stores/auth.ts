@@ -9,7 +9,7 @@ interface User {
 export const isAuthenticated = writable(false);
 export const user = writable<User>({});
 export const error = writable();
-export const authReadiness = writable<boolean>(false);
+export const authReadiness = writable<boolean>(true);
 
 export const popupOpen = writable(false);
 
