@@ -20,14 +20,16 @@ export const featureFlagsStore = writable<FeatureFlags>(
 );
 
 splitClient.on(splitClient.Event.SDK_READY, function () {
-	featureFlagsStore.update(
-		(value) => splitClient.getTreatments(Object.keys(value)) as unknown as FeatureFlags
-	);
+	featureFlagsStore.update((value) => {
+		const treatments = splitClient.getTreatments(Object.keys(value)) as unknown as FeatureFlags;
+		return treatments;
+	});
 	featureFlagsReadiness.set(true);
 });
 
 splitClient.on(splitClient.Event.SDK_UPDATE, function () {
-	featureFlagsStore.update(
-		(value) => splitClient.getTreatments(Object.keys(value)) as unknown as FeatureFlags
-	);
+	featureFlagsStore.update((value) => {
+		const treatments = splitClient.getTreatments(Object.keys(value)) as unknown as FeatureFlags;
+		return treatments;
+	});
 });

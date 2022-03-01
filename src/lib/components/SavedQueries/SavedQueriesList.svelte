@@ -30,7 +30,7 @@
 	);
 </script>
 
-<div class="queries px-4 overflow-auto relative bg-gray-700 hidden md:block">
+<div class="queries px-4 overflow-y-scroll relative bg-gray-700 hidden md:block">
 	<div class="flex flex-col pt-2 pb-4 bg-gray-700 sticky top-0 z-20">
 		<h3 class="text-xl mb-4 text-gray-300 whitespace-nowrap">Saved Queries</h3>
 		<input
@@ -60,7 +60,7 @@
 	}
 
 	.queries::-webkit-scrollbar-track {
-		background-color: #555555;
+		background-color: #374151;
 		border-radius: 100px;
 	}
 

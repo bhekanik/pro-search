@@ -40,19 +40,11 @@
 </script>
 
 <div
-	class="p-8 pt-6 relative h-full overflow-y-auto grid grid-cols-[1fr] md:grid-cols-[minmax(600px,1fr)_minmax(290px,400px)] gap-8"
+	class="main-area p-8 pt-6 relative h-full overflow-y-scroll grid grid-cols-[1fr] md:grid-cols-[minmax(600px,1fr)_minmax(290px,400px)] gap-8"
 >
 	<!-- <StoreMonitor /> -->
 	<div class="max-w-6xl h-full">
 		<main class="dark:text-gray-50">
-			{#if !$isAuthenticated}
-				<Announcement text="Sign up to save your queries and other cool features!" />
-			{/if}
-
-			{#if $configStore.queryPreview}
-				<QueryUrlPreview />
-			{/if}
-
 			<div class="flex flex-col gap-2 md:flex-row">
 				<SearchProvider />
 				<ValueSelector
@@ -64,6 +56,14 @@
 					<SearchBar {executeQuery} />
 				</ValueSelector>
 			</div>
+
+			{#if $configStore.queryPreview}
+				<QueryUrlPreview />
+			{/if}
+
+			{#if !$isAuthenticated}
+				<Announcement text="Sign up to save your queries and other cool features!" />
+			{/if}
 
 			{#if url}
 				<iframe title="Results" src={url} class="w-full h-full" frameborder="0" />
@@ -78,3 +78,21 @@
 		<SavedQueriesList />
 	{/if}
 </div>
+
+<style>
+	.main-area::-webkit-scrollbar {
+		width: 15px;
+	}
+
+	.main-area::-webkit-scrollbar-track {
+		background-color: #374151;
+		border-radius: 100px;
+	}
+
+	.main-area::-webkit-scrollbar-thumb {
+		border-radius: 80px;
+		border: 5px solid transparent;
+		background-clip: content-box;
+		background-color: #8070d4;
+	}
+</style>

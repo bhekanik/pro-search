@@ -2,18 +2,17 @@
 	export let text = '';
 
 	let showInfo = true;
-	// class="query-url text-xs whitespace-nowrap mb-4 py-2 px-4 bordered bg-[#1DA1F2] bg-opacity-40 rounded-lg overflow-x-auto"
 </script>
 
 <div
 	class={`${
 		showInfo === false && 'hidden'
-	} query-url text-sm mb-4 py-2 px-4 bg-purple-600 bg-opacity-40 rounded-lg overflow-x-auto relative flex justify-between w-full`}
+	} query-url text-sm my-4 py-2 px-4 bg-purple-600 bg-opacity-40 rounded-lg overflow-x-auto relative flex justify-between w-full`}
 >
 	<span>
 		{text}
 	</span>
-	<button on:click={() => (showInfo = false)} class="btn btn-xs btn-ghost">Dismiss</button>
+	<button on:click={() => (showInfo = false)} class="btn btn-xs btn-ghost btn-circle">✕</button>
 </div>
 
 <style>

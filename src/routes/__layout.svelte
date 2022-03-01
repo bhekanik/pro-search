@@ -4,7 +4,7 @@
 	import Header from '$lib/components/Header/Header.svelte';
 	import ShareModal from '$lib/components/SavedQueries/ShareModal.svelte';
 	import Seo from '$lib/components/SEO/SEO.svelte';
-	import { isAuthenticated, queryToShareStore, readiness } from '$lib/stores';
+	import { isAuthenticated, queryToShareStore } from '$lib/stores';
 	import * as Sentry from '@sentry/browser';
 	import { Integrations } from '@sentry/tracing';
 	import { onDestroy, onMount } from 'svelte';
@@ -49,13 +49,7 @@
 	{/if}
 </div>
 
-{#if $readiness}
-	<slot />
-{:else}
-	<div class="h-full w-full grid place-items-center col-span-2">
-		<div class="btn btn-circle btn-ghost btn-xl loading" />
-	</div>
-{/if}
+<slot />
 
 {#if $queryToShareStore}
 	<ShareModal query={$queryToShareStore} />

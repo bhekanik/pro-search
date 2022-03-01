@@ -9,6 +9,7 @@
 		firebaseAuth as firebaseAuthStore,
 		isAuthenticated,
 		queryStore,
+		readiness,
 		savedQueriesStore,
 		SAVED_QUERIES_KEY
 	} from '$lib/stores';
@@ -142,52 +143,56 @@
 		<h1 class="text2xl md:text-4xl text-left bg-transparent font-medium">Pro-Search</h1>
 	</div>
 
+	<SettingsModal />
+	<AuthModal bind:closeModalButton />
 	<div class="flex gap-2 items-center">
-		<SettingsModal />
-		<AuthModal bind:closeModalButton />
-		<!-- <button data-toggle-theme="dark,light" data-act-class="ACTIVECLASS">Theme</button> -->
-		{#if $firebaseAuthStore.isLoggedIn}
-			<label for="my-modal-2" class="btn btn-sm btn-ghost border modal-button">Settings</label>
-			<div class="dropdown dropdown-end">
-				<div
-					tabindex="0"
-					class={`avatar ${!$firebaseAuthStore.user?.photoURL ? 'placeholder' : ''}`}
-				>
-					<div class="rounded-full w-8 h-8 ring ring-primary">
-						{#if $firebaseAuthStore.user?.photoURL}
-							<img alt="profile" src={$firebaseAuthStore.user.photoURL} />
-						{:else}
-							<span class="text-s"
-								>{$firebaseAuthStore.user.displayName?.charAt(0) ||
-									$firebaseAuthStore.user.email?.charAt(0).toUpperCase()}</span
-							>
-						{/if}
+		{#if $readiness}
+			<!-- <button data-toggle-theme="dark,light" data-act-class="ACTIVECLASS">Theme</button> -->
+			{#if $firebaseAuthStore.isLoggedIn}
+				<label for="my-modal-2" class="btn btn-sm btn-ghost border modal-button">Settings</label>
+				<div class="dropdown dropdown-end">
+					<div
+						tabindex="0"
+						class={`avatar ${!$firebaseAuthStore.user?.photoURL ? 'placeholder' : ''}`}
+					>
+						<div class="rounded-full w-8 h-8 ring ring-primary">
+							{#if $firebaseAuthStore.user?.photoURL}
+								<img alt="profile" src={$firebaseAuthStore.user.photoURL} />
+							{:else}
+								<span class="text-s"
+									>{$firebaseAuthStore.user.displayName?.charAt(0) ||
+										$firebaseAuthStore.user.email?.charAt(0).toUpperCase()}</span
+								>
+							{/if}
+						</div>
 					</div>
-				</div>
 
-				<ul
-					tabindex="0"
-					class="menu dropdown-content rounded-box w-52 bordered shadow-lg bg-slate-600"
-				>
-					{#if $firebaseAuthStore.user.email}
-						<li>
-							<span>{$firebaseAuthStore.user?.email}</span>
-						</li>
-					{/if}
-					<!-- <li>
+					<ul
+						tabindex="0"
+						class="menu dropdown-content rounded-box w-52 bordered shadow-lg bg-slate-600"
+					>
+						{#if $firebaseAuthStore.user.email}
+							<li>
+								<span>{$firebaseAuthStore.user?.email}</span>
+							</li>
+						{/if}
+						<!-- <li>
 						<label for="my-modal-2" class="btn btn-sm btn-ghost border modal-button">Settings</label
 						>
 					</li> -->
-					<li>
-						<span on:click={logout}>Logout</span>
-					</li>
-				</ul>
-			</div>
-		{:else}
-			<label for="auth-modal" class="btn btn-sm btn-ghost">Login / Sign Up</label>
-			<!-- <button on:click={login} class="btn btn-sm btn-ghost">
+						<li>
+							<span on:click={logout}>Logout</span>
+						</li>
+					</ul>
+				</div>
+			{:else}
+				<label for="auth-modal" class="btn btn-sm btn-ghost">Login / Sign Up</label>
+				<!-- <button on:click={login} class="btn btn-sm btn-ghost">
 				{'Login/Sign Up'}
 			</button> -->
+			{/if}
+		{:else}
+			<div class="btn btn-sm btn-circle btn-ghost btn-xl loading" />
 		{/if}
 	</div>
 </header>

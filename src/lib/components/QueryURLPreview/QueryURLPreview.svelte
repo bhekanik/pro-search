@@ -10,7 +10,7 @@
 </script>
 
 <div
-	class="query-url text-xs whitespace-nowrap mb-4 py-2 px-4 bordered bg-purple-600 bg-opacity-40 rounded-lg overflow-x-auto"
+	class="query-url text-xs whitespace-nowrap my-4 py-2 px-4 bordered bg-purple-600 bg-opacity-40 rounded-lg overflow-x-auto"
 >
 	{queryUrl}
 </div>
