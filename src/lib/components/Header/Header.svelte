@@ -29,6 +29,7 @@
 	import AuthModal from '../AuthModal/AuthModal.svelte';
 
 	let isProd = process.env.NODE_ENV === 'production';
+	let isProdDeployEnv = process.env.VITE_DEPLOYMENT_ENV === 'production';
 
 	if (isProd) {
 		LogRocket.init('uetpov/pro-search');
@@ -140,7 +141,9 @@
 <header class="flex justify-between align-center px-8 py-4">
 	<div class="flex gap-2 items-center justify-center">
 		<img class="w-10 h-10" src="/logo_512.png" alt="logo" />
-		<h1 class="text2xl md:text-4xl text-left bg-transparent font-medium">Pro-Search</h1>
+		<h1 class="text2xl md:text-4xl text-left bg-transparent font-medium">
+			{isProdDeployEnv ? 'Pro-Search' : 'Pro-Search - Dev'}
+		</h1>
 	</div>
 
 	<SettingsModal />
