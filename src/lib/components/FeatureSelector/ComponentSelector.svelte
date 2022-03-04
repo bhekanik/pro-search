@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { FeatureFlagNames, featureFlagsStore } from '$lib/stores';
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 
 	export let featureFlag: FeatureFlagNames | null = null;
 	export let onFeature;
@@ -10,13 +10,17 @@
 
 	let Feature = offFeature;
 
-	if (featureFlag !== null && condition !== null) {
-		Feature = $featureFlagsStore[featureFlag] === 'on' && condition ? onFeature : offFeature;
-	} else if (featureFlag !== null && condition === null) {
-		Feature = $featureFlagsStore[featureFlag] === 'on' ? onFeature : offFeature;
-	} else if (featureFlag === null && condition !== null) {
-		Feature = condition ? onFeature : offFeature;
-	}
+	onMount(() => {
+		if (featureFlag !== null && condition !== null) {
+			Feature = $featureFlagsStore[featureFlag] === 'on' && condition ? onFeature : offFeature;
+		} else if (featureFlag !== null && condition === null) {
+			Feature = $featureFlagsStore[featureFlag] === 'on' ? onFeature : offFeature;
+		} else if (featureFlag === null && condition !== null) {
+			console.log('final condition:', condition);
+			console.log('featureFlag:', featureFlag);
+			Feature = condition ? onFeature : offFeature;
+		}
+	});
 
 	let unsubscribe;
 

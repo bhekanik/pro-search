@@ -10,11 +10,11 @@
 	async function handleAccept() {
 		const user = await supabase.auth.user();
 
-		const record = await supabase.from(TableNames.config).select();
+		const record = await supabase.from(TableNames.settings).select();
 
 		if (record.data.length > 0) {
 			const { data, error } = await supabase
-				.from(TableNames.config)
+				.from(TableNames.settings)
 				.update([
 					{
 						...$settingsStore,
@@ -26,7 +26,7 @@
 					user_id: user.id
 				});
 		} else {
-			const { data, error } = await supabase.from(TableNames.config).insert([
+			const { data, error } = await supabase.from(TableNames.settings).insert([
 				{
 					...$settingsStore,
 					default_search_provider: $settingsStore.default_search_provider.name.toLowerCase(),
@@ -64,13 +64,13 @@
 		<div class="modal-box">
 			<h3 class="font-bold text-xl mb-8">Settings</h3>
 			<BooleanOption
-				name="autosaveQueries"
+				name="autosave_queries"
 				{handleCheckboxChange}
 				value={$settingsStore.autosave_queries}
 				label="Autosave Queries"
 			/>
 			<BooleanOption
-				name="queryPreview"
+				name="query_preview"
 				{handleCheckboxChange}
 				value={$settingsStore.query_preview}
 				label="Query URL Preview"

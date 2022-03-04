@@ -1,5 +1,5 @@
 export enum TableNames {
-	config = 'config',
+	settings = 'settings',
 	savedQueries = 'saved_queries',
 	searchProviders = 'search_providers',
 	profile = 'profile'

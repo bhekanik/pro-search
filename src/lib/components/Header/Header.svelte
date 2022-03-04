@@ -36,8 +36,7 @@
 
 		authStore.set({
 			isLoggedIn: !!user,
-			user: user,
-			firebaseControlled: true
+			user: user || null
 		});
 
 		isAuthenticated.set(!!user);
@@ -50,10 +49,12 @@
 				email: user.email
 			});
 
-			const { data: savedQueriesData } = await supabase.from(TableNames.config).select();
-			console.log('savedQueriesData:', savedQueriesData);
+			const { data: savedQueries } = await supabase.from(TableNames.savedQueries).select();
+			const { data: settings } = await supabase.from(TableNames.settings).select().single();
 
-			savedQueriesStore.set(savedQueriesData);
+			console.log('savedQueries:', savedQueries);
+			savedQueriesStore.set(savedQueries);
+			settingsStore.set(settings);
 
 			savedQueriesSubscription = supabase
 				.from(TableNames.savedQueries)
@@ -64,7 +65,7 @@
 				.subscribe();
 
 			settingsSubscription = supabase
-				.from(TableNames.config)
+				.from(TableNames.settings)
 				.on('*', (payload) => {
 					console.log('Change received!', payload);
 					// savedQueriesStore.set(payload || []);
@@ -81,7 +82,7 @@
 		handleAuth(user);
 
 		supabase.auth.onAuthStateChange(async (event, session) => {
-			await handleAuth(session.user, event);
+			await handleAuth(session?.user, event);
 		});
 
 		themeChange(false);

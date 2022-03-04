@@ -10,9 +10,8 @@ export const popupOpen = writable(false);
 
 export const authStore = writable<{
 	isLoggedIn: boolean;
-	user?: User;
-	firebaseControlled: boolean;
+	user: User | null;
 }>({
 	isLoggedIn: false,
-	firebaseControlled: false
+	user: null
 });
