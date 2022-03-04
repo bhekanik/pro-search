@@ -1,12 +1,18 @@
 <script lang="ts">
 	import { TableNames } from '$lib/app/model';
 	import { supabase } from '$lib/app/supabaseClient';
-	import { authStore, isAuthenticated, searchProvidersStore, settingsStore } from '$lib/stores';
+	import {
+		authStore,
+		isAuthenticated,
+		queryStore,
+		searchProvidersStore,
+		settingsStore
+	} from '$lib/stores';
 	import SearchProviderSelect from '../SearchProvider/SearchProviderSelect.svelte';
 	import BooleanOption from './BooleanOption.svelte';
 
 	async function handleAccept() {
-		const { error } = await supabase
+		const { error, data } = await supabase
 			.from(TableNames.settings)
 			.update([
 				{
@@ -16,11 +22,21 @@
 			])
 			.match({
 				user_id: $authStore.user.id
-			});
-
+			})
+			.select(`autosave_queries, default_search_provider(id, url, name), query_preview`)
+			.single();
 		if (error) {
 			console.error(error);
 			return;
+		}
+
+		if (data) {
+			console.log('data:', data);
+			settingsStore.set(data);
+			queryStore.update((currentQuery) => ({
+				...currentQuery,
+				provider: data.default_search_provider
+			}));
 		}
 	}
 

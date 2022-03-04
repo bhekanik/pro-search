@@ -7,9 +7,13 @@ node_modules
 .vercel
 
 .env
+local.env
 
 cypress/screenshots/
 cypress/videos/
 .vercel_build_output
 # Local Netlify folder
 .netlify
+
+# Supabase
+.supabase
