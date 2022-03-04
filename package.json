@@ -1,6 +1,7 @@
 {
 	"name": "pro-search",
 	"version": "0.0.1",
+	"author": "Bhekani Khumalo",
 	"license": "MIT",
 	"scripts": {
 		"dev": "svelte-kit dev --host --open --port 4000",
@@ -40,10 +41,7 @@
 		"svelte-preprocess": "^4.9.8",
 		"tailwindcss": "^3.0.8",
 		"tslib": "^2.3.1",
-		"typescript": "^4.5.4"
-	},
-	"type": "module",
-	"dependencies": {
+		"typescript": "^4.5.4",
 		"@auth0/auth0-spa-js": "^1.19.3",
 		"@netlify/functions": "^0.7.2",
 		"@sentry/browser": "^6.16.1",
@@ -60,9 +58,10 @@
 		"qrcode": "^1.5.0",
 		"supabase-ui-svelte": "^0.1.1",
 		"svelte-feather-icons": "^3.5.1",
-		"theme-change": "^2.0.2",
-		"uuid": "^8.3.2"
+		"theme-change": "^2.0.2"
 	},
+	"type": "module",
+	"dependencies": {},
 	"lint-staged": {
 		"src/**/*.{js,ts,svelte}": "npm run lint",
 		"src/functions/**/*.{js,ts}": "npm run lint",
