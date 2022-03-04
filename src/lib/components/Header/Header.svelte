@@ -145,13 +145,13 @@
 			{#if $authStore.isLoggedIn}
 				<label for="my-modal-2" class="btn btn-sm btn-ghost border modal-button">Settings</label>
 				<div class="dropdown dropdown-end">
-					<div tabindex="0" class="placeholder">
+					<div tabindex="0" class="avatar placeholder">
 						<div class="rounded-full w-8 h-8 ring ring-primary">
 							<!-- {#if $firebaseAuthStore.user?.photoURL}
 								<img alt="profile" src={$firebaseAuthStore.user.photoURL} />
 							{:else} -->
 							<span class="text-s"
-								>{$authStore.user?.email?.charAt(0) ||
+								>{$authStore.user?.email?.charAt(0).toUpperCase() ||
 									$authStore.user.email?.charAt(0).toUpperCase()}</span
 							>
 							<!-- {/if} -->
