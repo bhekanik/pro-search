@@ -57,7 +57,7 @@
 				</ValueSelector>
 			</div>
 
-			{#if $settingsStore.queryPreview}
+			{#if $settingsStore.query_preview}
 				<QueryUrlPreview />
 			{/if}
 

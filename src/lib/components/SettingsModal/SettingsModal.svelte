@@ -2,37 +2,27 @@
 	import { searchProvidersWithAll, searchProvidersWithoutAll } from '$lib/app/config';
 	import { TableNames } from '$lib/app/model';
 	import { supabase } from '$lib/app/supabaseClient';
-	import { isAuthenticated, settingsStore } from '$lib/stores';
+	import { authStore, isAuthenticated, settingsStore } from '$lib/stores';
 	import ValueSelector from '../FeatureSelector/ValueSelector.svelte';
 	import SearchProviderSelect from '../SearchProvider/SearchProviderSelect.svelte';
 	import BooleanOption from './BooleanOption.svelte';
 
 	async function handleAccept() {
-		const user = await supabase.auth.user();
-
-		const record = await supabase.from(TableNames.settings).select();
-
-		if (record.data.length > 0) {
-			const { data, error } = await supabase
-				.from(TableNames.settings)
-				.update([
-					{
-						...$settingsStore,
-						default_search_provider: $settingsStore.default_search_provider.name.toLowerCase(),
-						user_id: user.id
-					}
-				])
-				.match({
-					user_id: user.id
-				});
-		} else {
-			const { data, error } = await supabase.from(TableNames.settings).insert([
+		const { error } = await supabase
+			.from(TableNames.settings)
+			.update([
 				{
 					...$settingsStore,
-					default_search_provider: $settingsStore.default_search_provider.name.toLowerCase(),
-					user_id: user.id
+					default_search_provider: $settingsStore.default_search_provider.name.toLowerCase()
 				}
-			]);
+			])
+			.match({
+				user_id: $authStore.user.id
+			});
+
+		if (error) {
+			console.error(error);
+			return;
 		}
 	}
 
@@ -55,6 +45,7 @@
 			[name]: checked
 		});
 	}
+	console.log('$settingsStore:', $settingsStore);
 </script>
 
 {#if $isAuthenticated}

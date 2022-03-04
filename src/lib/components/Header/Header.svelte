@@ -50,11 +50,15 @@
 			});
 
 			const { data: savedQueries } = await supabase.from(TableNames.savedQueries).select();
-			const { data: settings } = await supabase.from(TableNames.settings).select().single();
+			const { data: settings } = await supabase
+				.from(TableNames.settings)
+				.select(`auto_save_queries, default_search_provider, query_preview`)
+				.single();
+			console.log('settings:', settings);
 
 			console.log('savedQueries:', savedQueries);
-			savedQueriesStore.set(savedQueries);
-			settingsStore.set(settings);
+			savedQueriesStore.set(savedQueries || []);
+			if (settings) settingsStore.set(settings);
 
 			savedQueriesSubscription = supabase
 				.from(TableNames.savedQueries)
@@ -93,8 +97,7 @@
 
 		authStore.set({
 			isLoggedIn: false,
-			user: null,
-			firebaseControlled: false
+			user: null
 		});
 
 		isAuthenticated.set(false);
