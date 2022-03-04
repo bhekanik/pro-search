@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { seo } from '$lib/stores';
 	import { onDestroy } from 'svelte';
+	import type { Unsubscriber } from 'svelte/store';
 	let isProd = process.env.NODE_ENV === 'production';
 
 	const {
@@ -9,7 +10,7 @@
 	} = $page;
 	let description = $seo.description;
 	let title = $seo.title;
-	let unsubscribe;
+	let unsubscribe: Unsubscriber;
 
 	$: {
 		unsubscribe = seo.subscribe((value) => {

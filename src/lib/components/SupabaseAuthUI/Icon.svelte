@@ -21,7 +21,7 @@
 		azure: AzureIcon
 	};
 
-	export let name;
+	export let name: string;
 	export let size = 10;
 </script>
 

@@ -1,8 +1,7 @@
 <script lang="ts">
 	import Protected from '$lib/components/Protected/Protected.svelte';
 	import SavedQuery from '$lib/components/SavedQueries/SavedQuery.svelte';
-	import type { Query } from '$lib/stores';
-	import { queryToShareStore, seo } from '$lib/stores';
+	import { queryToShareStore, savedQueriesStore, seo, type Query } from '$lib/stores';
 	import { search } from 'fast-fuzzy';
 	import { onMount } from 'svelte';
 	import { flip } from 'svelte/animate';
@@ -27,11 +26,11 @@
 		}
 	}
 
-	// $: savedQueries = $savedQueriesStore.sort(
-	// 	(a, b) => Number(new Date(b.createdAt)) - Number(new Date(a.createdAt))
-	// );
+	$: savedQueries = $savedQueriesStore.sort(
+		(a, b) => Number(new Date(b.created_at)) - Number(new Date(a.created_at))
+	);
 
-	function focusInput(element) {
+	function focusInput(element: HTMLElement) {
 		element.focus();
 	}
 

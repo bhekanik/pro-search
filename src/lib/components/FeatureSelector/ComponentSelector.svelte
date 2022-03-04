@@ -1,10 +1,12 @@
 <script lang="ts">
-	import { FeatureFlagNames, featureFlagsStore } from '$lib/stores';
+	import type { FeatureFlagNames } from '$lib/stores';
+	import { featureFlagsStore } from '$lib/stores';
 	import { onDestroy } from 'svelte';
+	import type { Unsubscriber } from 'svelte/store';
 
 	export let featureFlag: FeatureFlagNames | null = null;
-	export let onFeature;
-	export let offFeature;
+	export let onFeature: any;
+	export let offFeature: any;
 	export let condition: boolean | null = null;
 	export let props = {};
 
@@ -23,7 +25,7 @@
 		}
 	}
 
-	let unsubscribe;
+	let unsubscribe: Unsubscriber;
 
 	$: {
 		unsubscribe = featureFlagsStore.subscribe((newValue) => {

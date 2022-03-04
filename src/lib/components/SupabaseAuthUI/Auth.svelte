@@ -29,7 +29,7 @@
 	export let view: AuthProps['view'] = 'sign_in';
 	export let redirectTo = '';
 
-	function setView(newView) {
+	function setView(newView: AuthProps['view']) {
 		view = newView;
 	}
 </script>

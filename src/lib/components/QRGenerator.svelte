@@ -2,7 +2,7 @@
 	import QRCode from 'qrcode';
 
 	let canvas = null;
-	export let link;
+	export let link: string;
 
 	$: {
 		if (canvas && link) {
@@ -14,7 +14,7 @@
 						dark: '#5b20a6'
 					}
 				},
-				function (error) {
+				function (error: unknown) {
 					if (error) console.error(error);
 				}
 			);

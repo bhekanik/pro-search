@@ -7,11 +7,12 @@
 			return {
 				...currentQuery,
 				provider: $searchProvidersStore.find(
-					(provider) => provider.id === (e.target as HTMLSelectElement).value
+					(provider) => provider.id === Number((e.target as HTMLSelectElement).value)
 				)
 			};
 		});
 	};
+	console.log('$queryStore:', $queryStore);
 </script>
 
 <SearchProviderSelect

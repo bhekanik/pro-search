@@ -6,7 +6,7 @@
 	export let name: string;
 	export let textInputPlaceholder = '';
 	export let value: boolean;
-	export let handleCheckboxChange;
+	export let handleCheckboxChange: (e: Event) => void;
 
 	export let hasInput = false;
 </script>

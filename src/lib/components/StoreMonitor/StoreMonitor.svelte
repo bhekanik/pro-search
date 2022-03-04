@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import {
 		featureFlagsStore,
 		queryStore,
@@ -8,6 +8,7 @@
 		user
 	} from '$lib/stores';
 	import { onDestroy } from 'svelte';
+	import type { Unsubscriber } from 'svelte/store';
 
 	let selected = 'featureFlags';
 
@@ -22,16 +23,16 @@
 
 	$: value = stores[selected].value;
 
-	let unsubscribe;
+	let unsubscribe: Unsubscriber;
 
 	$: {
-		unsubscribe = stores[selected].name.subscribe((newValue) => {
+		unsubscribe = stores[selected].name.subscribe((newValue: unknown) => {
 			value = newValue;
 		});
 	}
 
-	function handleClick(e) {
-		const { id } = e.target;
+	function handleClick(e: MouseEvent) {
+		const { id } = e.target as HTMLElement;
 		selected = id;
 	}
 

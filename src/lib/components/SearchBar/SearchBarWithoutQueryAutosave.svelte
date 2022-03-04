@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { TableNames } from '$lib/app/model';
 	import { supabase } from '$lib/app/supabaseClient';
-	import { isAuthenticated, queryStore } from '$lib/stores';
+	import { isAuthenticated, queryStore, savedQueriesStore } from '$lib/stores';
 	import { fade } from 'svelte/transition';
 	import SearchBarBase from './SearchBarBase.svelte';
 
@@ -11,14 +11,30 @@
 	let input = null;
 
 	const saveSearch = async () => {
-		const user = await supabase.auth.user();
+		const user = supabase.auth.user();
 
-		const { data, error } = await supabase.from(TableNames.savedQueries).insert([
-			{
-				...$queryStore,
-				name: queryName,
-				user_id: user.id
-			}
+		const { data, error } = await supabase
+			.from(TableNames.savedQueries)
+			.insert([
+				{
+					...$queryStore,
+					name: queryName,
+					user_id: user.id,
+					filters: JSON.stringify($queryStore.filters),
+					provider: $queryStore.provider.name
+				}
+			])
+			.select('filters, created_at, id, name, provider(id, name, url), search_term');
+
+		if (error) {
+			console.error(error);
+			alert('Error saving query');
+			return;
+		}
+
+		savedQueriesStore.set([
+			...$savedQueriesStore,
+			...data.map((d) => ({ ...d, filters: JSON.parse(d.filters) }))
 		]);
 
 		queryStore.reset();
@@ -33,12 +49,10 @@
 	};
 
 	const handleKeydown = (e) => {
-		if (e.keyCode === 13) {
+		if (e.key === 'Enter' || e.code === 'Enter') {
 			saveSearch();
 		}
 	};
-
-	console.log('phakathi inside');
 </script>
 
 <SearchBarBase {executeQuery} />

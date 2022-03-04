@@ -62,7 +62,10 @@
 			{/if}
 
 			{#if !$isAuthenticated}
-				<Announcement text="Sign up to save your queries and other cool features!" />
+				<Announcement>
+					<label for="auth-modal" class="underline cursor-pointer font-bold inline">Sign up</label>
+					to save your queries and other cool features!
+				</Announcement>
 			{/if}
 
 			{#if url}

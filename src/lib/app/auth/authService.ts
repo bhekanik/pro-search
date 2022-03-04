@@ -48,7 +48,7 @@ async function loginWithPopup(client: Auth0Client, options?: PopupLoginOptions):
 			const authState = await client.isAuthenticated();
 			isAuthenticated.set(authState);
 			const userState = await client.getUser();
-			user.set(userState);
+			console.log('userState:', userState);
 		}
 	} catch (e) {
 		console.error(e);

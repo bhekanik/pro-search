@@ -1,8 +1,9 @@
 <script lang="ts">
+	import type { Query } from '$lib/stores';
 	import { generateQueryUrl } from '$lib/utils/generateAndGo';
 	import QrGenerator from '../QRGenerator.svelte';
 
-	export let query;
+	export let query: Query;
 
 	let link = '';
 	let copiedText = '';

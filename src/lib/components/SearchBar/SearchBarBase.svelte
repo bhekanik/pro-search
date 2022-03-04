@@ -3,12 +3,12 @@
 	import { generateQueryUrl } from '$lib/utils/generateAndGo';
 	import { fade, scale } from 'svelte/transition';
 
-	let searchInput;
+	let searchInput: HTMLInputElement;
 
 	export let executeQuery: (query: string | string[]) => void;
 	export let saveQuery = false;
 
-	function focusElement(element) {
+	function focusElement(element: HTMLElement) {
 		element.focus();
 	}
 
@@ -22,10 +22,10 @@
 		focusElement(searchInput);
 	};
 
-	const handleInput = (e) => {
+	const handleInput = (e: Event) => {
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
-			newQuery.search_term = e.target.value.trim();
+			newQuery.search_term = (e.target as HTMLInputElement).value.trim();
 			return newQuery;
 		});
 	};
@@ -39,7 +39,7 @@
 	};
 
 	const onKeydown = (e) => {
-		if (e.keyCode === 13) {
+		if (e.key === 'Enter' || e.code === 'Enter') {
 			handleSearch();
 		}
 	};

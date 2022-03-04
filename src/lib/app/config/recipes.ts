@@ -12,7 +12,7 @@ export interface InputType {
 	name: string;
 	type: string;
 	placeholder: string;
-	ref?: any;
+	ref?: HTMLElement;
 	handleSearch?: () => void;
 	shouldHandleSearch: boolean;
 	handleInput?: (e: Event) => void;

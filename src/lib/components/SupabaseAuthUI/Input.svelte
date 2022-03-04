@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Icon from './Icon.svelte';
 
-	export let name;
-	export let label;
+	export let name: string;
+	export let label: string;
 	export let placeholder = '';
-	export let value;
+	export let value: string;
 	export let icon = null;
 	export let type = 'text';
 </script>

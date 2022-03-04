@@ -1,6 +1,4 @@
 <script lang="ts">
-	export let text = '';
-
 	let showInfo = true;
 </script>
 
@@ -10,7 +8,7 @@
 	} query-url text-sm my-4 py-2 px-4 bg-purple-600 bg-opacity-40 rounded-lg overflow-x-auto relative flex justify-between w-full`}
 >
 	<span>
-		{text}
+		<slot />
 	</span>
 	<button on:click={() => (showInfo = false)} class="btn btn-xs btn-ghost btn-circle">✕</button>
 </div>

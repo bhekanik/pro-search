@@ -2,9 +2,9 @@
 	import { goto } from '$app/navigation';
 	import { supabase } from '$lib/app/supabaseClient';
 	import { queryStore, savedQueriesStore } from '$lib/stores';
-	import type { Filter } from '$lib/stores/query';
+	import type { Filter, Query } from '$lib/stores/query';
 
-	export let query;
+	export let query: Query;
 	export let handleShare: (id: string) => void;
 
 	const generateFilters = (filters: Record<string, Filter>): string =>
@@ -15,6 +15,11 @@
 
 	const handleDelete = async () => {
 		const { error } = await supabase.from('saved_queries').delete().eq('id', query.id);
+		if (error) {
+			console.error(error);
+			alert('There was an error deleting the query');
+			return;
+		}
 
 		const { data: newSavedQueries } = await supabase.from('saved_queries').select();
 

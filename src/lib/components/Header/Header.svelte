@@ -14,6 +14,7 @@
 		searchProvidersStore,
 		settingsStore
 	} from '$lib/stores';
+	import type { RealtimeSubscription, User } from '@supabase/supabase-js';
 	import LogRocket from 'logrocket';
 	import { onDestroy, onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
@@ -26,13 +27,12 @@
 	}
 
 	let closeModalButton = null;
-	let savedQueriesUnsub;
 
 	let redirectTo = '';
-	let savedQueriesSubscription;
-	let settingsSubscription;
+	let savedQueriesSubscription: RealtimeSubscription;
+	let settingsSubscription: RealtimeSubscription;
 
-	const handleAuth = async (user, event = null) => {
+	const handleAuth = async (user: User, event = null) => {
 		console.log('event:', event);
 		console.log('user:', user);
 
@@ -70,6 +70,7 @@
 				.from(TableNames.settings)
 				.select(`autosave_queries, default_search_provider(id, url, name), query_preview`)
 				.single();
+			console.log('settings:', settings);
 			if (settings) {
 				settingsStore.set(settings);
 				queryStore.update((currentQuery) => ({
@@ -120,7 +121,6 @@
 
 	onDestroy(() => {
 		splitClient?.destroy();
-		savedQueriesUnsub?.();
 		supabase.removeAllSubscriptions();
 		if (savedQueriesSubscription) supabase.removeSubscription(savedQueriesSubscription);
 		if (settingsSubscription) supabase.removeSubscription(settingsSubscription);

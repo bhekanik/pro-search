@@ -3,16 +3,16 @@ import { supabase } from '$lib/app/supabaseClient';
 import type { FilterType } from '$lib/app/types/filters';
 import { filtersThatDontRequireSearchTerm } from '$lib/app/types/filters';
 import { formatQuery } from '$lib/components/Filters/utils/formatQuery';
+import type { Query } from '$lib/stores';
 import {
 	isAuthenticated as isAuthenticatedStore,
-	Query,
 	queryStore,
 	savedQueriesStore
 } from '$lib/stores';
 import { get } from 'svelte/store';
 
 const saveNewQuery = async (currentSavedQueries: Query[], query: Query) => {
-	const user = await supabase.auth.user();
+	const user = supabase.auth.user();
 
 	const newQuery = {
 		...query,

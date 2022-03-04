@@ -1,4 +1,5 @@
-import { FeatureFlagNames, featureFlagsStore } from '$lib/stores';
+import type { FeatureFlagNames } from '$lib/stores';
+import { featureFlagsStore } from '$lib/stores';
 import { get } from 'svelte/store';
 
 export function featureSelector<T>(

@@ -1,17 +1,18 @@
-<script>
+<script lang="ts">
+	import type { Provider, SupabaseClient } from '@supabase/supabase-js';
+	import type { AuthProps } from './Auth.svelte';
 	import Button from './Button.svelte';
 	import Text from './Text.svelte';
 
-	export let supabaseClient;
-	export let providers;
-	export let socialLayout;
-	export let socialButtonSize;
-	export let socialColors;
-	export let view;
-	export let redirectTo;
+	export let supabaseClient: SupabaseClient;
+	export let providers: AuthProps['providers'] = [];
+	export let socialLayout: AuthProps['socialLayout'] = 'vertical';
+	export let socialButtonSize: AuthProps['socialButtonSize'] = 'medium';
+	export let socialColors = false;
+	export let view: AuthProps['view'] = 'sign_in';
+	export let redirectTo: string;
 
-	let loading = false,
-		error = '';
+	let error = '';
 
 	const buttonStyles = {
 		google: {
@@ -44,10 +45,8 @@
 
 	$: hasProviders = providers && providers.length > 0;
 
-	async function handleProviderSignIn(provider) {
-		loading = true;
-
-		const options = {};
+	async function handleProviderSignIn(provider: Provider) {
+		const options: Record<string, string> = {};
 
 		if (redirectTo) {
 			options.redirectTo = redirectTo;
@@ -55,8 +54,6 @@
 
 		const { error: signInError } = await supabaseClient.auth.signIn({ provider }, options);
 		if (signInError) error = signInError.message;
-
-		loading = false;
 	}
 </script>
 
@@ -67,7 +64,6 @@
 		{#each providers as provider}
 			<Button
 				block
-				shadow
 				icon={provider}
 				size={socialButtonSize}
 				style={socialColors ? buttonStyles[provider] : {}}

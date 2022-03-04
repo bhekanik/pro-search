@@ -46,7 +46,7 @@
 		});
 	};
 
-	const onSelectChange = (e) => {
+	const onSelectChange = (e: Event) => {
 		handleSelectChange(e);
 	};
 
