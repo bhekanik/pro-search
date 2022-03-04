@@ -11,7 +11,7 @@
 	<div class="modal-box">
 		<h3 class="font-bold text-lg p-8">Login/Register</h3>
 		<!-- <div id="firebaseui-auth-container" class="w-full" /> -->
-		<Auth providers={['google', 'twitter', 'github']} socialColors {redirectTo} />
+		<Auth providers={['google', 'github']} socialColors {redirectTo} />
 		<div class="modal-action px-8 pb-8">
 			<label for="auth-modal" bind:this={closeModalButton} class="btn w-full">Close</label>
 		</div>

@@ -34,7 +34,7 @@
 	}
 </script>
 
-<div class="component {classes}" {style}>
+<div class="component px-8 {classes}" {style}>
 	<div class="container">
 		<SocialAuthView
 			{supabaseClient}

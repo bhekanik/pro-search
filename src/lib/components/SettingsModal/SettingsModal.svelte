@@ -18,6 +18,7 @@
 				.update([
 					{
 						...$settingsStore,
+						default_search_provider: $settingsStore.default_search_provider.name.toLowerCase(),
 						user_id: user.id
 					}
 				])
@@ -28,6 +29,7 @@
 			const { data, error } = await supabase.from(TableNames.config).insert([
 				{
 					...$settingsStore,
+					default_search_provider: $settingsStore.default_search_provider.name.toLowerCase(),
 					user_id: user.id
 				}
 			]);
