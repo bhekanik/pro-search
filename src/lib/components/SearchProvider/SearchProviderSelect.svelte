@@ -2,7 +2,7 @@
 	import type { SearchProvider } from '$lib/app/config/searchProviders';
 
 	export let searchProviders: SearchProvider[] = [];
-	export let value: string;
+	export let value: number;
 </script>
 
 <select

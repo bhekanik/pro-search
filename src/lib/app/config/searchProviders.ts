@@ -1,5 +1,5 @@
 export interface SearchProvider {
-	id: string;
+	id: number;
 	name: string;
 	url: string | string[];
 }
@@ -8,22 +8,22 @@ export type SearchProviderName = 'Google' | 'Bing' | 'DuckDuckGo' | 'Yahoo';
 
 export const searchProvidersWithoutAll: SearchProvider[] = [
 	{
-		id: '1',
+		id: 1,
 		name: 'Google',
 		url: 'https://google.com/search?q='
 	},
 	{
-		id: '2',
+		id: 2,
 		name: 'DuckDuckGo',
 		url: 'https://duckduckgo.com/?q='
 	},
 	{
-		id: '3',
+		id: 3,
 		name: 'Bing',
 		url: 'https://bing.com/search?q='
 	},
 	{
-		id: '4',
+		id: 4,
 		name: 'Yahoo',
 		url: 'https://search.yahoo.com/search?q='
 	}
@@ -32,7 +32,7 @@ export const searchProvidersWithoutAll: SearchProvider[] = [
 export const searchProvidersWithAll: SearchProvider[] = [
 	...searchProvidersWithoutAll,
 	{
-		id: '5',
+		id: 5,
 		name: 'All',
 		url: [
 			'https://search.yahoo.com/search?q=',

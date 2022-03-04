@@ -37,6 +37,8 @@
 			saveSearch();
 		}
 	};
+
+	console.log('phakathi inside');
 </script>
 
 <SearchBarBase {executeQuery} />

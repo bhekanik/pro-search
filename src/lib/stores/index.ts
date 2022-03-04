@@ -4,5 +4,6 @@ export * from './query';
 export * from './queryToShare';
 export * from './readiness';
 export * from './savedQueries';
+export * from './searchProviders';
 export * from './seo';
 export * from './settings';

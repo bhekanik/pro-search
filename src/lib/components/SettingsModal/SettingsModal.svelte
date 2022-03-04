@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { searchProvidersWithAll, searchProvidersWithoutAll } from '$lib/app/config';
 	import { TableNames } from '$lib/app/model';
 	import { supabase } from '$lib/app/supabaseClient';
-	import { authStore, isAuthenticated, settingsStore } from '$lib/stores';
-	import ValueSelector from '../FeatureSelector/ValueSelector.svelte';
+	import { authStore, isAuthenticated, searchProvidersStore, settingsStore } from '$lib/stores';
 	import SearchProviderSelect from '../SearchProvider/SearchProviderSelect.svelte';
 	import BooleanOption from './BooleanOption.svelte';
 
@@ -13,7 +11,7 @@
 			.update([
 				{
 					...$settingsStore,
-					default_search_provider: $settingsStore.default_search_provider.name.toLowerCase()
+					default_search_provider: $settingsStore.default_search_provider.name
 				}
 			])
 			.match({
@@ -26,14 +24,14 @@
 		}
 	}
 
-	function handleChange(e: Event, searchProviders) {
-		searchProviders.find((searchProvider) => {
-			if (searchProvider.id === (e.target as HTMLSelectElement).value) {
-				settingsStore.set({
-					...$settingsStore,
-					default_search_provider: searchProvider
-				});
-			}
+	function handleChange(e: Event) {
+		const newSearchProvider = $searchProvidersStore.find(
+			(searchProvider) => searchProvider.id === Number((e.target as HTMLSelectElement).value)
+		);
+
+		settingsStore.set({
+			...$settingsStore,
+			default_search_provider: newSearchProvider
 		});
 	}
 
@@ -45,7 +43,6 @@
 			[name]: checked
 		});
 	}
-	console.log('$settingsStore:', $settingsStore);
 </script>
 
 {#if $isAuthenticated}
@@ -66,19 +63,12 @@
 				value={$settingsStore.query_preview}
 				label="Query URL Preview"
 			/>
-			<ValueSelector
-				featureFlag="Search_All_Providers"
-				onValue={searchProvidersWithAll}
-				offValue={searchProvidersWithoutAll}
-				let:feature={searchProviders}
-			>
-				<span class="input-label mr-4">Default Search Provider: </span>
-				<SearchProviderSelect
-					value={$settingsStore.default_search_provider.id}
-					{searchProviders}
-					on:change={(e) => handleChange(e, searchProviders)}
-				/>
-			</ValueSelector>
+			<span class="input-label mr-4">Default Search Provider: </span>
+			<SearchProviderSelect
+				value={$settingsStore.default_search_provider.id}
+				searchProviders={$searchProvidersStore}
+				on:change={(e) => handleChange(e)}
+			/>
 
 			<div class="divider" />
 			<div class="modal-action">

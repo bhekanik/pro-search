@@ -8,8 +8,10 @@
 		authReadiness,
 		authStore,
 		isAuthenticated,
+		queryStore,
 		readiness,
 		savedQueriesStore,
+		searchProvidersStore,
 		settingsStore
 	} from '$lib/stores';
 	import LogRocket from 'logrocket';
@@ -50,31 +52,25 @@
 			});
 
 			const { data: savedQueries } = await supabase.from(TableNames.savedQueries).select();
-			const { data: settings } = await supabase
-				.from(TableNames.settings)
-				.select(`auto_save_queries, default_search_provider, query_preview`)
-				.single();
-			console.log('settings:', settings);
-
 			console.log('savedQueries:', savedQueries);
 			savedQueriesStore.set(savedQueries || []);
-			if (settings) settingsStore.set(settings);
 
-			savedQueriesSubscription = supabase
-				.from(TableNames.savedQueries)
-				.on('*', (payload) => {
-					console.log('Change received!', payload);
-					// savedQueriesStore.set(payload || []);
-				})
-				.subscribe();
+			const { data: searchProviders } = await supabase
+				.from(TableNames.searchProviders)
+				.select('id, name, url');
+			searchProvidersStore.set(searchProviders || []);
 
-			settingsSubscription = supabase
+			const { data: settings } = await supabase
 				.from(TableNames.settings)
-				.on('*', (payload) => {
-					console.log('Change received!', payload);
-					// savedQueriesStore.set(payload || []);
-				})
-				.subscribe();
+				.select(`autosave_queries, default_search_provider(id, url, name), query_preview`)
+				.single();
+			if (settings) {
+				settingsStore.set(settings);
+				queryStore.update((currentQuery) => ({
+					...currentQuery,
+					provider: settings.default_search_provider
+				}));
+			}
 		}
 	};
 
@@ -85,6 +81,22 @@
 
 		handleAuth(user);
 
+		savedQueriesSubscription = supabase
+			.from(TableNames.savedQueries)
+			.on('*', (payload) => {
+				console.log('Change received!', payload);
+				// savedQueriesStore.set(payload || []);
+			})
+			.subscribe();
+
+		settingsSubscription = supabase
+			.from(TableNames.settings)
+			.on('*', (payload) => {
+				console.log('Change received!', payload);
+				// savedQueriesStore.set(payload || []);
+			})
+			.subscribe();
+
 		supabase.auth.onAuthStateChange(async (event, session) => {
 			await handleAuth(session?.user, event);
 		});
@@ -94,13 +106,6 @@
 
 	function logout() {
 		supabase.auth.signOut();
-
-		authStore.set({
-			isLoggedIn: false,
-			user: null
-		});
-
-		isAuthenticated.set(false);
 
 		savedQueriesStore.set([]);
 
