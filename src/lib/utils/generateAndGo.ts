@@ -3,12 +3,7 @@ import { supabase } from '$lib/app/supabaseClient';
 import type { FilterType } from '$lib/app/types/filters';
 import { filtersThatDontRequireSearchTerm } from '$lib/app/types/filters';
 import { formatQuery } from '$lib/components/Filters/utils/formatQuery';
-import type { Query } from '$lib/stores';
-import {
-	isAuthenticated as isAuthenticatedStore,
-	queryStore,
-	savedQueriesStore
-} from '$lib/stores';
+import { authStore, queryStore, savedQueriesStore, type Query } from '$lib/stores';
 import { get } from 'svelte/store';
 
 const saveNewQuery = async (currentSavedQueries: Query[], query: Query) => {
@@ -35,9 +30,8 @@ const saveNewQuery = async (currentSavedQueries: Query[], query: Query) => {
 
 export async function updateSavedQueries(options?: { query?: Query }): Promise<void> {
 	const query = options?.query || get(queryStore);
-	const isAuthenticated = get(isAuthenticatedStore);
 
-	if (!isAuthenticated) {
+	if (!get(authStore).isLoggedIn) {
 		return;
 	}
 

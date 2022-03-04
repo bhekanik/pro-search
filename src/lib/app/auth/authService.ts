@@ -1,4 +1,3 @@
-import { isAuthenticated, popupOpen, user } from '$lib/stores';
 import type {
 	Auth0Client,
 	LogoutOptions,
@@ -23,15 +22,12 @@ async function loginWithRedirect(
 ): Promise<void> {
 	try {
 		await client.loginWithRedirect(options);
-
-		user.set(await client.getUser());
 	} catch (e) {
 		console.error(e);
 	}
 }
 
 async function handleRedirectCallback(client: Auth0Client, url?: string): Promise<void> {
-	popupOpen.set(true);
 	try {
 		await client.handleRedirectCallback(url);
 	} catch (e) {
@@ -40,20 +36,17 @@ async function handleRedirectCallback(client: Auth0Client, url?: string): Promis
 }
 
 async function loginWithPopup(client: Auth0Client, options?: PopupLoginOptions): Promise<void> {
-	popupOpen.set(true);
 	try {
 		await client.loginWithPopup(options);
 
 		if (client) {
 			const authState = await client.isAuthenticated();
-			isAuthenticated.set(authState);
+			console.log('authState:', authState);
 			const userState = await client.getUser();
 			console.log('userState:', userState);
 		}
 	} catch (e) {
 		console.error(e);
-	} finally {
-		popupOpen.set(false);
 	}
 }
 
@@ -61,13 +54,7 @@ function logout(client: Auth0Client, options?: LogoutOptions): void | Promise<vo
 	return client.logout(options);
 }
 
-async function checkAuth(client: Auth0Client): Promise<void> {
-	isAuthenticated.set(await client.isAuthenticated());
-	user.set(await client.getUser());
-}
-
 const auth = {
-	checkAuth,
 	createClient,
 	handleRedirectCallback,
 	loginWithPopup,

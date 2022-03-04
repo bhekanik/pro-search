@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { isAuthenticated } from '$lib/stores';
+	import { authStore } from '$lib/stores';
 </script>
 
-{#if $isAuthenticated}
+{#if $authStore.isLoggedIn}
 	<slot />
 {/if}

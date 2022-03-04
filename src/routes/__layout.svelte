@@ -4,7 +4,7 @@
 	import Header from '$lib/components/Header/Header.svelte';
 	import ShareModal from '$lib/components/SavedQueries/ShareModal.svelte';
 	import Seo from '$lib/components/SEO/SEO.svelte';
-	import { isAuthenticated, queryToShareStore } from '$lib/stores';
+	import { authStore, queryToShareStore } from '$lib/stores';
 	import * as Sentry from '@sentry/browser';
 	import { Integrations } from '@sentry/tracing';
 	import { onDestroy, onMount } from 'svelte';
@@ -40,7 +40,7 @@
 	<a href="/recipes" class={`tab tab-bordered ${$page.url.pathname === '/recipes' && 'tab-active'}`}
 		>Recipes</a
 	>
-	{#if $isAuthenticated}
+	{#if $authStore.isLoggedIn}
 		<a
 			href="/saved-queries"
 			class={`tab tab-bordered ${$page.url.pathname === '/saved-queries' && 'tab-active'}`}

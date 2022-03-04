@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { isAuthenticated } from '$lib/stores';
+	import { authStore } from '$lib/stores';
 
 	export let handleLogin: () => void;
 </script>
@@ -28,7 +28,7 @@
 	</div>
 	<div class="flex-none">
 		<button on:click={handleLogin} class="btn btn-square btn-ghost">
-			{#if $isAuthenticated}
+			{#if $authStore.isLoggedIn}
 				<div class="avatar">
 					<div class="rounded-full w-10 h-10 m-1">
 						<img src="https://i.pravatar.cc/500?img=32" alt="Avatar" />

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { TableNames } from '$lib/app/model';
 	import { supabase } from '$lib/app/supabaseClient';
-	import { isAuthenticated, queryStore, savedQueriesStore } from '$lib/stores';
+	import { authStore, queryStore, savedQueriesStore } from '$lib/stores';
 	import { fade } from 'svelte/transition';
 	import SearchBarBase from './SearchBarBase.svelte';
 
@@ -56,7 +56,7 @@
 </script>
 
 <SearchBarBase {executeQuery} />
-{#if $queryStore.search_term && $isAuthenticated}
+{#if $queryStore.search_term && $authStore.isLoggedIn}
 	<label for={`name-query-modal-btn-${$queryStore.id}`} in:fade class="btn btn-outlint">Save</label>
 	<input
 		on:input={handleInput}

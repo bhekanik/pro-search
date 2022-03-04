@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Recipes from '$lib/components/Recipes/Recipes.svelte';
 	import SavedQueriesList from '$lib/components/SavedQueries/SavedQueriesList.svelte';
-	import { isAuthenticated, seo } from '$lib/stores';
+	import { authStore, seo } from '$lib/stores';
 	import { onMount } from 'svelte';
 
 	onMount(() => {
@@ -17,7 +17,7 @@
 >
 	<Recipes />
 
-	{#if $isAuthenticated}
+	{#if $authStore.isLoggedIn}
 		<SavedQueriesList />
 	{/if}
 </div>

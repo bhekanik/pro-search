@@ -6,7 +6,7 @@
 	import SavedQueriesList from '$lib/components/SavedQueries/SavedQueriesList.svelte';
 	import SearchBar from '$lib/components/SearchBar/SearchBar.svelte';
 	import SearchProvider from '$lib/components/SearchProvider/SearchProvider.svelte';
-	import { isAuthenticated, seo, settingsStore } from '$lib/stores';
+	import { authStore, seo, settingsStore } from '$lib/stores';
 	import { onMount } from 'svelte';
 
 	let url = '';
@@ -61,7 +61,7 @@
 				<QueryUrlPreview />
 			{/if}
 
-			{#if !$isAuthenticated}
+			{#if !$authStore.isLoggedIn}
 				<Announcement>
 					<label for="auth-modal" class="underline cursor-pointer font-bold inline">Sign up</label>
 					to save your queries and other cool features!
@@ -77,7 +77,7 @@
 		</main>
 	</div>
 
-	{#if $isAuthenticated}
+	{#if $authStore.isLoggedIn}
 		<SavedQueriesList />
 	{/if}
 </div>

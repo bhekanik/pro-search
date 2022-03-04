@@ -1,11 +1,11 @@
 <script lang="ts">
 	import {
+		authStore,
 		featureFlagsStore,
 		queryStore,
 		readiness,
 		savedQueriesStore,
-		settingsStore,
-		user
+		settingsStore
 	} from '$lib/stores';
 	import { onDestroy } from 'svelte';
 	import type { Unsubscriber } from 'svelte/store';
@@ -14,7 +14,7 @@
 
 	const stores = {
 		featureFlags: { value: $featureFlagsStore, name: featureFlagsStore },
-		auth: { value: $user, name: user },
+		auth: { value: $authStore, name: authStore },
 		query: { value: $queryStore, name: queryStore },
 		savedQueries: { value: $savedQueriesStore, name: savedQueriesStore },
 		readiness: { value: $readiness, name: readiness },

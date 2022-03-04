@@ -1,13 +1,8 @@
 <script lang="ts">
 	import { TableNames } from '$lib/app/model';
 	import { supabase } from '$lib/app/supabaseClient';
-	import {
-		authStore,
-		isAuthenticated,
-		queryStore,
-		searchProvidersStore,
-		settingsStore
-	} from '$lib/stores';
+	import { authStore, queryStore, searchProvidersStore, settingsStore } from '$lib/stores';
+	import Protected from '../Protected/Protected.svelte';
 	import SearchProviderSelect from '../SearchProvider/SearchProviderSelect.svelte';
 	import BooleanOption from './BooleanOption.svelte';
 
@@ -62,7 +57,7 @@
 	}
 </script>
 
-{#if $isAuthenticated}
+<Protected>
 	<input type="checkbox" id="my-modal-2" class="modal-toggle" />
 
 	<div class="modal">
@@ -94,4 +89,4 @@
 			</div>
 		</div>
 	</div>
-{/if}
+</Protected>

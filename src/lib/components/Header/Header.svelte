@@ -8,7 +8,6 @@
 	import {
 		authReadiness,
 		authStore,
-		isAuthenticated,
 		queryStore,
 		readiness,
 		savedQueriesStore,
@@ -43,8 +42,6 @@
 			isLoggedIn: !!user,
 			user: user || null
 		});
-
-		isAuthenticated.set(!!user);
 
 		authReadiness.set(true);
 
@@ -193,9 +190,6 @@
 				</div>
 			{:else}
 				<label for="auth-modal" class="btn btn-sm btn-ghost">Login / Sign Up</label>
-				<!-- <button on:click={login} class="btn btn-sm btn-ghost">
-				{'Login/Sign Up'}
-			</button> -->
 			{/if}
 		{:else}
 			<div class="btn btn-sm btn-circle btn-ghost btn-xl loading" />
