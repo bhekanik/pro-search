@@ -13,7 +13,7 @@
 	}
 
 	const handleSearch = () => {
-		if (!$queryStore.searchTerm) return;
+		if (!$queryStore.search_term) return;
 		const generatedQueryUrl = generateQueryUrl({
 			saveQuery,
 			skipSearchTermCheck: true
@@ -25,7 +25,7 @@
 	const handleInput = (e) => {
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
-			newQuery.searchTerm = e.target.value.trim();
+			newQuery.search_term = e.target.value.trim();
 			return newQuery;
 		});
 	};
@@ -54,10 +54,10 @@
 		type="text"
 		use:focusElement
 		bind:this={searchInput}
-		value={$queryStore.searchTerm}
+		value={$queryStore.search_term}
 	/>
 
-	{#if $queryStore.searchTerm}
+	{#if $queryStore.search_term}
 		<button
 			on:click={handleSearchClear}
 			in:fade

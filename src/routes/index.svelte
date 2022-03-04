@@ -6,7 +6,7 @@
 	import SavedQueriesList from '$lib/components/SavedQueries/SavedQueriesList.svelte';
 	import SearchBar from '$lib/components/SearchBar/SearchBar.svelte';
 	import SearchProvider from '$lib/components/SearchProvider/SearchProvider.svelte';
-	import { configStore, isAuthenticated, seo } from '$lib/stores';
+	import { isAuthenticated, seo, settingsStore } from '$lib/stores';
 	import { onMount } from 'svelte';
 
 	let url = '';
@@ -57,7 +57,7 @@
 				</ValueSelector>
 			</div>
 
-			{#if $configStore.queryPreview}
+			{#if $settingsStore.queryPreview}
 				<QueryUrlPreview />
 			{/if}
 

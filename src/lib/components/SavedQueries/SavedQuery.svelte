@@ -1,10 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { initFirebase } from '$lib/app/auth/initFirebase';
-	import { firebaseAuth, queryStore, savedQueriesStore, SAVED_QUERIES_KEY } from '$lib/stores';
+	import { supabase } from '$lib/app/supabaseClient';
+	import { queryStore, savedQueriesStore } from '$lib/stores';
 	import type { Filter } from '$lib/stores/query';
-	import { doc, getDoc, setDoc } from 'firebase/firestore';
-	import { get } from 'svelte/store';
 
 	export let query;
 	export let handleShare: (id: string) => void;
@@ -16,18 +14,9 @@
 		);
 
 	const handleDelete = async () => {
-		const { db } = await initFirebase();
+		const { error } = await supabase.from('saved_queries').delete().eq('id', query.id);
 
-		const savedQueries =
-			(await getDoc(doc(db, SAVED_QUERIES_KEY, get(firebaseAuth).user.uid))).data()?.data ?? [];
-
-		const newSavedQueries = savedQueries.filter((savedQuery) => savedQuery.id !== query.id);
-
-		await setDoc(
-			doc(db, SAVED_QUERIES_KEY, $firebaseAuth.user.uid),
-			{ data: newSavedQueries },
-			{ merge: true }
-		);
+		const { data: newSavedQueries } = await supabase.from('saved_queries').select();
 
 		savedQueriesStore.set(newSavedQueries);
 		return newSavedQueries;

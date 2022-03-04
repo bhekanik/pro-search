@@ -1,28 +1,45 @@
 <script lang="ts">
-	import { initFirebase } from '$lib/app/auth/initFirebase';
 	import { searchProvidersWithAll, searchProvidersWithoutAll } from '$lib/app/config';
-	import { configStore, firebaseAuth, isAuthenticated } from '$lib/stores';
-	import { doc, setDoc } from 'firebase/firestore';
+	import { TableNames } from '$lib/app/model';
+	import { supabase } from '$lib/app/supabaseClient';
+	import { isAuthenticated, settingsStore } from '$lib/stores';
 	import ValueSelector from '../FeatureSelector/ValueSelector.svelte';
 	import SearchProviderSelect from '../SearchProvider/SearchProviderSelect.svelte';
 	import BooleanOption from './BooleanOption.svelte';
 
 	async function handleAccept() {
-		const { db } = await initFirebase();
+		const user = await supabase.auth.user();
 
-		await setDoc(
-			doc(db, 'users', $firebaseAuth.user.uid),
-			{ config: $configStore },
-			{ merge: true }
-		);
+		const record = await supabase.from(TableNames.config).select();
+
+		if (record.data.length > 0) {
+			const { data, error } = await supabase
+				.from(TableNames.config)
+				.update([
+					{
+						...$settingsStore,
+						user_id: user.id
+					}
+				])
+				.match({
+					user_id: user.id
+				});
+		} else {
+			const { data, error } = await supabase.from(TableNames.config).insert([
+				{
+					...$settingsStore,
+					user_id: user.id
+				}
+			]);
+		}
 	}
 
 	function handleChange(e: Event, searchProviders) {
 		searchProviders.find((searchProvider) => {
 			if (searchProvider.id === (e.target as HTMLSelectElement).value) {
-				configStore.set({
-					...$configStore,
-					defaultSearchProvider: searchProvider
+				settingsStore.set({
+					...$settingsStore,
+					default_search_provider: searchProvider
 				});
 			}
 		});
@@ -31,8 +48,8 @@
 	function handleCheckboxChange(e: Event) {
 		const { checked, name } = e.target as HTMLInputElement;
 
-		configStore.set({
-			...$configStore,
+		settingsStore.set({
+			...$settingsStore,
 			[name]: checked
 		});
 	}
@@ -47,13 +64,13 @@
 			<BooleanOption
 				name="autosaveQueries"
 				{handleCheckboxChange}
-				value={$configStore.autosaveQueries}
+				value={$settingsStore.autosave_queries}
 				label="Autosave Queries"
 			/>
 			<BooleanOption
 				name="queryPreview"
 				{handleCheckboxChange}
-				value={$configStore.queryPreview}
+				value={$settingsStore.query_preview}
 				label="Query URL Preview"
 			/>
 			<ValueSelector
@@ -64,7 +81,7 @@
 			>
 				<span class="input-label mr-4">Default Search Provider: </span>
 				<SearchProviderSelect
-					value={$configStore.defaultSearchProvider.id}
+					value={$settingsStore.default_search_provider.id}
 					{searchProviders}
 					on:change={(e) => handleChange(e, searchProviders)}
 				/>

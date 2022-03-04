@@ -1,10 +1,10 @@
 <script>
 	import {
-		configStore,
 		featureFlagsStore,
 		queryStore,
 		readiness,
 		savedQueriesStore,
+		settingsStore,
 		user
 	} from '$lib/stores';
 	import { onDestroy } from 'svelte';
@@ -17,7 +17,7 @@
 		query: { value: $queryStore, name: queryStore },
 		savedQueries: { value: $savedQueriesStore, name: savedQueriesStore },
 		readiness: { value: $readiness, name: readiness },
-		config: { value: $configStore, name: configStore }
+		config: { value: $settingsStore, name: settingsStore }
 	};
 
 	$: value = stores[selected].value;

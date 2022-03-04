@@ -1,32 +1,20 @@
 <script lang="ts">
-	import { initFirebase } from '$lib/app/auth/initFirebase';
-	import { searchProvidersWithAll } from '$lib/app/config';
+	import { TableNames } from '$lib/app/model';
 	import { splitClient } from '$lib/app/splitClient';
+	import { supabase } from '$lib/app/supabaseClient';
+	import AuthModal from '$lib/components/AuthModal/AuthModal.svelte';
 	import SettingsModal from '$lib/components/SettingsModal/SettingsModal.svelte';
 	import {
 		authReadiness,
-		configStore,
-		firebaseAuth as firebaseAuthStore,
+		authStore,
 		isAuthenticated,
-		queryStore,
 		readiness,
 		savedQueriesStore,
-		SAVED_QUERIES_KEY
+		settingsStore
 	} from '$lib/stores';
-	import 'firebase/auth';
-	import {
-		EmailAuthProvider,
-		GoogleAuthProvider,
-		onAuthStateChanged,
-		signInWithRedirect,
-		signOut,
-		TwitterAuthProvider
-	} from 'firebase/auth';
-	import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 	import LogRocket from 'logrocket';
 	import { onDestroy, onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
-	import AuthModal from '../AuthModal/AuthModal.svelte';
 
 	let isProd = process.env.NODE_ENV === 'production';
 	let isProdDeployEnv = process.env.VITE_DEPLOYMENT_ENV === 'production';
@@ -35,88 +23,74 @@
 		LogRocket.init('uetpov/pro-search');
 	}
 
-	let auth;
-	let ui;
-	let uiConfig;
 	let closeModalButton = null;
-	let configUnsub;
 	let savedQueriesUnsub;
 
-	onMount(() => {
-		(async () => {
-			const firebase = await initFirebase();
-			auth = firebase.auth;
+	let redirectTo = '';
+	let savedQueriesSubscription;
+	let settingsSubscription;
 
-			onAuthStateChanged(auth, async (user) => {
-				firebaseAuthStore.set({
-					isLoggedIn: !!user,
-					user,
-					firebaseControlled: true
-				});
+	const handleAuth = async (user, event = null) => {
+		console.log('event:', event);
+		console.log('user:', user);
 
-				isAuthenticated.set(!!user);
+		authStore.set({
+			isLoggedIn: !!user,
+			user: user,
+			firebaseControlled: true
+		});
 
-				authReadiness.set(true);
+		isAuthenticated.set(!!user);
 
-				if (user) {
-					LogRocket.identify(user.email || user.displayName, {
-						name: user.displayName,
-						email: user.email
-					});
+		authReadiness.set(true);
 
-					const savedQueriesSnapshot = await getDoc(doc(firebase.db, SAVED_QUERIES_KEY, user.uid));
-
-					savedQueriesUnsub = onSnapshot(doc(firebase.db, SAVED_QUERIES_KEY, user.uid), (doc) => {
-						savedQueriesStore.set(savedQueriesSnapshot.data().data || []);
-					});
-
-					configUnsub = onSnapshot(doc(firebase.db, 'users', user.uid), (doc) => {
-						configStore.set({ ...$configStore, ...doc.data().config });
-						queryStore.set({
-							...$queryStore,
-							provider: doc.data().config.defaultSearchProvider || searchProvidersWithAll[0]
-						});
-					});
-				}
+		if (user) {
+			LogRocket.identify(user.email || user.id, {
+				name: user.id,
+				email: user.email
 			});
 
-			const firebaseui = await import('firebaseui');
-			ui = new firebaseui.auth.AuthUI(auth);
-			uiConfig = {
-				callbacks: {
-					signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-						if (authResult?.additionalUserInfo?.providerId === 'password') closeModalButton.click();
-						// User successfully signed in.
-						// Return type determines whether we continue the redirect automatically
-						// or whether we leave that to developer to handle.
-						return false;
-					}
-				},
-				signInOptions: [
-					// List of OAuth providers supported.
-					EmailAuthProvider.PROVIDER_ID,
-					GoogleAuthProvider.PROVIDER_ID,
-					TwitterAuthProvider.PROVIDER_ID
-				],
-				credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO
-			};
-			// if (ui.isPendingRedirect()) {
-			ui.start('#firebaseui-auth-container', uiConfig);
-			// }
-		})();
+			const { data: savedQueriesData } = await supabase.from(TableNames.config).select();
+			console.log('savedQueriesData:', savedQueriesData);
+
+			savedQueriesStore.set(savedQueriesData);
+
+			savedQueriesSubscription = supabase
+				.from(TableNames.savedQueries)
+				.on('*', (payload) => {
+					console.log('Change received!', payload);
+					// savedQueriesStore.set(payload || []);
+				})
+				.subscribe();
+
+			settingsSubscription = supabase
+				.from(TableNames.config)
+				.on('*', (payload) => {
+					console.log('Change received!', payload);
+					// savedQueriesStore.set(payload || []);
+				})
+				.subscribe();
+		}
+	};
+
+	onMount(() => {
+		redirectTo = window.location.origin;
+
+		const user = supabase.auth.user();
+
+		handleAuth(user);
+
+		supabase.auth.onAuthStateChange(async (event, session) => {
+			await handleAuth(session.user, event);
+		});
 
 		themeChange(false);
 	});
 
-	function login() {
-		const provider = new GoogleAuthProvider();
-		signInWithRedirect(auth, provider);
-	}
-
 	function logout() {
-		signOut(auth);
+		supabase.auth.signOut();
 
-		firebaseAuthStore.set({
+		authStore.set({
 			isLoggedIn: false,
 			user: null,
 			firebaseControlled: false
@@ -126,15 +100,15 @@
 
 		savedQueriesStore.set([]);
 
-		configStore.reset();
-
-		ui.start('#firebaseui-auth-container', uiConfig);
+		settingsStore.reset();
 	}
 
 	onDestroy(() => {
 		splitClient?.destroy();
-		configUnsub?.();
 		savedQueriesUnsub?.();
+		supabase.removeAllSubscriptions();
+		if (savedQueriesSubscription) supabase.removeSubscription(savedQueriesSubscription);
+		if (settingsSubscription) supabase.removeSubscription(settingsSubscription);
 	});
 </script>
 
@@ -147,26 +121,23 @@
 	</div>
 
 	<SettingsModal />
-	<AuthModal bind:closeModalButton />
+	<AuthModal {redirectTo} bind:closeModalButton />
 	<div class="flex gap-2 items-center">
 		{#if $readiness}
 			<!-- <button data-toggle-theme="dark,light" data-act-class="ACTIVECLASS">Theme</button> -->
-			{#if $firebaseAuthStore.isLoggedIn}
+			{#if $authStore.isLoggedIn}
 				<label for="my-modal-2" class="btn btn-sm btn-ghost border modal-button">Settings</label>
 				<div class="dropdown dropdown-end">
-					<div
-						tabindex="0"
-						class={`avatar ${!$firebaseAuthStore.user?.photoURL ? 'placeholder' : ''}`}
-					>
+					<div tabindex="0" class="placeholder">
 						<div class="rounded-full w-8 h-8 ring ring-primary">
-							{#if $firebaseAuthStore.user?.photoURL}
+							<!-- {#if $firebaseAuthStore.user?.photoURL}
 								<img alt="profile" src={$firebaseAuthStore.user.photoURL} />
-							{:else}
-								<span class="text-s"
-									>{$firebaseAuthStore.user.displayName?.charAt(0) ||
-										$firebaseAuthStore.user.email?.charAt(0).toUpperCase()}</span
-								>
-							{/if}
+							{:else} -->
+							<span class="text-s"
+								>{$authStore.user?.email?.charAt(0) ||
+									$authStore.user.email?.charAt(0).toUpperCase()}</span
+							>
+							<!-- {/if} -->
 						</div>
 					</div>
 
@@ -174,9 +145,9 @@
 						tabindex="0"
 						class="menu dropdown-content rounded-box w-52 bordered shadow-lg bg-slate-600"
 					>
-						{#if $firebaseAuthStore.user.email}
+						{#if $authStore.user?.email}
 							<li>
-								<span>{$firebaseAuthStore.user?.email}</span>
+								<span>{$authStore.user?.email}</span>
 							</li>
 						{/if}
 						<!-- <li>

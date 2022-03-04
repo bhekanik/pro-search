@@ -1,34 +1,27 @@
-import { initFirebase } from '$lib/app/auth/initFirebase';
+import { TableNames } from '$lib/app/model';
+import { supabase } from '$lib/app/supabaseClient';
 import type { FilterType } from '$lib/app/types/filters';
 import { filtersThatDontRequireSearchTerm } from '$lib/app/types/filters';
 import { formatQuery } from '$lib/components/Filters/utils/formatQuery';
 import {
-	firebaseAuth,
 	isAuthenticated as isAuthenticatedStore,
 	Query,
 	queryStore,
-	savedQueriesStore,
-	SAVED_QUERIES_KEY
+	savedQueriesStore
 } from '$lib/stores';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { get } from 'svelte/store';
-import { v4 as uuidv4 } from 'uuid';
 
 const saveNewQuery = async (currentSavedQueries: Query[], query: Query) => {
+	const user = await supabase.auth.user();
+
 	const newQuery = {
 		...query,
-		id: uuidv4(),
-		createdAt: new Date().toISOString(),
-		name: query.name || `Untitled Query - ${new Date().toUTCString()}`
+		name: query.name || `Untitled Query - ${new Date().toUTCString()}`,
+		user_id: user.id
 	};
 	const newSavedQueries = [...currentSavedQueries, newQuery];
-	const { db } = await initFirebase();
 
-	await setDoc(
-		doc(db, SAVED_QUERIES_KEY, get(firebaseAuth).user.uid),
-		{ data: newSavedQueries },
-		{ merge: true }
-	);
+	await supabase.from(TableNames.savedQueries).insert([newQuery]);
 
 	savedQueriesStore.set(newSavedQueries);
 };
@@ -41,15 +34,13 @@ export async function updateSavedQueries(options?: { query?: Query }): Promise<v
 		return;
 	}
 
-	const { db } = await initFirebase();
-
 	// Skip saving if the query is equal to the first saved query
-	const currentSavedQueries =
-		(await getDoc(doc(db, SAVED_QUERIES_KEY, get(firebaseAuth).user.uid))).data()?.data ?? [];
+	const { data: currentSavedQueries } = await supabase.from(TableNames.savedQueries).select(`
+		search_term, filters, provider, name, user_id
+	`);
 
 	const newSavedQueries = [...currentSavedQueries];
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const { id, createdAt, ...queryWithoutIdAndDate } = query;
+	const { ...queryWithoutIdAndDate } = query;
 	let exists = false;
 	if (currentSavedQueries.length) {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -79,7 +70,7 @@ export const generateQueryUrl = (
 
 	if (
 		!options.skipSearchTermCheck &&
-		!query.searchTerm &&
+		!query.search_term &&
 		!filtersThatDontRequireSearchTerm.includes(options.type)
 	) {
 		return;

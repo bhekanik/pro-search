@@ -1,21 +1,16 @@
-import type { UserInfo } from 'firebase/auth';
+import type { User } from '@supabase/supabase-js';
 import { writable } from 'svelte/store';
 
-interface User {
-	email?: string;
-	picture?: string;
-}
-
 export const isAuthenticated = writable(false);
-export const user = writable<User>({});
+export const user = writable<User | null>(null);
 export const error = writable();
-export const authReadiness = writable<boolean>(false);
+export const authReadiness = writable<boolean>(true);
 
 export const popupOpen = writable(false);
 
-export const firebaseAuth = writable<{
+export const authStore = writable<{
 	isLoggedIn: boolean;
-	user?: UserInfo;
+	user?: User;
 	firebaseControlled: boolean;
 }>({
 	isLoggedIn: false,

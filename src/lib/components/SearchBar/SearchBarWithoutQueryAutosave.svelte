@@ -1,6 +1,7 @@
 <script lang="ts">
+	import { TableNames } from '$lib/app/model';
+	import { supabase } from '$lib/app/supabaseClient';
 	import { isAuthenticated, queryStore } from '$lib/stores';
-	import { updateSavedQueries } from '$lib/utils/generateAndGo';
 	import { fade } from 'svelte/transition';
 	import SearchBarBase from './SearchBarBase.svelte';
 
@@ -9,13 +10,17 @@
 	let queryName = '';
 	let input = null;
 
-	const saveSearch = () => {
-		updateSavedQueries({
-			query: {
+	const saveSearch = async () => {
+		const user = await supabase.auth.user();
+
+		const { data, error } = await supabase.from(TableNames.savedQueries).insert([
+			{
 				...$queryStore,
-				name: queryName
+				name: queryName,
+				user_id: user.id
 			}
-		});
+		]);
+
 		queryStore.reset();
 		queryName = '';
 	};
@@ -35,7 +40,7 @@
 </script>
 
 <SearchBarBase {executeQuery} />
-{#if $queryStore.searchTerm && $isAuthenticated}
+{#if $queryStore.search_term && $isAuthenticated}
 	<label for={`name-query-modal-btn-${$queryStore.id}`} in:fade class="btn btn-outlint">Save</label>
 	<input
 		on:input={handleInput}

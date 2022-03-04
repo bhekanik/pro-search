@@ -47,7 +47,7 @@ export const formatQuery = (options?: { query?: Query }): string => {
 			.map((filter) => filter[1].formatted.trim())
 			.join('&');
 
-		const formattedQuery = `${prefix}${query.searchTerm}${
+		const formattedQuery = `${prefix}${query.search_term}${
 			queryParams.trim() ? `&${queryParams}` : ''
 		}`;
 
@@ -63,7 +63,7 @@ export const formatQuery = (options?: { query?: Query }): string => {
 			.map((filter) => filter[1].formatted.trim())
 			.join('&');
 
-		const formattedQuery = `${prefix}${query.searchTerm}${
+		const formattedQuery = `${prefix}${query.search_term}${
 			queryParams.trim() ? `&${queryParams}` : ''
 		}`;
 
@@ -75,7 +75,7 @@ export const formatQuery = (options?: { query?: Query }): string => {
 			''
 		);
 
-		const formattedQuery = `${prefix}${query.searchTerm}`;
+		const formattedQuery = `${prefix}${query.search_term}`;
 
 		return formattedQuery;
 	}

@@ -12,20 +12,18 @@ export interface Filter {
 
 export interface Query {
 	id: string;
-	searchTerm: string;
+	search_term: string;
 	filters: Record<string, Filter>;
 	provider: SearchProvider;
-	createdAt: string;
 	name: string;
 }
 
 export const defaultQuery: Query = {
 	id: '',
 	name: '',
-	searchTerm: '',
+	search_term: '',
 	filters: {},
-	provider: searchProvidersWithAll[0],
-	createdAt: new Date().toISOString()
+	provider: searchProvidersWithAll[0]
 };
 
 const { subscribe, set, update }: Writable<Query> = writable({ ...defaultQuery });
