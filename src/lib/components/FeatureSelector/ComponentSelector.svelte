@@ -19,8 +19,6 @@
 			Feature = $featureFlagsStore[featureFlag] === 'on' ? onFeature : offFeature;
 		} else if (featureFlag === null && condition !== null) {
 			console.log('final condition:', condition);
-			console.log('featureFlag:', featureFlag);
-			console.log('props:', props);
 			Feature = condition ? onFeature : offFeature;
 		}
 	}

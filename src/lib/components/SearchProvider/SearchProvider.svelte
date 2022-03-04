@@ -12,7 +12,10 @@
 			};
 		});
 	};
-	console.log('$queryStore:', $queryStore);
+
+	$: {
+		console.log('$queryStore:', $queryStore.provider);
+	}
 </script>
 
 <SearchProviderSelect

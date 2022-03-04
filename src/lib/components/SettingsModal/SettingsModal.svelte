@@ -25,13 +25,14 @@
 			})
 			.select(`autosave_queries, default_search_provider(id, url, name), query_preview`)
 			.single();
+
 		if (error) {
 			console.error(error);
+			alert('There was an error saving your settings.');
 			return;
 		}
 
 		if (data) {
-			console.log('data:', data);
 			settingsStore.set(data);
 			queryStore.update((currentQuery) => ({
 				...currentQuery,

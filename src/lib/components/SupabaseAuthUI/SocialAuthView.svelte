@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Provider, SupabaseClient } from '@supabase/supabase-js';
 	import type { AuthProps } from './Auth.svelte';
-	import Button from './Button.svelte';
+	import Icon from './Icon.svelte';
 	import Text from './Text.svelte';
 
 	export let supabaseClient: SupabaseClient;
@@ -62,15 +62,22 @@
 
 	<div class="providers" class:horizontal={socialLayout == 'horizontal'}>
 		{#each providers as provider}
-			<Button
-				block
-				icon={provider}
-				size={socialButtonSize}
-				style={socialColors ? buttonStyles[provider] : {}}
+			<button
+				class="btn btn-primary flex w-full"
+				style={Object.entries(buttonStyles[provider])
+					.map(([key, value]) => {
+						return `${key}: ${value}`;
+					})
+					.join(';')}
 				on:click={() => handleProviderSignIn(provider)}
 			>
-				{#if socialLayout == 'vertical'}{view == 'sign_up' ? 'Sign up' : 'Sign in'} with {provider}{/if}
-			</Button>
+				<span class="flex mr-2">
+					<Icon name={provider} size={21} />
+				</span>
+				<span>
+					{#if socialLayout == 'vertical'}{view == 'sign_up' ? 'Sign up' : 'Sign in'} with {provider}{/if}
+				</span>
+			</button>
 		{/each}
 	</div>
 	<div role="separator" class="divider">
@@ -86,7 +93,7 @@
 	.providers {
 		display: flex;
 		flex-direction: column;
-		gap: 5px;
+		gap: 10px;
 	}
 
 	.providers.horizontal {

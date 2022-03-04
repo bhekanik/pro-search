@@ -29,6 +29,7 @@
 			});
 		} catch (error) {
 			console.log('error:', error);
+			alert('An error occured while sharing');
 		}
 	};
 </script>

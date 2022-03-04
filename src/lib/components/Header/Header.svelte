@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { SearchProvider } from '$lib/app/config';
 	import { TableNames } from '$lib/app/model';
 	import { splitClient } from '$lib/app/splitClient';
 	import { supabase } from '$lib/app/supabaseClient';
@@ -12,7 +13,9 @@
 		readiness,
 		savedQueriesStore,
 		searchProvidersStore,
-		settingsStore
+		settingsStore,
+		type Query,
+		type Settings
 	} from '$lib/stores';
 	import type { RealtimeSubscription, User } from '@supabase/supabase-js';
 	import LogRocket from 'logrocket';
@@ -52,7 +55,7 @@
 			});
 
 			const { data: savedQueries } = await supabase
-				.from(TableNames.savedQueries)
+				.from<Omit<Query, 'filters'> & { filters: string }>(TableNames.savedQueries)
 				.select('filters, created_at, id, name, provider(id, name, url), search_term');
 			savedQueriesStore.set(
 				savedQueries.map((savedQuery) => ({
@@ -61,13 +64,8 @@
 				})) || []
 			);
 
-			const { data: searchProviders } = await supabase
-				.from(TableNames.searchProviders)
-				.select('id, name, url');
-			searchProvidersStore.set(searchProviders || []);
-
 			const { data: settings } = await supabase
-				.from(TableNames.settings)
+				.from<Settings>(TableNames.settings)
 				.select(`autosave_queries, default_search_provider(id, url, name), query_preview`)
 				.single();
 			console.log('settings:', settings);
@@ -81,12 +79,15 @@
 		}
 	};
 
-	onMount(() => {
+	onMount(async () => {
 		redirectTo = window.location.origin;
 
 		const user = supabase.auth.user();
 
-		handleAuth(user);
+		const { data: searchProviders } = await supabase
+			.from<SearchProvider>(TableNames.searchProviders)
+			.select('id, name, url');
+		searchProvidersStore.set(searchProviders || []);
 
 		savedQueriesSubscription = supabase
 			.from(TableNames.savedQueries)
@@ -104,6 +105,7 @@
 			})
 			.subscribe();
 
+		handleAuth(user);
 		supabase.auth.onAuthStateChange(async (event, session) => {
 			await handleAuth(session?.user, event);
 		});

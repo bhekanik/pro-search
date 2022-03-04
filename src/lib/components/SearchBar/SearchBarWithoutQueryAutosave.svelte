@@ -28,7 +28,7 @@
 
 		if (error) {
 			console.error(error);
-			alert('Error saving query');
+			alert('Error while saving query');
 			return;
 		}
 

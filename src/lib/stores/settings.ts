@@ -2,7 +2,7 @@ import type { SearchProvider } from '$lib/app/config';
 import { searchProvidersWithAll } from '$lib/app/config';
 import { writable } from 'svelte/store';
 
-interface Settings {
+export interface Settings {
 	autosave_queries: boolean;
 	default_search_provider: SearchProvider;
 	query_preview: boolean;
