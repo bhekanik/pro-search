@@ -36,7 +36,7 @@
 <div>
 	<span class="text-gray-300">Query Term: </span>
 	<span class="font-medium text-gray-300 whitespace-nowrap overflow-hidden text-ellipsis">
-		{query.searchTerm}
+		{query.search_term}
 	</span>
 </div>
 <div>

@@ -19,15 +19,22 @@ const saveNewQuery = async (currentSavedQueries: Query[], query: Query) => {
 		name: query.name || `Untitled Query - ${new Date().toUTCString()}`,
 		user_id: user.id
 	};
-	const newSavedQueries = [...currentSavedQueries, newQuery];
 
-	await supabase.from(TableNames.savedQueries).insert([newQuery]);
+	const { data } = await supabase
+		.from(TableNames.savedQueries)
+		.insert([
+			{ ...newQuery, filters: JSON.stringify(query.filters), provider: query.provider.name }
+		])
+		.select('filters, created_at, id, name, provider(id, name, url), search_term');
 
-	savedQueriesStore.set(newSavedQueries);
+	savedQueriesStore.set([
+		...currentSavedQueries,
+		...data.map((d) => ({ ...d, filters: JSON.parse(d.filters) }))
+	]);
 };
 
 export async function updateSavedQueries(options?: { query?: Query }): Promise<void> {
-	const query = options.query || get(queryStore);
+	const query = options?.query || get(queryStore);
 	const isAuthenticated = get(isAuthenticatedStore);
 
 	if (!isAuthenticated) {

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import SavedQuery from '$lib/components/SavedQueries/SavedQuery.svelte';
-	import type { Query } from '$lib/stores';
-	import { queryToShareStore } from '$lib/stores';
+	import { Query, queryToShareStore, savedQueriesStore } from '$lib/stores';
 	import { search } from 'fast-fuzzy';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
@@ -25,9 +24,9 @@
 		}
 	}
 
-	// $: savedQueries = $savedQueriesStore.sort(
-	// 	(a, b) => Number(new Date(b.createdAt)) - Number(new Date(a.createdAt))
-	// );
+	$: savedQueries = $savedQueriesStore.sort(
+		(a, b) => Number(new Date(b.created_at)) - Number(new Date(a.created_at))
+	);
 </script>
 
 <div class="queries px-4 overflow-y-scroll relative bg-gray-700 hidden md:block">

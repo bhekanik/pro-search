@@ -11,15 +11,15 @@ export interface Filter {
 }
 
 export interface Query {
-	id: string;
+	id?: string;
 	search_term: string;
 	filters: Record<string, Filter>;
 	provider: SearchProvider;
 	name: string;
+	created_at?: string;
 }
 
 export const defaultQuery: Query = {
-	id: '',
 	name: '',
 	search_term: '',
 	filters: {},

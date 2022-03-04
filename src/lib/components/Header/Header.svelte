@@ -51,9 +51,15 @@
 				email: user.email
 			});
 
-			const { data: savedQueries } = await supabase.from(TableNames.savedQueries).select();
-			console.log('savedQueries:', savedQueries);
-			savedQueriesStore.set(savedQueries || []);
+			const { data: savedQueries } = await supabase
+				.from(TableNames.savedQueries)
+				.select('filters, created_at, id, name, provider(id, name, url), search_term');
+			savedQueriesStore.set(
+				savedQueries.map((savedQuery) => ({
+					...savedQuery,
+					filters: JSON.parse(savedQuery.filters)
+				})) || []
+			);
 
 			const { data: searchProviders } = await supabase
 				.from(TableNames.searchProviders)
