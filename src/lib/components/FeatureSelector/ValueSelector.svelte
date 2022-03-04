@@ -11,12 +11,14 @@
 
 	let value = offValue;
 
-	if (featureFlag !== null && condition !== null) {
-		value = $featureFlagsStore[featureFlag] === 'on' && condition ? onValue : offValue;
-	} else if (featureFlag !== null && condition === null) {
-		value = $featureFlagsStore[featureFlag] === 'on' ? onValue : offValue;
-	} else if (featureFlag === null && condition !== null) {
-		value = condition ? onValue : offValue;
+	$: {
+		if (featureFlag !== null && condition !== null) {
+			value = $featureFlagsStore[featureFlag] === 'on' && condition ? onValue : offValue;
+		} else if (featureFlag !== null && condition === null) {
+			value = $featureFlagsStore[featureFlag] === 'on' ? onValue : offValue;
+		} else if (featureFlag === null && condition !== null) {
+			value = condition ? onValue : offValue;
+		}
 	}
 
 	let unsubscribe: Unsubscriber;

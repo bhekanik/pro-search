@@ -5,9 +5,6 @@
 	import ComponentSelector from '../FeatureSelector/ComponentSelector.svelte';
 
 	export let executeQuery: (query: string | string[]) => void;
-	$: {
-		console.log('condition', !$settingsStore.autosave_queries);
-	}
 </script>
 
 <ComponentSelector

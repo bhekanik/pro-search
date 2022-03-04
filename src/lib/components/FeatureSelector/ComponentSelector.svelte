@@ -10,28 +10,38 @@
 	export let condition: boolean | null = null;
 	export let props = {};
 
-	let Feature = offFeature;
+	let selector: 'on' | 'off' = 'off';
+
+	let features = {
+		on: onFeature,
+		off: offFeature
+	};
+
+	const handleChange = (ff: FeatureFlagNames | null, cond: boolean | null) => {
+		if (ff !== null && cond !== null) {
+			selector = $featureFlagsStore[ff] === 'on' && cond ? 'on' : 'off';
+		} else if (ff !== null && cond === null) {
+			selector = $featureFlagsStore[ff] === 'on' ? 'on' : 'off';
+		} else if (ff === null && cond !== null) {
+			selector = cond ? 'on' : 'off';
+		}
+	};
 
 	$: {
-		if (featureFlag !== null && condition !== null) {
-			Feature = $featureFlagsStore[featureFlag] === 'on' && condition ? onFeature : offFeature;
-		} else if (featureFlag !== null && condition === null) {
-			Feature = $featureFlagsStore[featureFlag] === 'on' ? onFeature : offFeature;
-		} else if (featureFlag === null && condition !== null) {
-			console.log('final condition:', condition);
-			Feature = condition ? onFeature : offFeature;
-		}
+		handleChange(featureFlag, condition);
+
+		console.log(selector ? '' : '');
 	}
 
 	let unsubscribe: Unsubscriber;
 
 	$: {
 		unsubscribe = featureFlagsStore.subscribe((newValue) => {
-			Feature = newValue[featureFlag] === 'on' && condition ? onFeature : offFeature;
+			selector = newValue[featureFlag] === 'on' && condition ? 'on' : 'off';
 		});
 	}
 
 	onDestroy(() => unsubscribe?.());
 </script>
 
-<svelte:component this={Feature} {...props} />
+<svelte:component this={features[selector]} {...props} />
