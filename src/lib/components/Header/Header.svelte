@@ -35,9 +35,6 @@
 	let settingsSubscription: RealtimeSubscription;
 
 	const handleAuth = async (user: User, event = null) => {
-		console.log('event:', event);
-		console.log('user:', user);
-
 		authStore.set({
 			isLoggedIn: !!user,
 			user: user || null

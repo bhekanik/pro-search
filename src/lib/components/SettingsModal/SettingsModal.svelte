@@ -6,13 +6,15 @@
 	import SearchProviderSelect from '../SearchProvider/SearchProviderSelect.svelte';
 	import BooleanOption from './BooleanOption.svelte';
 
+	let newSettings = $settingsStore;
+
 	async function handleAccept() {
 		const { error, data } = await supabase
 			.from(TableNames.settings)
 			.update([
 				{
-					...$settingsStore,
-					default_search_provider: $settingsStore.default_search_provider.name
+					...newSettings,
+					default_search_provider: newSettings.default_search_provider.name
 				}
 			])
 			.match({
@@ -41,19 +43,19 @@
 			(searchProvider) => searchProvider.id === Number((e.target as HTMLSelectElement).value)
 		);
 
-		settingsStore.set({
-			...$settingsStore,
+		newSettings = {
+			...newSettings,
 			default_search_provider: newSearchProvider
-		});
+		};
 	}
 
 	function handleCheckboxChange(e: Event) {
 		const { checked, name } = e.target as HTMLInputElement;
 
-		settingsStore.set({
-			...$settingsStore,
+		newSettings = {
+			...newSettings,
 			[name]: checked
-		});
+		};
 	}
 </script>
 

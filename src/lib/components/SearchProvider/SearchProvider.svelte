@@ -12,10 +12,6 @@
 			};
 		});
 	};
-
-	$: {
-		console.log('$queryStore:', $queryStore.provider);
-	}
 </script>
 
 <SearchProviderSelect
