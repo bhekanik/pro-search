@@ -7,8 +7,8 @@
 	export let supabaseClient: SupabaseClient;
 	export let providers: AuthProps['providers'] = [];
 	export let socialLayout: AuthProps['socialLayout'] = 'vertical';
-	export let socialButtonSize: AuthProps['socialButtonSize'] = 'medium';
-	export let socialColors = false;
+	// export let socialButtonSize: AuthProps['socialButtonSize'] = 'medium';
+	// export let socialColors = false;
 	export let view: AuthProps['view'] = 'sign_in';
 	export let redirectTo: string;
 

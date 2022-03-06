@@ -23,8 +23,8 @@
 	export { classes as class };
 	export let style = '';
 	export let socialLayout: AuthProps['socialLayout'] = 'vertical';
-	export let socialColors = false;
-	export let socialButtonSize: AuthProps['socialButtonSize'] = 'medium';
+	// export let socialColors = false;
+	// export let socialButtonSize: AuthProps['socialButtonSize'] = 'medium';
 	export let providers: AuthProps['providers'] = [];
 	export let view: AuthProps['view'] = 'sign_in';
 	export let redirectTo = '';
@@ -36,15 +36,7 @@
 
 <div class="component px-8 {classes}" {style}>
 	<div class="container">
-		<SocialAuthView
-			{supabaseClient}
-			{providers}
-			{socialLayout}
-			{socialButtonSize}
-			{socialColors}
-			{view}
-			{redirectTo}
-		/>
+		<SocialAuthView {supabaseClient} {providers} {socialLayout} {view} {redirectTo} />
 
 		{#if view == 'sign_in' || view == 'sign_up'}
 			<EmailAuthView {supabaseClient} {view} {setView} />

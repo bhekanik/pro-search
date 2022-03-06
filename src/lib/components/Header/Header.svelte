@@ -16,7 +16,7 @@
 		type Query,
 		type Settings
 	} from '$lib/stores';
-	import type { RealtimeSubscription, User } from '@supabase/supabase-js';
+	import type { User } from '@supabase/supabase-js';
 	import LogRocket from 'logrocket';
 	import { onDestroy, onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
@@ -31,10 +31,8 @@
 	let closeModalButton = null;
 
 	let redirectTo = '';
-	let savedQueriesSubscription: RealtimeSubscription;
-	let settingsSubscription: RealtimeSubscription;
 
-	const handleAuth = async (user: User, event = null) => {
+	const handleAuth = async (user: User) => {
 		authStore.set({
 			isLoggedIn: !!user,
 			user: user || null
@@ -62,7 +60,6 @@
 				.from<Settings>(TableNames.settings)
 				.select(`autosave_queries, default_search_provider(id, url, name), query_preview`)
 				.single();
-			console.log('settings:', settings);
 			if (settings) {
 				settingsStore.set(settings);
 				queryStore.update((currentQuery) => ({
@@ -76,32 +73,15 @@
 	onMount(async () => {
 		redirectTo = window.location.origin;
 
-		const user = supabase.auth.user();
-
 		const { data: searchProviders } = await supabase
 			.from<SearchProvider>(TableNames.searchProviders)
 			.select('id, name, url');
 		searchProvidersStore.set(searchProviders || []);
 
-		savedQueriesSubscription = supabase
-			.from(TableNames.savedQueries)
-			.on('*', (payload) => {
-				console.log('Change received!', payload);
-				// savedQueriesStore.set(payload || []);
-			})
-			.subscribe();
-
-		settingsSubscription = supabase
-			.from(TableNames.settings)
-			.on('*', (payload) => {
-				console.log('Change received!', payload);
-				// savedQueriesStore.set(payload || []);
-			})
-			.subscribe();
-
+		const user = supabase.auth.user();
 		handleAuth(user);
-		supabase.auth.onAuthStateChange(async (event, session) => {
-			await handleAuth(session?.user, event);
+		supabase.auth.onAuthStateChange(async (_, session) => {
+			await handleAuth(session?.user);
 		});
 
 		themeChange(false);
@@ -118,8 +98,6 @@
 	onDestroy(() => {
 		splitClient?.destroy();
 		supabase.removeAllSubscriptions();
-		if (savedQueriesSubscription) supabase.removeSubscription(savedQueriesSubscription);
-		if (settingsSubscription) supabase.removeSubscription(settingsSubscription);
 	});
 </script>
 
