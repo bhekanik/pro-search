@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Auth from '$lib/components/SupabaseAuthUI/Auth.svelte';
-	import 'firebaseui/dist/firebaseui.css';
 
 	export let closeModalButton = null;
 	export let redirectTo = '';
