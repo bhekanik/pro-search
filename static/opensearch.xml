@@ -1,0 +1,10 @@
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+                       xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+  <ShortName>Pro-Search</ShortName>
+  <Description>Pro-Search - Advanced search engine query builder.</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16" type="image/x-icon">https://www.pro-search.io/favicon.ico</Image>
+  <Url type="text/html" template="https://www.pro-search.io"/>
+  <Url type="application/x-suggestions+json" template="[suggestionURL]"/>
+  <moz:SearchForm>https://www.pro-search.io</moz:SearchForm>
+</OpenSearchDescription>
