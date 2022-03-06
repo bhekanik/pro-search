@@ -3,9 +3,8 @@
 </script>
 
 <div
-	class={`${
-		showInfo === false && 'hidden'
-	} query-url text-sm my-4 py-2 px-4 bg-purple-600 bg-opacity-40 rounded-lg overflow-x-auto relative flex justify-between w-full`}
+	class:hidden={!showInfo}
+	class="query-url text-sm my-4 py-2 px-4 bg-purple-600 bg-opacity-40 rounded-lg overflow-x-auto relative flex justify-between w-full"
 >
 	<span>
 		<slot />

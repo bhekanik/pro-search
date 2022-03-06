@@ -144,7 +144,8 @@
 				<div class="dropdown dropdown-end">
 					<div
 						tabindex="0"
-						class={`avatar ${!$authStore.user?.user_metadata?.photoURL ? 'placeholder' : ''}`}
+						class:placeholder={!$authStore.user?.user_metadata?.photoURL}
+						class="avatar"
 					>
 						<div class="rounded-full w-8 h-8 ring ring-primary">
 							{#if $authStore.user?.user_metadata?.picture || $authStore.user?.user_metadata?.avatar_url}
