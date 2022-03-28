@@ -5,6 +5,7 @@
 	import RelatedFilter from '$lib/components/Filters/Common/Related.svelte';
 	import SiteFilter from '$lib/components/Filters/Common/Site.svelte';
 	import SynonymsFilter from '$lib/components/Filters/Common/Synonyms.svelte';
+	import ExcludeSite from './Common/ExcludeSite.svelte';
 </script>
 
 <h2 class="text-gray-300">Only return pages...</h2>
@@ -12,6 +13,7 @@
 <Exact />
 <ExcludeFilter />
 <SiteFilter />
+<ExcludeSite />
 <FileTypeFilter />
 <!-- <LinkFilter /> -->
 <RelatedFilter />

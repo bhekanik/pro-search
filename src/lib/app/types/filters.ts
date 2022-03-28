@@ -7,6 +7,7 @@ export type FilterType =
 	| 'DateBefore'
 	| 'Exact'
 	| 'Exclude'
+	| 'ExcludeSite'
 	| 'File Type'
 	| 'Link'
 	| 'Locale'
