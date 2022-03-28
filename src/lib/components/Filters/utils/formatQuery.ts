@@ -11,6 +11,7 @@ const queryParamFilters = [
 	'dateBefore',
 	'exact',
 	'exclude',
+	'excludeSite',
 	'fileType',
 	'link',
 	'locale',
@@ -23,6 +24,14 @@ const queryParamFilters = [
 	'site',
 	'sortBy'
 ];
+
+const postFixFilters = ['excludeSite'];
+
+const getPostfix = (query: Query): string =>
+	Object.entries(query.filters)
+		.filter((filter) => postFixFilters.includes(filter[0]))
+		.map((filter) => filter[1].formatted.trim())
+		.join('+');
 
 /**
  * Formats the search input for the search engine according to the provided
@@ -43,11 +52,15 @@ export const formatQuery = (options?: { query?: Query }): string => {
 			.reduce((prev, curr) => `${prev}${curr[1].formatted}`, '');
 
 		const queryParams = Object.entries(query.filters)
-			.filter((filter) => queryParamFilters.includes(filter[0]))
+			.filter(
+				(filter) => queryParamFilters.includes(filter[0]) && !postFixFilters.includes(filter[0])
+			)
 			.map((filter) => filter[1].formatted.trim())
 			.join('&');
 
-		const formattedQuery = `${prefix}${query.search_term}${
+		const postfix = getPostfix(query);
+
+		const formattedQuery = `${prefix}${query.search_term}${postfix.trim() && `+${postfix}`}${
 			queryParams.trim() ? `&${queryParams}` : ''
 		}`;
 
@@ -55,27 +68,30 @@ export const formatQuery = (options?: { query?: Query }): string => {
 	} else if (searchProviderName === 'Bing') {
 		// put the filters together
 		const prefix = Object.entries(query.filters)
-			.filter((filter) => !['save'].includes(filter[0]))
+			.filter((filter) => !['save'].includes(filter[0]) && !postFixFilters.includes(filter[0]))
 			.reduce((prev, curr) => `${prev}${curr[1].formatted}`, '');
 
 		const queryParams = Object.entries(query.filters)
-			.filter((filter) => ['save'].includes(filter[0]))
+			.filter((filter) => ['save'].includes(filter[0]) && !postFixFilters.includes(filter[0]))
 			.map((filter) => filter[1].formatted.trim())
 			.join('&');
 
-		const formattedQuery = `${prefix}${query.search_term}${
+		const postfix = getPostfix(query);
+
+		const formattedQuery = `${prefix}${query.search_term}${postfix.trim() && `+${postfix}`}${
 			queryParams.trim() ? `&${queryParams}` : ''
 		}`;
 
 		return formattedQuery;
 	} else {
 		// put the filters together
-		const prefix = Object.entries(query.filters).reduce(
-			(prev, curr) => `${prev}${curr[1].formatted}`,
-			''
-		);
+		const prefix = Object.entries(query.filters)
+			.filter((filter) => !postFixFilters.includes(filter[0]))
+			.reduce((prev, curr) => `${prev}${curr[1].formatted}`, '');
 
-		const formattedQuery = `${prefix}${query.search_term}`;
+		const postfix = getPostfix(query);
+
+		const formattedQuery = `${prefix}${query.search_term}${postfix.trim() && `+${postfix}`}`;
 
 		return formattedQuery;
 	}

@@ -15,6 +15,7 @@
 	import Rights from '$lib/components/Filters/Google/Rights.svelte';
 	import Safe from '$lib/components/Filters/Google/Safe.svelte';
 	import SiteFilter from '$lib/components/Filters/Google/Site.svelte';
+	import ExcludeSite from './Common/ExcludeSite.svelte';
 </script>
 
 <h2 class="text-gray-300">Only return pages...</h2>
@@ -26,6 +27,7 @@
 <PublishLanguage />
 <Content />
 <SiteFilter />
+<ExcludeSite />
 <!-- <DateBefore /> -->
 <!-- <DateAfter /> -->
 <Area />
