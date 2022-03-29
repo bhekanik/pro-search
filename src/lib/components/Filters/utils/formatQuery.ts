@@ -60,7 +60,7 @@ export const formatQuery = (options?: { query?: Query }): string => {
 
 		const postfix = getPostfix(query);
 
-		const formattedQuery = `${prefix}${query.search_term}${postfix.trim() && `+${postfix}`}${
+		const formattedQuery = `${prefix}${query.search_term}${postfix.trim() && `+${postfix} `}${
 			queryParams.trim() ? `&${queryParams}` : ''
 		}`;
 
@@ -78,7 +78,7 @@ export const formatQuery = (options?: { query?: Query }): string => {
 
 		const postfix = getPostfix(query);
 
-		const formattedQuery = `${prefix}${query.search_term}${postfix.trim() && `+${postfix}`}${
+		const formattedQuery = `${prefix}${query.search_term}${postfix.trim() && `+${postfix} `}${
 			queryParams.trim() ? `&${queryParams}` : ''
 		}`;
 
@@ -91,7 +91,7 @@ export const formatQuery = (options?: { query?: Query }): string => {
 
 		const postfix = getPostfix(query);
 
-		const formattedQuery = `${prefix}${query.search_term}${postfix.trim() && `+${postfix}`}`;
+		const formattedQuery = `${prefix}${query.search_term}${postfix.trim() && `+${postfix}`} `;
 
 		return formattedQuery;
 	}

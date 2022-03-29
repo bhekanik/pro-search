@@ -1,6 +1,7 @@
 <script lang="ts">
 	import FilterBase from '$lib/components/Filters/Base/Base.svelte';
 	import { queryStore } from '$lib/stores';
+	import { listCreateParams, QueryKeys } from '../utils/listApplyOperator';
 
 	const handleInput = (e: Event) => {
 		const value = (e.target as HTMLInputElement).value;
@@ -9,7 +10,7 @@
 			newQuery.filters.excludeSite = {
 				type: 'ExcludeSite',
 				value,
-				formatted: `-site:${encodeURIComponent(value.trim())}`
+				formatted: listCreateParams(value, QueryKeys.excludeSite)
 			};
 			return newQuery;
 		});
@@ -20,6 +21,6 @@
 	on:input={handleInput}
 	type="ExcludeSite"
 	hasInput
-	label="... without any results from this website"
-	textInputPlaceholder="Website to exclude (example: cnn.com)"
+	label="... excluding results from any of these websites"
+	textInputPlaceholder="Websites to exclude (example: cnn.com bbc.com)"
 />
