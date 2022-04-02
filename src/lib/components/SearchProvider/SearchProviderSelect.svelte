@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { SearchProvider } from '$lib/app/config/searchProviders';
+	import type { SearchProvider } from '$lib/app/types';
 
 	export let searchProviders: SearchProvider[] = [];
 	export let value: number;

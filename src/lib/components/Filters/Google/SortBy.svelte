@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { sortByOptions } from '$lib/app/config/sortByOptions';
+	import { sortByOptions } from '$lib/app/fixtures';
 	import FilterBase from '$lib/components/Filters/Base/Base.svelte';
 	import { queryStore } from '$lib/stores';
 

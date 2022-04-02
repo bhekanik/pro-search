@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { searchAreas } from '$lib/app/config/areas';
+	import { searchAreas } from '$lib/app/fixtures/areas';
 	import FilterBase from '$lib/components/Filters/Base/Base.svelte';
 	import { queryStore } from '$lib/stores';
 

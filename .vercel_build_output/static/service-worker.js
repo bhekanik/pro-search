@@ -1,29 +1,33 @@
-const timestamp = 1644123978325;
+const timestamp = 1651156055381;
 const build = [
-  "/_app/start-94b82b9e.js",
-  "/_app/pages/__layout.svelte-bb3294ff.js",
-  "/_app/assets/pages/__layout.svelte-6e277012.css",
-  "/_app/error.svelte-c8e21f42.js",
-  "/_app/pages/index.svelte-56aab725.js",
-  "/_app/assets/pages/index.svelte-7e8eb9c2.css",
-  "/_app/pages/saved-queries.svelte-0886fccb.js",
+  "/_app/start-90b254da.js",
+  "/_app/pages/__layout.svelte-1922302e.js",
+  "/_app/assets/pages/__layout.svelte-0bf054f3.css",
+  "/_app/error.svelte-1468afc0.js",
+  "/_app/pages/index.svelte-302aec2e.js",
+  "/_app/assets/pages/index.svelte-bd8536ff.css",
+  "/_app/pages/saved-queries.svelte-20e79f48.js",
   "/_app/assets/pages/saved-queries.svelte-170e4e5f.css",
-  "/_app/pages/recipes.svelte-a596f53f.js",
+  "/_app/pages/recipes.svelte-c8513866.js",
   "/_app/assets/pages/recipes.svelte-698adbdb.css",
-  "/_app/chunks/vendor-8f340f4c.js",
-  "/_app/chunks/singletons-a6a7384f.js",
-  "/_app/chunks/queryToShare-9fd243eb.js",
-  "/_app/chunks/generateAndGo-1cffa812.js",
-  "/_app/chunks/SavedQueriesList-e003abe1.js",
-  "/_app/assets/SavedQueriesList-d77e6f70.css",
-  "/_app/chunks/SavedQuery-53e8228c.js"
+  "/_app/chunks/vendor-739188d0.js",
+  "/_app/chunks/singletons-d1fb5791.js",
+  "/_app/chunks/supabaseClient-f98d745b.js",
+  "/_app/chunks/generateQueryUrl-359b1f52.js",
+  "/_app/chunks/Protected-cbec64e8.js",
+  "/_app/chunks/SavedQueriesList-f8d6be83.js",
+  "/_app/assets/SavedQueriesList-cb9d0b05.css",
+  "/_app/chunks/SavedQuery-7c294e90.js"
 ];
 const files = [
+  "/OG.png",
+  "/OG.svg",
+  "/apple-touch-icon.png",
   "/favicon.png",
-  "/logo_192.png",
   "/logo_512.png",
-  "/manifest.json",
-  "/robots.txt"
+  "/opensearch.xml",
+  "/robots.txt",
+  "/site.webmanifest"
 ];
 const worker = self;
 const FILES = `cache${timestamp}`;

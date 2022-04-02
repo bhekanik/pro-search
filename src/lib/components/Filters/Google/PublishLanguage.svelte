@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { publishLanguages } from '$lib/app/config/languages';
+	import { publishLanguages } from '$lib/app/fixtures';
 	import FilterBase from '$lib/components/Filters/Base/Base.svelte';
 	import { queryStore } from '$lib/stores';
 

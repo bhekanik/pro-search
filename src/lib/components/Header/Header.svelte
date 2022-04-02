@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { SearchProvider } from '$lib/app/config';
 	import { TableNames } from '$lib/app/model';
 	import { splitClient } from '$lib/app/splitClient';
 	import { supabase } from '$lib/app/supabaseClient';
+	import type { SearchProvider } from '$lib/app/types';
 	import AuthModal from '$lib/components/AuthModal/AuthModal.svelte';
 	import SettingsModal from '$lib/components/SettingsModal/SettingsModal.svelte';
 	import {
@@ -19,6 +19,8 @@
 	import type { User } from '@supabase/supabase-js';
 	import LogRocket from 'logrocket';
 	import { onDestroy, onMount } from 'svelte';
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	import { themeChange } from 'theme-change';
 
 	let isProd = process.env.NODE_ENV === 'production';
@@ -28,7 +30,7 @@
 		LogRocket.init('uetpov/pro-search');
 	}
 
-	let closeModalButton = null;
+	let closeModalButton: any = null;
 
 	let redirectTo = '';
 
@@ -43,14 +45,14 @@
 		if (user) {
 			LogRocket.identify(user.email || user.id, {
 				name: user.id,
-				email: user.email
+				email: user.email || ''
 			});
 
 			const { data: savedQueries } = await supabase
 				.from<Omit<Query, 'filters'> & { filters: string }>(TableNames.savedQueries)
 				.select('filters, created_at, id, name, provider(id, name, url), search_term');
 			savedQueriesStore.set(
-				savedQueries.map((savedQuery) => ({
+				savedQueries?.map((savedQuery) => ({
 					...savedQuery,
 					filters: JSON.parse(savedQuery.filters)
 				})) || []
@@ -70,6 +72,18 @@
 		}
 	};
 
+	let initial =
+		$authStore.user?.user_metadata?.full_name
+			.split(' ')
+			.map((n: string) => n.charAt(0))
+			.join('')
+			.toUpperCase() ||
+		$authStore.user?.user_metadata?.name
+			?.split(' ')
+			.map((n: string) => n.charAt(0))
+			.join('')
+			.toUpperCase();
+
 	onMount(async () => {
 		redirectTo = window.location.origin;
 
@@ -79,10 +93,12 @@
 		searchProvidersStore.set(searchProviders || []);
 
 		const user = supabase.auth.user();
-		handleAuth(user);
-		supabase.auth.onAuthStateChange(async (_, session) => {
-			await handleAuth(session?.user);
-		});
+		if (user) {
+			handleAuth(user);
+			supabase.auth.onAuthStateChange(async (_, session) => {
+				if (session?.user) await handleAuth(session?.user);
+			});
+		}
 
 		themeChange(false);
 	});
@@ -130,18 +146,7 @@
 										$authStore.user?.user_metadata?.avatar_url}
 								/>
 							{:else}
-								<span class="text-s"
-									>{$authStore.user?.user_metadata?.full_name
-										?.split(' ')
-										.map((n) => n.charAt(0))
-										.join('')
-										.toUpperCase() ||
-										$authStore.user.user_metadata?.name
-											?.split(' ')
-											.map((n) => n.charAt(0))
-											.join('')
-											.toUpperCase()}</span
-								>
+								<span class="text-s">{initial}</span>
 							{/if}
 						</div>
 					</div>

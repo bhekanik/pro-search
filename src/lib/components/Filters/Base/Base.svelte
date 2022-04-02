@@ -1,14 +1,8 @@
-<script lang="ts" context="module">
-	export interface OptionType {
-		label: string;
-		value: string;
-	}
-</script>
-
 <script lang="ts">
+	import type { OptionType } from '$lib/app/types';
 	import type { FilterType } from '$lib/app/types/filters';
 	import { queryStore } from '$lib/stores';
-	import { generateQueryUrl } from '$lib/utils/generateAndGo';
+	import { generateQueryUrl } from '$lib/utils';
 	import Case from 'case';
 	import { slide } from 'svelte/transition';
 
@@ -17,8 +11,8 @@
 	export let label = '';
 	export let textInputPlaceholder = '';
 	export let options: OptionType[] | null = null;
-	export let handleSelectChange: (e: Event) => void = null;
-	export let handleCheckboxChange: (e: Event) => void = null;
+	export let handleSelectChange: ((e: Event) => void) | null = null;
+	export let handleCheckboxChange: ((e: Event) => void) | null = null;
 
 	const handleCheckboxInput = (e: Event) => {
 		const value = (e.target as HTMLInputElement).checked;
@@ -47,10 +41,10 @@
 	};
 
 	const onSelectChange = (e: Event) => {
-		handleSelectChange(e);
+		handleSelectChange?.(e);
 	};
 
-	const handleKeydown = (e) => {
+	const handleKeydown = (e: any) => {
 		if (e.key === 'Enter' || e.code === 'Enter') {
 			window.open(generateQueryUrl({ type }) as string);
 		}

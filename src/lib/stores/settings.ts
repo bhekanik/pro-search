@@ -1,5 +1,5 @@
-import type { SearchProvider } from '$lib/app/config';
 import { searchProvidersWithAll } from '$lib/app/config';
+import type { SearchProvider } from '$lib/app/types';
 import { writable } from 'svelte/store';
 
 export interface Settings {

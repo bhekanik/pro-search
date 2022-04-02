@@ -3,6 +3,7 @@
 	import { seo } from '$lib/stores';
 	import { onDestroy } from 'svelte';
 	import type { Unsubscriber } from 'svelte/store';
+
 	let isProd = process.env.NODE_ENV === 'production';
 
 	const {

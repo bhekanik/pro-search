@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fileTypes } from '$lib/app/config';
+	import { fileTypes } from '$lib/app/fixtures';
 	import FilterBase from '$lib/components/Filters/Base/Base.svelte';
 	import { queryStore } from '$lib/stores';
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Query } from '$lib/stores';
-	import { generateQueryUrl } from '$lib/utils/generateAndGo';
+	import { generateQueryUrl } from '$lib/utils';
 	import QrGenerator from '../QRGenerator.svelte';
 
 	export let query: Query;

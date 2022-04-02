@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { queryStore } from '$lib/stores';
-	import { generateQueryUrl } from '$lib/utils/generateAndGo';
+	import { generateQueryUrl } from '$lib/utils';
 
 	let queryUrl = '';
 

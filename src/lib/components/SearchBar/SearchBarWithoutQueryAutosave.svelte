@@ -48,7 +48,7 @@
 		}
 	};
 
-	const handleKeydown = (e) => {
+	const handleKeydown = (e: any) => {
 		if (e.key === 'Enter' || e.code === 'Enter') {
 			saveSearch();
 		}

@@ -1,6 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import type { OptionType } from '$lib/components/Filters/Base/Base.svelte';
+import type { OptionType } from '../types';
 
 export const fileTypes: OptionType[] = [
 	{ label: 'Adobe Acrobat PDF (.pdf)', value: 'pdf' },
