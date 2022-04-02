@@ -11,6 +11,7 @@ export type FilterType =
 	| 'File Type'
 	| 'Link'
 	| 'Locale'
+	| 'NumRange'
 	| 'Past'
 	| 'Personal'
 	| 'Publish Language'

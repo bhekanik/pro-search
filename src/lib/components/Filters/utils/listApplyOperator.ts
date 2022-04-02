@@ -1,6 +1,7 @@
 export enum Operator {
 	Exclude = '-',
-	Synonym = '~'
+	Synonym = '~',
+	NumRange = '..'
 }
 
 export enum QueryKeys {
@@ -9,6 +10,18 @@ export enum QueryKeys {
 }
 
 export function listApplyOperator(value: string, operator: Operator): string {
+	if (operator === Operator.NumRange) {
+		return value
+			.trim()
+			.replace(/\s{2,}/g, ' ')
+			.split(' ')
+			.filter((value, index) => index < 2)
+			.reduce(
+				(acc, item, index, array) =>
+					`${acc}${item.trim()}${index !== array.length - 1 ? operator : ''}`,
+				''
+			);
+	}
 	return value
 		.trim()
 		.split(' ')

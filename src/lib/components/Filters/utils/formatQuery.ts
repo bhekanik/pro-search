@@ -11,7 +11,6 @@ const queryParamFilters = [
 	'dateBefore',
 	'exact',
 	'exclude',
-	'excludeSite',
 	'fileType',
 	'link',
 	'locale',
@@ -25,7 +24,7 @@ const queryParamFilters = [
 	'sortBy'
 ];
 
-const postFixFilters = ['excludeSite'];
+const postFixFilters = ['excludeSite', 'numRange'];
 
 const getPostfix = (query: Query): string =>
 	Object.entries(query.filters)
@@ -48,7 +47,9 @@ export const formatQuery = (options?: { query?: Query }): string => {
 	if (searchProviderName === 'Google') {
 		// put the filters together
 		const prefix = Object.entries(query.filters)
-			.filter((filter) => !queryParamFilters.includes(filter[0]))
+			.filter(
+				(filter) => !queryParamFilters.includes(filter[0]) && !postFixFilters.includes(filter[0])
+			)
 			.reduce((prev, curr) => `${prev}${curr[1].formatted}`, '');
 
 		const queryParams = Object.entries(query.filters)

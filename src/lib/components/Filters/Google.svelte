@@ -16,6 +16,7 @@
 	import Safe from '$lib/components/Filters/Google/Safe.svelte';
 	import SiteFilter from '$lib/components/Filters/Google/Site.svelte';
 	import ExcludeSite from './Common/ExcludeSite.svelte';
+	import NumRange from './Common/NumRange.svelte';
 </script>
 
 <h2 class="text-gray-300">Only return pages...</h2>
@@ -31,6 +32,7 @@
 <!-- <DateBefore /> -->
 <!-- <DateAfter /> -->
 <Area />
+<NumRange />
 <FileTypeFilter />
 <LinkFilter />
 <RelatedFilter />
