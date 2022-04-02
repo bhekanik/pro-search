@@ -57,5 +57,23 @@ export const recipes: RecipeType[] = [
 				helperText: 'Example: Startup tools or Angel or Salaries'
 			}
 		]
+	},
+	{
+		id: '4',
+		hoverBgColor: 'hover:bg-[#e2eabf]',
+		bgColor: 'bg-[#e2ea62]',
+		textColor: 'text-gray-900',
+		queryTemplate: `"{{queryTerm}}" cheat sheet filetype:pdf`,
+		searchProvider: 'Google',
+		name: 'Find cheatsheets for any topic',
+		inputs: [
+			{
+				name: 'queryTerm',
+				type: 'text',
+				placeholder: 'Topic',
+				shouldHandleSearch: true,
+				helperText: 'Example: Calculus'
+			}
+		]
 	}
 ];
