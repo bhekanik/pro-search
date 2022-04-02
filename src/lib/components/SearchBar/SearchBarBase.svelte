@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { queryStore } from '$lib/stores';
-	import { generateQueryUrl } from '$lib/utils/generateAndGo';
+	import { generateQueryUrl } from '$lib/utils';
 	import { fade, scale } from 'svelte/transition';
 
 	let searchInput: HTMLInputElement;
@@ -38,7 +38,7 @@
 		queryStore.reset();
 	};
 
-	const onKeydown = (e) => {
+	const onKeydown = (e: any) => {
 		if (e.key === 'Enter' || e.code === 'Enter') {
 			handleSearch();
 		}

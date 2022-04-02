@@ -1,35 +1,4 @@
-import type { SearchProviderName } from './searchProviders';
-
-export interface RecipeInput {
-	name: string;
-	type: string;
-	placeholder: string;
-	shouldHandleSearch: boolean;
-	helperText?: string;
-}
-
-export interface InputType {
-	name: string;
-	type: string;
-	placeholder: string;
-	ref?: HTMLElement;
-	handleSearch?: () => void;
-	shouldHandleSearch: boolean;
-	handleInput?: (e: Event) => void;
-	value?: string;
-	helperText?: string;
-}
-
-export interface RecipeType {
-	id: string;
-	searchProvider: SearchProviderName;
-	hoverBgColor?: string;
-	bgColor?: string;
-	textColor?: string;
-	inputs: RecipeInput[];
-	queryTemplate: string;
-	name: string;
-}
+import type { RecipeType } from '../types';
 
 export const recipes: RecipeType[] = [
 	{
@@ -86,6 +55,24 @@ export const recipes: RecipeType[] = [
 				placeholder: 'Query',
 				shouldHandleSearch: true,
 				helperText: 'Example: Startup tools or Angel or Salaries'
+			}
+		]
+	},
+	{
+		id: '4',
+		hoverBgColor: 'hover:bg-[#e2eabf]',
+		bgColor: 'bg-[#e2ea62]',
+		textColor: 'text-gray-900',
+		queryTemplate: `"{{queryTerm}}" cheat sheet filetype:pdf`,
+		searchProvider: 'Google',
+		name: 'Find cheatsheets for any topic',
+		inputs: [
+			{
+				name: 'queryTerm',
+				type: 'text',
+				placeholder: 'Topic',
+				shouldHandleSearch: true,
+				helperText: 'Example: Calculus'
 			}
 		]
 	}

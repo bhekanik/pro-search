@@ -1,7 +1,6 @@
 <script lang="ts">
-	import type { SearchProviderName } from '$lib/app/config';
 	import { searchProvidersWithoutAll } from '$lib/app/config';
-	import type { InputType, RecipeInput } from '$lib/app/config/recipes';
+	import type { InputType, RecipeInput, SearchProviderName } from '$lib/app/types';
 	import { onMount } from 'svelte';
 	import { fade, scale } from 'svelte/transition';
 

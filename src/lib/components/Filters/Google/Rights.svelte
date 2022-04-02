@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { rightsOptions } from '$lib/app/config/rightsOptions';
+	import { rightsOptions } from '$lib/app/fixtures';
 	import FilterBase from '$lib/components/Filters/Base/Base.svelte';
 	import { queryStore } from '$lib/stores';
 

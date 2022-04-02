@@ -1,13 +1,15 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { splitClient } from '$lib/app/splitClient';
+	import Head from '$lib/components/Head/Head.svelte';
 	import Header from '$lib/components/Header/Header.svelte';
+	import Nav from '$lib/components/Nav/Nav.svelte';
 	import ShareModal from '$lib/components/SavedQueries/ShareModal.svelte';
-	import Seo from '$lib/components/SEO/SEO.svelte';
-	import { authStore, queryToShareStore } from '$lib/stores';
+	import { queryToShareStore } from '$lib/stores';
 	import * as Sentry from '@sentry/browser';
 	import { Integrations } from '@sentry/tracing';
 	import { onDestroy, onMount } from 'svelte';
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	import { themeChange } from 'theme-change';
 	import '../global.css';
 
@@ -32,25 +34,10 @@
 	onDestroy(() => splitClient?.destroy());
 </script>
 
-<Seo />
-
+<Head />
 <Header />
-<div class="tabs border-b px-8 border-b-gray-400">
-	<a href="/" class:tab-active={$page.url.pathname === '/'} class="tab tab-bordered">Search</a>
-	<a href="/recipes" class:tab-active={$page.url.pathname === '/recipes'} class="tab tab-bordered"
-		>Recipes</a
-	>
-	{#if $authStore.isLoggedIn}
-		<a
-			href="/saved-queries"
-			class:tab-active={$page.url.pathname === '/saved-queries'}
-			class="tab tab-bordered">Saved Queries</a
-		>
-	{/if}
-</div>
-
+<Nav />
 <slot />
-
 {#if $queryToShareStore}
 	<ShareModal query={$queryToShareStore} />
 {/if}

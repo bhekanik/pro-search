@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { contentOptions } from '$lib/app/config/contentOptions';
+	import { contentOptions } from '$lib/app/fixtures/contentOptions';
 	import FilterBase from '$lib/components/Filters/Base/Base.svelte';
 	import { queryStore } from '$lib/stores';
 

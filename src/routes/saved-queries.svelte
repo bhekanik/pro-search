@@ -14,7 +14,7 @@
 	const handleShare = (id: string) => {
 		const queryToShare = savedQueries.find((query) => query.id === id);
 
-		queryToShareStore.set(queryToShare);
+		queryToShareStore.set(queryToShare as Query);
 	};
 
 	$: {
@@ -27,7 +27,7 @@
 	}
 
 	$: savedQueries = $savedQueriesStore.sort(
-		(a, b) => Number(new Date(b.created_at)) - Number(new Date(a.created_at))
+		(a, b) => Number(new Date(b.created_at as string)) - Number(new Date(a.created_at as string))
 	);
 
 	function focusInput(element: HTMLElement) {
