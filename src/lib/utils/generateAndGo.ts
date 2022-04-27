@@ -82,11 +82,11 @@ export const generateQueryUrl = (
 	const formattedQuery = formatQuery({ query });
 
 	if (typeof query.provider.url === 'string') {
-		return `${query.provider.url}${encodeURIComponent(formattedQuery)}`;
+		return `${query.provider.url}${encodeURIComponent(formattedQuery).replace(/%2B/g, '+')}`;
 	} else {
 		const url = [];
 		for (const providerUrl of query.provider.url) {
-			url.push(`${providerUrl}${encodeURIComponent(formattedQuery)}`);
+			url.push(`${providerUrl}${encodeURIComponent(formattedQuery).replace(/%2B/g, '+')}`);
 		}
 		return url;
 	}

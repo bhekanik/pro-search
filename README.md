@@ -48,11 +48,11 @@ Once you have that installed you can run `npm run dev` to start up the app. This
 ### Working on an issue
 
 - When you select an issue, make sure to assign it to yourself to avoid someone else picking it up and duplicating work. Also go to the project board and move it to 'In Progress'
-- Create a feature branch from `main`. Name your branch starting with the issue number then a little description of what the branch is about separated by a '/', for example '23/take-over-the-world'
+- Create a feature branch from `dev`. Name your branch starting with the issue number then a little description of what the branch is about separated by a '/', for example '23/take-over-the-world'
 - Your commits should be structured and meaningful inline with [this convention](https://dev.to/bhekanik/supercharge-your-git-history-with-better-commit-messages-32fk).
 - Refactor your commits to clean them up (if needed).
 - Always rebase your work before opening a PR.
-- Open your pull request against `main`. Name your pull request meaningful, include a description of what you did and reference the issue that the PR relates to so that github can do the automation.
+- Open your pull request against `dev`. Name your pull request meaningful, include a description of what you did and reference the issue that the PR relates to so that github can do the automation.
 - PR's will not be accepted without appropriate tests where applicable.
 - A preview of the app will be deployed to vercel and the link attached to the PR as a comment.
 - Assign reviewers so that they're pinged to review your code.
