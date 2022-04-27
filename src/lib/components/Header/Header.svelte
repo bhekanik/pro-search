@@ -132,7 +132,7 @@
 							{:else}
 								<span class="text-s"
 									>{$authStore.user?.user_metadata?.full_name
-										.split(' ')
+										?.split(' ')
 										.map((n) => n.charAt(0))
 										.join('')
 										.toUpperCase() ||

@@ -10,7 +10,7 @@
 				type: 'Title',
 				value,
 				formatted:
-					value.split(' ').length > 1 ? `allintitle:${value.trim()} ` : `intitle:${value.trim()} `
+					value?.split(' ').length > 1 ? `allintitle:${value.trim()} ` : `intitle:${value.trim()} `
 			};
 			return newQuery;
 		});

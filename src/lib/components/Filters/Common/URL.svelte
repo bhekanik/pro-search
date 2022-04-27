@@ -10,7 +10,7 @@
 				type: 'URL',
 				value,
 				formatted:
-					value.split(' ').length > 1 ? `allinurl:${value.trim()} ` : `inurl:${value.trim()} `
+					value?.split(' ').length > 1 ? `allinurl:${value.trim()} ` : `inurl:${value.trim()} `
 			};
 			return newQuery;
 		});

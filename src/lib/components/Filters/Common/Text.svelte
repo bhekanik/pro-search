@@ -10,7 +10,7 @@
 				type: 'Text',
 				value,
 				formatted:
-					value.split(' ').length > 1 ? `allintext:${value.trim()} ` : `intext:${value.trim()} `
+					value?.split(' ').length > 1 ? `allintext:${value.trim()} ` : `intext:${value.trim()} `
 			};
 			return newQuery;
 		});
