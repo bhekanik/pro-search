@@ -61,11 +61,13 @@ export const formatQuery = (options?: { query?: Query }): string => {
 
 		const postfix = getPostfix(query);
 
-		const formattedQuery = `${prefix}${query.search_term}${postfix.trim() && `+${postfix} `}${
+		const formattedQuery = `${prefix}${query.search_term}${postfix.trim() && `+${postfix} `}`;
+
+		const formattedQueryWithParams = `${encodeURIComponent(formattedQuery)}${
 			queryParams.trim() ? `&${queryParams}` : ''
 		}`;
 
-		return formattedQuery;
+		return formattedQueryWithParams;
 	} else if (searchProviderName === 'Bing') {
 		// put the filters together
 		const prefix = Object.entries(query.filters)
@@ -79,11 +81,13 @@ export const formatQuery = (options?: { query?: Query }): string => {
 
 		const postfix = getPostfix(query);
 
-		const formattedQuery = `${prefix}${query.search_term}${postfix.trim() && `+${postfix} `}${
+		const formattedQuery = `${prefix}${query.search_term}${postfix.trim() && `+${postfix} `}`;
+
+		const formattedQueryWithParams = `${encodeURIComponent(formattedQuery)}${
 			queryParams.trim() ? `&${queryParams}` : ''
 		}`;
 
-		return formattedQuery;
+		return formattedQueryWithParams;
 	} else {
 		// put the filters together
 		const prefix = Object.entries(query.filters)
@@ -94,6 +98,6 @@ export const formatQuery = (options?: { query?: Query }): string => {
 
 		const formattedQuery = `${prefix}${query.search_term}${postfix.trim() && `+${postfix}`} `;
 
-		return formattedQuery;
+		return encodeURIComponent(formattedQuery);
 	}
 };
