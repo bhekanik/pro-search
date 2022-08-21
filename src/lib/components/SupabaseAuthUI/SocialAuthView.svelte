@@ -1,6 +1,7 @@
 <script lang="ts">
+	import type { AuthProps } from '$lib/app/types';
+
 	import type { Provider, SupabaseClient } from '@supabase/supabase-js';
-	import type { AuthProps } from './Auth.svelte';
 	import Icon from './Icon.svelte';
 	import Text from './Text.svelte';
 

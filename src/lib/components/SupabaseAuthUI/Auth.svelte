@@ -1,18 +1,6 @@
-<script lang="ts" context="module">
-	export interface AuthProps {
-		providers?: ('azure' | 'twitter' | 'bitbucket' | 'facebook' | 'github' | 'gitlab' | 'google')[];
-		view?: 'sign_in' | 'sign_up' | 'magic_link' | 'forgotten_password';
-		classes?: string;
-		style?: string;
-		socialLayout?: 'vertical' | 'horizontal';
-		socialColors?: boolean;
-		socialButtonSize?: 'medium' | 'large';
-		redirectTo?: string;
-	}
-</script>
-
 <script lang="ts">
 	import { supabase as supabaseClient } from '$lib/app/supabaseClient';
+	import type { AuthProps } from '$lib/app/types';
 	import EmailAuthView from './EmailAuthView.svelte';
 	import ForgottenPasswordView from './ForgottenPasswordView.svelte';
 	import MagicLinkView from './MagicLinkView.svelte';
