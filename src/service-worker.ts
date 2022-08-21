@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { build, files, timestamp } from '$service-worker';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const worker = self as unknown as any;

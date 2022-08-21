@@ -1,10 +1,4 @@
 <script lang="ts" context="module">
-	import { supabase as supabaseClient } from '$lib/app/supabaseClient';
-	import EmailAuthView from './EmailAuthView.svelte';
-	import ForgottenPasswordView from './ForgottenPasswordView.svelte';
-	import MagicLinkView from './MagicLinkView.svelte';
-	import SocialAuthView from './SocialAuthView.svelte';
-
 	export interface AuthProps {
 		providers?: ('azure' | 'twitter' | 'bitbucket' | 'facebook' | 'github' | 'gitlab' | 'google')[];
 		view?: 'sign_in' | 'sign_up' | 'magic_link' | 'forgotten_password';
@@ -18,6 +12,12 @@
 </script>
 
 <script lang="ts">
+	import { supabase as supabaseClient } from '$lib/app/supabaseClient';
+	import EmailAuthView from './EmailAuthView.svelte';
+	import ForgottenPasswordView from './ForgottenPasswordView.svelte';
+	import MagicLinkView from './MagicLinkView.svelte';
+	import SocialAuthView from './SocialAuthView.svelte';
+
 	let classes = '';
 
 	export { classes as class };
