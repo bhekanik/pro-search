@@ -65,8 +65,8 @@ devDependencies:
     specifier: ^8.0.2
     version: 8.0.3(cypress@9.7.0)
   '@types/node':
-    specifier: ^14.17.20
-    version: 14.18.24
+    specifier: ^20.4.1
+    version: 20.4.1
   '@types/qrcode':
     specifier: ^1.4.2
     version: 1.5.0
@@ -635,6 +635,10 @@ packages:
 
   /@types/node@14.18.24:
     resolution: {integrity: sha512-aJdn8XErcSrfr7k8ZDDfU6/2OgjZcB2Fu9d+ESK8D7Oa5mtsv8Fa8GpcwTA0v60kuZBaalKPzuzun4Ov1YWO/w==}
+
+  /@types/node@20.4.1:
+    resolution: {integrity: sha512-JIzsAvJeA/5iY6Y/OxZbv1lUcc8dNSE77lb2gnBH+/PJ3lFR1Ccvgwl5JWnHAkNHcRsT0TbpVOsiMKZ1F/yyJg==}
+    dev: true
 
   /@types/phoenix@1.5.4:
     resolution: {integrity: sha512-L5eZmzw89eXBKkiqVBcJfU1QGx9y+wurRIEgt0cuLH0hwNtVUxtx+6cu0R2STwWj468sjXyBYPYDtGclUd1kjQ==}
