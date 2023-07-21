@@ -104,8 +104,8 @@ devDependencies:
     specifier: ^2.4.1
     version: 2.7.1
   prettier-plugin-svelte:
-    specifier: ^2.4.0
-    version: 2.7.0(prettier@2.7.1)(svelte@3.49.0)
+    specifier: ^2.10.1
+    version: 2.10.1(prettier@2.7.1)(svelte@3.49.0)
   svelte:
     specifier: ^3.42.6
     version: 3.49.0
@@ -3204,11 +3204,11 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-plugin-svelte@2.7.0(prettier@2.7.1)(svelte@3.49.0):
-    resolution: {integrity: sha512-fQhhZICprZot2IqEyoiUYLTRdumULGRvw0o4dzl5jt0jfzVWdGqeYW27QTWAeXhoupEZJULmNoH3ueJwUWFLIA==}
+  /prettier-plugin-svelte@2.10.1(prettier@2.7.1)(svelte@3.49.0):
+    resolution: {integrity: sha512-Wlq7Z5v2ueCubWo0TZzKc9XHcm7TDxqcuzRuGd0gcENfzfT4JZ9yDlCbEgxWgiPmLHkBjfOtpAWkcT28MCDpUQ==}
     peerDependencies:
       prettier: ^1.16.4 || ^2.0.0
-      svelte: ^3.2.0
+      svelte: ^3.2.0 || ^4.0.0-next.0
     dependencies:
       prettier: 2.7.1
       svelte: 3.49.0
