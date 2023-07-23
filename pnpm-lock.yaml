@@ -27,8 +27,8 @@ dependencies:
     specifier: ^3.3.1
     version: 3.3.1
   fast-fuzzy:
-    specifier: ^1.11.1
-    version: 1.11.2
+    specifier: ^1.12.0
+    version: 1.12.0
   logrocket:
     specifier: ^2.1.3
     version: 2.2.1
@@ -2094,8 +2094,8 @@ packages:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
     dev: true
 
-  /fast-fuzzy@1.11.2:
-    resolution: {integrity: sha512-H1ct10Pzx+pSO4h7F1uBXET91ay2hy67J1aQZFKL23EXsOoanpwjPNQQoc+NhClKJMmlGGN+0bXhIdFJX70BJw==}
+  /fast-fuzzy@1.12.0:
+    resolution: {integrity: sha512-sXxGgHS+ubYpsdLnvOvJ9w5GYYZrtL9mkosG3nfuD446ahvoWEsSKBP7ieGmWIKVLnaxRDgUJkZMdxRgA2Ni+Q==}
     dependencies:
       graphemesplit: 2.4.4
     dev: false
