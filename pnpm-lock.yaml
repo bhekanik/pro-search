@@ -30,8 +30,8 @@ dependencies:
     specifier: ^1.12.0
     version: 1.12.0
   logrocket:
-    specifier: ^2.1.3
-    version: 2.2.1
+    specifier: ^4.0.4
+    version: 4.0.4
   qrcode:
     specifier: ^1.5.0
     version: 1.5.1
@@ -2839,8 +2839,8 @@ packages:
       wrap-ansi: 6.2.0
     dev: true
 
-  /logrocket@2.2.1:
-    resolution: {integrity: sha512-yf+iaZNuB13RjNFHzEWvj76G5nVzpl1u6p0wOnWOyLbOJflJJEIMBO81VEOtDUawFYeus8Xprsdfofb+KRqoCQ==}
+  /logrocket@4.0.4:
+    resolution: {integrity: sha512-BKberHlh9bo9YZFoDqy1aJoi8KrHXi1Z9DSS6+Nqspr+onqU0wVfLacTb3sZt+KnmSR7uELJGUjE+Tikw3e23Q==}
     dev: false
 
   /long@5.2.3:
