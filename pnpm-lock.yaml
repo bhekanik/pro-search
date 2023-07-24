@@ -62,8 +62,8 @@ devDependencies:
     specifier: ^0.5.9
     version: 0.5.9(tailwindcss@3.1.8)
   '@testing-library/cypress':
-    specifier: ^8.0.2
-    version: 8.0.3(cypress@10.11.0)
+    specifier: ^8.0.7
+    version: 8.0.7(cypress@10.11.0)
   '@types/node':
     specifier: ^20.4.2
     version: 20.4.2
@@ -623,11 +623,11 @@ packages:
       tailwindcss: 3.1.8(postcss@8.4.26)
     dev: true
 
-  /@testing-library/cypress@8.0.3(cypress@10.11.0):
-    resolution: {integrity: sha512-nY2YaSbmuPo5k6kL0iLj/pGPPfka3iwb3kpTx8QN/vOCns92Saz9wfACqB8FJzcR7+lfA4d5HUOWqmTddBzczg==}
+  /@testing-library/cypress@8.0.7(cypress@10.11.0):
+    resolution: {integrity: sha512-3HTV725rOS+YHve/gD9coZp/UcPK5xhr4H0GMnq/ni6USdtzVtSOG9WBFtd8rYnrXk8rrGD+0toRFYouJNIG0Q==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
-      cypress: ^2.1.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0
+      cypress: ^2.1.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0
     dependencies:
       '@babel/runtime': 7.18.9
       '@testing-library/dom': 8.17.1
