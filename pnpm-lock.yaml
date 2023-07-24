@@ -63,7 +63,7 @@ devDependencies:
     version: 0.5.9(tailwindcss@3.3.3)
   '@testing-library/cypress':
     specifier: ^8.0.7
-    version: 8.0.7(cypress@10.11.0)
+    version: 8.0.7(cypress@11.2.0)
   '@types/node':
     specifier: ^20.4.4
     version: 20.4.4
@@ -77,8 +77,8 @@ devDependencies:
     specifier: ^4.31.1
     version: 4.33.0(eslint@7.32.0)(typescript@4.9.5)
   cypress:
-    specifier: ^10.11.0
-    version: 10.11.0
+    specifier: ^11.2.0
+    version: 11.2.0
   cypress-svelte-unit-test:
     specifier: ^3.3.4
     version: 3.3.4(rollup@2.78.1)
@@ -806,7 +806,7 @@ packages:
       tailwindcss: 3.3.3
     dev: true
 
-  /@testing-library/cypress@8.0.7(cypress@10.11.0):
+  /@testing-library/cypress@8.0.7(cypress@11.2.0):
     resolution: {integrity: sha512-3HTV725rOS+YHve/gD9coZp/UcPK5xhr4H0GMnq/ni6USdtzVtSOG9WBFtd8rYnrXk8rrGD+0toRFYouJNIG0Q==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
@@ -814,7 +814,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.18.9
       '@testing-library/dom': 8.17.1
-      cypress: 10.11.0
+      cypress: 11.2.0
     dev: true
 
   /@testing-library/dom@8.17.1:
@@ -1605,8 +1605,8 @@ packages:
       - supports-color
     dev: true
 
-  /cypress@10.11.0:
-    resolution: {integrity: sha512-lsaE7dprw5DoXM00skni6W5ElVVLGAdRUUdZjX2dYsGjbY/QnpzWZ95Zom1mkGg0hAaO/QVTZoFVS7Jgr/GUPA==}
+  /cypress@11.2.0:
+    resolution: {integrity: sha512-u61UGwtu7lpsNWLUma/FKNOsrjcI6wleNmda/TyKHe0dOBcVjbCPlp1N6uwFZ0doXev7f/91YDpU9bqDCFeBLA==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     requiresBuild: true
