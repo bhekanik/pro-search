@@ -9,8 +9,8 @@ dependencies:
     specifier: ^7.61.0
     version: 7.61.0
   '@sentry/tracing':
-    specifier: ^7.60.0
-    version: 7.60.0
+    specifier: ^7.61.0
+    version: 7.61.0
   '@splitsoftware/splitio':
     specifier: ^10.23.0
     version: 10.23.0
@@ -571,16 +571,6 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /@sentry-internal/tracing@7.60.0:
-    resolution: {integrity: sha512-2qvxmR954H+K7u4o92sS2u+hntzshem9XwfHAqDvBe51arNbFVy8LfJTJ5fffgZq/6jXlozCO0/6aR5yLR5mBg==}
-    engines: {node: '>=8'}
-    dependencies:
-      '@sentry/core': 7.60.0
-      '@sentry/types': 7.60.0
-      '@sentry/utils': 7.60.0
-      tslib: 2.6.1
-    dev: false
-
   /@sentry-internal/tracing@7.61.0:
     resolution: {integrity: sha512-zTr+MXEG4SxNxif42LIgm2RQn+JRXL2NuGhRaKSD2i4lXKFqHVGlVdoWqY5UfqnnJPokiTWIj9ejR8I5HV8Ogw==}
     engines: {node: '>=8'}
@@ -603,15 +593,6 @@ packages:
       tslib: 2.6.1
     dev: false
 
-  /@sentry/core@7.60.0:
-    resolution: {integrity: sha512-B02OlFMoqdkfDZlbQfmk7tL2vObShofk7ySd/7mp+oRdUuCvX0tyrGlwI87YJvd8YWSZOCKINs3aVYivw/b6gg==}
-    engines: {node: '>=8'}
-    dependencies:
-      '@sentry/types': 7.60.0
-      '@sentry/utils': 7.60.0
-      tslib: 2.6.1
-    dev: false
-
   /@sentry/core@7.61.0:
     resolution: {integrity: sha512-zl0ZKRjIoYJQWYTd3K/U6zZfS4GDY9yGd2EH4vuYO4kfYtEp/nJ8A+tfAeDo0c9FGxZ0Q+5t5F4/SfwbgyyQzg==}
     engines: {node: '>=8'}
@@ -630,29 +611,16 @@ packages:
       '@sentry/utils': 7.61.0
     dev: false
 
-  /@sentry/tracing@7.60.0:
-    resolution: {integrity: sha512-J8RV5NL4GS8Sc7h7qKDiGYX9kLigKZQVNXHKDQVGnXLJyFCCdNTTVI9NG5r2fCMGE8mgpUVInppxRLCHLJa+8g==}
+  /@sentry/tracing@7.61.0:
+    resolution: {integrity: sha512-asGbw3n04qkM5zUCPlGg9i52GEHq9Nmore38SJFN0L4N/YH6EPJLEUfNm2jFvXWCo96kq/dPKnyjOEuPccwhIA==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry-internal/tracing': 7.60.0
-    dev: false
-
-  /@sentry/types@7.60.0:
-    resolution: {integrity: sha512-MSEuF9YjE0j+UKdqee2AzcNlMnShVNTkCB2Wnng6Bc5hHhn4fyYeTLbuFpNxL0ffN65lxblaWx6doDsMcvRxcA==}
-    engines: {node: '>=8'}
+      '@sentry-internal/tracing': 7.61.0
     dev: false
 
   /@sentry/types@7.61.0:
     resolution: {integrity: sha512-/GLlIBNR35NKPE/SfWi9W10dK9hE8qTShzsuPVn5wAJxpT3Lb4+dkwmKCTLUYxdkmvRDEudkfOxgalsfQGTAWA==}
     engines: {node: '>=8'}
-    dev: false
-
-  /@sentry/utils@7.60.0:
-    resolution: {integrity: sha512-Oc/PQqzeNDOSy4ZzVj6h9U+GEGRkg2PEVn9PC2V9/v3HDD20mndFqR/S2B5OOgDb/6pNGyz8XiZYI5rb29WFHA==}
-    engines: {node: '>=8'}
-    dependencies:
-      '@sentry/types': 7.60.0
-      tslib: 2.6.1
     dev: false
 
   /@sentry/utils@7.61.0:
