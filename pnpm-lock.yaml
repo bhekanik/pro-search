@@ -81,7 +81,7 @@ devDependencies:
     version: 12.17.2
   cypress-svelte-unit-test:
     specifier: ^3.3.4
-    version: 3.3.4(rollup@2.78.1)
+    version: 3.3.4(rollup@2.79.1)
   eslint:
     specifier: ^7.32.0
     version: 7.32.0
@@ -122,8 +122,8 @@ devDependencies:
     specifier: ^3.3.3
     version: 3.3.3
   tslib:
-    specifier: ^2.6.0
-    version: 2.6.0
+    specifier: ^2.6.1
+    version: 2.6.1
   typescript:
     specifier: ^5.1.6
     version: 5.1.6
@@ -171,13 +171,13 @@ packages:
       regenerator-runtime: 0.13.9
     dev: true
 
-  /@bahmutov/cy-rollup@2.0.0(rollup@2.78.1):
+  /@bahmutov/cy-rollup@2.0.0(rollup@2.79.1):
     resolution: {integrity: sha512-KJlvqB3U1nvKSq7djkXcvM4WpBLP6HEWKKzChI8s/aw0pYm0gVc+sphpyz5CmGpsNE9+/1QB6yoDfTe9Q97SJw==}
     peerDependencies:
       rollup: '2'
     dependencies:
       debug: 4.1.1
-      rollup: 2.78.1
+      rollup: 2.79.1
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -578,7 +578,7 @@ packages:
       '@sentry/core': 7.60.0
       '@sentry/types': 7.60.0
       '@sentry/utils': 7.60.0
-      tslib: 2.6.0
+      tslib: 2.6.1
     dev: false
 
   /@sentry/browser@7.60.0:
@@ -590,7 +590,7 @@ packages:
       '@sentry/replay': 7.60.0
       '@sentry/types': 7.60.0
       '@sentry/utils': 7.60.0
-      tslib: 2.6.0
+      tslib: 2.6.1
     dev: false
 
   /@sentry/core@7.60.0:
@@ -599,7 +599,7 @@ packages:
     dependencies:
       '@sentry/types': 7.60.0
       '@sentry/utils': 7.60.0
-      tslib: 2.6.0
+      tslib: 2.6.1
     dev: false
 
   /@sentry/replay@7.60.0:
@@ -628,7 +628,7 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       '@sentry/types': 7.60.0
-      tslib: 2.6.0
+      tslib: 2.6.1
     dev: false
 
   /@splitsoftware/splitio-commons@1.9.0(ioredis@4.28.5):
@@ -640,7 +640,7 @@ packages:
         optional: true
     dependencies:
       ioredis: 4.28.5
-      tslib: 2.6.0
+      tslib: 2.6.1
     dev: false
 
   /@splitsoftware/splitio@10.23.0:
@@ -1619,11 +1619,11 @@ packages:
     resolution: {integrity: sha512-d4ZVpCW31eWwCMe1YT3ur7mUDnTXbgwyzaL320DrcRT45rfjYxkt5QWLrmOJ+/UEAI2+fQgKe/fCjR8l4TpRgw==}
     dev: false
 
-  /cypress-svelte-unit-test@3.3.4(rollup@2.78.1):
+  /cypress-svelte-unit-test@3.3.4(rollup@2.79.1):
     resolution: {integrity: sha512-Ce93Tz7YuqnQnyIlOSoieL3tzorUg+/R/sFxNU2v4t1rHI5oCyQ4Q1P2nydUGyJaGYrNXDwTP1CaGpw8yIR++g==}
     engines: {node: '>=8'}
     dependencies:
-      '@bahmutov/cy-rollup': 2.0.0(rollup@2.78.1)
+      '@bahmutov/cy-rollup': 2.0.0(rollup@2.79.1)
       unfetch: 4.1.0
     transitivePeerDependencies:
       - rollup
@@ -4096,14 +4096,6 @@ packages:
       estree-walker: 0.6.1
     dev: true
 
-  /rollup@2.78.1:
-    resolution: {integrity: sha512-VeeCgtGi4P+o9hIg+xz4qQpRl6R401LWEXBmxYKOV4zlF82lyhgh2hTZnheFUbANE8l2A41F458iwj2vEYaXJg==}
-    engines: {node: '>=10.0.0'}
-    hasBin: true
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
   /rollup@2.79.1:
     resolution: {integrity: sha512-uKxbd0IhMZOhjAiD5oAFp7BqvkA4Dv47qpOCtaNvng4HBwdbWtdOh8f5nZNuk2rp51PMGk3bzfWu5oayNEuYnw==}
     engines: {node: '>=10.0.0'}
@@ -4120,7 +4112,7 @@ packages:
   /rxjs@7.8.1:
     resolution: {integrity: sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==}
     dependencies:
-      tslib: 2.6.0
+      tslib: 2.6.1
     dev: true
 
   /sade@1.8.1:
@@ -4618,8 +4610,8 @@ packages:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
 
-  /tslib@2.6.0:
-    resolution: {integrity: sha512-7At1WUettjcSRHXCyYtTselblcHl9PJFFVKiCAy/bY97+BPZXSQ2wbq0P9s8tK2G7dFQfNnlJnPAiArVBVBsfA==}
+  /tslib@2.6.1:
+    resolution: {integrity: sha512-t0hLfiEKfMUoqhG+U1oid7Pva4bbDPHYfJNiB7BiIjRkj1pyC++4N3huJfqY6aRH6VTB0rvtzQwjM4K6qpfOig==}
 
   /tsutils@3.21.0(typescript@5.1.6):
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
