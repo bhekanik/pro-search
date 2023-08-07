@@ -30,8 +30,8 @@ dependencies:
     specifier: ^1.12.0
     version: 1.12.0
   logrocket:
-    specifier: ^4.0.4
-    version: 4.0.4
+    specifier: ^5.0.1
+    version: 5.0.1
   qrcode:
     specifier: ^1.5.3
     version: 1.5.3
@@ -3380,8 +3380,8 @@ packages:
       wrap-ansi: 6.2.0
     dev: true
 
-  /logrocket@4.0.4:
-    resolution: {integrity: sha512-BKberHlh9bo9YZFoDqy1aJoi8KrHXi1Z9DSS6+Nqspr+onqU0wVfLacTb3sZt+KnmSR7uELJGUjE+Tikw3e23Q==}
+  /logrocket@5.0.1:
+    resolution: {integrity: sha512-czWLcDkBJ+V/wooBQtPW76RAS2rszjsfkQumqPO3zPCQka8dcjsuGJxJhcxAuMZf5WDZd/zkvfDZCBJ6zeCQYg==}
     dev: false
 
   /long@5.2.3:
