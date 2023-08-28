@@ -15,8 +15,8 @@ dependencies:
     specifier: ^10.23.0
     version: 10.23.0
   '@supabase/supabase-js':
-    specifier: ^2.32.0
-    version: 2.32.0
+    specifier: ^2.33.1
+    version: 2.33.1
   autoprefixer:
     specifier: ^10.4.15
     version: 10.4.15(postcss@8.4.28)
@@ -686,8 +686,8 @@ packages:
       - encoding
     dev: false
 
-  /@supabase/realtime-js@2.7.3:
-    resolution: {integrity: sha512-c7TzL81sx2kqyxsxcDduJcHL9KJdCOoKimGP6lQSqiZKX42ATlBZpWbyy9KFGFBjAP4nyopMf5JhPi2ZH9jyNw==}
+  /@supabase/realtime-js@2.7.4:
+    resolution: {integrity: sha512-FzSzs1k9ruh/uds5AJ95Nc3beiMCCIhougExJ3O98CX1LMLAKUKFy5FivKLvcNhXnNfUEL0XUfGMb4UH2J7alg==}
     dependencies:
       '@types/phoenix': 1.5.4
       '@types/websocket': 1.0.5
@@ -704,13 +704,13 @@ packages:
       - encoding
     dev: false
 
-  /@supabase/supabase-js@2.32.0:
-    resolution: {integrity: sha512-1ShFhuOI5Du7604nlCelBsRD61daXk2O0qwjumoz35bqrYThnSPPtpJqZOHw6Mg6o7mLjIInYLh/DBlh8UvzRg==}
+  /@supabase/supabase-js@2.33.1:
+    resolution: {integrity: sha512-jA00rquPTppPOHpBB6KABW98lfg0gYXcuGqP3TB1iiduznRVsi3GGk2qBKXPDLMYSe0kRlQp5xCwWWthaJr8eA==}
     dependencies:
       '@supabase/functions-js': 2.1.2
       '@supabase/gotrue-js': 2.46.1
       '@supabase/postgrest-js': 1.8.0
-      '@supabase/realtime-js': 2.7.3
+      '@supabase/realtime-js': 2.7.4
       '@supabase/storage-js': 2.5.1
       cross-fetch: 3.1.5
     transitivePeerDependencies:
