@@ -44,8 +44,8 @@ dependencies:
 
 devDependencies:
   '@cypress/vite-dev-server':
-    specifier: ^5.0.5
-    version: 5.0.5
+    specifier: ^5.0.6
+    version: 5.0.6
   '@sveltejs/adapter-auto':
     specifier: 1.0.0-next.65
     version: 1.0.0-next.65
@@ -217,13 +217,13 @@ packages:
       uuid: 8.3.2
     dev: true
 
-  /@cypress/vite-dev-server@5.0.5:
-    resolution: {integrity: sha512-ZR6Smfe2Jpe7V//yrISgbe4CfLfjpMuqr9ryCmx7NV3XiKJVBMIYmDUQ0lVIR6m7JaHv0/rElM8dTA6R987olQ==}
+  /@cypress/vite-dev-server@5.0.6:
+    resolution: {integrity: sha512-vqa6ImiMPnANJD1qQLytiLKi0oSZ2z+ZbYCybtGUmgZng/ITfZfsrNr7xd8Z8lUJboEXucK2eA3mPMdQvj05YQ==}
     dependencies:
       debug: 4.3.4(supports-color@8.1.1)
       find-up: 6.3.0
       node-html-parser: 5.3.3
-      semver: 7.3.7
+      semver: 7.5.4
     transitivePeerDependencies:
       - supports-color
     dev: true
