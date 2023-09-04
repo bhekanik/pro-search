@@ -24,8 +24,8 @@ dependencies:
     specifier: ^1.6.3
     version: 1.6.3
   daisyui:
-    specifier: ^3.6.3
-    version: 3.6.3
+    specifier: ^3.6.4
+    version: 3.6.4
   fast-fuzzy:
     specifier: ^1.12.0
     version: 1.12.0
@@ -1709,8 +1709,8 @@ packages:
       type: 1.2.0
     dev: false
 
-  /daisyui@3.6.3:
-    resolution: {integrity: sha512-VNWogAjx37H8kNYd2E/+r1OXc6dOvJTKlKltqIKAlNMFVfx2BIKPcmnVxaHQLfj2vhv1mYDBjgWj+1enQ+4yZA==}
+  /daisyui@3.6.4:
+    resolution: {integrity: sha512-8cFEkA2CaTKLUBvEU+9cTx6uvLSN2ZUq9fXxMkdiRS7QM79jBFv3klNkbUaPslmVh0eoeeCk0o98sjmfQ7/Cgg==}
     engines: {node: '>=16.9.0'}
     dependencies:
       colord: 2.9.3
