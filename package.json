@@ -38,7 +38,7 @@
 		"@sveltejs/vite-plugin-svelte": "^1.4.0",
 		"@tailwindcss/typography": "^0.5.9",
 		"@testing-library/cypress": "^9.0.0",
-		"@types/node": "^20.5.9",
+		"@types/node": "^20.6.0",
 		"@types/qrcode": "^1.5.2",
 		"@typescript-eslint/eslint-plugin": "^4.31.1",
 		"@typescript-eslint/parser": "^4.31.1",
