@@ -20,7 +20,7 @@
 		"@sentry/browser": "^7.69.0",
 		"@sentry/tracing": "^7.69.0",
 		"@splitsoftware/splitio": "^10.23.0",
-		"@supabase/supabase-js": "^2.33.2",
+		"@supabase/supabase-js": "^2.36.0",
 		"autoprefixer": "^10.4.15",
 		"case": "^1.6.3",
 		"daisyui": "^3.7.5",
