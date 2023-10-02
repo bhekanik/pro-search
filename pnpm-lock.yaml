@@ -12,8 +12,8 @@ dependencies:
     specifier: ^7.73.0
     version: 7.73.0
   '@splitsoftware/splitio':
-    specifier: ^10.23.0
-    version: 10.23.0
+    specifier: ^10.23.1
+    version: 10.23.1
   '@supabase/supabase-js':
     specifier: ^2.33.2
     version: 2.33.2
@@ -631,8 +631,8 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@splitsoftware/splitio-commons@1.9.0(ioredis@4.28.5):
-    resolution: {integrity: sha512-2QoWvGOk/LB+q2TglqGD0w/hcUKG4DZwBSt5NtmT1ODGiLyCf2wbcfG/eBR9QlUnLisJ62dj6vOQsVUB2kiHOw==}
+  /@splitsoftware/splitio-commons@1.9.1(ioredis@4.28.5):
+    resolution: {integrity: sha512-+1lFUBj+Jgfd8l7nT49+rZodwgZXJ6c20+4PPb0O+iTmUZXHtYvfS2AK8A9j6QREubeccc6UMlfjH3SQVgwEbg==}
     peerDependencies:
       ioredis: ^4.28.0
     peerDependenciesMeta:
@@ -643,11 +643,11 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@splitsoftware/splitio@10.23.0:
-    resolution: {integrity: sha512-b9mn2B8U1DfpDETsaWH4T1jhkn8XWwlAVsHwhgIRhCgBs0B9wm4SsXx+OWHZ5bl5uvEwtFFIAtCU58j/irnqpw==}
+  /@splitsoftware/splitio@10.23.1:
+    resolution: {integrity: sha512-tpgMdAUlKdiwcPqThXc1UPdCXDjiVNwaVu5SY2ETRunXLquGBrWhY2Ev8qyDqrw7UKDt+rArlSMum0gxvroUyQ==}
     engines: {node: '>=6', npm: '>=3'}
     dependencies:
-      '@splitsoftware/splitio-commons': 1.9.0(ioredis@4.28.5)
+      '@splitsoftware/splitio-commons': 1.9.1(ioredis@4.28.5)
       '@types/google.analytics': 0.0.40
       '@types/ioredis': 4.28.10
       bloom-filters: 3.0.0
