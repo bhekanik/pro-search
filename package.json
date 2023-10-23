@@ -19,7 +19,7 @@
 	"dependencies": {
 		"@sentry/browser": "^7.74.0",
 		"@sentry/tracing": "^7.74.0",
-		"@supabase/supabase-js": "^2.38.1",
+		"@supabase/supabase-js": "^2.38.2",
 		"@splitsoftware/splitio": "^10.23.1",
 		"autoprefixer": "^10.4.16",
 		"case": "^1.6.3",
