@@ -15,8 +15,8 @@ dependencies:
     specifier: ^10.23.1
     version: 10.23.1
   '@supabase/supabase-js':
-    specifier: ^2.38.1
-    version: 2.38.1
+    specifier: ^2.38.2
+    version: 2.38.2
   autoprefixer:
     specifier: ^10.4.16
     version: 10.4.16(postcss@8.4.31)
@@ -668,8 +668,8 @@ packages:
       '@supabase/node-fetch': 2.6.14
     dev: false
 
-  /@supabase/gotrue-js@2.55.0:
-    resolution: {integrity: sha512-wZAP66Lo68iROKo33m8seY30rCeGiR34leMEZ80j9fPm+/ar6h3y43Hb7f9F2STVMwT3Sv+aM+w0yCon5bih4g==}
+  /@supabase/gotrue-js@2.57.0:
+    resolution: {integrity: sha512-/CcAW40aPKgp9/w9WgXVUQFg1AOdvFR687ONOMjASPBuC6FsNbKlcXp4pc+rwKNtxyxDkBbR+x7zj/8g00r/Og==}
     dependencies:
       '@supabase/node-fetch': 2.6.14
     dev: false
@@ -687,8 +687,8 @@ packages:
       '@supabase/node-fetch': 2.6.14
     dev: false
 
-  /@supabase/realtime-js@2.8.0:
-    resolution: {integrity: sha512-j1OP2nRJhqLNEoYSMkIl1+cHK/Ow9fektemazkF2CvrIrmwgfJJGaFGiWGVgwoKtwVcrdknSsYWpxs90hys1EQ==}
+  /@supabase/realtime-js@2.8.1:
+    resolution: {integrity: sha512-bka5U4OeoKMdorGMPjdF30cl8n8nbhn+I9H4iySKzbN45W6AGxi7xoODnxdq/QwaDGtVyTMVbU+GVWre0QCdtw==}
     dependencies:
       '@supabase/node-fetch': 2.6.14
       '@types/phoenix': 1.5.4
@@ -704,14 +704,14 @@ packages:
       '@supabase/node-fetch': 2.6.14
     dev: false
 
-  /@supabase/supabase-js@2.38.1:
-    resolution: {integrity: sha512-WbdwKiZMMPiELL+8A4WJRHHq+xVKN+3tXxKnJWbR0XZG8HgeGVeQWhlchatTttaxsNKyx68gE7wWNvhin0V+Mg==}
+  /@supabase/supabase-js@2.38.2:
+    resolution: {integrity: sha512-yOCi94oO5WVUBhQ890BvtT7J3p8spP47PMhn22YldIcDLEQWE6N6X2JzfWCLHktXw+oCYUJfQBuqYhyLHAKb0w==}
     dependencies:
       '@supabase/functions-js': 2.1.5
-      '@supabase/gotrue-js': 2.55.0
+      '@supabase/gotrue-js': 2.57.0
       '@supabase/node-fetch': 2.6.14
       '@supabase/postgrest-js': 1.8.5
-      '@supabase/realtime-js': 2.8.0
+      '@supabase/realtime-js': 2.8.1
       '@supabase/storage-js': 2.5.4
     transitivePeerDependencies:
       - supports-color
