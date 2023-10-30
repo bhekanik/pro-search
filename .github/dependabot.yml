@@ -5,29 +5,34 @@
 
 version: 2
 updates:
-# Maintain dependencies for GitHub Actions
+  # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
+      time: "00:00"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "actions:"
+      include: scope
 
   # Maintain dependencies for npm
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 99
+      interval: "daily"
+      time: "00:00"
+    open-pull-requests-limit: 10
     commit-message:
-      prefix: build
+      prefix: "npm:"
       include: scope
-      
+
   - package-ecosystem: docker
     directory: /
     schedule:
       interval: daily
-      time: '00:00'
-      timezone: UTC
-    open-pull-requests-limit: 99
+      time: "00:00"
+    open-pull-requests-limit: 10
     commit-message:
-      prefix: build
+      prefix: "docker:"
       include: scope
