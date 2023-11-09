@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@sentry/browser':
-    specifier: ^7.77.0
-    version: 7.77.0
+    specifier: ^7.79.0
+    version: 7.79.0
   '@sentry/tracing':
     specifier: ^7.77.0
     version: 7.77.0
@@ -588,15 +588,24 @@ packages:
       '@sentry/utils': 7.77.0
     dev: false
 
-  /@sentry/browser@7.77.0:
-    resolution: {integrity: sha512-nJ2KDZD90H8jcPx9BysQLiQW+w7k7kISCWeRjrEMJzjtge32dmHA8G4stlUTRIQugy5F+73cOayWShceFP7QJQ==}
+  /@sentry-internal/tracing@7.79.0:
+    resolution: {integrity: sha512-Mf9Bd0OrZ24h1qZpvmz9IRnfORMGYNYC1xWBBFpIR1AauEDX89x+mJwIOrUc4KKAAAwt73shrJv1QA8QOm4E3g==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry-internal/tracing': 7.77.0
-      '@sentry/core': 7.77.0
-      '@sentry/replay': 7.77.0
-      '@sentry/types': 7.77.0
-      '@sentry/utils': 7.77.0
+      '@sentry/core': 7.79.0
+      '@sentry/types': 7.79.0
+      '@sentry/utils': 7.79.0
+    dev: false
+
+  /@sentry/browser@7.79.0:
+    resolution: {integrity: sha512-gWbWEElF61uZeTFLIZz3NMyCkAzBDOpMAogEbVu2GX91SHKB7GXlE//INnS/R5wfE5j/CFaZc53mzzoIuMy1sA==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@sentry-internal/tracing': 7.79.0
+      '@sentry/core': 7.79.0
+      '@sentry/replay': 7.79.0
+      '@sentry/types': 7.79.0
+      '@sentry/utils': 7.79.0
     dev: false
 
   /@sentry/core@7.77.0:
@@ -607,14 +616,22 @@ packages:
       '@sentry/utils': 7.77.0
     dev: false
 
-  /@sentry/replay@7.77.0:
-    resolution: {integrity: sha512-M9Ik2J5ekl+C1Och3wzLRZVaRGK33BlnBwfwf3qKjgLDwfKW+1YkwDfTHbc2b74RowkJbOVNcp4m8ptlehlSaQ==}
+  /@sentry/core@7.79.0:
+    resolution: {integrity: sha512-9vG7SfOcJNJNiqlqg4MuHDUCaSf2ZXpv3eZYRPbBkgPGr8X1ekrSABpOK+6kBNvbtKxfWVTWbLpAA6xU+cwnVw==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@sentry/types': 7.79.0
+      '@sentry/utils': 7.79.0
+    dev: false
+
+  /@sentry/replay@7.79.0:
+    resolution: {integrity: sha512-vF79NxWGYfoD0hnIkdgUQqedoMcRHHp5UAfZlxhpQzJf4TnbOjollp63AvOrfd38osSG2d3E5kTUU9xs/zKhBQ==}
     engines: {node: '>=12'}
     dependencies:
-      '@sentry-internal/tracing': 7.77.0
-      '@sentry/core': 7.77.0
-      '@sentry/types': 7.77.0
-      '@sentry/utils': 7.77.0
+      '@sentry-internal/tracing': 7.79.0
+      '@sentry/core': 7.79.0
+      '@sentry/types': 7.79.0
+      '@sentry/utils': 7.79.0
     dev: false
 
   /@sentry/tracing@7.77.0:
@@ -629,11 +646,23 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
+  /@sentry/types@7.79.0:
+    resolution: {integrity: sha512-3tV32+v/DF8w7kD0p3kLWtgVTVdFL39oGY02+vz//rjWg/vzeqSE95mCYKm5pUfd6cPETX/8dunCiuTBQIkTHQ==}
+    engines: {node: '>=8'}
+    dev: false
+
   /@sentry/utils@7.77.0:
     resolution: {integrity: sha512-NmM2kDOqVchrey3N5WSzdQoCsyDkQkiRxExPaNI2oKQ/jMWHs9yt0tSy7otPBcXs0AP59ihl75Bvm1tDRcsp5g==}
     engines: {node: '>=8'}
     dependencies:
       '@sentry/types': 7.77.0
+    dev: false
+
+  /@sentry/utils@7.79.0:
+    resolution: {integrity: sha512-tUTlb6PvfZawqBmBK9CPXflqrZDXHKWoX3fve2zLK6W0FSpIMOO4TH8PBqkHBFs0ZgF/bnv/bsM4z7uEAlAtzg==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@sentry/types': 7.79.0
     dev: false
 
   /@splitsoftware/splitio-commons@1.9.1(ioredis@4.28.5):
