@@ -23,7 +23,7 @@
 		"@splitsoftware/splitio": "^10.23.1",
 		"autoprefixer": "^10.4.16",
 		"case": "^1.6.3",
-		"daisyui": "^3.9.4",
+		"daisyui": "^4.0.1",
 		"fast-fuzzy": "^1.12.0",
 		"logrocket": "^6.0.2",
 		"qrcode": "^1.5.3",
