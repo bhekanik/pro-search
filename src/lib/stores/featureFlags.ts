@@ -3,7 +3,7 @@ import { splitClient } from '../app/splitClient';
 
 const featureFlagNames = ['Search_All_Providers', 'Results_In_IFrame'] as const;
 
-export type FeatureFlagNames = typeof featureFlagNames[number];
+export type FeatureFlagNames = (typeof featureFlagNames)[number];
 
 export interface FeatureFlags {
 	Search_All_Providers: SplitIO.Treatment;
