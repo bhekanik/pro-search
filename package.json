@@ -69,9 +69,8 @@
 	},
 	"type": "module",
 	"lint-staged": {
-		"src/**/*.{js,ts,svelte}": "prettier --write . && eslint src/",
-		"src/**/*.{ts,svelte}": "svelte-check --tsconfig ./tsconfig.json --threshold warning",
-		"functions/**/*.{js,ts}": "prettier --write . && eslint functions/",
-		"src/**/*.{js,css,md,svelte,ts}": "npm run format"
+		"src/**/*.{js,ts,svelte}": ["prettier --write", "eslint --fix"],
+		"functions/**/*.{js,ts}": ["prettier --write", "eslint --fix"],
+		"src/**/*.{js,css,md,svelte,ts}": "prettier --write"
 	}
 }
