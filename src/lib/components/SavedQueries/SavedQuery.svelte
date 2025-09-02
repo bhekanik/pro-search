@@ -3,6 +3,7 @@
 	import { supabase } from '$lib/app/supabaseClient';
 	import { queryStore, savedQueriesStore } from '$lib/stores';
 	import type { Filter, Query } from '$lib/stores/query';
+	import { sanitizeHtml } from '$lib/utils/sanitization';
 
 	export let query: Query;
 	export let handleShare: (id: string) => void;
