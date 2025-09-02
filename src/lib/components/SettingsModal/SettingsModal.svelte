@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { TableNames } from '$lib/app/model';
-	import { supabase } from '$lib/app/supabaseClient';
 	import { authStore, queryStore, searchProvidersStore, settingsStore } from '$lib/stores';
+	import { convexSettingsStore } from '$lib/stores/convexSettings';
 	import Protected from '../Protected/Protected.svelte';
 	import SearchProviderSelect from '../SearchProvider/SearchProviderSelect.svelte';
 	import BooleanOption from './BooleanOption.svelte';
@@ -9,32 +8,16 @@
 	let newSettings = $settingsStore;
 
 	async function handleAccept() {
-		const { error, data } = await supabase
-			.from(TableNames.settings)
-			.update([
-				{
-					...newSettings,
-					default_search_provider: newSettings.default_search_provider.name
-				}
-			])
-			.match({
-				user_id: $authStore.user.id
-			})
-			.select(`autosave_queries, default_search_provider(id, url, name), query_preview`)
-			.single();
-
-		if (error) {
-			console.error(error);
-			alert('There was an error saving your settings.');
-			return;
-		}
-
-		if (data) {
-			settingsStore.set(data);
+		try {
+			await convexSettingsStore.save(newSettings);
+			settingsStore.set(newSettings);
 			queryStore.update((currentQuery) => ({
 				...currentQuery,
-				provider: data.default_search_provider
+				provider: newSettings.default_search_provider
 			}));
+		} catch (error) {
+			console.error(error);
+			alert('There was an error saving your settings.');
 		}
 	}
 

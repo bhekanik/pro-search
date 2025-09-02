@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { TableNames } from '$lib/app/model';
 	import { splitClient } from '$lib/app/splitClient';
-	import { supabase } from '$lib/app/supabaseClient';
 	import type { SearchProvider } from '$lib/app/types';
 	import AuthModal from '$lib/components/AuthModal/AuthModal.svelte';
 	import SettingsModal from '$lib/components/SettingsModal/SettingsModal.svelte';
@@ -16,7 +14,11 @@
 		type Query,
 		type Settings
 	} from '$lib/stores';
-	import type { User } from '@supabase/supabase-js';
+	import { convexAuthStore } from '$lib/stores/convexAuth';
+	import { convexSettingsStore } from '$lib/stores/convexSettings';
+	import { convexClient } from '$lib/app/convexClient';
+	import { api } from '../../../../convex/_generated/api';
+	import type { ConvexUser } from '$lib/app/types/convex';
 	import LogRocket from 'logrocket';
 	import { onDestroy, onMount } from 'svelte';
 	// @ts-ignore - theme-change module has type issues
@@ -33,7 +35,7 @@
 
 	let redirectTo = '';
 
-	const handleAuth = async (user: User) => {
+	const handleAuth = async (user: ConvexUser) => {
 		authStore.set({
 			isLoggedIn: !!user,
 			user: user || null
@@ -42,70 +44,44 @@
 		authReadiness.set(true);
 
 		if (user) {
-			LogRocket.identify(user.email || user.id, {
-				name: user.id,
+			LogRocket.identify(user.email || user._id, {
+				name: user._id,
 				email: user.email || ''
 			});
-
-			const { data: savedQueries } = await supabase
-				.from<Omit<Query, 'filters'> & { filters: string }>(TableNames.savedQueries)
-				.select('filters, created_at, id, name, provider(id, name, url), search_term');
-			savedQueriesStore.set(
-				savedQueries?.map((savedQuery) => ({
-					...savedQuery,
-					filters: JSON.parse(savedQuery.filters)
-				})) || []
-			);
-
-			const { data: settings } = await supabase
-				.from<Settings>(TableNames.settings)
-				.select(`autosave_queries, default_search_provider(id, url, name), query_preview`)
-				.single();
-			if (settings) {
-				settingsStore.set(settings);
-				queryStore.update((currentQuery) => ({
-					...currentQuery,
-					provider: settings.default_search_provider
-				}));
-			}
 		}
 	};
 
-	let initial =
-		$authStore.user?.user_metadata?.full_name
-			.split(' ')
-			.map((n: string) => n.charAt(0))
-			.join('')
-			.toUpperCase() ||
-		$authStore.user?.user_metadata?.name
+	$: initial =
+		$authStore.user?.name
 			?.split(' ')
 			.map((n: string) => n.charAt(0))
 			.join('')
-			.toUpperCase();
+			.toUpperCase() || 'U';
 
 	onMount(async () => {
 		redirectTo = window.location.origin;
 
-		const { data: searchProviders } = await supabase
-			.from<SearchProvider>(TableNames.searchProviders)
-			.select('id, name, url');
+		// Load search providers from Convex
+		const searchProviders = await convexClient.query(api.searchProviders.list);
 		searchProvidersStore.set(searchProviders || []);
 
-		const {
-			data: { user }
-		} = await supabase.auth.getUser();
-		if (user) {
-			handleAuth(user);
-		}
-		supabase.auth.onAuthStateChange(async (_, session) => {
-			if (session?.user) await handleAuth(session?.user);
+		// Subscribe to auth changes
+		const unsubscribe = convexAuthStore.subscribe((user) => {
+			if (user) {
+				handleAuth(user);
+			}
 		});
 
 		themeChange(false);
+
+		return () => {
+			unsubscribe();
+		};
 	});
 
-	function logout() {
-		supabase.auth.signOut();
+	async function logout() {
+		// Sign out from Convex auth
+		await convexAuthStore.signOut();
 
 		savedQueriesStore.set([]);
 
@@ -135,18 +111,14 @@
 				<div class="dropdown dropdown-end">
 					<button
 						tabindex="0"
-						class:placeholder={!$authStore.user?.user_metadata?.photoURL}
+						class:placeholder={!$authStore.user?.image}
 						class="avatar btn btn-ghost btn-circle"
 						aria-label="User menu"
 						type="button"
 					>
 						<div class="rounded-full w-8 h-8 ring ring-primary">
-							{#if $authStore.user?.user_metadata?.picture || $authStore.user?.user_metadata?.avatar_url}
-								<img
-									alt="profile"
-									src={$authStore.user?.user_metadata?.picture ||
-										$authStore.user?.user_metadata?.avatar_url}
-								/>
+							{#if $authStore.user?.image}
+								<img alt="profile" src={$authStore.user.image} />
 							{:else}
 								<span class="text-s">{initial}</span>
 							{/if}
