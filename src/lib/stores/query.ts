@@ -1,8 +1,8 @@
-import type { SearchProvider } from '$lib/app/types';
+import type { SearchProvider } from '$lib/app/types/searchProviders';
 import type { FilterType } from '$lib/app/types/filters';
 import type { Writable } from 'svelte/store';
 import { writable } from 'svelte/store';
-import { searchProvidersWithAll } from '../app/config/searchProviders';
+import { searchProvidersWithAll } from '$lib/app/config/searchProviders';
 
 export interface Filter {
 	formatted: string;

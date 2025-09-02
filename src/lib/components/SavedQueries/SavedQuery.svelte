@@ -3,6 +3,7 @@
 	import { supabase } from '$lib/app/supabaseClient';
 	import { queryStore, savedQueriesStore } from '$lib/stores';
 	import type { Filter, Query } from '$lib/stores/query';
+	import { sanitizeHtml } from '$lib/utils/sanitization';
 
 	export let query: Query;
 	export let handleShare: (id: string) => void;
@@ -57,10 +58,10 @@
 	</span>
 </div>
 <div class="flex gap-1 align-middle items-center justify-end mt-2">
-	<label
+	<button
 		on:click={() => handleShare(query.id)}
-		for={`share-modal-btn-${query.id}`}
-		class="btn btn-sm btn-ghost glass modal-button text-gray-300">Share</label
+		type="button"
+		class="btn btn-sm btn-ghost glass modal-button text-gray-300">Share</button
 	>
 	<button class="btn btn-sm glass text-gray-300" on:click={() => handleApply()}>Apply</button>
 	<button class="btn btn-sm glass text-gray-300" on:click={() => handleDelete()}>Delete</button>

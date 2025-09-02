@@ -1,13 +1,26 @@
 import { TableNames } from '$lib/app/model';
 import { supabase } from '$lib/app/supabaseClient';
-import { savedQueriesStore, type Query } from '$lib/stores';
+import { savedQueriesStore, type Query } from '$stores';
+import { sanitizeQueryName, validateLength } from './sanitization';
 
 export const saveNewQuery = async (currentSavedQueries: Query[], query: Query): Promise<void> => {
-	const user = supabase.auth.user();
+	const {
+		data: { user }
+	} = await supabase.auth.getUser();
+
+	// Sanitize query name
+	const sanitizedName = sanitizeQueryName(
+		query.name || `Untitled Query - ${new Date().toUTCString()}`
+	);
+
+	// Validate length (1-100 characters)
+	if (!validateLength(sanitizedName, 1, 100)) {
+		throw new Error('Query name must be between 1 and 100 characters');
+	}
 
 	const newQuery = {
 		...query,
-		name: query.name || `Untitled Query - ${new Date().toUTCString()}`,
+		name: sanitizedName,
 		user_id: user?.id
 	};
 
@@ -20,6 +33,6 @@ export const saveNewQuery = async (currentSavedQueries: Query[], query: Query): 
 
 	savedQueriesStore.set([
 		...currentSavedQueries,
-		...(data?.map((d) => ({ ...d, filters: JSON.parse(d.filters) })) || [])
+		...(data?.map((d: any) => ({ ...d, filters: JSON.parse(d.filters) })) || [])
 	]);
 };

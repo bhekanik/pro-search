@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { fileTypes } from '$lib/app/fixtures';
-	import FilterBase from '$lib/components/Filters/Base/Base.svelte';
-	import { queryStore } from '$lib/stores';
+	import FilterBase from '$components/Filters/Base/Base.svelte';
+	import { queryStore } from '$stores';
 
 	const handleChange = (e: Event) => {
 		const value = (e.target as HTMLSelectElement).value;
-		queryStore.update((currentQuery) => {
+		queryStore.update((currentQuery: any) => {
 			const newQuery = { ...currentQuery };
 			newQuery.filters.fileType = {
 				type: 'File Type',

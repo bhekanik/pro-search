@@ -1,13 +1,13 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import { build, files, timestamp } from '$service-worker';
+import { build, files, version } from '$service-worker';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const worker = self as unknown as any;
-const FILES = `cache${timestamp}`;
+const FILES = `cache${version}`;
 const to_cache = build.concat(files);
 const staticAssets = new Set(to_cache);
 // listen for the install events
-worker.addEventListener('install', (event) => {
+worker.addEventListener('install', (event: any) => {
 	event.waitUntil(
 		caches
 			.open(FILES)
@@ -18,7 +18,7 @@ worker.addEventListener('install', (event) => {
 	);
 });
 // listen for the activate events
-worker.addEventListener('activate', (event) => {
+worker.addEventListener('activate', (event: any) => {
 	event.waitUntil(
 		caches.keys().then(async (keys) => {
 			// delete old caches
@@ -31,7 +31,7 @@ worker.addEventListener('activate', (event) => {
 });
 // attempt to process HTTP requests and rely on the cache if offline
 async function fetchAndCache(request: Request) {
-	const cache = await caches.open(`offline${timestamp}`);
+	const cache = await caches.open(`offline${version}`);
 	try {
 		const response = await fetch(request);
 		cache.put(request, response.clone());
@@ -43,7 +43,7 @@ async function fetchAndCache(request: Request) {
 	}
 }
 // listen for the fetch events
-worker.addEventListener('fetch', (event) => {
+worker.addEventListener('fetch', (event: any) => {
 	if (event.request.method !== 'GET' || event.request.headers.has('range')) return;
 	const url = new URL(event.request.url);
 	// only cache files that are local to your application

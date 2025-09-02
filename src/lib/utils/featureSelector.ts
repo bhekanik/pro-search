@@ -1,5 +1,5 @@
-import type { FeatureFlagNames } from '$lib/stores';
-import { featureFlagsStore } from '$lib/stores';
+import type { FeatureFlagNames } from '$stores';
+import { featureFlagsStore } from '$stores';
 import { get } from 'svelte/store';
 
 export function featureSelector<T>(
@@ -10,7 +10,7 @@ export function featureSelector<T>(
 ): T {
 	const featureFlagsStoreValue = get(featureFlagsStore);
 
-	const featureState = featureFlagsStoreValue[featureFlag] === 'on' && otherCondition;
+	const featureState = (featureFlagsStoreValue as any)[featureFlag] === 'on' && otherCondition;
 
 	return featureState ? onFeature : offFeature;
 }

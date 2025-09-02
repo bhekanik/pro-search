@@ -4,6 +4,7 @@ import svelte from 'eslint-plugin-svelte';
 import prettier from 'eslint-config-prettier';
 import globals from 'globals';
 
+/** @type {import('eslint').Linter.Config[]} */
 export default [
 	js.configs.recommended,
 	...ts.configs.recommended,
@@ -17,17 +18,14 @@ export default [
 			globals: {
 				...globals.browser,
 				...globals.node,
-				...globals.es2017
+				...globals.es2021
 			}
 		},
 		rules: {
 			'@typescript-eslint/no-explicit-any': 'warn',
 			'@typescript-eslint/no-unused-vars': 'warn',
 			'no-console': 'warn',
-			'svelte/require-each-key': 'warn',
-			'svelte/no-useless-mustaches': 'warn',
-			'svelte/no-reactive-reassign': 'warn',
-			'svelte/no-immutable-reactive-statements': 'warn'
+			'no-unused-vars': 'warn'
 		}
 	},
 	{
@@ -36,9 +34,32 @@ export default [
 			parserOptions: {
 				parser: ts.parser
 			}
+		},
+		rules: {
+			'svelte/require-each-key': 'warn',
+			'svelte/no-useless-mustaches': 'warn',
+			'svelte/no-reactive-reassign': 'warn',
+			'svelte/no-immutable-reactive-statements': 'warn'
 		}
 	},
 	{
-		ignores: ['**/*.cjs', 'build/', '.svelte-kit/', 'dist/']
+		ignores: [
+			'build/',
+			'.svelte-kit/',
+			'dist/',
+			'node_modules/',
+			'*.config.js',
+			'*.config.ts',
+			'.vercel/',
+			'convex/_generated/',
+			'.d.ts',
+			'cypress/',
+			'src/service-worker.ts',
+			'convex/auth.config.ts',
+			'setup-convex.js',
+			'**/*.spec.ts',
+			'**/*.test.ts',
+			'**/*.cjs'
+		]
 	}
 ];

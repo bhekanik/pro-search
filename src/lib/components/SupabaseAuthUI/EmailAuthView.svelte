@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
 	import Input from './Input.svelte';
 	import LinkButton from './LinkButton.svelte';
 	import Text from './Text.svelte';
 
-	export let supabaseClient;
-	export let view;
-	export let setView;
+	export let supabaseClient: any;
+	export let view: any;
+	export let setView: any;
 
 	let error = '',
 		message = '',

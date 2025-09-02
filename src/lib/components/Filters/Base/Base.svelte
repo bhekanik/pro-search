@@ -16,7 +16,7 @@
 
 	const handleCheckboxInput = (e: Event) => {
 		const value = (e.target as HTMLInputElement).checked;
-		queryStore.update((currentQuery) => {
+		queryStore.update((currentQuery: any) => {
 			const newQuery = { ...currentQuery };
 			if (value === false) {
 				delete newQuery.filters[Case.camel(type)];
@@ -71,7 +71,6 @@
 			in:slide
 			out:slide
 			class="select select-bordered"
-			type="text"
 			name={`${type}-input`}
 			id={`${type}-input`}
 			value={$queryStore.filters[Case.camel(type)]?.value || options[0].value}

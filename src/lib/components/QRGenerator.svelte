@@ -1,7 +1,7 @@
 <script lang="ts">
 	import QRCode from 'qrcode';
 
-	let canvas = null;
+	let canvas: any = null;
 	export let link: string;
 
 	$: {
@@ -22,4 +22,4 @@
 	}
 </script>
 
-<canvas bind:this={canvas} />
+<canvas bind:this={canvas}></canvas>

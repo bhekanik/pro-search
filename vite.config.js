@@ -1,11 +1,14 @@
 import { sveltekit } from '@sveltejs/kit/vite';
+import { defineConfig } from 'vite';
 
-/** @type {import('vite').UserConfig} */
-const config = {
+export default defineConfig({
 	plugins: [sveltekit()],
-	define: {
-		'process.env': process.env
+	optimizeDeps: {
+		include: ['theme-change', 'fast-fuzzy', 'qrcode']
+	},
+	server: {
+		fs: {
+			allow: ['..']
+		}
 	}
-};
-
-export default config;
+});
