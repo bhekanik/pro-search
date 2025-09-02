@@ -1,11 +1,9 @@
 import { recipes } from '$lib/app/config/recipes';
 import type { RecipeType } from '$lib/app/types';
+import type { PageServerLoad } from './$types';
 
-/** @type {import('@sveltejs/kit').RequestHandler} */
-export async function GET(): Promise<{ body: { recipes: RecipeType[] } }> {
+export const load: PageServerLoad = async () => {
 	return {
-		body: {
-			recipes
-		}
+		recipes
 	};
-}
+};

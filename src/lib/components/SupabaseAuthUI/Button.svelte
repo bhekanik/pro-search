@@ -39,8 +39,8 @@
 		align-items: center;
 		position: relative;
 		text-align: center;
-		transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-			transform;
+		transition-property:
+			background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 		transition-duration: 150ms;
 		border-radius: 0.25rem;

@@ -1,7 +1,7 @@
 import type { FilterType } from '$lib/app/types/filters';
 import { filtersThatDontRequireSearchTerm } from '$lib/app/types/filters';
-import { formatQuery } from '$lib/components/Filters/utils/formatQuery';
-import { queryStore, type Query } from '$lib/stores';
+import { formatQuery } from '$components/Filters/utils/formatQuery';
+import { queryStore, type Query } from '$stores';
 import { get } from 'svelte/store';
 import { updateSavedQueries } from './updateSavedQueries';
 

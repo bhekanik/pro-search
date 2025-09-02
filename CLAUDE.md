@@ -1,29 +1,35 @@
 # Pro-Search Codebase Overview
 
 ## 🚀 INDIE DEVELOPER CONTEXT
+
 **This is a free indie project focused on providing value to users.**
+
 - Target: Tens of thousands of users (not millions)
 - Philosophy: Ship fast, validate, iterate
 - Priority: Working features over perfect code
 
 ## 🎯 THE CORE FEATURE
+
 **CRITICAL: Advanced Query Building with Saved Queries**
 
 Pro-Search is a FREE advanced search query builder that makes Google's powerful search operators accessible through a visual interface. Users can build complex search queries without memorizing syntax, save them for reuse, and execute them across multiple search engines simultaneously.
 
 ### Core functionality:
+
 - **Visual Query Builder**: Point-and-click interface to build advanced search queries
 - **Multi-Engine Support**: Google, DuckDuckGo, Bing, Yahoo, or all at once
 - **Saved Queries**: Save and reuse queries (requires authentication)
 - **Query Sharing**: Share saved queries with others via links
 
 ### Critical path that must never break:
+
 1. User builds query using filters → Query gets formatted correctly
 2. User clicks search → Opens new tab(s) with properly formatted query URL
 3. Authenticated users can save queries → Queries persist in Supabase
 4. Users can load and re-execute saved queries
 
 ### Key files:
+
 - `src/lib/utils/generateQueryUrl.ts` - Core query URL generation
 - `src/lib/components/Filters/utils/formatQuery.ts` - Query formatting logic
 - `src/lib/components/SearchBar/SearchBarBase.svelte` - Search execution
@@ -31,11 +37,13 @@ Pro-Search is a FREE advanced search query builder that makes Google's powerful 
 - `src/lib/app/supabaseClient.ts` - Database connection
 
 ### Dependencies:
+
 - **Supabase**: Authentication & database for saved queries
 - **Split.io**: Feature flags for A/B testing
 - **Vercel**: Hosting and deployment
 
 ### Failure impact:
+
 - If query generation breaks → Users can't use the app at all
 - If auth breaks → Users lose saved queries, reduced functionality
 - If Supabase breaks → No saved queries, no user accounts
@@ -60,6 +68,7 @@ npm run dev
 ## Architecture Overview
 
 **Simple Monolithic SvelteKit App** ✅
+
 - Frontend: SvelteKit with TypeScript
 - Styling: TailwindCSS + DaisyUI (migrating to SCSS per README)
 - Backend: Supabase (Auth + PostgreSQL)
@@ -67,6 +76,7 @@ npm run dev
 - Feature Flags: Split.io
 
 ### Directory Structure
+
 ```
 src/
 ├── lib/
@@ -91,6 +101,7 @@ src/
 ## Development Guidelines
 
 ### Priority Order
+
 1. **Fix anything that breaks query generation** - This is the core feature
 2. **Fix auth/saved queries issues** - This is a core feature
 3. **Fix bugs users complain about** - Check GitHub issues
@@ -99,6 +110,7 @@ src/
 6. Everything else is optional
 
 ### What to Ignore
+
 - Perfect test coverage (barely any tests exist)
 - Microservices architecture (monolith is fine)
 - Complex CI/CD (Vercel handles deployment)
@@ -108,6 +120,7 @@ src/
 ## Current Tech Stack
 
 ### Core Dependencies
+
 - **@supabase/supabase-js**: Auth & database
 - **@splitsoftware/splitio**: Feature flags
 - **fast-fuzzy**: Fuzzy search for saved queries
@@ -115,6 +128,7 @@ src/
 - **theme-change**: Dark mode support
 
 ### Dev Stack
+
 - **SvelteKit**: Full-stack framework
 - **TypeScript**: Type safety
 - **Vite**: Build tool
@@ -125,6 +139,7 @@ src/
 ## Key Features & Components
 
 ### 1. Query Builder (Core Feature)
+
 - **Location**: `src/lib/components/Filters/`
 - **Purpose**: Visual interface for building complex search queries
 - **Providers**: Google, DuckDuckGo, Bing, Yahoo
@@ -138,6 +153,7 @@ src/
   - SafeSearch settings
 
 ### 2. Saved Queries (Free Feature)
+
 - **Location**: `src/lib/components/SavedQueries/`
 - **Purpose**: Save and reuse complex queries
 - **Features**:
@@ -147,6 +163,7 @@ src/
   - Sort by creation date
 
 ### 3. Authentication
+
 - **Location**: `src/lib/components/AuthModal/`, `src/lib/stores/auth.ts`
 - **Provider**: Supabase Auth
 - **Features**:
@@ -155,6 +172,7 @@ src/
   - Protected routes for saved queries
 
 ### 4. Search Providers
+
 - **Location**: `src/lib/app/config/searchProviders.ts`
 - **Supported**: Google, DuckDuckGo, Bing, Yahoo, All (opens all 4)
 - **Extensible**: Easy to add new search engines
@@ -255,18 +273,21 @@ src/
 ## Recommended Improvements (Priority Order)
 
 ### Must Fix This Week (Money Feature Protection)
+
 1. Add error handling for query generation failures
 2. Add loading states for saved queries
 3. Document Supabase schema
 4. Add basic error boundaries
 
 ### Should Fix This Month (User Experience)
+
 5. Add analytics to understand usage patterns
 6. Add success/error toasts for user actions
 7. Add empty states with helpful messages
 8. Add basic analytics to understand usage
 
 ### Nice to Have (Growth Features)
+
 9. Add more search engines (Startpage, Searx, etc.)
 10. Add query templates/recipes marketplace
 11. Add team sharing for saved queries
