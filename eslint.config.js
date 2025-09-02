@@ -1,17 +1,13 @@
 import js from '@eslint/js';
-import ts from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
+import ts from 'typescript-eslint';
 import svelte from 'eslint-plugin-svelte';
 import prettier from 'eslint-config-prettier';
 import globals from 'globals';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
 	js.configs.recommended,
+	...ts.configs.recommended,
 	...svelte.configs['flat/recommended'],
 	prettier,
 	...svelte.configs['flat/prettier'],
@@ -31,7 +27,7 @@ export default [
 		files: ['**/*.svelte'],
 		languageOptions: {
 			parserOptions: {
-				parser: tsParser
+				parser: ts.parser
 			}
 		},
 		rules: {
@@ -39,26 +35,6 @@ export default [
 			'svelte/require-each-key': 'warn',
 			'svelte/no-useless-mustaches': 'warn',
 			'svelte/no-reactive-reassign': 'warn'
-		}
-	},
-	{
-		files: ['**/*.ts', '**/*.tsx'],
-		languageOptions: {
-			parser: tsParser,
-			parserOptions: {
-				project: './tsconfig.json',
-				tsconfigRootDir: __dirname,
-				extraFileExtensions: ['.svelte']
-			}
-		},
-		plugins: {
-			'@typescript-eslint': ts
-		},
-		rules: {
-			...ts.configs['recommended'].rules,
-			'@typescript-eslint/no-explicit-any': 'warn',
-			'@typescript-eslint/no-unused-vars': 'warn',
-			'no-unused-vars': 'warn'
 		}
 	},
 	{
