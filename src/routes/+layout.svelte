@@ -7,8 +7,7 @@
 	import { queryToShareStore } from '$stores';
 	import * as Sentry from '@sentry/sveltekit';
 	import { onDestroy, onMount } from 'svelte';
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
+	// @ts-ignore - theme-change module has type issues
 	import { themeChange } from 'theme-change';
 	import '../global.css';
 

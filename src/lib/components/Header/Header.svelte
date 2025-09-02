@@ -19,8 +19,7 @@
 	import type { User } from '@supabase/supabase-js';
 	import LogRocket from 'logrocket';
 	import { onDestroy, onMount } from 'svelte';
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
+	// @ts-ignore - theme-change module has type issues
 	import { themeChange } from 'theme-change';
 
 	let isProd = import.meta.env.MODE === 'production';

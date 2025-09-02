@@ -3,7 +3,9 @@ import { supabase } from '$lib/app/supabaseClient';
 import { savedQueriesStore, type Query } from '$stores';
 
 export const saveNewQuery = async (currentSavedQueries: Query[], query: Query): Promise<void> => {
-	const { data: { user } } = await supabase.auth.getUser();
+	const {
+		data: { user }
+	} = await supabase.auth.getUser();
 
 	const newQuery = {
 		...query,
