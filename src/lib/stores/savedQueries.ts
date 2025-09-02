@@ -1,4 +1,7 @@
-import { writable } from 'svelte/store';
-import type { Query } from './query';
-
-export const savedQueriesStore = writable<Query[]>([]);
+// Re-export Convex saved queries as the main store
+export { 
+  unifiedSavedQueriesStore as savedQueriesStore,
+  saveQuery,
+  deleteQuery,
+  updateQuery 
+} from './unifiedSavedQueries';
