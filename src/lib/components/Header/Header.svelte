@@ -134,10 +134,12 @@
 			{#if $authStore.isLoggedIn}
 				<label for="my-modal-2" class="btn btn-sm btn-ghost border modal-button">Settings</label>
 				<div class="dropdown dropdown-end">
-					<div
+					<button
 						tabindex="0"
 						class:placeholder={!$authStore.user?.user_metadata?.photoURL}
-						class="avatar"
+						class="avatar btn btn-ghost btn-circle"
+						aria-label="User menu"
+						type="button"
 					>
 						<div class="rounded-full w-8 h-8 ring ring-primary">
 							{#if $authStore.user?.user_metadata?.picture || $authStore.user?.user_metadata?.avatar_url}
@@ -150,10 +152,10 @@
 								<span class="text-s">{initial}</span>
 							{/if}
 						</div>
-					</div>
+					</button>
 
 					<ul
-						tabindex="0"
+						tabindex="-1"
 						class="menu dropdown-content rounded-box w-52 bordered shadow-lg bg-slate-600"
 					>
 						{#if $authStore.user?.email}
@@ -166,7 +168,7 @@
 						>
 					</li> -->
 						<li>
-							<span on:click={logout}>Logout</span>
+							<button on:click={logout} type="button">Logout</button>
 						</li>
 					</ul>
 				</div>
@@ -174,7 +176,7 @@
 				<label for="auth-modal" class="btn btn-sm btn-ghost">Login / Sign Up</label>
 			{/if}
 		{:else}
-			<div class="btn btn-sm btn-circle btn-ghost btn-xl loading" />
+			<div class="btn btn-sm btn-circle btn-ghost btn-xl loading"></div>
 		{/if}
 	</div>
 </header>
