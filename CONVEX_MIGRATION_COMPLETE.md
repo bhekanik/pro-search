@@ -24,6 +24,7 @@ Pro-Search has been successfully migrated from Supabase to Convex as the primary
 ### Environment Variables
 
 Required variables in `.env.local`:
+
 ```env
 # Convex Configuration
 PUBLIC_CONVEX_URL=https://sensible-shepherd-964.convex.cloud
@@ -37,12 +38,14 @@ GOOGLE_CLIENT_SECRET=
 ```
 
 ### Removed Dependencies
+
 - `@supabase/supabase-js` - No longer needed
 - All Supabase-related code and configuration
 
 ### Store Architecture
 
 The stores now use Convex directly:
+
 - `authStore` → Uses Convex Auth
 - `savedQueriesStore` → Uses Convex saved queries
 - `settingsStore` → Uses Convex settings
@@ -50,11 +53,13 @@ The stores now use Convex directly:
 ### Development
 
 To run the application:
+
 ```bash
 npm run dev
 ```
 
 To build for production:
+
 ```bash
 npm run build
 ```
@@ -62,6 +67,7 @@ npm run build
 ### Deployment
 
 The application is ready to deploy to Vercel. The Convex backend is already deployed and running at:
+
 - Dashboard: https://dashboard.convex.dev/d/sensible-shepherd-964
 - API: https://sensible-shepherd-964.convex.cloud
 
@@ -90,6 +96,7 @@ The application is ready to deploy to Vercel. The Convex backend is already depl
 ## Support
 
 For Convex-related issues:
+
 - Documentation: https://docs.convex.dev
 - Dashboard: https://dashboard.convex.dev/d/sensible-shepherd-964
 - Community: https://convex.dev/community

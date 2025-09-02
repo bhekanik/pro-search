@@ -84,9 +84,19 @@
 				on:change={(e) => handleChange(e)}
 			/>
 
-			<div class="divider" />
+			<div class="divider"></div>
 			<div class="modal-action">
-				<label on:click={handleAccept} for="my-modal-2" class="btn btn-primary">Accept</label>
+				<button
+					type="button"
+					on:click={() => {
+						handleAccept();
+						const modal = document.getElementById('my-modal-2') as HTMLInputElement;
+						if (modal) modal.checked = false;
+					}}
+					class="btn btn-primary"
+				>
+					Accept
+				</button>
 				<label for="my-modal-2" class="btn">Cancel</label>
 			</div>
 		</div>

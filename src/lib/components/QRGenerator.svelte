@@ -22,4 +22,4 @@
 	}
 </script>
 
-<canvas bind:this={canvas} />
+<canvas bind:this={canvas}></canvas>

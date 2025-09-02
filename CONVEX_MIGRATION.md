@@ -5,6 +5,7 @@ This document outlines the migration from Supabase to Convex for the Pro-Search 
 ## Migration Status
 
 ✅ **Completed:**
+
 - Convex setup and configuration
 - Schema definition for all required tables
 - Authentication setup with Convex Auth
@@ -13,10 +14,12 @@ This document outlines the migration from Supabase to Convex for the Pro-Search 
 - Unified stores for gradual migration
 
 ⏳ **In Progress:**
+
 - Frontend integration with unified stores
 - Testing migration path
 
 🔲 **Pending:**
+
 - Data migration from Supabase to Convex
 - Complete removal of Supabase dependencies
 - Production deployment
@@ -102,18 +105,22 @@ To migrate existing data from Supabase to Convex:
 ## Key Changes
 
 ### Authentication
+
 - **Before**: Supabase Auth with email/password and social providers
 - **After**: Convex Auth with same providers plus better session management
 
 ### Database
+
 - **Before**: PostgreSQL via Supabase
 - **After**: Convex's document database with real-time subscriptions
 
 ### API Calls
+
 - **Before**: REST API calls to Supabase
 - **After**: Type-safe function calls to Convex
 
 ### Real-time Updates
+
 - **Before**: Manual polling or Supabase subscriptions
 - **After**: Automatic real-time updates with Convex queries
 
@@ -165,6 +172,7 @@ If issues arise during migration:
 ## Support
 
 For Convex-specific issues:
+
 - [Convex Documentation](https://docs.convex.dev)
 - [Convex Discord](https://convex.dev/community)
 - [Convex Auth Guide](https://labs.convex.dev/auth)
