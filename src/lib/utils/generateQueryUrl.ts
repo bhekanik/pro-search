@@ -4,6 +4,7 @@ import { formatQuery } from '$components/Filters/utils/formatQuery';
 import { queryStore, type Query } from '$stores';
 import { get } from 'svelte/store';
 import { updateSavedQueries } from './updateSavedQueries';
+import { isValidSearchProviderUrl } from './sanitization';
 
 interface GenerateQueryUrlOptions {
 	saveQuery?: boolean;
@@ -30,11 +31,23 @@ export const generateQueryUrl = (
 	const formattedQuery = formatQuery({ query });
 
 	if (typeof query.provider.url === 'string') {
-		return `${query.provider.url}${formattedQuery.replace(/%2B/g, '+')}`;
+		// Validate provider URL before using it
+		const fullUrl = `${query.provider.url}${formattedQuery.replace(/%2B/g, '+')}`;
+		if (!isValidSearchProviderUrl(fullUrl)) {
+			console.error('Invalid search provider URL detected:', fullUrl);
+			return '';
+		}
+		return fullUrl;
 	} else {
 		const url = [];
 		for (const providerUrl of query.provider.url) {
-			url.push(`${providerUrl}${formattedQuery.replace(/%2B/g, '+')}`);
+			const fullUrl = `${providerUrl}${formattedQuery.replace(/%2B/g, '+')}`;
+			// Validate each provider URL
+			if (isValidSearchProviderUrl(fullUrl)) {
+				url.push(fullUrl);
+			} else {
+				console.error('Invalid search provider URL detected:', fullUrl);
+			}
 		}
 		return url;
 	}
