@@ -1,9 +1,12 @@
 <script lang="ts">
 	import FilterBase from '$lib/components/Filters/Base/Base.svelte';
 	import { queryStore } from '$lib/stores';
+	import { sanitizeFilterValue } from '$lib/utils/sanitization';
 
 	const handleInput = (e: Event) => {
-		const value = (e.target as HTMLInputElement).value;
+		const rawValue = (e.target as HTMLInputElement).value;
+		// Sanitize the exact match value to prevent injection
+		const value = sanitizeFilterValue(rawValue, 'exact');
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
 			newQuery.filters.exact = {
