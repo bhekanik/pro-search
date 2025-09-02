@@ -1,20 +1,20 @@
 # Pro-Search Codebase Overview
 
 ## 🚀 INDIE DEVELOPER CONTEXT
-**This is an indie SaaS project focused on rapid market validation.**
+**This is a free indie project focused on providing value to users.**
 - Target: Tens of thousands of users (not millions)
 - Philosophy: Ship fast, validate, iterate
 - Priority: Working features over perfect code
 
-## 💰 THE MONEY FEATURE
-**CRITICAL: Advanced Query Building with Saved Queries (requires auth)**
+## 🎯 THE CORE FEATURE
+**CRITICAL: Advanced Query Building with Saved Queries**
 
-Pro-Search is an advanced search query builder that makes Google's powerful search operators accessible through a visual interface. Users can build complex search queries without memorizing syntax, save them for reuse, and execute them across multiple search engines simultaneously.
+Pro-Search is a FREE advanced search query builder that makes Google's powerful search operators accessible through a visual interface. Users can build complex search queries without memorizing syntax, save them for reuse, and execute them across multiple search engines simultaneously.
 
 ### Core functionality:
 - **Visual Query Builder**: Point-and-click interface to build advanced search queries
 - **Multi-Engine Support**: Google, DuckDuckGo, Bing, Yahoo, or all at once
-- **Saved Queries** (PREMIUM): Save and reuse queries (requires authentication)
+- **Saved Queries**: Save and reuse queries (requires authentication)
 - **Query Sharing**: Share saved queries with others via links
 
 ### Critical path that must never break:
@@ -37,7 +37,7 @@ Pro-Search is an advanced search query builder that makes Google's powerful sear
 
 ### Failure impact:
 - If query generation breaks → Users can't use the app at all
-- If auth breaks → Users lose saved queries, reduced value proposition
+- If auth breaks → Users lose saved queries, reduced functionality
 - If Supabase breaks → No saved queries, no user accounts
 
 ## Quick Start
@@ -92,7 +92,7 @@ src/
 
 ### Priority Order
 1. **Fix anything that breaks query generation** - This is the core feature
-2. **Fix auth/saved queries issues** - This is the premium feature
+2. **Fix auth/saved queries issues** - This is a core feature
 3. **Fix bugs users complain about** - Check GitHub issues
 4. **Ship features users request** - Focus on search operators
 5. **Improve developer experience** - Better types, cleaner code
@@ -137,7 +137,7 @@ src/
   - Language filters
   - SafeSearch settings
 
-### 2. Saved Queries (Premium Feature)
+### 2. Saved Queries (Free Feature)
 - **Location**: `src/lib/components/SavedQueries/`
 - **Purpose**: Save and reuse complex queries
 - **Features**:
@@ -168,10 +168,10 @@ src/
    - Without these, auth and saved queries completely break
    - No local database setup - must use Supabase
 
-2. **No Payment System**
-   - App mentions "premium features" but has NO payment integration
-   - No Stripe, no subscriptions, no way to monetize
-   - Saved queries are free for all authenticated users
+2. **Authentication Required for Full Features**
+   - Saved queries require authentication via Supabase
+   - All features are free for authenticated users
+   - No paid tiers or premium features
 
 3. **Hardcoded Search Provider URLs**
    - Search engine URLs are hardcoded in `searchProviders.ts`
@@ -261,7 +261,7 @@ src/
 4. Add basic error boundaries
 
 ### Should Fix This Month (User Experience)
-5. Add payment integration (Stripe/Lemon Squeezy)
+5. Add analytics to understand usage patterns
 6. Add success/error toasts for user actions
 7. Add empty states with helpful messages
 8. Add basic analytics to understand usage
@@ -278,7 +278,7 @@ src/
 2. **Run the app locally** and test query generation
 3. **Check GitHub issues** for user-reported bugs
 4. **Focus on the money feature** - ensure query building never breaks
-5. **Add payment integration** to actually monetize the premium features
+5. **Add analytics** to understand how users are using the app
 
 ## Development Workflow
 
@@ -312,6 +312,6 @@ git push origin feature-name
 
 ## Summary
 
-Pro-Search is a **working product** that solves a real problem - making advanced search queries accessible. The core feature (query building) works well, but the monetization strategy needs implementation. The codebase is clean enough for an indie project, with room for iterative improvements as users provide feedback.
+Pro-Search is a **working FREE product** that solves a real problem - making advanced search queries accessible. The core feature (query building) works well and all features are available for free to authenticated users. The codebase is clean enough for an indie project, with room for iterative improvements as users provide feedback.
 
-**Bottom Line**: Focus on keeping the query builder working, add payment processing, and ship features that users actually request. Don't over-engineer - this is an indie project that needs to validate its market fit.
+**Bottom Line**: Focus on keeping the query builder working, improve user experience, and ship features that users actually request. Don't over-engineer - this is a free indie project focused on providing value to users.
