@@ -69,7 +69,7 @@
 			{/if}
 
 			{#if url}
-				<iframe title="Results" src={url} class="w-full h-full" frameborder="0" />
+				<iframe title="Results" src={url} class="w-full h-full" frameborder="0"></iframe>
 			{:else}
 				<Filters />
 				<!-- <Recipes /> -->

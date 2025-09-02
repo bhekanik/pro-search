@@ -1,13 +1,13 @@
 import { TableNames } from '$lib/app/model';
 import { supabase } from '$lib/app/supabaseClient';
-import { authStore, queryStore, type Query } from '$lib/stores';
+import { authStore, queryStore, type Query } from '$stores';
 import { get } from 'svelte/store';
 import { saveNewQuery } from './saveNewQuery';
 
 export async function updateSavedQueries(options?: { query?: Query }): Promise<void> {
 	const query = options?.query || get(queryStore);
 
-	if (!get(authStore).isLoggedIn) {
+	if (!(get(authStore) as any).isLoggedIn) {
 		return;
 	}
 

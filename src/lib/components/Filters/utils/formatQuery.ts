@@ -29,7 +29,7 @@ const postFixFilters = ['excludeSite', 'numRange'];
 const getPostfix = (query: Query): string =>
 	Object.entries(query.filters)
 		.filter((filter) => postFixFilters.includes(filter[0]))
-		.map((filter) => filter[1].formatted.trim())
+		.map((filter) => (filter[1] as any).formatted.trim())
 		.join('+');
 
 /**
@@ -39,7 +39,7 @@ const getPostfix = (query: Query): string =>
  * @returns The formatted query ready to be sent to the search engine
  */
 export const formatQuery = (options?: { query?: Query }): string => {
-	const query = options.query || get(queryStore);
+	const query = options?.query || get(queryStore);
 	const {
 		provider: { name: searchProviderName }
 	} = query;
@@ -50,13 +50,13 @@ export const formatQuery = (options?: { query?: Query }): string => {
 			.filter(
 				(filter) => !queryParamFilters.includes(filter[0]) && !postFixFilters.includes(filter[0])
 			)
-			.reduce((prev, curr) => `${prev}${curr[1].formatted}`, '');
+			.reduce((prev, curr) => `${prev}${(curr[1] as any).formatted}`, '');
 
 		const queryParams = Object.entries(query.filters)
 			.filter(
 				(filter) => queryParamFilters.includes(filter[0]) && !postFixFilters.includes(filter[0])
 			)
-			.map((filter) => filter[1].formatted.trim())
+			.map((filter) => (filter[1] as any).formatted.trim())
 			.join('&');
 
 		const postfix = getPostfix(query);
@@ -72,11 +72,11 @@ export const formatQuery = (options?: { query?: Query }): string => {
 		// put the filters together
 		const prefix = Object.entries(query.filters)
 			.filter((filter) => !['save'].includes(filter[0]) && !postFixFilters.includes(filter[0]))
-			.reduce((prev, curr) => `${prev}${curr[1].formatted}`, '');
+			.reduce((prev, curr) => `${prev}${(curr[1] as any).formatted}`, '');
 
 		const queryParams = Object.entries(query.filters)
 			.filter((filter) => ['save'].includes(filter[0]) && !postFixFilters.includes(filter[0]))
-			.map((filter) => filter[1].formatted.trim())
+			.map((filter) => (filter[1] as any).formatted.trim())
 			.join('&');
 
 		const postfix = getPostfix(query);
@@ -92,7 +92,7 @@ export const formatQuery = (options?: { query?: Query }): string => {
 		// put the filters together
 		const prefix = Object.entries(query.filters)
 			.filter((filter) => !postFixFilters.includes(filter[0]))
-			.reduce((prev, curr) => `${prev}${curr[1].formatted}`, '');
+			.reduce((prev, curr) => `${prev}${(curr[1] as any).formatted}`, '');
 
 		const postfix = getPostfix(query);
 

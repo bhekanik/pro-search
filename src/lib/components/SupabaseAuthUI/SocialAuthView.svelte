@@ -53,7 +53,7 @@
 			options.redirectTo = redirectTo;
 		}
 
-		const { error: signInError } = await supabaseClient.auth.signIn({ provider }, options);
+		const { error: signInError } = await supabaseClient.auth.signInWithOAuth({ provider }, options);
 		if (signInError) error = signInError.message;
 	}
 </script>
@@ -65,7 +65,7 @@
 		{#each providers as provider}
 			<button
 				class="btn btn-primary flex w-full"
-				style={Object.entries(buttonStyles[provider])
+				style={Object.entries((buttonStyles as any)[provider])
 					.map(([key, value]) => {
 						return `${key}: ${value}`;
 					})

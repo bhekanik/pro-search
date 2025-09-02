@@ -23,8 +23,8 @@
 	// @ts-ignore
 	import { themeChange } from 'theme-change';
 
-	let isProd = process.env.NODE_ENV === 'production';
-	let isProdDeployEnv = process.env.VITE_DEPLOYMENT_ENV === 'production';
+	let isProd = import.meta.env.MODE === 'production';
+	let isProdDeployEnv = import.meta.env.VITE_DEPLOYMENT_ENV === 'production';
 
 	if (isProd) {
 		LogRocket.init('uetpov/pro-search');
@@ -92,13 +92,15 @@
 			.select('id, name, url');
 		searchProvidersStore.set(searchProviders || []);
 
-		const user = supabase.auth.user();
+		const {
+			data: { user }
+		} = await supabase.auth.getUser();
 		if (user) {
 			handleAuth(user);
-			supabase.auth.onAuthStateChange(async (_, session) => {
-				if (session?.user) await handleAuth(session?.user);
-			});
 		}
+		supabase.auth.onAuthStateChange(async (_, session) => {
+			if (session?.user) await handleAuth(session?.user);
+		});
 
 		themeChange(false);
 	});
@@ -113,7 +115,6 @@
 
 	onDestroy(() => {
 		splitClient?.destroy();
-		supabase.removeAllSubscriptions();
 	});
 </script>
 

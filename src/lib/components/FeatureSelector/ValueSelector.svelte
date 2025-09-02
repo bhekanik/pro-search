@@ -24,8 +24,8 @@
 	let unsubscribe: Unsubscriber;
 
 	$: {
-		unsubscribe = featureFlagsStore.subscribe((newValue) => {
-			value = newValue[featureFlag] === 'on' && condition ? onValue : offValue;
+		unsubscribe = featureFlagsStore.subscribe((newValue: any) => {
+			value = newValue?.[featureFlag] === 'on' && condition ? onValue : offValue;
 		});
 	}
 

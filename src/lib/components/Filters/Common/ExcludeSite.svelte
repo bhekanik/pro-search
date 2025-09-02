@@ -5,7 +5,7 @@
 
 	const handleInput = (e: Event) => {
 		const value = (e.target as HTMLInputElement).value;
-		queryStore.update((currentQuery) => {
+		queryStore.update((currentQuery: any) => {
 			const newQuery = { ...currentQuery };
 			newQuery.filters.excludeSite = {
 				type: 'ExcludeSite',

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import QRCode from 'qrcode';
 
-	let canvas = null;
+	let canvas: any = null;
 	export let link: string;
 
 	$: {

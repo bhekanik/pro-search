@@ -5,7 +5,7 @@ import { SplitFactory } from '@splitsoftware/splitio';
 const authorizationKey = (import.meta.env.VITE_SPLIT_API_KEY as string) || '';
 
 // Instantiate the SDK
-const factory: SplitIO.ISDK = SplitFactory({
+const factory = SplitFactory({
 	core: {
 		authorizationKey, // the key can be the logged in
 		// user id, or the account id that
@@ -20,4 +20,4 @@ const factory: SplitIO.ISDK = SplitFactory({
 });
 
 // And get the client instance you'll use
-export const splitClient: SplitIO.IClient = authorizationKey ? factory.client() : null;
+export const splitClient = authorizationKey ? factory.client() : null;

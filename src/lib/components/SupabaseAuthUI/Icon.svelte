@@ -26,6 +26,6 @@
 </script>
 
 <svelte:component
-	this={map[name]}
+	this={(map as any)[name]}
 	size={name === 'mail' || name === 'key' || name === 'inbox' ? size.toString() : size}
 />
