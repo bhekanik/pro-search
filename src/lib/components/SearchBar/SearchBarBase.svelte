@@ -2,6 +2,7 @@
 	import { queryStore } from '$lib/stores';
 	import { generateQueryUrl } from '$lib/utils';
 	import { fade, scale } from 'svelte/transition';
+	import { sanitizeSearchTerm } from '$lib/utils/sanitization';
 
 	let searchInput: HTMLInputElement;
 
@@ -25,7 +26,9 @@
 	const handleInput = (e: Event) => {
 		queryStore.update((currentQuery) => {
 			const newQuery = { ...currentQuery };
-			newQuery.search_term = (e.target as HTMLInputElement).value.trim();
+			// Sanitize the search term before storing
+			const rawValue = (e.target as HTMLInputElement).value.trim();
+			newQuery.search_term = sanitizeSearchTerm(rawValue);
 			return newQuery;
 		});
 	};
