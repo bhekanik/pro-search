@@ -19,7 +19,7 @@
 		"@auth/core": "^0.37.0",
 		"@auth/sveltekit": "^1.10.0",
 		"@convex-dev/auth": "^0.0.88",
-		"@sentry/sveltekit": "^8.48.0",
+		"@sentry/sveltekit": "^10.19.0",
 		"@splitsoftware/splitio": "^11.4.1",
 		"case": "^1.6.3",
 		"convex": "^1.26.2",
