@@ -37,7 +37,7 @@
 		"@tailwindcss/typography": "^0.5.10",
 		"@types/node": "^22.0.0",
 		"@types/qrcode": "^1.5.5",
-		"@typescript-eslint/eslint-plugin": "^8.36.0",
+		"@typescript-eslint/eslint-plugin": "^8.46.1",
 		"@typescript-eslint/parser": "^8.36.0",
 		"autoprefixer": "^10.4.16",
 		"eslint": "^9.20.0",
